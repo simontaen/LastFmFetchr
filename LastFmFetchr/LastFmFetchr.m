@@ -24,9 +24,14 @@ NSString *const kLFMArtistPlaycount = @"playcount";
 NSString *const kLFMArtistTags = @"tags";
 NSString *const kLFMArtistIsOnTour = @"ontour";
 
+
+// Last.fm API Method parameters
+NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
+
 @interface LastFmFetchr ()
 {
 	NSUserDefaults *userDefaults;
+	AFLastFmAPIClient *lastFmApiClient;
 	dispatch_queue_t async_queue;
 }
 @end
@@ -49,6 +54,7 @@ NSString *const kLFMArtistIsOnTour = @"ontour";
 	if (self = [super init]) {
 		// Init code here
 		userDefaults = [NSUserDefaults standardUserDefaults];
+		lastFmApiClient = [AFLastFmAPIClient sharedClient];
 		
 		// Setup the async queue
 		async_queue = dispatch_queue_create("com.lastfmfetchr.asyncQueue", NULL);
@@ -60,34 +66,34 @@ NSString *const kLFMArtistIsOnTour = @"ontour";
 #pragma mark - API calls
 
 /// Artist methods
-- (void)getInfoForArtist:(NSString *)artist
+- (NSOperation *)getInfoForArtist:(NSString *)artist
 						  success:(void (^)(id JSON))success
 						  failure:(void (^)(id response, NSError *error))failure
 {
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
-	params[@"method"] = @"artist.getInfo";
+	params[@"method"] = kLFMMethodArtistGetInfo;
 	params[@"artist"] = artist;
-
-	[[AFLastFmAPIClient sharedClient] getPath:@"artist.getInfo"
-								   parameters:[self addDefaultParameters:params]
-									  success:^(AFHTTPRequestOperation *operation, id JSON) {
-										  success(JSON);
-									  }
-									  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-										  failure(operation, error);
-									  }];
 	
 #ifndef NDEBUG
-	NSLog(@"LastFmFetchr: Request artist.getInfo");
+	NSLog(@"LastFmFetchr: Request %@", kLFMMethodArtistGetInfo);
 #endif
+	
+	return [self getPath:@""
+			  parameters:[self addDefaultParameters:params]
+				 success:^(AFHTTPRequestOperation *operation, id JSON) {
+					 if (!operation.isCancelled) success(JSON);
+				 }
+				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+					 if (!operation.isCancelled) failure(operation, error);
+				 }];
 }
 
 #pragma mark - Requests Management
 
-/// Cancels all artists.getInfo requests that are currently queued or being executed
-- (void)cancelAllArtistsGetInfoRequests
+/// Cancels all requests that are currently queued or being executed
+- (void)cancelAllRequests
 {
-	[[AFLastFmAPIClient sharedClient] cancelAllHTTPOperationsWithMethod:@"GET" path:@"artist.getInfo"];
+	[lastFmApiClient cancelAllHTTPOperationsWithMethod:nil path:nil];
 }
 
 #pragma mark - Error Handling
@@ -109,6 +115,30 @@ NSString *const kLFMArtistIsOnTour = @"ontour";
 }
 
 # pragma mark - Private Methods
+
+/// DO NOT modify the operation returned, race-condition, see https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
+- (AFHTTPRequestOperation *)getPath:(NSString *)path
+						 parameters:(NSDictionary *)parameters
+							success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+							failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"GET" path:path parameters:parameters];
+    AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [lastFmApiClient enqueueHTTPRequestOperation:operation];
+	return operation;
+}
+
+/// DO NOT modify the operation returned, race-condition, see https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
+- (AFHTTPRequestOperation *)postPath:(NSString *)path
+						  parameters:(NSDictionary *)parameters
+							 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+							 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"POST" path:path parameters:parameters];
+	AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [lastFmApiClient enqueueHTTPRequestOperation:operation];
+	return  operation;
+}
 
 - (NSDictionary *)addDefaultParameters:(NSMutableDictionary *)parameters
 {

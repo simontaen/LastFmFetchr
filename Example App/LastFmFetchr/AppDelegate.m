@@ -20,29 +20,37 @@
 	lastFmFetchr.apiKey = @"aed3367b0133ab707cb4e5b6b04da3e7";
 	lastFmFetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
 	
+	NSMutableSet *operations = [NSMutableSet set];
+	
 	int __block counter = 0;
 	NSLog(@"Counter %i", counter);
 	for (int i = 0; i < 5; i ++) {
-		[lastFmFetchr getInfoForArtist:@"Bon Jovi"
-							   success:^(id JSON) {
-								   NSLog(@"Counter %i", --counter);
-								   //NSLog(@"JSON Response was: %@", JSON);
-								   if (![JSON isKindOfClass:[NSDictionary class]]) {
-									   NSLog(@"JSON is Kind of class %@", [[JSON class] description]);
-								   }
-								   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
-								   if (JSON[@"error"]) {
-									   NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
-								   }
-							   }
-							   failure:^(id response, NSError *error) {
-								   NSLog(@"Counter %i", --counter);
-								   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withResponse:response]);
-							   }];
+		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
+												 success:^(id JSON) {
+													 if (JSON[@"error"]) {
+														 NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
+													 } else {
+														 NSLog(@"Counter %i", --counter);
+														 //NSLog(@"JSON Response was: %@", JSON);
+														 if (![JSON isKindOfClass:[NSDictionary class]]) {
+															 NSLog(@"JSON is Kind of class %@", [[JSON class] description]);
+														 }
+														 NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
+													 }
+												 }
+												 failure:^(id response, NSError *error) {
+													 NSLog(@"Error: %@", [lastFmFetchr messageForError:error withResponse:response]);
+												 }];
+		if (i % 2 == 0) {
+			[operations addObject:op];
+		}
 		NSLog(@"Counter %i", ++counter);
 	}
 	
-	[lastFmFetchr cancelAllArtistsGetInfoRequests];
+	for (NSOperation *op in operations) {
+		[op cancel];
+	}
+	
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
 						   success:^(id JSON) {
 							   NSLog(@"Counter %i", --counter);

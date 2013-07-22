@@ -59,16 +59,21 @@ enum LFMServiceErrorCodes {
 
 #pragma mark - API calls
 
+// Be aware of https://github.com/AFNetworking/AFNetworking/issues/405
+// ONLY use the returned operation for cancelling reasons
+// DO NOT try to modify it or else you'll run into a race condition
+// https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
+
 /// Artist methods
-- (void)getInfoForArtist:(NSString *)artist
-						  success:(void (^)(id JSON))success
-						  failure:(void (^)(id response, NSError *error))failure;
+- (NSOperation *)getInfoForArtist:(NSString *)artist
+									 success:(void (^)(id JSON))success
+									 failure:(void (^)(id response, NSError *error))failure;
 
 
 #pragma mark - Requests Management
 
-/// Cancels all artists.getInfo requests that are currently queued or being executed
-- (void)cancelAllArtistsGetInfoRequests;
+/// Cancels all requests that are currently queued or being executed
+- (void)cancelAllRequests;
 
 #pragma mark - Error Handling
 
