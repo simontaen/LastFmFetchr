@@ -19,9 +19,32 @@ extern NSString *const kLFMArtistPlaycount;
 extern NSString *const kLFMArtistTags;
 extern NSString *const kLFMArtistIsOnTour;
 
+// API Error codes
+
+enum LFMServiceErrorCodes {
+	kLFMErrorInvalidService = 2,
+	kLFMErrorInvalidMethod = 3,
+	kLFMErrorAuthenticationFailed = 4,
+	kLFMErrorInvalidFormat = 5,
+	kLFMErrorInvalidParameters = 6,
+	kLFMErrorInvalidResource = 7,
+	kLFMErrorOperationFailed = 8,
+	kLFMErrorInvalidSession = 9,
+	kLFMErrorInvalidAPIKey = 10,
+	kLFMErrorServiceOffline = 11,
+	kLFMErrorSubscribersOnly = 12,
+	kLFMErrorInvalidAPISignature = 13,
+	kLFMErrorTemporaryError = 16,
+	kLFMErrorSuspendedAPIKey = 26,
+	kLFMErrorRateLimitExceeded = 29
+};
+
+
 @interface LastFmFetchr : NSObject
 
-@property (nonatomic, strong) NSString *apiKey;
+@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *apiKey;
+@property (strong, nonatomic) NSString *apiSecret;
 
 
 # pragma mark - Singleton Methods
@@ -37,17 +60,19 @@ extern NSString *const kLFMArtistIsOnTour;
 #pragma mark - API calls
 
 /// Artist methods
-- (NSOperation *)getInfoForArtist:(NSString *)artist
+- (void)getInfoForArtist:(NSString *)artist
 						  success:(void (^)(id JSON))success
-						  failure:(void (^)(NSError *error, id response))failure;
+						  failure:(void (^)(id response, NSError *error))failure;
 
 
 #pragma mark - Requests Management
 
-/**
- * Cancels all requests that are currently being executed
- */
-- (void)cancelAllRequests;
+/// Cancels all artists.getInfo requests that are currently queued or being executed
+- (void)cancelAllArtistsGetInfoRequests;
 
+#pragma mark - Error Handling
+
+/// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
+- (NSString *)messageForError:(NSError *)error withResponse:(id)response;
 
 @end

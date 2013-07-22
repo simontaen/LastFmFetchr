@@ -7,12 +7,61 @@
 //
 
 #import "AppDelegate.h"
+#import "LastFmFetchr.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+	
+	
+	LastFmFetchr *lastFmFetchr = [LastFmFetchr sharedManager];
+	lastFmFetchr.apiKey = @"aed3367b0133ab707cb4e5b6b04da3e7";
+	lastFmFetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
+	
+	int __block counter = 0;
+	NSLog(@"Counter %i", counter);
+	for (int i = 0; i < 5; i ++) {
+		[lastFmFetchr getInfoForArtist:@"Bon Jovi"
+							   success:^(id JSON) {
+								   NSLog(@"Counter %i", --counter);
+								   //NSLog(@"JSON Response was: %@", JSON);
+								   if (![JSON isKindOfClass:[NSDictionary class]]) {
+									   NSLog(@"JSON is Kind of class %@", [[JSON class] description]);
+								   }
+								   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
+								   if (JSON[@"error"]) {
+									   NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
+								   }
+							   }
+							   failure:^(id response, NSError *error) {
+								   NSLog(@"Counter %i", --counter);
+								   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withResponse:response]);
+							   }];
+		NSLog(@"Counter %i", ++counter);
+	}
+	
+	[lastFmFetchr cancelAllArtistsGetInfoRequests];
+	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
+						   success:^(id JSON) {
+							   NSLog(@"Counter %i", --counter);
+							   //NSLog(@"JSON Response was: %@", JSON);
+							   if (![JSON isKindOfClass:[NSDictionary class]]) {
+								   NSLog(@"JSON is Kind of class %@", [[JSON class] description]);
+							   }
+							   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
+							   if (JSON[@"error"]) {
+								   NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
+							   }
+						   }
+						   failure:^(id response, NSError *error) {
+							   NSLog(@"Counter %i", --counter);
+							   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withResponse:response]);
+						   }];
+	NSLog(@"Counter %i", ++counter);
+		
+	
     return YES;
 }
 							
