@@ -19,7 +19,7 @@ extern NSString *const kLFMArtistPlaycount;
 extern NSString *const kLFMArtistTags;
 extern NSString *const kLFMArtistIsOnTour;
 
-// API Error codes
+// API Error codes, see http://www.last.fm/api/errorcodes
 
 enum LFMServiceErrorCodes {
 	kLFMErrorInvalidService = 2,
@@ -33,9 +33,20 @@ enum LFMServiceErrorCodes {
 	kLFMErrorInvalidAPIKey = 10,
 	kLFMErrorServiceOffline = 11,
 	kLFMErrorSubscribersOnly = 12,
-	kLFMErrorInvalidAPISignature = 13,
+	kLFMErrorInvalidMethodSignature = 13,
+	kLFMErrorUnauthorizedToken = 14,
+	kLFMErrorStreamingUnavailable = 15,
 	kLFMErrorTemporaryError = 16,
-	kLFMErrorSuspendedAPIKey = 26,
+	kLFMErrorLoginRequired = 17,
+	kLFMErrorTrialExpired = 18,
+	kLFMErrorNotEnoughContent = 20,
+	kLFMErrorNotEnoughMembers = 21,
+	kLFMErrorNotEnoughFans = 22,
+	kLFMErrorNotEnoughNeighbours = 23,
+	kLFMErrorNoPeakRadio = 24,
+	kLFMErrorRadioNotFound = 25,
+	kLFMErrorAPIKeySuspended = 26,
+	kLFMErrorDeprecated = 27,
 	kLFMErrorRateLimitExceeded = 29
 };
 
