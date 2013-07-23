@@ -24,41 +24,54 @@
 	
 	int __block counter = 0;
 	NSLog(@"Counter %i", counter);
-	for (int i = 0; i < 5; i ++) {
-		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
-												 success:^(id JSON) {
-													 if (JSON[@"error"]) {
-														 NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
-													 } else {
-														 NSLog(@"Counter %i", --counter);
-														 //NSLog(@"JSON Response was: %@", JSON);
-														 if (![JSON isKindOfClass:[NSDictionary class]]) {
-															 NSLog(@"JSON is Kind of class %@", [[JSON class] description]);
-														 }
-														 NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
-													 }
-												 }
-												 failure:^(id response, NSError *error) {
-													 NSLog(@"Error: %@", [lastFmFetchr messageForError:error withResponse:response]);
-												 }];
-		if (i % 2 == 0) {
-			[operations addObject:op];
-		}
-		NSLog(@"Counter %i", ++counter);
-	}
-	
+//	for (int i = 0; i < 5; i ++) {
+//		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
+//												 success:^(id JSON) {
+//													 if (JSON[@"error"]) {
+//														 NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
+//													 } else {
+//														 NSLog(@"Counter %i", --counter);
+//														 //NSLog(@"JSON Response was: %@", JSON);
+//														 if (![JSON isKindOfClass:[NSDictionary class]]) {
+//															 NSLog(@"JSON is Kind of class %@", [[JSON class] description]);
+//														 }
+//														 NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
+//													 }
+//												 }
+//												 failure:^(id response, NSError *error) {
+//													 NSLog(@"Error: %@", [lastFmFetchr messageForError:error withResponse:response]);
+//												 }];
+//		if (i % 2 == 0) {
+//			[operations addObject:op];
+//		}
+//		NSLog(@"Counter %i", ++counter);
+//	}
+//	
 	for (NSOperation *op in operations) {
 		[op cancel];
 	}
 	
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
-						   success:^(id JSON) {
+						   success:^(NSDictionary *JSON) {
 							   NSLog(@"Counter %i", --counter);
-							   //NSLog(@"JSON Response was: %@", JSON);
-							   if (![JSON isKindOfClass:[NSDictionary class]]) {
-								   NSLog(@"JSON is Kind of class %@", [[JSON class] description]);
-							   }
+							   NSLog(@"JSON Response was: %@", JSON);
+							   NSLog(@"-------------------------------------------------------------------------------");
+							   NSLog(@"kLFMArtistBio %@", JSON[kLFMArtistBio]);
+							   NSLog(@"kLFMArtistBio_Content %@", [JSON valueForKeyPath:kLFMArtistBio_Content]);
+							   NSLog(@"kLFMArtistBio_FormationList %@", [JSON valueForKeyPath:kLFMArtistBio_FormationList]);
+							   NSLog(@"kLFMArtistBio_Links %@", [JSON valueForKeyPath:kLFMArtistBio_Links]);
+							   NSLog(@"kLFMArtistBio_PlaceFormed %@", [JSON valueForKeyPath:kLFMArtistBio_PlaceFormed]);
+							   NSLog(@"kLFMArtistBio_Published %@", [JSON valueForKeyPath:kLFMArtistBio_Published]);
+							   NSLog(@"kLFMArtistBio_Summary %@", [JSON valueForKeyPath:kLFMArtistBio_Summary]);
+							   NSLog(@"kLFMArtistBio_YearFormed %@", [JSON valueForKeyPath:kLFMArtistBio_YearFormed]);
+							   NSLog(@"kLFMArtistName %@", JSON[kLFMArtistName]);
 							   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
+							   NSLog(@"kLFMArtistImage with mod %@", JSON[kLFMArtistImage][3][@"#text"]);
+							   NSLog(@"kLFMArtistImage_Large %@", [JSON valueForKey:kLFMArtistImage_Large]);
+							   NSLog(@"kLFMArtistListeners %@", JSON[kLFMArtistListeners]);
+							   NSLog(@"kLFMArtistPlaycount %@", JSON[kLFMArtistPlaycount]);
+							   NSLog(@"kLFMArtistTags_List %@", JSON[kLFMArtistTags_List]);
+							   NSLog(@"kLFMArtistIsOnTour %@", JSON[kLFMArtistIsOnTour]);
 							   if (JSON[@"error"]) {
 								   NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
 							   }

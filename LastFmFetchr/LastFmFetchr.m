@@ -15,17 +15,27 @@ NSString *const kLFMBaseURLString = @"http://ws.audioscrobbler.com/2.0";
 
 // Artist Info keys
 NSString *const kLFMArtistBio = @"bio";
-NSString *const kLFMArtistSummary = @"summary";
+NSString *const kLFMArtistBio_Content = @"bio.content";
+NSString *const kLFMArtistBio_FormationList = @"bio.formationlist";
+NSString *const kLFMArtistBio_Links = @"bio.links";
+NSString *const kLFMArtistBio_PlaceFormed = @"bio.placeformed";
+NSString *const kLFMArtistBio_Published = @"bio.published";
+NSString *const kLFMArtistBio_Summary = @"bio.summary";
+NSString *const kLFMArtistBio_YearFormed = @"bio.yearformed";
 NSString *const kLFMArtistName = @"name";
 NSString *const kLFMArtistLastFmPageURL = @"url";
-NSString *const kLFMArtistImageLarge = @"image";
+NSString *const kLFMArtistImage = @"image";
+NSString *const kLFMArtistImage_Large = @"image.3.#text";
 NSString *const kLFMArtistListeners = @"listeners";
 NSString *const kLFMArtistPlaycount = @"playcount";
-NSString *const kLFMArtistTags = @"tags";
+NSString *const kLFMArtistTags_List = @"tags.tag";
 NSString *const kLFMArtistIsOnTour = @"ontour";
 
+// Last.fm API parameters
+NSString *const kLFMParameterMethod = @"method";
+NSString *const kLFMParameterArtist = @"artist";
 
-// Last.fm API Method parameters
+// Last.fm API method parameter values
 NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 
 @interface LastFmFetchr ()
@@ -67,12 +77,12 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 
 /// Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
-						  success:(void (^)(id JSON))success
+						  success:(void (^)(NSDictionary *JSON))success
 						  failure:(void (^)(id response, NSError *error))failure
 {
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
-	params[@"method"] = kLFMMethodArtistGetInfo;
-	params[@"artist"] = artist;
+	params[kLFMParameterMethod] = kLFMMethodArtistGetInfo;
+	params[kLFMParameterArtist] = artist;
 	
 #ifndef NDEBUG
 	NSLog(@"LastFmFetchr: Request %@", kLFMMethodArtistGetInfo);
@@ -81,7 +91,14 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 	return [self getPath:@""
 			  parameters:[self addDefaultParameters:params]
 				 success:^(AFHTTPRequestOperation *operation, id JSON) {
-					 if (!operation.isCancelled) success(JSON);
+					 if (!operation.isCancelled) {
+						 if ([JSON isKindOfClass:[NSDictionary class]]) {
+							 success((NSDictionary *)(JSON[kLFMParameterArtist]));
+						 } else {
+							 // TODO create an appropriate error object
+							 failure(operation, nil);
+						 }
+					 }
 				 }
 				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 					 if (!operation.isCancelled) failure(operation, error);

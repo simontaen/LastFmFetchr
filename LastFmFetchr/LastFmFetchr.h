@@ -10,13 +10,20 @@
 
 // Artist Info keys
 extern NSString *const kLFMArtistBio;
-extern NSString *const kLFMArtistSummary;
+extern NSString *const kLFMArtistBio_Content;
+extern NSString *const kLFMArtistBio_FormationList;
+extern NSString *const kLFMArtistBio_Links;
+extern NSString *const kLFMArtistBio_PlaceFormed;
+extern NSString *const kLFMArtistBio_Published;
+extern NSString *const kLFMArtistBio_Summary;
+extern NSString *const kLFMArtistBio_YearFormed;
 extern NSString *const kLFMArtistName;
 extern NSString *const kLFMArtistLastFmPageURL;
-extern NSString *const kLFMArtistImageLarge;
+extern NSString *const kLFMArtistImage;
+extern NSString *const kLFMArtistImage_Large;
 extern NSString *const kLFMArtistListeners;
 extern NSString *const kLFMArtistPlaycount;
-extern NSString *const kLFMArtistTags;
+extern NSString *const kLFMArtistTags_List;
 extern NSString *const kLFMArtistIsOnTour;
 
 // API Error codes, see http://www.last.fm/api/errorcodes
@@ -77,7 +84,7 @@ enum LFMServiceErrorCodes {
 
 /// Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
-									 success:(void (^)(id JSON))success
+									 success:(void (^)(NSDictionary *JSON))success
 									 failure:(void (^)(id response, NSError *error))failure;
 
 
