@@ -121,7 +121,7 @@
 							   NSLog(@"artistTags %@", [JSON artistTags]);
 							   NSLog(@"artistTagNames %@", [JSON artistTagNames]);
 							   NSLog(@"artistTagURLs %@", [JSON artistTagURLs]);
-							   NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
+							   NSLog(@"artistLastFmPage %@", [JSON artistLastFmPage]);
 							   NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
 
 							   

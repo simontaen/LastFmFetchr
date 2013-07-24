@@ -16,7 +16,7 @@
 /// Straight JSON ouput
 - (NSString *)artistMembers;
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
-- (NSString *)artistMemberArray;
+- (NSArray *)artistMemberArray;
 /// Straight JSON ouput
 - (NSString *)artistBioContent;
 /// Straight JSON ouput

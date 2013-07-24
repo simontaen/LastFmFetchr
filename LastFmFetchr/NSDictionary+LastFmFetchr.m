@@ -24,62 +24,67 @@ NSString *const kEmpty = @"";
 // artist.getInfo
 - (NSString *)artistMembers
 {
-	return [self valueForKeyPath:kLFMArtist_Members];
+	return [self notNilStringForKeyPath:kLFMArtist_Members];
 }
 
-- (NSString *)artistMemberArray
+- (NSArray *)artistMemberArray
 {
-	return [self artistMembers];
+	id item = [self artistMembers];
+	if (![item isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *array = (NSArray *)item;
+	return array;
 }
 
 - (NSString *)artistBioContent
 {
-	return [self valueForKeyPath:kLFMArtistBio_Content];
+	return [self notNilStringForKeyPath:kLFMArtistBio_Content];
 }
 
 - (NSString *)artistBioFormationYears
 {
-	return [self valueForKeyPath:kLFMArtistBio_FormationYears];
+	return [self notNilStringForKeyPath:kLFMArtistBio_FormationYears];
 }
 
 - (NSArray *)artistBioFormationYearDates
 {
-	NSString *str = [self artistBioFormationYears];
-	if (![str isKindOfClass:[NSDictionary class]]) {
+	id item = [self valueForKeyPath:kLFMArtistBio_FormationYears];
+	if (![item isKindOfClass:[NSDictionary class]]) {
 		return nil;
 	}
-	NSDictionary *lfm = (NSDictionary *)str;
+	NSDictionary *dict = (NSDictionary *)item;
 
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy"];
 	
-	return @[[formatter dateFromString:lfm[@"yearfrom"]], [formatter dateFromString:lfm[@"yearto"]]];
+	return @[[formatter dateFromString:dict[@"yearfrom"]], [formatter dateFromString:dict[@"yearto"]]];
 }
 
 - (NSString *)artistBioLink
 {
-	return [self valueForKeyPath:kLFMArtistBio_Link];
+	return [self notNilStringForKeyPath:kLFMArtistBio_Link];
 }
 
 - (NSURL *)artistBioLinkURL
 {
-	NSString *str = [self artistBioLink];
-	if (![str isKindOfClass:[NSDictionary class]]) {
+	id item = [self valueForKeyPath:kLFMArtistBio_Link];
+	if (![item isKindOfClass:[NSDictionary class]]) {
 		return nil;
 	}
-	NSDictionary *lfm = (NSDictionary *)str;
+	NSDictionary *dict = (NSDictionary *)item;
 
-	return [NSURL URLWithString:lfm[@"href"]];
+	return [NSURL URLWithString:dict[@"href"]];
 }
 
 - (NSString *)artistBioPlaceFormed
 {
-	return [self valueForKeyPath:kLFMArtistBio_PlaceFormed];
+	return [self notNilStringForKeyPath:kLFMArtistBio_PlaceFormed];
 }
 
 - (NSString *)artistBioPublished
 {
-	return [self valueForKeyPath:kLFMArtistBio_Published];
+	return [self notNilStringForKeyPath:kLFMArtistBio_Published];
 }
 
 - (NSDate *)artistBioPublishedDate
@@ -92,12 +97,12 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistBioSummary
 {
-	return [self valueForKeyPath:kLFMArtistBio_Summary];
+	return [self notNilStringForKeyPath:kLFMArtistBio_Summary];
 }
 
 - (NSString *)artistBioYearFormed
 {
-	return [self valueForKeyPath:kLFMArtistBio_YearFormed];
+	return [self notNilStringForKeyPath:kLFMArtistBio_YearFormed];
 }
 
 - (NSDate *)artistBioYearFormedDate
@@ -110,7 +115,11 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageSmall
 {
-	return [self valueForKeyPath:kLFMArtistImageList][0][@"#text"];
+	id item = [self valueForKeyPath:kLFMArtistImageList];
+	if ([item isKindOfClass:[NSArray class]]) {
+		return [item[0][@"#text"] description];
+	}
+	return kEmpty;
 }
 
 - (NSURL *)artistImageSmallURL;
@@ -120,7 +129,11 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageMedium
 {
-	return [self valueForKeyPath:kLFMArtistImageList][1][@"#text"];
+	id item = [self valueForKeyPath:kLFMArtistImageList];
+	if ([item isKindOfClass:[NSArray class]]) {
+		return [item[1][@"#text"] description];
+	}
+	return kEmpty;
 }
 
 - (NSURL *)artistImageMediumURL;
@@ -130,7 +143,11 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageLarge
 {
-	return [self valueForKeyPath:kLFMArtistImageList][2][@"#text"];
+	id item = [self valueForKeyPath:kLFMArtistImageList];
+	if ([item isKindOfClass:[NSArray class]]) {
+		return [item[2][@"#text"] description];
+	}
+	return kEmpty;
 }
 
 - (NSURL *)artistImageLargeURL;
@@ -140,7 +157,11 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageExtraLarge
 {
-	return [self valueForKeyPath:kLFMArtistImageList][3][@"#text"];
+	id item = [self valueForKeyPath:kLFMArtistImageList];
+	if ([item isKindOfClass:[NSArray class]]) {
+		return [item[3][@"#text"] description];
+	}
+	return kEmpty;
 }
 
 - (NSURL *)artistImageExtraLargeURL;
@@ -150,7 +171,11 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageMega
 {
-	return [self valueForKeyPath:kLFMArtistImageList][4][@"#text"];
+	id item = [self valueForKeyPath:kLFMArtistImageList];
+	if ([item isKindOfClass:[NSArray class]]) {
+		return [item[4][@"#text"] description];
+	}
+	return kEmpty;
 }
 
 - (NSURL *)artistImageMegaURL
@@ -160,17 +185,17 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistMusicBrianzId
 {
-	return [self valueForKeyPath:kLFMArtistMusicBrianzId];
+	return [self notNilStringForKeyPath:kLFMArtistMusicBrianzId];
 }
 
 - (NSString *)artistName
 {
-	return [self valueForKeyPath:kLFMArtistName];
+	return [self notNilStringForKeyPath:kLFMArtistName];
 }
 
 - (NSString *)artistIsOnTour
 {
-	return [self valueForKeyPath:kLFMArtistIsOnTour];
+	return [self notNilStringForKeyPath:kLFMArtistIsOnTour];
 }
 
 - (BOOL)artistIsOnTourBool
@@ -183,17 +208,22 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistSimilarArtists
 {
-	return [self valueForKeyPath:kLFMArtist_SimilarArtists];
+	return [self notNilStringForKeyPath:kLFMArtist_SimilarArtists];
 }
 
 - (NSArray *)artistSimilarArtistsArray
 {
-	return [self artistSimilarArtists];
+	id item = [self valueForKeyPath:kLFMArtist_SimilarArtists];
+	if (![item isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *lfm = (NSArray *)item;
+	return lfm;
 }
 
 - (NSString *)artistListeners
 {
-	return [self valueForKeyPath:kLFMArtistStats_Listeners];
+	return [self notNilStringForKeyPath:kLFMArtistStats_Listeners];
 }
 
 - (NSNumber *)artistListenersNumber
@@ -203,7 +233,7 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistPlaycount
 {
-	return [self valueForKeyPath:kLFMArtistStats_Playcount];
+	return [self notNilStringForKeyPath:kLFMArtistStats_Playcount];
 }
 
 - (NSNumber *)artistPlaycountNumber;
@@ -213,7 +243,7 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistStreamable
 {
-	return [self valueForKeyPath:kLFMArtistStreamable];
+	return [self notNilStringForKeyPath:kLFMArtistStreamable];
 }
 
 - (BOOL)artistStreamableBool
@@ -226,20 +256,20 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistTags
 {
-	return [self valueForKeyPath:kLFMArtist_Tags];
+	return [self notNilStringForKeyPath:kLFMArtist_Tags];
 }
 
 - (NSArray *)artistTagNames
 {
-	NSString *str = [self artistTags];
-	if (![str isKindOfClass:[NSArray class]]) {
+	id item = [self valueForKeyPath:kLFMArtist_Tags];
+	if (![item isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
-	NSArray *lfm = (NSArray *)str;
+	NSArray *array = (NSArray *)item;
 	NSMutableArray *tags = [NSMutableArray array];
 	
-	for (NSDictionary *entry in lfm) {
-		[tags addObject:[NSString stringWithString:entry[@"name"]]];
+	for (NSDictionary *dict in array) {
+		[tags addObject:[NSString stringWithString:dict[@"name"]]];
 	}
 	
 	return tags;
@@ -247,15 +277,15 @@ NSString *const kEmpty = @"";
 
 - (NSArray *)artistTagURLs
 {
-	NSString *str = [self artistTags];
-	if (![str isKindOfClass:[NSArray class]]) {
+	id item = [self valueForKeyPath:kLFMArtist_Tags];
+	if (![item isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
-	NSArray *lfm = (NSArray *)str;
+	NSArray *array = (NSArray *)item;
 	NSMutableArray *tags = [NSMutableArray array];
 	
-	for (NSDictionary *entry in lfm) {
-		[tags addObject:[NSURL URLWithString:entry[@"url"]]];
+	for (NSDictionary *dict in array) {
+		[tags addObject:[NSURL URLWithString:dict[@"url"]]];
 	}
 	
 	return tags;
@@ -263,12 +293,21 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistLastFmPage
 {
-	return [self valueForKeyPath:kLFMArtistLastFmPageURL];
+	return [self notNilStringForKeyPath:kLFMArtistLastFmPageURL];
 }
 
 - (NSURL *)artistLastFmPageURL
 {
 	return [NSURL URLWithString:[self artistLastFmPage]];
+}
+
+- (NSString *)notNilStringForKeyPath:(NSString *)keyPath
+{
+	id item = [self valueForKeyPath:keyPath];
+	if (item) {
+		return [item description];
+	}
+	return kEmpty;
 }
 
 @end
