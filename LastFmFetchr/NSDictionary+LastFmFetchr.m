@@ -29,11 +29,11 @@ NSString *const kEmpty = @"";
 
 - (NSArray *)artistMemberArray
 {
-	id item = [self artistMembers];
-	if (![item isKindOfClass:[NSArray class]]) {
+	id obj = [self artistMembers];
+	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
-	NSArray *array = (NSArray *)item;
+	NSArray *array = (NSArray *)obj;
 	return array;
 }
 
@@ -49,11 +49,11 @@ NSString *const kEmpty = @"";
 
 - (NSArray *)artistBioFormationYearDates
 {
-	id item = [self valueForKeyPath:kLFMArtistBio_FormationYears];
-	if (![item isKindOfClass:[NSDictionary class]]) {
+	id obj = [self valueForKeyPath:kLFMArtistBio_FormationYears];
+	if (![obj isKindOfClass:[NSDictionary class]]) {
 		return nil;
 	}
-	NSDictionary *dict = (NSDictionary *)item;
+	NSDictionary *dict = (NSDictionary *)obj;
 
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy"];
@@ -68,11 +68,11 @@ NSString *const kEmpty = @"";
 
 - (NSURL *)artistBioLinkURL
 {
-	id item = [self valueForKeyPath:kLFMArtistBio_Link];
-	if (![item isKindOfClass:[NSDictionary class]]) {
+	id obj = [self valueForKeyPath:kLFMArtistBio_Link];
+	if (![obj isKindOfClass:[NSDictionary class]]) {
 		return nil;
 	}
-	NSDictionary *dict = (NSDictionary *)item;
+	NSDictionary *dict = (NSDictionary *)obj;
 
 	return [NSURL URLWithString:dict[@"href"]];
 }
@@ -115,9 +115,9 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageSmall
 {
-	id item = [self valueForKeyPath:kLFMArtistImageList];
-	if ([item isKindOfClass:[NSArray class]]) {
-		return [item[0][@"#text"] description];
+	id obj = [self valueForKeyPath:kLFMArtistImageList];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[0][@"#text"] description];
 	}
 	return kEmpty;
 }
@@ -129,9 +129,9 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageMedium
 {
-	id item = [self valueForKeyPath:kLFMArtistImageList];
-	if ([item isKindOfClass:[NSArray class]]) {
-		return [item[1][@"#text"] description];
+	id obj = [self valueForKeyPath:kLFMArtistImageList];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[1][@"#text"] description];
 	}
 	return kEmpty;
 }
@@ -143,9 +143,9 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageLarge
 {
-	id item = [self valueForKeyPath:kLFMArtistImageList];
-	if ([item isKindOfClass:[NSArray class]]) {
-		return [item[2][@"#text"] description];
+	id obj = [self valueForKeyPath:kLFMArtistImageList];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[2][@"#text"] description];
 	}
 	return kEmpty;
 }
@@ -157,9 +157,9 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageExtraLarge
 {
-	id item = [self valueForKeyPath:kLFMArtistImageList];
-	if ([item isKindOfClass:[NSArray class]]) {
-		return [item[3][@"#text"] description];
+	id obj = [self valueForKeyPath:kLFMArtistImageList];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[3][@"#text"] description];
 	}
 	return kEmpty;
 }
@@ -171,9 +171,9 @@ NSString *const kEmpty = @"";
 
 - (NSString *)artistImageMega
 {
-	id item = [self valueForKeyPath:kLFMArtistImageList];
-	if ([item isKindOfClass:[NSArray class]]) {
-		return [item[4][@"#text"] description];
+	id obj = [self valueForKeyPath:kLFMArtistImageList];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[4][@"#text"] description];
 	}
 	return kEmpty;
 }
@@ -213,11 +213,11 @@ NSString *const kEmpty = @"";
 
 - (NSArray *)artistSimilarArtistsArray
 {
-	id item = [self valueForKeyPath:kLFMArtist_SimilarArtists];
-	if (![item isKindOfClass:[NSArray class]]) {
+	id obj = [self valueForKeyPath:kLFMArtist_SimilarArtists];
+	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
-	NSArray *lfm = (NSArray *)item;
+	NSArray *lfm = (NSArray *)obj;
 	return lfm;
 }
 
@@ -261,15 +261,15 @@ NSString *const kEmpty = @"";
 
 - (NSArray *)artistTagNames
 {
-	id item = [self valueForKeyPath:kLFMArtist_Tags];
-	if (![item isKindOfClass:[NSArray class]]) {
+	id obj = [self valueForKeyPath:kLFMArtist_Tags];
+	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
-	NSArray *array = (NSArray *)item;
-	NSMutableArray *tags = [NSMutableArray array];
+	NSArray *array = (NSArray *)obj;
+	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[array count]];
 	
 	for (NSDictionary *dict in array) {
-		[tags addObject:[NSString stringWithString:dict[@"name"]]];
+		[tags addObject:[dict[@"name"] description]];
 	}
 	
 	return tags;
@@ -277,15 +277,15 @@ NSString *const kEmpty = @"";
 
 - (NSArray *)artistTagURLs
 {
-	id item = [self valueForKeyPath:kLFMArtist_Tags];
-	if (![item isKindOfClass:[NSArray class]]) {
+	id obj = [self valueForKeyPath:kLFMArtist_Tags];
+	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
-	NSArray *array = (NSArray *)item;
-	NSMutableArray *tags = [NSMutableArray array];
+	NSArray *array = (NSArray *)obj;
+	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[array count]];
 	
 	for (NSDictionary *dict in array) {
-		[tags addObject:[NSURL URLWithString:dict[@"url"]]];
+		[tags addObject:[NSURL URLWithString:[dict[@"url"] description]]];
 	}
 	
 	return tags;
@@ -303,9 +303,9 @@ NSString *const kEmpty = @"";
 
 - (NSString *)notNilStringForKeyPath:(NSString *)keyPath
 {
-	id item = [self valueForKeyPath:keyPath];
-	if (item) {
-		return [item description];
+	id obj = [self valueForKeyPath:keyPath];
+	if (obj) {
+		return [obj description];
 	}
 	return kEmpty;
 }

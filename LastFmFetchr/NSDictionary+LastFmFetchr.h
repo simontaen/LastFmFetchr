@@ -13,7 +13,7 @@
 @interface NSDictionary (LastFmFetchr)
 
 // artist.getInfo
-/// Straight JSON ouput
+/// Never-nil NSString of members of the artist
 - (NSString *)artistMembers;
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
 - (NSArray *)artistMemberArray;
