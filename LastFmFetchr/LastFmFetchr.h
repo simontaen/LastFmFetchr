@@ -96,6 +96,6 @@ enum LFMServiceErrorCodes {
 
 /// Initializes and returns a new LastFmFetchr singleton object
 /// @return A new singleton object
-+ (id)sharedManager;
++ (instancetype)sharedManager;
 
 @end

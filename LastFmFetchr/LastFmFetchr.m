@@ -175,7 +175,7 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 
 # pragma mark - Singleton Methods
 
-+ (id)sharedManager
++ (instancetype)sharedManager
 {
 	static LastFmFetchr *_sharedManager;
 	static dispatch_once_t onceToken;
