@@ -13,7 +13,7 @@
 // ------------ Keys to the JSON response from Last.fm ------------------
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
-// Artist Info keys
+// artist.getInfo
 NSString *const kLFMArtistBio = @"bio";
 NSString *const kLFMArtistBio_Content = @"bio.content";
 NSString *const kLFMArtistBio_FormationList = @"bio.formationlist";

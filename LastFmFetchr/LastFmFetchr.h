@@ -11,7 +11,7 @@
 // ------------ Keys to the JSON response from Last.fm ------------------
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
-// Artist Info keys
+// artist.getInfo
 extern NSString *const kLFMArtistBio;
 extern NSString *const kLFMArtistBio_Content;
 extern NSString *const kLFMArtistBio_FormationList;
@@ -66,16 +66,6 @@ enum LFMServiceErrorCodes {
 @property (strong, nonatomic) NSString *apiSecret;
 
 
-# pragma mark - Singleton Methods
-
-/**
- * Initializes and returns a new LastFmFetchr singleton object
- *
- * @return A new singleton object
- */
-
-+ (id)sharedManager;
-
 #pragma mark - API calls
 
 // Be aware of https://github.com/AFNetworking/AFNetworking/issues/405
@@ -88,7 +78,6 @@ enum LFMServiceErrorCodes {
 									 success:(void (^)(NSDictionary *JSON))success
 									 failure:(void (^)(id response, NSError *error))failure;
 
-
 #pragma mark - Requests Management
 
 /// Cancels all requests that are currently queued or being executed
@@ -98,5 +87,11 @@ enum LFMServiceErrorCodes {
 
 /// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
 - (NSString *)messageForError:(NSError *)error withResponse:(id)response;
+
+# pragma mark - Singleton Methods
+
+/// Initializes and returns a new LastFmFetchr singleton object
+/// @return A new singleton object
++ (id)sharedManager;
 
 @end
