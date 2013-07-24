@@ -3,6 +3,8 @@ LastFmFetchr
 
 A lightweight JSON-based Objective-C wrapper to make asynchronous requests for the [Last.fm API](http://www.last.fm/api).
 
+**IMPORTANT**: This is still under heavy development. DO NOT use it in a production environment.
+
 **Note:** You will need to [create an API Account](http://www.last.fm/api/account/create) to get an API key which must be set when you first instantiate LastFmFetchr, otherwise an exception will be thrown.
 
 ## Quick Examples ##
