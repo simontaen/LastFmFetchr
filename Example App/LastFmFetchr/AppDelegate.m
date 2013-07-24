@@ -56,38 +56,46 @@
 						   success:^(NSDictionary *JSON) {
 							   NSLog(@"Counter %i", --counter);
 							   // NSLog(@"JSON Response was: %@", JSON);
-							   
+							   /*
 							   NSLog(@"-------------------------------------------------------------------------------");
 							   NSLog(@"USING STRAIGHT KEYS");
 							   NSLog(@"-------------------------------------------------------------------------------");
-							   NSLog(@"kLFMArtistBio %@", JSON[kLFMArtistBio]);
+							   NSLog(@"kLFMArtist_Members %@", [JSON valueForKeyPath:kLFMArtist_Members]);
+							   //NSLog(@"kLFMArtistBio %@", JSON[kLFMArtistBio]);
 							   NSLog(@"kLFMArtistBio_Content %@", [JSON valueForKeyPath:kLFMArtistBio_Content]);
-							   NSLog(@"kLFMArtistBio_FormationList %@", [JSON valueForKeyPath:kLFMArtistBio_FormationList]);
-							   NSLog(@"kLFMArtistBio_Links %@", [JSON valueForKeyPath:kLFMArtistBio_Links]);
+							   NSLog(@"kLFMArtistBio_Formation %@", [JSON valueForKeyPath:kLFMArtistBio_Formation]);
+							   NSLog(@"kLFMArtistBio_Link %@", [JSON valueForKeyPath:kLFMArtistBio_Link]);
 							   NSLog(@"kLFMArtistBio_PlaceFormed %@", [JSON valueForKeyPath:kLFMArtistBio_PlaceFormed]);
 							   NSLog(@"kLFMArtistBio_Published %@", [JSON valueForKeyPath:kLFMArtistBio_Published]);
 							   NSLog(@"kLFMArtistBio_Summary %@", [JSON valueForKeyPath:kLFMArtistBio_Summary]);
 							   NSLog(@"kLFMArtistBio_YearFormed %@", [JSON valueForKeyPath:kLFMArtistBio_YearFormed]);
-							   NSLog(@"kLFMArtistName %@", JSON[kLFMArtistName]);
-							   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
 							   NSLog(@"kLFMArtistImageList %@", JSON[kLFMArtistImageList]);
-							   NSLog(@"kLFMArtistListeners %@", JSON[kLFMArtistListeners]);
-							   NSLog(@"kLFMArtistPlaycount %@", JSON[kLFMArtistPlaycount]);
-							   NSLog(@"kLFMArtistTags_List %@", [JSON valueForKeyPath:kLFMArtistTags_List]);
+							   NSLog(@"kLFMArtistMusicBrianzId %@", JSON[kLFMArtistMusicBrianzId]);
+							   NSLog(@"kLFMArtistName %@", JSON[kLFMArtistName]);
 							   NSLog(@"kLFMArtistIsOnTour %@", JSON[kLFMArtistIsOnTour]);
-							   
+							   NSLog(@"kLFMArtist_SimilarArtists %@", [JSON valueForKeyPath:kLFMArtist_SimilarArtists]);
+							   NSLog(@"kLFMArtistStats_Listeners %@", [JSON valueForKeyPath:kLFMArtistStats_Listeners]);
+							   NSLog(@"kLFMArtistStats_Playcount %@", [JSON valueForKeyPath:kLFMArtistStats_Playcount]);
+							   NSLog(@"kLFMArtistStreamable %@", JSON[kLFMArtistStreamable]);
+							   NSLog(@"kLFMArtist_Tags %@", [JSON valueForKeyPath:kLFMArtist_Tags]);
+							   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
+							   */
 							   NSLog(@"-------------------------------------------------------------------------------");
 							   NSLog(@"NSDictionary+LastFmFetchr");
 							   NSLog(@"-------------------------------------------------------------------------------");
+							   NSLog(@"artistMembers %@", [JSON artistMembers]);
+							   NSLog(@"artistMemberArray %@", [JSON artistMemberArray]);
 							   NSLog(@"artistBioContent %@", [JSON artistBioContent]);
-							   NSLog(@"artistBioFormation %@", [JSON artistBioFormation]);
-							   NSLog(@"artistBioLinks %@", [JSON artistBioLinks]);
+							   NSLog(@"artistBioFormationYears %@", [JSON artistBioFormationYears]);
+							   NSLog(@"artistBioFormationYearDates %@", [JSON artistBioFormationYearDates]);
+							   NSLog(@"artistBioLink %@", [JSON artistBioLink]);
+							   NSLog(@"artistBioLinkURL %@", [JSON artistBioLinkURL]);
 							   NSLog(@"artistBioPlaceFormed %@", [JSON artistBioPlaceFormed]);
 							   NSLog(@"artistBioPublished %@", [JSON artistBioPublished]);
+							   NSLog(@"artistBioPublishedDate %@", [JSON artistBioPublishedDate]);
 							   NSLog(@"artistBioSummary %@", [JSON artistBioSummary]);
 							   NSLog(@"artistBioYearFormed %@", [JSON artistBioYearFormed]);
-							   NSLog(@"artistName %@", [JSON artistName]);
-							   NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
+							   NSLog(@"artistBioYearFormedDate %@", [JSON artistBioYearFormedDate]);
 							   NSLog(@"artistImageSmall %@", [JSON artistImageSmall]);
 							   NSLog(@"artistImageSmallURL %@", [JSON artistImageSmallURL]);
 							   NSLog(@"artistImageMedium %@", [JSON artistImageMedium]);
@@ -98,13 +106,24 @@
 							   NSLog(@"artistImageExtraLargeURL %@", [JSON artistImageExtraLargeURL]);
 							   NSLog(@"artistImageMega %@", [JSON artistImageMega]);
 							   NSLog(@"artistImageMegaURL %@", [JSON artistImageMegaURL]);
-							   NSLog(@"artistListeners %@", [JSON artistListeners]);
-							   NSLog(@"artistPlaycount %@", [JSON artistPlaycount]);
-							   NSLog(@"artistTags %@", [JSON artistTags]);
-							   NSLog(@"artistTagsNames %@", [JSON artistTagNames]);
-							   NSLog(@"artistTagsURLs %@", [JSON artistTagURLs]);
+							   NSLog(@"artistMusicBrianzId %@", [JSON artistMusicBrianzId]);
+							   NSLog(@"artistName %@", [JSON artistName]);
 							   NSLog(@"artistIsOnTour %@", [JSON artistIsOnTour]);
-							   							   
+							   NSLog(@"artistIsOnTourBool %c", [JSON artistIsOnTourBool]);
+							   NSLog(@"artistSimilarArtists %@", [JSON artistSimilarArtists]);
+							   NSLog(@"artistSimilarArtistsArray %@", [JSON artistSimilarArtistsArray]);
+							   NSLog(@"artistListeners %@", [JSON artistListeners]);
+							   NSLog(@"artistListenersNumber %@", [JSON artistListenersNumber]);
+							   NSLog(@"artistPlaycount %@", [JSON artistPlaycount]);
+							   NSLog(@"artistPlaycountNumber %@", [JSON artistPlaycountNumber]);
+							   NSLog(@"artistStreamable %@", [JSON artistStreamable]);
+							   NSLog(@"artistStreamableBool %c", [JSON artistStreamableBool]);
+							   NSLog(@"artistTags %@", [JSON artistTags]);
+							   NSLog(@"artistTagNames %@", [JSON artistTagNames]);
+							   NSLog(@"artistTagURLs %@", [JSON artistTagURLs]);
+							   NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
+							   NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
+
 							   
 							   if (JSON[@"error"]) {
 								   NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);

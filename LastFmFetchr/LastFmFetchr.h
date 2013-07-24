@@ -12,21 +12,25 @@
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
 // artist.getInfo
-extern NSString *const kLFMArtistBio;
+extern NSString *const kLFMArtist_Members;
+//extern NSString *const kLFMArtistBio;
 extern NSString *const kLFMArtistBio_Content;
-extern NSString *const kLFMArtistBio_FormationList;
-extern NSString *const kLFMArtistBio_Links;
+extern NSString *const kLFMArtistBio_FormationYears;
+extern NSString *const kLFMArtistBio_Link;
 extern NSString *const kLFMArtistBio_PlaceFormed;
 extern NSString *const kLFMArtistBio_Published;
 extern NSString *const kLFMArtistBio_Summary;
 extern NSString *const kLFMArtistBio_YearFormed;
-extern NSString *const kLFMArtistName;
-extern NSString *const kLFMArtistLastFmPageURL;
 extern NSString *const kLFMArtistImageList;
-extern NSString *const kLFMArtistListeners;
-extern NSString *const kLFMArtistPlaycount;
-extern NSString *const kLFMArtistTags_List;
+extern NSString *const kLFMArtistMusicBrianzId;
+extern NSString *const kLFMArtistName;
 extern NSString *const kLFMArtistIsOnTour;
+extern NSString *const kLFMArtist_SimilarArtists;
+extern NSString *const kLFMArtistStats_Listeners;
+extern NSString *const kLFMArtistStats_Playcount;
+extern NSString *const kLFMArtistStreamable;
+extern NSString *const kLFMArtist_Tags;
+extern NSString *const kLFMArtistLastFmPageURL;
 
 // API Error codes, see http://www.last.fm/api/errorcodes
 enum LFMServiceErrorCodes {

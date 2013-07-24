@@ -11,24 +11,28 @@
 #import "AFLastFmAPIClient.h"
 
 // ------------ Keys to the JSON response from Last.fm ------------------
-// By convention you need to use valueForKey: if the constant name contains an underbar '_'
+// By convention you need to use valueForKeyPath: if the constant name contains an underbar '_'
 
 // artist.getInfo
+NSString *const kLFMArtist_Members = @"bandmembers.member";
 NSString *const kLFMArtistBio = @"bio";
 NSString *const kLFMArtistBio_Content = @"bio.content";
-NSString *const kLFMArtistBio_FormationList = @"bio.formationlist";
-NSString *const kLFMArtistBio_Links = @"bio.links";
+NSString *const kLFMArtistBio_FormationYears = @"bio.formationlist.formation";
+NSString *const kLFMArtistBio_Link = @"bio.links.link";
 NSString *const kLFMArtistBio_PlaceFormed = @"bio.placeformed";
 NSString *const kLFMArtistBio_Published = @"bio.published";
 NSString *const kLFMArtistBio_Summary = @"bio.summary";
 NSString *const kLFMArtistBio_YearFormed = @"bio.yearformed";
-NSString *const kLFMArtistName = @"name";
-NSString *const kLFMArtistLastFmPageURL = @"url";
 NSString *const kLFMArtistImageList = @"image";
-NSString *const kLFMArtistListeners = @"listeners";
-NSString *const kLFMArtistPlaycount = @"playcount";
-NSString *const kLFMArtistTags_List = @"tags.tag";
+NSString *const kLFMArtistMusicBrianzId = @"mbid";
+NSString *const kLFMArtistName = @"name";
 NSString *const kLFMArtistIsOnTour = @"ontour";
+NSString *const kLFMArtist_SimilarArtists = @"similar.artist";
+NSString *const kLFMArtistStats_Listeners = @"stats.listeners";
+NSString *const kLFMArtistStats_Playcount = @"stats.playcount";
+NSString *const kLFMArtistStreamable = @"streamable";
+NSString *const kLFMArtist_Tags = @"tags.tag";
+NSString *const kLFMArtistLastFmPageURL = @"url";
 
 
 // ------------------- PRIVATE CONSTANTS -------------------

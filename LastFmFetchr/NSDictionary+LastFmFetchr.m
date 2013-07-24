@@ -22,19 +22,54 @@ NSString *const kEmpty = @"";
 @implementation NSDictionary (LastFmFetchr)
 
 // artist.getInfo
+- (NSString *)artistMembers
+{
+	return [self valueForKeyPath:kLFMArtist_Members];
+}
+
+- (NSString *)artistMemberArray
+{
+	return [self artistMembers];
+}
+
 - (NSString *)artistBioContent
 {
 	return [self valueForKeyPath:kLFMArtistBio_Content];
 }
 
-- (NSString *)artistBioFormation
+- (NSString *)artistBioFormationYears
 {
-	return [self valueForKeyPath:kLFMArtistBio_FormationList];
+	return [self valueForKeyPath:kLFMArtistBio_FormationYears];
 }
 
-- (NSString *)artistBioLinks
+- (NSArray *)artistBioFormationYearDates
 {
-	return [self valueForKeyPath:kLFMArtistBio_Links];
+	NSString *str = [self artistBioFormationYears];
+	if (![str isKindOfClass:[NSDictionary class]]) {
+		return nil;
+	}
+	NSDictionary *lfm = (NSDictionary *)str;
+
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy"];
+	
+	return @[[formatter dateFromString:lfm[@"yearfrom"]], [formatter dateFromString:lfm[@"yearto"]]];
+}
+
+- (NSString *)artistBioLink
+{
+	return [self valueForKeyPath:kLFMArtistBio_Link];
+}
+
+- (NSURL *)artistBioLinkURL
+{
+	NSString *str = [self artistBioLink];
+	if (![str isKindOfClass:[NSDictionary class]]) {
+		return nil;
+	}
+	NSDictionary *lfm = (NSDictionary *)str;
+
+	return [NSURL URLWithString:lfm[@"href"]];
 }
 
 - (NSString *)artistBioPlaceFormed
@@ -47,6 +82,14 @@ NSString *const kEmpty = @"";
 	return [self valueForKeyPath:kLFMArtistBio_Published];
 }
 
+- (NSDate *)artistBioPublishedDate
+{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
+	
+	return [formatter dateFromString:[self artistBioPublished]];
+}
+
 - (NSString *)artistBioSummary
 {
 	return [self valueForKeyPath:kLFMArtistBio_Summary];
@@ -57,14 +100,12 @@ NSString *const kEmpty = @"";
 	return [self valueForKeyPath:kLFMArtistBio_YearFormed];
 }
 
-- (NSString *)artistName
+- (NSDate *)artistBioYearFormedDate
 {
-	return [self valueForKeyPath:kLFMArtistName];
-}
-
-- (NSString *)artistLastFmPageURL
-{
-	return [self valueForKeyPath:kLFMArtistLastFmPageURL];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy"];
+	
+	return [formatter dateFromString:[self artistBioYearFormed]];
 }
 
 - (NSString *)artistImageSmall
@@ -112,24 +153,80 @@ NSString *const kEmpty = @"";
 	return [self valueForKeyPath:kLFMArtistImageList][4][@"#text"];
 }
 
-- (NSString *)artistImageMegaURL
+- (NSURL *)artistImageMegaURL
 {
 	return [NSURL URLWithString:[self artistImageMega]];
 }
 
+- (NSString *)artistMusicBrianzId
+{
+	return [self valueForKeyPath:kLFMArtistMusicBrianzId];
+}
+
+- (NSString *)artistName
+{
+	return [self valueForKeyPath:kLFMArtistName];
+}
+
+- (NSString *)artistIsOnTour
+{
+	return [self valueForKeyPath:kLFMArtistIsOnTour];
+}
+
+- (BOOL)artistIsOnTourBool
+{
+	if ([@"1" isEqual:[self artistIsOnTour]]) {
+		return YES;
+	}
+	return NO;
+}
+
+- (NSString *)artistSimilarArtists
+{
+	return [self valueForKeyPath:kLFMArtist_SimilarArtists];
+}
+
+- (NSArray *)artistSimilarArtistsArray
+{
+	return [self artistSimilarArtists];
+}
+
 - (NSString *)artistListeners
 {
-	return [self valueForKeyPath:kLFMArtistListeners];
+	return [self valueForKeyPath:kLFMArtistStats_Listeners];
+}
+
+- (NSNumber *)artistListenersNumber
+{
+	return [NSNumber numberWithLongLong:[[self artistListeners] longLongValue]];
 }
 
 - (NSString *)artistPlaycount
 {
-	return [self valueForKeyPath:kLFMArtistPlaycount];
+	return [self valueForKeyPath:kLFMArtistStats_Playcount];
+}
+
+- (NSNumber *)artistPlaycountNumber;
+{
+	return [NSNumber numberWithLongLong:[[self artistPlaycount] longLongValue]];
+}
+
+- (NSString *)artistStreamable
+{
+	return [self valueForKeyPath:kLFMArtistStreamable];
+}
+
+- (BOOL)artistStreamableBool
+{
+	if ([@"1" isEqual:[self artistStreamable]]) {
+		return YES;
+	}
+	return NO;
 }
 
 - (NSString *)artistTags
 {
-	return [self valueForKeyPath:kLFMArtistTags_List];
+	return [self valueForKeyPath:kLFMArtist_Tags];
 }
 
 - (NSArray *)artistTagNames
@@ -164,9 +261,14 @@ NSString *const kEmpty = @"";
 	return tags;
 }
 
-- (NSString *)artistIsOnTour
+- (NSString *)artistLastFmPage
 {
-	return [self valueForKeyPath:kLFMArtistIsOnTour];
+	return [self valueForKeyPath:kLFMArtistLastFmPageURL];
+}
+
+- (NSURL *)artistLastFmPageURL
+{
+	return [NSURL URLWithString:[self artistLastFmPage]];
 }
 
 @end

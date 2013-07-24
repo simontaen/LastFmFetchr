@@ -1,0 +1,245 @@
+2013-07-24 18:00:42.625 LastFmFetchr[2038:c07] JSON Response was: {
+	bandmembers =     {
+		member =         (
+						{
+				name = "Roger Waters";
+				yearfrom = 1964;
+				yearto = 1985;
+			},
+						{
+				name = "David Gilmour";
+				yearfrom = 1968;
+				yearto = 1994;
+			},
+						{
+				name = "Rick Wright";
+				yearfrom = 1964;
+				yearto = 1979;
+			},
+						{
+				name = "Nick Mason";
+				yearfrom = 1964;
+				yearto = 1994;
+			},
+						{
+				name = "Syd Barrett";
+				yearfrom = 1964;
+				yearto = 1968;
+			},
+						{
+				name = "Bob Klose";
+				yearfrom = 1964;
+				yearto = 1965;
+			}
+		);
+	};
+	bio =     {
+		content = "\n                    Pink Floyd was a <a href=\"http://www.last.fm/tag/psychedelic\" class=\"bbcode_tag\" rel=\"tag\">psychedelic</a>/<a href=\"http://www.last.fm/tag/progressive%20rock\" class=\"bbcode_tag\" rel=\"tag\">progressive rock</a> band formed in Cambridge, England, United Kingdom in 1965. Pink Floyd is one of <a href=\"http://www.last.fm/tag/rock\" class=\"bbcode_tag\" rel=\"tag\">rock</a>'s most successful and influential acts, having sold over 200 million albums worldwide and with 74.5 million certified units in the United States, making them one of the best-selling artists of all time.   The band's classic lineup was <a href=\"http://www.last.fm/music/Roger+Waters\" class=\"bbcode_artist\">Roger Waters</a> (vocals, bass), <a href=\"http://www.last.fm/music/David+Gilmour\" class=\"bbcode_artist\">David Gilmour</a> (vocals, guitar), <a href=\"http://www.last.fm/music/Rick+Wright\" class=\"bbcode_artist\">Rick Wright</a> (organ, keyboards, vocals) and <a href=\"http://www.last.fm/music/Nick+Mason\" class=\"bbcode_artist\">Nick Mason</a> (drums).\n\n        <a href=\"http://www.last.fm/music/Pink+Floyd\">Read more about Pink Floyd on Last.fm</a>.\n    \n    \nUser-contributed text is available under the Creative Commons By-SA License and may also be available under the GNU FDL.\n    ";
+		formationlist =         {
+			formation =             {
+				yearfrom = 1965;
+				yearto = 1994;
+			};
+		};
+		links =         {
+			link =             {
+				"#text" = "";
+				href = "http://www.last.fm/music/Pink+Floyd/+wiki";
+				rel = original;
+			};
+		};
+		placeformed = "Cambridge, England, United Kingdom";
+		published = "Fri, 3 Aug 2012 04:12:01 +0000";
+		summary = "\n                Pink Floyd was a <a href=\"http://www.last.fm/tag/psychedelic\" class=\"bbcode_tag\" rel=\"tag\">psychedelic</a>/<a href=\"http://www.last.fm/tag/progressive%20rock\" class=\"bbcode_tag\" rel=\"tag\">progressive rock</a> band formed in Cambridge, England, United Kingdom in 1965. Pink Floyd is one of <a href=\"http://www.last.fm/tag/rock\" class=\"bbcode_tag\" rel=\"tag\">rock</a>'s most successful and influential acts, having sold over 200 million albums worldwide and with 74.5 million certified units in the United States, making them one of the best-selling artists of all time.   The band's classic lineup was <a href=\"http://www.last.fm/music/Roger+Waters\" class=\"bbcode_artist\">Roger Waters</a> (vocals, bass), <a href=\"http://www.last.fm/music/David+Gilmour\" class=\"bbcode_artist\">David Gilmour</a> (vocals, guitar), <a href=\"http://www.last.fm/music/Rick+Wright\" class=\"bbcode_artist\">Rick Wright</a> (organ, keyboards, vocals) and <a href=\"http://www.last.fm/music/Nick+Mason\" class=\"bbcode_artist\">Nick Mason</a> (drums).\n\n        <a href=\"http://www.last.fm/music/Pink+Floyd\">Read more about Pink Floyd on Last.fm</a>.\n    \n    ";
+		yearformed = 1965;
+	};
+	image =     (
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/34/3390608.jpg";
+			size = small;
+		},
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/64/3390608.jpg";
+			size = medium;
+		},
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/126/3390608.jpg";
+			size = large;
+		},
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/252/3390608.jpg";
+			size = extralarge;
+		},
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/_/3390608/Pink+Floyd+pinkfloyd.jpg";
+			size = mega;
+		}
+	);
+	mbid = "83d91898-7763-47d7-b03b-b92132375c47";
+	name = "Pink Floyd";
+	ontour = 0;
+	similar =     {
+		artist =         (
+						{
+				image =                 (
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/34/32395441.jpg";
+						size = small;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/64/32395441.jpg";
+						size = medium;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/126/32395441.jpg";
+						size = large;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/252/32395441.jpg";
+						size = extralarge;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/500/32395441/David+Gilmour.jpg";
+						size = mega;
+					}
+				);
+				name = "David Gilmour";
+				url = "http://www.last.fm/music/David+Gilmour";
+			},
+						{
+				image =                 (
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/34/380160.jpg";
+						size = small;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/64/380160.jpg";
+						size = medium;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/126/380160.jpg";
+						size = large;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/252/380160.jpg";
+						size = extralarge;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/500/380160/Led+Zeppelin.jpg";
+						size = mega;
+					}
+				);
+				name = "Led Zeppelin";
+				url = "http://www.last.fm/music/Led+Zeppelin";
+			},
+						{
+				image =                 (
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/34/34270323.png";
+						size = small;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/64/34270323.png";
+						size = medium;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/126/34270323.png";
+						size = large;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/252/34270323.png";
+						size = extralarge;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/_/34270323/Roger+Waters.png";
+						size = mega;
+					}
+				);
+				name = "Roger Waters";
+				url = "http://www.last.fm/music/Roger+Waters";
+			},
+						{
+				image =                 (
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/34/12006269.jpg";
+						size = small;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/64/12006269.jpg";
+						size = medium;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/126/12006269.jpg";
+						size = large;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/252/12006269.jpg";
+						size = extralarge;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/_/12006269/Syd+Barrett.jpg";
+						size = mega;
+					}
+				);
+				name = "Syd Barrett";
+				url = "http://www.last.fm/music/Syd+Barrett";
+			},
+						{
+				image =                 (
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/34/17737529.jpg";
+						size = small;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/64/17737529.jpg";
+						size = medium;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/126/17737529.jpg";
+						size = large;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/252/17737529.jpg";
+						size = extralarge;
+					},
+										{
+						"#text" = "http://userserve-ak.last.fm/serve/_/17737529/The+Doors.jpg";
+						size = mega;
+					}
+				);
+				name = "The Doors";
+				url = "http://www.last.fm/music/The+Doors";
+			}
+		);
+	};
+	stats =     {
+		listeners = 2463975;
+		playcount = 225908720;
+	};
+	streamable = 0;
+	tags =     {
+		tag =         (
+						{
+				name = "progressive rock";
+				url = "http://www.last.fm/tag/progressive%20rock";
+			},
+						{
+				name = "classic rock";
+				url = "http://www.last.fm/tag/classic%20rock";
+			},
+						{
+				name = "psychedelic rock";
+				url = "http://www.last.fm/tag/psychedelic%20rock";
+			},
+						{
+				name = rock;
+				url = "http://www.last.fm/tag/rock";
+			},
+						{
+				name = psychedelic;
+				url = "http://www.last.fm/tag/psychedelic";
+			}
+		);
+	};
+	url = "http://www.last.fm/music/Pink+Floyd";
+}
