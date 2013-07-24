@@ -23,13 +23,23 @@
 - (NSString *)artistName;
 - (NSString *)artistLastFmPageURL;
 - (NSString *)artistImageSmall;
+- (NSURL *)artistImageSmallURL;
 - (NSString *)artistImageMedium;
+- (NSURL *)artistImageMediumURL;
 - (NSString *)artistImageLarge;
+- (NSURL *)artistImageLargeURL;
 - (NSString *)artistImageExtraLarge;
+- (NSURL *)artistImageExtraLargeURL;
 - (NSString *)artistImageMega;
+- (NSString *)artistImageMegaURL;
 - (NSString *)artistListeners;
 - (NSString *)artistPlaycount;
+/// Straight JSON ouput
 - (NSString *)artistTags;
+/// (ordered) Array of Names as NSStrings
+- (NSArray *)artistTagNames;
+/// (ordered) Array of Last.fm tag links as NSURLs
+- (NSArray *)artistTagURLs;
 - (NSString *)artistIsOnTour;
 
 @end

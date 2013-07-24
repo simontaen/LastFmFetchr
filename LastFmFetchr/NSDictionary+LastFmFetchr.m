@@ -72,9 +72,19 @@ NSString *const kEmpty = @"";
 	return [self valueForKeyPath:kLFMArtistImageList][0][@"#text"];
 }
 
+- (NSURL *)artistImageSmallURL;
+{
+	return [NSURL URLWithString:[self artistImageSmall]];
+}
+
 - (NSString *)artistImageMedium
 {
 	return [self valueForKeyPath:kLFMArtistImageList][1][@"#text"];
+}
+
+- (NSURL *)artistImageMediumURL;
+{
+	return [NSURL URLWithString:[self artistImageMedium]];
 }
 
 - (NSString *)artistImageLarge
@@ -82,14 +92,29 @@ NSString *const kEmpty = @"";
 	return [self valueForKeyPath:kLFMArtistImageList][2][@"#text"];
 }
 
+- (NSURL *)artistImageLargeURL;
+{
+	return [NSURL URLWithString:[self artistImageLarge]];
+}
+
 - (NSString *)artistImageExtraLarge
 {
 	return [self valueForKeyPath:kLFMArtistImageList][3][@"#text"];
 }
 
+- (NSURL *)artistImageExtraLargeURL;
+{
+	return [NSURL URLWithString:[self artistImageExtraLarge]];
+}
+
 - (NSString *)artistImageMega
 {
 	return [self valueForKeyPath:kLFMArtistImageList][4][@"#text"];
+}
+
+- (NSString *)artistImageMegaURL
+{
+	return [NSURL URLWithString:[self artistImageMega]];
 }
 
 - (NSString *)artistListeners
@@ -105,6 +130,38 @@ NSString *const kEmpty = @"";
 - (NSString *)artistTags
 {
 	return [self valueForKeyPath:kLFMArtistTags_List];
+}
+
+- (NSArray *)artistTagNames
+{
+	NSString *str = [self artistTags];
+	if (![str isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *lfm = (NSArray *)str;
+	NSMutableArray *tags = [NSMutableArray array];
+	
+	for (NSDictionary *entry in lfm) {
+		[tags addObject:[NSString stringWithString:entry[@"name"]]];
+	}
+	
+	return tags;
+}
+
+- (NSArray *)artistTagURLs
+{
+	NSString *str = [self artistTags];
+	if (![str isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *lfm = (NSArray *)str;
+	NSMutableArray *tags = [NSMutableArray array];
+	
+	for (NSDictionary *entry in lfm) {
+		[tags addObject:[NSURL URLWithString:entry[@"url"]]];
+	}
+	
+	return tags;
 }
 
 - (NSString *)artistIsOnTour

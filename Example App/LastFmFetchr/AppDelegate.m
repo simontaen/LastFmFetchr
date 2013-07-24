@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LastFmFetchr.h"
+#import "NSDictionary+LastFmFetchr.h"
 
 @implementation AppDelegate
 
@@ -54,7 +55,10 @@
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
 						   success:^(NSDictionary *JSON) {
 							   NSLog(@"Counter %i", --counter);
-							   NSLog(@"JSON Response was: %@", JSON);
+							   // NSLog(@"JSON Response was: %@", JSON);
+							   
+							   NSLog(@"-------------------------------------------------------------------------------");
+							   NSLog(@"USING STRAIGHT KEYS");
 							   NSLog(@"-------------------------------------------------------------------------------");
 							   NSLog(@"kLFMArtistBio %@", JSON[kLFMArtistBio]);
 							   NSLog(@"kLFMArtistBio_Content %@", [JSON valueForKeyPath:kLFMArtistBio_Content]);
@@ -67,11 +71,41 @@
 							   NSLog(@"kLFMArtistName %@", JSON[kLFMArtistName]);
 							   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
 							   NSLog(@"kLFMArtistImageList %@", JSON[kLFMArtistImageList]);
-							   NSLog(@"kLFMArtistImage Large %@", JSON[kLFMArtistImageList][2][@"#text"]);
 							   NSLog(@"kLFMArtistListeners %@", JSON[kLFMArtistListeners]);
 							   NSLog(@"kLFMArtistPlaycount %@", JSON[kLFMArtistPlaycount]);
-							   NSLog(@"kLFMArtistTags_List %@", JSON[kLFMArtistTags_List]);
+							   NSLog(@"kLFMArtistTags_List %@", [JSON valueForKeyPath:kLFMArtistTags_List]);
 							   NSLog(@"kLFMArtistIsOnTour %@", JSON[kLFMArtistIsOnTour]);
+							   
+							   NSLog(@"-------------------------------------------------------------------------------");
+							   NSLog(@"NSDictionary+LastFmFetchr");
+							   NSLog(@"-------------------------------------------------------------------------------");
+							   NSLog(@"artistBioContent %@", [JSON artistBioContent]);
+							   NSLog(@"artistBioFormation %@", [JSON artistBioFormation]);
+							   NSLog(@"artistBioLinks %@", [JSON artistBioLinks]);
+							   NSLog(@"artistBioPlaceFormed %@", [JSON artistBioPlaceFormed]);
+							   NSLog(@"artistBioPublished %@", [JSON artistBioPublished]);
+							   NSLog(@"artistBioSummary %@", [JSON artistBioSummary]);
+							   NSLog(@"artistBioYearFormed %@", [JSON artistBioYearFormed]);
+							   NSLog(@"artistName %@", [JSON artistName]);
+							   NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
+							   NSLog(@"artistImageSmall %@", [JSON artistImageSmall]);
+							   NSLog(@"artistImageSmallURL %@", [JSON artistImageSmallURL]);
+							   NSLog(@"artistImageMedium %@", [JSON artistImageMedium]);
+							   NSLog(@"artistImageMediumURL %@", [JSON artistImageMediumURL]);
+							   NSLog(@"artistImageLarge %@", [JSON artistImageLarge]);
+							   NSLog(@"artistImageLargeURL %@", [JSON artistImageLargeURL]);
+							   NSLog(@"artistImageExtraLarge %@", [JSON artistImageExtraLarge]);
+							   NSLog(@"artistImageExtraLargeURL %@", [JSON artistImageExtraLargeURL]);
+							   NSLog(@"artistImageMega %@", [JSON artistImageMega]);
+							   NSLog(@"artistImageMegaURL %@", [JSON artistImageMegaURL]);
+							   NSLog(@"artistListeners %@", [JSON artistListeners]);
+							   NSLog(@"artistPlaycount %@", [JSON artistPlaycount]);
+							   NSLog(@"artistTags %@", [JSON artistTags]);
+							   NSLog(@"artistTagsNames %@", [JSON artistTagNames]);
+							   NSLog(@"artistTagsURLs %@", [JSON artistTagURLs]);
+							   NSLog(@"artistIsOnTour %@", [JSON artistIsOnTour]);
+							   							   
+							   
 							   if (JSON[@"error"]) {
 								   NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
 							   }
