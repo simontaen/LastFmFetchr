@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+// ------------ Keys to the JSON response from Last.fm ------------------
+// By convention you need to use valueForKey: if the constant name contains an underbar '_'
+
 // Artist Info keys
 extern NSString *const kLFMArtistBio;
 extern NSString *const kLFMArtistBio_Content;
@@ -19,15 +22,13 @@ extern NSString *const kLFMArtistBio_Summary;
 extern NSString *const kLFMArtistBio_YearFormed;
 extern NSString *const kLFMArtistName;
 extern NSString *const kLFMArtistLastFmPageURL;
-extern NSString *const kLFMArtistImage;
-extern NSString *const kLFMArtistImage_Large;
+extern NSString *const kLFMArtistImageList;
 extern NSString *const kLFMArtistListeners;
 extern NSString *const kLFMArtistPlaycount;
 extern NSString *const kLFMArtistTags_List;
 extern NSString *const kLFMArtistIsOnTour;
 
 // API Error codes, see http://www.last.fm/api/errorcodes
-
 enum LFMServiceErrorCodes {
 	kLFMErrorInvalidService = 2,
 	kLFMErrorInvalidMethod = 3,

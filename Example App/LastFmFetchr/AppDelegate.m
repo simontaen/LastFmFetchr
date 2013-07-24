@@ -66,8 +66,8 @@
 							   NSLog(@"kLFMArtistBio_YearFormed %@", [JSON valueForKeyPath:kLFMArtistBio_YearFormed]);
 							   NSLog(@"kLFMArtistName %@", JSON[kLFMArtistName]);
 							   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
-							   NSLog(@"kLFMArtistImage with mod %@", JSON[kLFMArtistImage][3][@"#text"]);
-							   NSLog(@"kLFMArtistImage_Large %@", [JSON valueForKey:kLFMArtistImage_Large]);
+							   NSLog(@"kLFMArtistImageList %@", JSON[kLFMArtistImageList]);
+							   NSLog(@"kLFMArtistImage with mod %@", JSON[kLFMArtistImageList][3][@"#text"]);
 							   NSLog(@"kLFMArtistListeners %@", JSON[kLFMArtistListeners]);
 							   NSLog(@"kLFMArtistPlaycount %@", JSON[kLFMArtistPlaycount]);
 							   NSLog(@"kLFMArtistTags_List %@", JSON[kLFMArtistTags_List]);

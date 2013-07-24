@@ -10,8 +10,8 @@
 #import "AFNetworking.h"
 #import "AFLastFmAPIClient.h"
 
-// Base URL to the API
-NSString *const kLFMBaseURLString = @"http://ws.audioscrobbler.com/2.0";
+// ------------ Keys to the JSON response from Last.fm ------------------
+// By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
 // Artist Info keys
 NSString *const kLFMArtistBio = @"bio";
@@ -24,12 +24,17 @@ NSString *const kLFMArtistBio_Summary = @"bio.summary";
 NSString *const kLFMArtistBio_YearFormed = @"bio.yearformed";
 NSString *const kLFMArtistName = @"name";
 NSString *const kLFMArtistLastFmPageURL = @"url";
-NSString *const kLFMArtistImage = @"image";
-NSString *const kLFMArtistImage_Large = @"image.3.#text";
+NSString *const kLFMArtistImageList = @"image";
 NSString *const kLFMArtistListeners = @"listeners";
 NSString *const kLFMArtistPlaycount = @"playcount";
 NSString *const kLFMArtistTags_List = @"tags.tag";
 NSString *const kLFMArtistIsOnTour = @"ontour";
+
+
+// ------------------- PRIVATE CONSTANTS -------------------
+
+// Base URL to the API
+NSString *const kLFMBaseURLString = @"http://ws.audioscrobbler.com/2.0";
 
 // Last.fm API parameters
 NSString *const kLFMParameterMethod = @"method";
@@ -37,6 +42,7 @@ NSString *const kLFMParameterArtist = @"artist";
 
 // Last.fm API method parameter values
 NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
+
 
 @interface LastFmFetchr ()
 {
@@ -47,31 +53,6 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 @end
 
 @implementation LastFmFetchr
-
-# pragma mark - Singleton Methods
-
-+ (id)sharedManager
-{
-	static LastFmFetchr *_sharedManager;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		_sharedManager = [[self alloc] init];
-	});
-	return _sharedManager;
-}
-
-- (id)init {
-	if (self = [super init]) {
-		// Init code here
-		userDefaults = [NSUserDefaults standardUserDefaults];
-		lastFmApiClient = [AFLastFmAPIClient sharedClient];
-		
-		// Setup the async queue
-		async_queue = dispatch_queue_create("com.lastfmfetchr.asyncQueue", NULL);
-	}
-	return self;
-}
-
 
 #pragma mark - API calls
 
@@ -93,6 +74,8 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 				 success:^(AFHTTPRequestOperation *operation, id JSON) {
 					 if (!operation.isCancelled) {
 						 if ([JSON isKindOfClass:[NSDictionary class]]) {
+							 // THAT is a code-smell https://twitter.com/qcoding/status/359770054226755584
+							 // But it's unavoidable
 							 success((NSDictionary *)(JSON[kLFMParameterArtist]));
 						 } else {
 							 // TODO create an appropriate error object
@@ -185,5 +168,29 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 
 // make sure you can only call this once
 //- (void)setApiKey:(NSString *)apiKey
+
+# pragma mark - Singleton Methods
+
++ (id)sharedManager
+{
+	static LastFmFetchr *_sharedManager;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		_sharedManager = [[self alloc] init];
+	});
+	return _sharedManager;
+}
+
+- (id)init {
+	if (self = [super init]) {
+		// Init code here
+		userDefaults = [NSUserDefaults standardUserDefaults];
+		lastFmApiClient = [AFLastFmAPIClient sharedClient];
+		
+		// Setup the async queue
+		async_queue = dispatch_queue_create("com.lastfmfetchr.asyncQueue", NULL);
+	}
+	return self;
+}
 
 @end
