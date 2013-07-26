@@ -15,7 +15,7 @@
 
 // artist.getInfo
 NSString *const kLFMArtist_Members = @"bandmembers.member";
-NSString *const kLFMArtistBio = @"bio";
+//NSString *const kLFMArtistBio = @"bio";
 NSString *const kLFMArtistBio_Content = @"bio.content";
 NSString *const kLFMArtistBio_FormationYears = @"bio.formationlist.formation";
 NSString *const kLFMArtistBio_Link = @"bio.links.link";
@@ -34,8 +34,14 @@ NSString *const kLFMArtistStreamable = @"streamable";
 NSString *const kLFMArtist_Tags = @"tags.tag";
 NSString *const kLFMArtistLastFmPageURL = @"url";
 
+// ------------ API Error codes, see http://www.last.fm/api/errorcodes ------------------
+
+NSString *const kLFMSericeErrorDomain = @"com.lastfmfetchr.service.errors";
 
 // ------------------- PRIVATE CONSTANTS -------------------
+
+NSString *const kLFMSericeErrorCode = @"error";
+NSString *const kLFMSericeErrorMessage = @"message";
 
 // Base URL to the API
 NSString *const kLFMBaseURLString = @"http://ws.audioscrobbler.com/2.0";
@@ -63,7 +69,7 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 /// Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 						  success:(void (^)(NSDictionary *JSON))success
-						  failure:(void (^)(id response, NSError *error))failure
+						  failure:(void (^)(NSOperation *operation, NSError *error))failure
 {
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
 	params[kLFMParameterMethod] = kLFMMethodArtistGetInfo;
@@ -78,12 +84,21 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 				 success:^(AFHTTPRequestOperation *operation, id JSON) {
 					 if (!operation.isCancelled) {
 						 if ([JSON isKindOfClass:[NSDictionary class]]) {
-							 // THAT is a code-smell https://twitter.com/qcoding/status/359770054226755584
-							 // But it's unavoidable
-							 success((NSDictionary *)(JSON[kLFMParameterArtist]));
+							 
+							 if (JSON[kLFMSericeErrorCode]) {
+								 NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
+																			 code:[JSON[kLFMSericeErrorCode] intValue]
+																		 userInfo:@{ NSLocalizedDescriptionKey : JSON[kLFMSericeErrorMessage], kLFMParameterMethod : kLFMMethodArtistGetInfo}];
+								 failure(operation, error);
+							 } else {
+								 success((NSDictionary *)(JSON[kLFMParameterArtist]));
+							 }
+							 
 						 } else {
-							 // TODO create an appropriate error object
-							 failure(operation, nil);
+							 NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
+																		 code:0
+																	 userInfo:@{ NSLocalizedDescriptionKey : @"Invalid service response", kLFMParameterMethod : kLFMMethodArtistGetInfo}];
+							 failure(operation, error);
 						 }
 					 }
 				 }
@@ -103,19 +118,28 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 #pragma mark - Error Handling
 
 /// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
-- (NSString *)messageForError:(NSError *)error withResponse:(id)response
+- (NSString *)messageForError:(NSError *)error withOperation:(NSOperation *)operation
 {
-	if ([response isKindOfClass:[NSDictionary class]]) {
-		NSString *errorMsg = [response objectForKey:@"message"];
-		return (errorMsg.length) ? errorMsg : error.localizedDescription;
-	} else if ([response isKindOfClass:[AFHTTPRequestOperation class]]) {
-		AFHTTPRequestOperation *operation = (AFHTTPRequestOperation *)response;
-		int statusCode = operation.response.statusCode;
-		NSString *errorMsg = [NSHTTPURLResponse localizedStringForStatusCode:statusCode];
-		return [errorMsg stringByAppendingFormat:@" (code %d)", statusCode];
-	} else {
-		return error.localizedDescription;
+	NSString *errorMsg = @"";
+	if ([operation isKindOfClass:[AFHTTPRequestOperation class]]) {
+		
+		int statusCode = ((AFHTTPRequestOperation *)operation).response.statusCode;
+		errorMsg = [NSHTTPURLResponse localizedStringForStatusCode:statusCode];
+		errorMsg = [errorMsg stringByAppendingFormat:@" (code %d). ", statusCode];
+		
 	}
+	
+	errorMsg = [errorMsg stringByAppendingString:error.localizedDescription];
+	
+	NSString *method = error.userInfo[kLFMParameterMethod];
+	
+	if (method.length) {
+		errorMsg = [errorMsg stringByAppendingFormat:@" (Method '%@').", method];
+	} else {
+		errorMsg = [errorMsg stringByAppendingString:@"."];
+	}
+	
+	return errorMsg;
 }
 
 # pragma mark - Private Methods

@@ -123,15 +123,10 @@
 							   NSLog(@"artistTagURLs %@", [JSON artistTagURLs]);
 							   NSLog(@"artistLastFmPage %@", [JSON artistLastFmPage]);
 							   NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
-
-							   
-							   if (JSON[@"error"]) {
-								   NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
-							   }
 						   }
-						   failure:^(id response, NSError *error) {
+						   failure:^(NSOperation *operation, NSError *error) {
 							   NSLog(@"Counter %i", --counter);
-							   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withResponse:response]);
+							   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withOperation:operation]);
 						   }];
 	NSLog(@"Counter %i", ++counter);
 		

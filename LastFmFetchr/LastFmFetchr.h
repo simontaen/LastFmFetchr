@@ -32,7 +32,10 @@ extern NSString *const kLFMArtistStreamable;
 extern NSString *const kLFMArtist_Tags;
 extern NSString *const kLFMArtistLastFmPageURL;
 
-// API Error codes, see http://www.last.fm/api/errorcodes
+// ------------ API Error codes, see http://www.last.fm/api/errorcodes ------------------
+
+extern NSString *const kLFMSericeErrorDomain;
+
 enum LFMServiceErrorCodes {
 	kLFMErrorInvalidService = 2,
 	kLFMErrorInvalidMethod = 3,
@@ -76,11 +79,13 @@ enum LFMServiceErrorCodes {
 // ONLY use the returned operation for cancelling reasons
 // DO NOT try to modify it or else you'll run into a race condition
 // https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
+// IF you cancel an operation, the CALLBACK WILL NOT FIRE, the response will be ignored in any case!
+
 
 /// Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 									 success:(void (^)(NSDictionary *JSON))success
-									 failure:(void (^)(id response, NSError *error))failure;
+									 failure:(void (^)(NSOperation *operation, NSError *error))failure;
 
 #pragma mark - Requests Management
 
@@ -90,7 +95,7 @@ enum LFMServiceErrorCodes {
 #pragma mark - Error Handling
 
 /// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
-- (NSString *)messageForError:(NSError *)error withResponse:(id)response;
+- (NSString *)messageForError:(NSError *)error withOperation:(id)response;
 
 # pragma mark - Singleton Methods
 
