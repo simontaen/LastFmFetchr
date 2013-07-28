@@ -154,7 +154,6 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 {
 	// using the decomposed convenience method from the AFHTTPClient
 	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"GET" path:path parameters:parameters];
-	NSLog(@"NSURLRequest Cache policy: %u", request.cachePolicy);
     AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure]; // actually is a registerHTTPOperationClass
 	// AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
 	// For all the delegate methods it provides a block property which gets called if set.

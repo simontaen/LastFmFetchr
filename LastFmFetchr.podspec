@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.source_files = 'LastFmFetchr/*'
   s.requires_arc = true
   s.dependency 'AFNetworking', '~> 1.3.1'
+  s.dependency 'SDURLCache', '~> 1.2.0'
 end
