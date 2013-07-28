@@ -13,12 +13,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-	NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024
-														 diskCapacity:24 * 1024 * 1024
-															 diskPath:nil];
-	[NSURLCache setSharedURLCache:URLCache];
-	
+{	
 	LastFmFetchr *lastFmFetchr = [LastFmFetchr sharedManager];
 	lastFmFetchr.apiKey = @"aed3367b0133ab707cb4e5b6b04da3e7";
 	lastFmFetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
