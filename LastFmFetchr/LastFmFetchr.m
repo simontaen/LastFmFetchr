@@ -18,7 +18,6 @@
 
 // artist.getInfo
 NSString *const kLFMArtist_Members = @"bandmembers.member";
-//NSString *const kLFMArtistBio = @"bio";
 NSString *const kLFMArtistBio_Content = @"bio.content";
 NSString *const kLFMArtistBio_FormationYears = @"bio.formationlist.formation";
 NSString *const kLFMArtistBio_Link = @"bio.links.link";
@@ -36,6 +35,22 @@ NSString *const kLFMArtistStats_Playcount = @"stats.playcount";
 NSString *const kLFMArtistStreamable = @"streamable";
 NSString *const kLFMArtist_Tags = @"tags.tag";
 NSString *const kLFMArtistLastFmPageURL = @"url";
+
+// album.getInfo
+NSString *const kLFMAlbumArtistName = @"artist";
+NSString *const kLFMAlbumId = @"id";
+NSString *const kLFMAlbumImageList = @"image";
+NSString *const kLFMAlbumListeners = @"listeners";
+NSString *const kLFMAlbumMusicBrianzId = @"mbid";
+NSString *const kLFMAlbumName = @"name";
+NSString *const kLFMAlbumPlaycount = @"playcount";
+NSString *const kLFMAlbumReleasedate = @"releasedate";
+NSString *const kLFMAlbum_Toptags = @"toptags.tag";
+NSString *const kLFMAlbum_Tracks = @"tracks.track";
+NSString *const kLFMAlbumLastFmPageURL = @"url";
+NSString *const kLFMAlbumWiki_Content = @"wiki.content";
+NSString *const kLFMAlbumWiki_Published = @"wiki.published";
+NSString *const kLFMAlbumWiki_Summary = @"wiki.summary";
 
 // ------------ API Error codes, see http://www.last.fm/api/errorcodes ------------------
 
