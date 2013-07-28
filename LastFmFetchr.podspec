@@ -11,4 +11,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.dependency 'AFNetworking', '~> 1.3.1'
   s.dependency 'SDURLCache', '~> 1.2.0'
+  s.dependency 'FCYAsserts', '~> 1.2.0'
 end
