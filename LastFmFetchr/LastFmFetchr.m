@@ -53,13 +53,11 @@ NSString *const kLFMBaseURLString = @"http://ws.audioscrobbler.com/2.0";
 NSString *const kLFMParameterMethod = @"method";
 NSString *const kLFMParameterMbid = @"mbid";
 NSString *const kLFMParameterArtist = @"artist";
+NSString *const kLFMParameterAlbum = @"album";
 
 // Last.fm API method parameter values
 NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
-
-// Block handler typedefs
-typedef void (^LastFmFetchrAPISuccess)(NSDictionary *JSON);
-typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
+NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 
 @interface LastFmFetchr ()
@@ -77,13 +75,13 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 
 #pragma mark - API calls
 
-/// Artist methods
+#pragma mark - Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
 						  success:(LastFmFetchrAPISuccess)success
 						  failure:(LastFmFetchrAPIFailure)failure
 {
-	FCYAssert([artist length] || [mbid length], @"Parameter artist or mbid is mandatory");
+	FCYAssert([artist length] || [mbid length], @"Must provide artist or mbid");
 	
 	// perpare the params
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -108,6 +106,51 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 										   operation:operation
 									methodParamValue:kLFMMethodArtistGetInfo
 									  jsonContentKey:kLFMParameterArtist
+											 success:success
+											 failure:failure];
+				 }
+				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+					 [self handleAFNetworkingFailure:error
+										   operation:operation
+											 failure:failure];
+				 }];
+}
+
+#pragma mark - Album methods
+- (NSOperation *)getInfoForAlbum:(NSString *)album
+						byArtist:(NSString *)artist
+							mbid:(NSString *)mbid
+						 success:(void (^)(NSDictionary *JSON))success
+						 failure:(void (^)(NSOperation *operation, NSError *error))failure;
+{
+	FCYAssert(([artist length] && [album length]) || [mbid length], @"Must provide @[artist,album] or mbid");
+	
+	// perpare the params
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	// add the Last.fm method
+	params[kLFMParameterMethod] = kLFMMethodAlbumGetInfo;
+	// add user params
+	if ([album length]) {
+		params[kLFMParameterAlbum] = album;
+	}
+	if ([artist length]) {
+		params[kLFMParameterArtist] = artist;
+	}
+	if ([mbid length]) {
+		params[kLFMParameterMbid] = mbid;
+	}
+	
+#ifndef NDEBUG
+	NSLog(@"LastFmFetchr: Request %@", kLFMMethodAlbumGetInfo);
+#endif
+	
+	return [self getPath:@""
+			  parameters:[self addDefaultParameters:params]
+				 success:^(AFHTTPRequestOperation *operation, id JSON) {
+					 [self handleAFNetworkingSuccess:JSON
+										   operation:operation
+									methodParamValue:kLFMMethodAlbumGetInfo
+									  jsonContentKey:kLFMParameterAlbum
 											 success:success
 											 failure:failure];
 				 }

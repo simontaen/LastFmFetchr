@@ -1,0 +1,137 @@
+2013-07-28 20:22:11.388 LastFmFetchr[23820:c07] JSON Response was: {
+	artist = "AC/DC";
+	id = 2024486;
+	image =     (
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/34s/91070889.png";
+			size = small;
+		},
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/64s/91070889.png";
+			size = medium;
+		},
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/174s/91070889.png";
+			size = large;
+		},
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/300x300/91070889.png";
+			size = extralarge;
+		},
+				{
+			"#text" = "http://userserve-ak.last.fm/serve/_/91070889/Highway+to+Hell.png";
+			size = mega;
+		}
+	);
+	listeners = 448369;
+	mbid = "022beb6f-9d5f-4a2c-9e48-2d93c7df4c1d";
+	name = "Highway to Hell";
+	playcount = 7058633;
+	releasedate = "    12 Jul 2002, 00:00";
+	toptags =     {
+		tag =         (
+						{
+				name = "hard rock";
+				url = "http://www.last.fm/tag/hard%20rock";
+			},
+						{
+				name = "albums i own";
+				url = "http://www.last.fm/tag/albums%20i%20own";
+			},
+						{
+				name = rock;
+				url = "http://www.last.fm/tag/rock";
+			},
+						{
+				name = "classic rock";
+				url = "http://www.last.fm/tag/classic%20rock";
+			},
+						{
+				name = 70s;
+				url = "http://www.last.fm/tag/70s";
+			}
+		);
+	};
+	tracks =     {
+		track =         (
+						{
+				"@attr" =                 {
+					rank = 1;
+				};
+				artist =                 {
+					mbid = "66c662b6-6e2f-4930-8610-912e24c63ed1";
+					name = "AC/DC";
+					url = "http://www.last.fm/music/AC%2FDC";
+				};
+				duration = 208;
+				mbid = "4b4a7daa-6c0f-41ac-bdca-88a4c584208e";
+				name = "Highway To Hell";
+				streamable =                 {
+					"#text" = 0;
+					fulltrack = 0;
+				};
+				url = "http://www.last.fm/music/AC%2FDC/_/Highway+To+Hell";
+			},
+						{
+				"@attr" =                 {
+					rank = 2;
+				};
+				artist =                 {
+					mbid = "66c662b6-6e2f-4930-8610-912e24c63ed1";
+					name = "AC/DC";
+					url = "http://www.last.fm/music/AC%2FDC";
+				};
+				duration = 254;
+				mbid = "b61d8ef8-f283-413c-8c4e-f7e7a8dff4ec";
+				name = "Hell Ain't A Bad Place To Be";
+				streamable =                 {
+					"#text" = 0;
+					fulltrack = 0;
+				};
+				url = "http://www.last.fm/music/AC%2FDC/_/Hell+Ain%27t+A+Bad+Place+To+Be";
+			},
+						{
+				"@attr" =                 {
+					rank = 3;
+				};
+				artist =                 {
+					mbid = "66c662b6-6e2f-4930-8610-912e24c63ed1";
+					name = "AC/DC";
+					url = "http://www.last.fm/music/AC%2FDC";
+				};
+				duration = 305;
+				mbid = "91ade697-572e-4771-a2ca-73d28b92039d";
+				name = "High Voltage";
+				streamable =                 {
+					"#text" = 0;
+					fulltrack = 0;
+				};
+				url = "http://www.last.fm/music/AC%2FDC/_/High+Voltage";
+			},
+						{
+				"@attr" =                 {
+					rank = 4;
+				};
+				artist =                 {
+					mbid = "66c662b6-6e2f-4930-8610-912e24c63ed1";
+					name = "AC/DC";
+					url = "http://www.last.fm/music/AC%2FDC";
+				};
+				duration = 274;
+				mbid = "8a3aef1a-49ba-4c4e-8cc2-4834675f109f";
+				name = "If You Want Blood (You've Got It)";
+				streamable =                 {
+					"#text" = 0;
+					fulltrack = 0;
+				};
+				url = "http://www.last.fm/music/AC%2FDC/_/If+You+Want+Blood+(You%27ve+Got+It)";
+			}
+		);
+	};
+	url = "http://www.last.fm/music/AC%2FDC/Highway+to+Hell";
+	wiki =     {
+		content = "Highway to Hell is the sixth studio album by Australian hard rock band AC/DC, released in July 1979. It is also AC/DC's fifth international studio album. All songs were written by Angus Young, Malcolm Young, and Bon Scott. It was the last album featuring Bon Scott, who died early the following year.\n \n The album has ten tracks:\n \n 1. &quot;Highway to Hell&quot; \U2013 3:28\n 2. &quot;Girls Got Rhythm&quot; \U2013 3:23\n 3. &quot;Walk All Over You&quot; \U2013 5:10\n 4. &quot;Touch Too Much&quot; \U2013 4:27\n 5. &quot;Beating Around the Bush&quot; \U2013 3:56\n 6. &quot;Shot Down in Flames&quot; \U2013 3:22\n 7. &quot;Get It Hot&quot; \U2013 2:34\n 8. &quot;If You Want Blood (You've Got It)&quot; \U2013 4:37\n 9. &quot;Love Hungry Man&quot; \U2013 4:17\n 10. &quot;Night Prowler&quot; \U2013 6:27\n \n All songs were written by Angus Young, Malcolm Young, and Bon Scott.\n \n It was originally released by Albert Productions, who licensed the album to Atlantic Records for release outside of Australia, and was then re-released by Epic Records in 2003 as part of the AC/DC Remasters series. On May 25th 2006, Highway To Hell was certified 7x platinum by the RIAA. In 2003, the album was ranked number 199 on Rolling Stone magazine's list of the 500 greatest albums of all time. [1]\n \n \n \n \n Overview\n Highway to Hell is the last AC/DC album recorded with lead vocalist Bon Scott before his death in February 1980. The final words spoken by Scott on the album are &quot;Shazbot, na-nu na-nu,&quot; phrases used on the then-popular American sitcom, Mork and Mindy, by lead character Mork (a visiting extraterrestrial played by Robin Williams).\n \n Highway to Hell was the first AC/DC album not produced by Harry Vanda and George Young. Pre-production of the album began in January 1979 with demos cut at Albert Studios in Sydney, Australia, where they met the intended producer, Eddie Kramer. Kramer was fired before a single track had been completed, and Robert John &quot;Mutt&quot; Lange was brought in to replace him. The change proved to be fortuitous, with Lange also producing the band's biggest sellers, Back in Black and For Those About to Rock. The album was recorded during sessions in February 1979 at Criteria Studios in Miami, Florida and March-April at Roundhouse Studios in London, England.\n \n In Australia, Highway to Hell was released with a slightly different album cover, featuring flames and a drawing of a bass guitar neck superimposed over the same group photo used on the international cover. Additionally, the East German release had different and much plainer designs on the front and back, apparently because the authorities were not happy with the sleeve as released elsewhere.\n \n Personnel\n Bon Scott \U2013 lead vocals \n Angus Young \U2013 lead guitar \n Malcolm Young \U2013 rhythm guitar, backing vocals \n Cliff Williams \U2013 bass, backing vocals \n Phil Rudd \U2013 drums \n Robert John &quot;Mutt&quot; Lange \U2013 producer \n Mark Dearnley \U2013 engineer \n \n Chart positions\n Billboard Music Charts (North America) - album\n \n 1979 Pop Albums No. 1 \n Billboard (North America) - singles\n \n 1979 Highway To Hell Pop Singles No. 2 \n 1992 Highway To Hell(Live) Mainstream Rock Tracks No. 11 \n \n        \nUser-contributed text is available under the Creative Commons By-SA License and may also be available under the GNU FDL.";
+		published = "Fri, 16 Jul 2010 09:45:56 +0000";
+		summary = "Highway to Hell is the sixth studio album by Australian hard rock band AC/DC, released in July 1979. It is also AC/DC's fifth international studio album. All songs were written by Angus Young, Malcolm Young, and Bon Scott. It was the last album featuring Bon Scott, who died early the following year.  The album has ten tracks:  1. &quot;Highway to Hell&quot; \U2013 3:28\n 2. &quot;Girls Got Rhythm&quot; \U2013 3:23\n 3. &quot;Walk All Over You&quot; \U2013 5:10\n 4. &quot;Touch Too Much&quot; \U2013 4:27\n 5. &quot;Beating Around the Bush&quot; \U2013 3:56\n 6. &quot;Shot Down in Flames&quot; \U2013 3:22\n ";
+	};
+}

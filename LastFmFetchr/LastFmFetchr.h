@@ -67,6 +67,11 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 };
 
 
+// ------------ Block handler typedefs ------------------
+typedef void (^LastFmFetchrAPISuccess)(NSDictionary *JSON);
+typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
+
+
 @interface LastFmFetchr : NSObject
 
 @property (strong, nonatomic) NSString *username;
@@ -85,11 +90,18 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
  Also the data is NOT being cached (TODO: is this verified?)
  */
 
-/// Artist methods
+#pragma mark - Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
-						  success:(void (^)(NSDictionary *JSON))success
-						  failure:(void (^)(NSOperation *operation, NSError *error))failure;
+						  success:(LastFmFetchrAPISuccess)success
+						  failure:(LastFmFetchrAPIFailure)failure;
+
+#pragma mark - Album methods
+- (NSOperation *)getInfoForAlbum:(NSString *)album
+						byArtist:(NSString *)artist
+							mbid:(NSString *)mbid
+						 success:(LastFmFetchrAPISuccess)success
+						 failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Requests Management
 
@@ -101,7 +113,7 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 /// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
 - (NSString *)messageForError:(NSError *)error withOperation:(id)response;
 
-# pragma mark - Singleton Methods
+#pragma mark - Singleton Methods
 
 /// Initializes and returns the LastFmFetchr singleton object
 /// @return The singleton object
