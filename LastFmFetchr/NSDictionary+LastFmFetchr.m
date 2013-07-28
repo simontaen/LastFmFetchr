@@ -54,7 +54,7 @@ NSString *const kEmpty = @"";
 		return nil;
 	}
 	NSDictionary *dict = (NSDictionary *)obj;
-
+	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy"];
 	
@@ -73,7 +73,7 @@ NSString *const kEmpty = @"";
 		return nil;
 	}
 	NSDictionary *dict = (NSDictionary *)obj;
-
+	
 	return [NSURL URLWithString:dict[@"href"]];
 }
 

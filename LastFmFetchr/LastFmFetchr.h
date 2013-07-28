@@ -76,13 +76,14 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 
 #pragma mark - API calls
 
-// Be aware of https://github.com/AFNetworking/AFNetworking/issues/405
-// ONLY use the returned operation for cancelling reasons
-// DO NOT try to modify it or else you'll run into a race condition
-// https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
-// IF you cancel an operation, the CALLBACK WILL NOT FIRE, the response will be ignored in any case!
-// Also the data is NOT being cached (TODO: is this verified?)
-
+/*
+ Be aware of https://github.com/AFNetworking/AFNetworking/issues/405
+ ONLY use the returned operation for cancelling reasons
+ DO NOT try to modify it or else you'll run into a race condition
+ https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
+ IF you cancel an operation, the CALLBACK WILL NOT FIRE, the response will be ignored in any case!
+ Also the data is NOT being cached (TODO: is this verified?)
+ */
 
 /// Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
@@ -102,8 +103,8 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 
 # pragma mark - Singleton Methods
 
-/// Initializes and returns a new LastFmFetchr singleton object
-/// @return A new singleton object
+/// Initializes and returns the LastFmFetchr singleton object
+/// @return The singleton object
 + (instancetype)sharedManager;
 
 @end

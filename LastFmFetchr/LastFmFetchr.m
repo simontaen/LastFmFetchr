@@ -165,11 +165,14 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 {
 	// using the decomposed convenience method from the AFHTTPClient
 	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"GET" path:path parameters:parameters];
-    AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure]; // actually is a registerHTTPOperationClass
-	// AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
-	// For all the delegate methods it provides a block property which gets called if set.
-	// You would do something like http://blackpixel.com/blog/2012/05/caching-and-nsurlconnection.html here
-	//operation setCacheResponseBlock:
+    AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure];
+	/*
+	 actually is a registerHTTPOperationClass
+	 AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
+	 For all the delegate methods it provides a block property which gets called if set.
+	 You would do something like http://blackpixel.com/blog/2012/05/caching-and-nsurlconnection.html here
+	 operation setCacheResponseBlock:
+	 */
     [lastFmApiClient enqueueHTTPRequestOperation:operation];
 	return operation;
 }
@@ -244,10 +247,10 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 		// Enable cache
 		SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:24 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
 		/*
-		NSURLCache *URLCache = [[NSURLCache alloc] init];
-		[URLCache setMemoryCapacity:8 * 1024 * 1024];
-		[URLCache setDiskCapacity:24 * 1024 * 1024];
-		*/
+		 NSURLCache *URLCache = [[NSURLCache alloc] init];
+		 [URLCache setMemoryCapacity:8 * 1024 * 1024];
+		 [URLCache setDiskCapacity:24 * 1024 * 1024];
+		 */
 		[NSURLCache setSharedURLCache:URLCache];
 		NSLog(@"Cache is being logged to: %@", [SDURLCache defaultCachePath]);
 	}
