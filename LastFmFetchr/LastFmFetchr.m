@@ -57,11 +57,18 @@ NSString *const kLFMParameterArtist = @"artist";
 // Last.fm API method parameter values
 NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 
+// Block handler typedefs
+typedef void (^LastFmFetchrAPISuccess)(NSDictionary *JSON);
+typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
+
 
 @interface LastFmFetchr ()
 {
-	NSUserDefaults *userDefaults;
+	// The client to talk the Last.fm
 	AFLastFmAPIClient *lastFmApiClient;
+	// probably not needed
+	NSUserDefaults *userDefaults;
+	// probably not needed
 	dispatch_queue_t async_queue;
 }
 @end
@@ -73,20 +80,22 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 /// Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
-						  success:(void (^)(NSDictionary *JSON))success
-						  failure:(void (^)(NSOperation *operation, NSError *error))failure
+						  success:(LastFmFetchrAPISuccess)success
+						  failure:(LastFmFetchrAPIFailure)failure
 {
 	FCYAssert([artist length] || [mbid length], @"Parameter artist or mbid is mandatory");
 	
+	// perpare the params
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	// add the Last.fm method
 	params[kLFMParameterMethod] = kLFMMethodArtistGetInfo;
+	// add user params
 	if ([artist length]) {
 		params[kLFMParameterArtist] = artist;
 	}
 	if ([mbid length]) {
 		params[kLFMParameterMbid] = mbid;
 	}
-	
 	
 #ifndef NDEBUG
 	NSLog(@"LastFmFetchr: Request %@", kLFMMethodArtistGetInfo);
@@ -95,37 +104,57 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 	return [self getPath:@""
 			  parameters:[self addDefaultParameters:params]
 				 success:^(AFHTTPRequestOperation *operation, id JSON) {
-					 if (!operation.isCancelled) {
-						 if ([JSON isKindOfClass:[NSDictionary class]]) {
-							 
-							 if (JSON[kLFMSericeErrorCode]) {
-								 NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
-																			 code:[JSON[kLFMSericeErrorCode] intValue]
-																		 userInfo:@{ NSLocalizedDescriptionKey : JSON[kLFMSericeErrorMessage], kLFMParameterMethod : kLFMMethodArtistGetInfo}];
-								 failure(operation, error);
-							 } else {
-								 success((NSDictionary *)(JSON[kLFMParameterArtist]));
-							 }
-							 
-						 } else {
-							 NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
-																		 code:0
-																	 userInfo:@{ NSLocalizedDescriptionKey : @"Invalid service response", kLFMParameterMethod : kLFMMethodArtistGetInfo}];
-							 failure(operation, error);
-						 }
-					 }
+					 [self handleAFNetworkingSuccess:JSON
+										   operation:operation
+									methodParamValue:kLFMMethodArtistGetInfo
+									  jsonContentKey:kLFMParameterArtist
+											 success:success
+											 failure:failure];
 				 }
 				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-					 if (!operation.isCancelled) failure(operation, error);
+					 [self handleAFNetworkingFailure:error
+										   operation:operation
+											 failure:failure];
 				 }];
 }
 
-#pragma mark - Requests Management
+# pragma mark - AFNetworking handlers
 
-/// Cancels all requests that are currently queued or being executed
-- (void)cancelAllRequests
+/// called when AFNetworking comes back with a success
+- (void)handleAFNetworkingSuccess:(id)JSON
+						operation:(AFHTTPRequestOperation *)operation
+				 methodParamValue:(NSString *)methodParamValue
+				   jsonContentKey:(NSString *)jsonContentKey
+						  success:(LastFmFetchrAPISuccess)success
+						  failure:(LastFmFetchrAPIFailure)failure
 {
-	[lastFmApiClient cancelAllHTTPOperationsWithMethod:nil path:nil];
+	if (!operation.isCancelled) {
+		if ([JSON isKindOfClass:[NSDictionary class]]) {
+			
+			if (JSON[kLFMSericeErrorCode]) {
+				NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
+															code:[JSON[kLFMSericeErrorCode] intValue]
+														userInfo:@{ NSLocalizedDescriptionKey : JSON[kLFMSericeErrorMessage], kLFMParameterMethod : methodParamValue}];
+				failure(operation, error);
+			} else {
+				success((NSDictionary *)(JSON[jsonContentKey]));
+			}
+			
+		} else {
+			NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
+														code:0
+													userInfo:@{ NSLocalizedDescriptionKey : @"Invalid service response", kLFMParameterMethod : kLFMMethodArtistGetInfo}];
+			failure(operation, error);
+		}
+	}
+}
+
+/// called when AFNetworking comes back with a failure
+- (void)handleAFNetworkingFailure:(NSError *)error
+						operation:(AFHTTPRequestOperation *)operation
+						  failure:(LastFmFetchrAPIFailure)failure
+{
+	if (!operation.isCancelled) failure(operation, error);
 }
 
 #pragma mark - Error Handling
@@ -153,6 +182,14 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 	}
 	
 	return errorMsg;
+}
+
+#pragma mark - Requests Management
+
+/// Cancels all requests that are currently queued or being executed
+- (void)cancelAllRequests
+{
+	[lastFmApiClient cancelAllHTTPOperationsWithMethod:nil path:nil];
 }
 
 # pragma mark - Private Methods
@@ -186,14 +223,18 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 	// using the decomposed convenience method from the AFHTTPClient
 	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"POST" path:path parameters:parameters];
 	AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure];
-	// AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
-	// For all the delegate methods it provides a block property which gets called if set.
-	// You would do something like http://blackpixel.com/blog/2012/05/caching-and-nsurlconnection.html here
-	//operation setCacheResponseBlock:
+	/*
+	 actually is a registerHTTPOperationClass
+	 AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
+	 For all the delegate methods it provides a block property which gets called if set.
+	 You would do something like http://blackpixel.com/blog/2012/05/caching-and-nsurlconnection.html here
+	 operation setCacheResponseBlock:
+	 */
     [lastFmApiClient enqueueHTTPRequestOperation:operation];
 	return  operation;
 }
 
+/// add default request parameters (format, api_key) 
 - (NSDictionary *)addDefaultParameters:(NSMutableDictionary *)parameters
 {
 	// Check if we have an API key set,
@@ -238,11 +279,7 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 - (id)init {
 	if (self = [super init]) {
 		// Init code here
-		userDefaults = [NSUserDefaults standardUserDefaults];
 		lastFmApiClient = [AFLastFmAPIClient sharedClient];
-		
-		// Setup the async queue
-		async_queue = dispatch_queue_create("com.lastfmfetchr.asyncQueue", NULL);
 		
 		// Enable cache
 		SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:24 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
