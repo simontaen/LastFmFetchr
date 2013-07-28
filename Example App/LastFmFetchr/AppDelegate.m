@@ -14,8 +14,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-	
+	NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024
+														 diskCapacity:24 * 1024 * 1024
+															 diskPath:nil];
+	[NSURLCache setSharedURLCache:URLCache];
 	
 	LastFmFetchr *lastFmFetchr = [LastFmFetchr sharedManager];
 	lastFmFetchr.apiKey = @"aed3367b0133ab707cb4e5b6b04da3e7";

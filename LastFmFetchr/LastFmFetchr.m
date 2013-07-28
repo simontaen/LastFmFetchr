@@ -144,26 +144,37 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 
 # pragma mark - Private Methods
 
-/// DO NOT modify the operation returned, race-condition, see https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
+/// DO NOT modify the operation returned, very possible race-condition, see https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
 - (AFHTTPRequestOperation *)getPath:(NSString *)path
 						 parameters:(NSDictionary *)parameters
 							success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
 							failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+	// using the decomposed convenience method from the AFHTTPClient
 	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"GET" path:path parameters:parameters];
-    AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure];
+	NSLog(@"NSURLRequest Cache policy: %u", request.cachePolicy);
+    AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure]; // actually is a registerHTTPOperationClass
+	// AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
+	// For all the delegate methods it provides a block property which gets called if set.
+	// You would do something like http://blackpixel.com/blog/2012/05/caching-and-nsurlconnection.html here
+	//operation setCacheResponseBlock:
     [lastFmApiClient enqueueHTTPRequestOperation:operation];
 	return operation;
 }
 
-/// DO NOT modify the operation returned, race-condition, see https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
+/// DO NOT modify the operation returned, very possible race-condition, see https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
 - (AFHTTPRequestOperation *)postPath:(NSString *)path
 						  parameters:(NSDictionary *)parameters
 							 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
 							 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+	// using the decomposed convenience method from the AFHTTPClient
 	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"POST" path:path parameters:parameters];
 	AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure];
+	// AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
+	// For all the delegate methods it provides a block property which gets called if set.
+	// You would do something like http://blackpixel.com/blog/2012/05/caching-and-nsurlconnection.html here
+	//operation setCacheResponseBlock:
     [lastFmApiClient enqueueHTTPRequestOperation:operation];
 	return  operation;
 }

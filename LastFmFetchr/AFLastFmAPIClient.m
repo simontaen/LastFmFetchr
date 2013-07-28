@@ -33,9 +33,6 @@ static NSString *const kLFMBaseURLString = @"http://ws.audioscrobbler.com/2.0";
 	[self registerHTTPOperationClass:[AFJSONRequestOperation class]];
 	// Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
 	[self setDefaultHeader:@"Accept" value:@"application/json"];
-	// Prefer compressed data on a mobile device
-	// TODO does this acutally work?
-	[self setDefaultHeader:@"Accept-Encoding" value:@"gzip"];
 	// Last.fm requirement, see http://www.last.fm/api/intro
 	self.stringEncoding = NSUTF8StringEncoding;
 	// strongly recommended by AFNetworking
