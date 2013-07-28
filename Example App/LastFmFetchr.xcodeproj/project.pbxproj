@@ -10,6 +10,8 @@
 		D5316BAD425D4DB0AF1A9361 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 449EFFBCEB0F48E995AF2770 /* libPods.a */; };
 		F4018FF6179FD5B8006285CA /* NSDictionary+LastFmFetchr.m in Sources */ = {isa = PBXBuildFile; fileRef = F4018FF5179FD5B8006285CA /* NSDictionary+LastFmFetchr.m */; };
 		F4208E8E179DA12B00790491 /* AFLastFmAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */; };
+		F428593317A55DB60047297B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593217A55DB60047297B /* SystemConfiguration.framework */; };
+		F428593517A55DBD0047297B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593417A55DBD0047297B /* MobileCoreServices.framework */; };
 		F4A7C115179D7B1F00FB7CC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */; };
 		F4A7C117179D7B1F00FB7CC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C116179D7B1F00FB7CC3 /* Foundation.framework */; };
 		F4A7C119179D7B1F00FB7CC3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C118179D7B1F00FB7CC3 /* CoreGraphics.framework */; };
@@ -29,6 +31,8 @@
 		F4018FF5179FD5B8006285CA /* NSDictionary+LastFmFetchr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+LastFmFetchr.m"; path = "../../LastFmFetchr/NSDictionary+LastFmFetchr.m"; sourceTree = "<group>"; };
 		F4208E8C179DA12B00790491 /* AFLastFmAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFLastFmAPIClient.h; path = ../../LastFmFetchr/AFLastFmAPIClient.h; sourceTree = "<group>"; };
 		F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFLastFmAPIClient.m; path = ../../LastFmFetchr/AFLastFmAPIClient.m; sourceTree = "<group>"; };
+		F428593217A55DB60047297B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F428593417A55DBD0047297B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F4A7C111179D7B1F00FB7CC3 /* LastFmFetchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LastFmFetchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F4A7C116179D7B1F00FB7CC3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -53,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F428593517A55DBD0047297B /* MobileCoreServices.framework in Frameworks */,
+				F428593317A55DB60047297B /* SystemConfiguration.framework in Frameworks */,
 				F4A7C115179D7B1F00FB7CC3 /* UIKit.framework in Frameworks */,
 				F4A7C117179D7B1F00FB7CC3 /* Foundation.framework in Frameworks */,
 				F4A7C119179D7B1F00FB7CC3 /* CoreGraphics.framework in Frameworks */,
@@ -85,6 +91,8 @@
 		F4A7C113179D7B1F00FB7CC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F428593417A55DBD0047297B /* MobileCoreServices.framework */,
+				F428593217A55DB60047297B /* SystemConfiguration.framework */,
 				F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */,
 				F4A7C116179D7B1F00FB7CC3 /* Foundation.framework */,
 				F4A7C118179D7B1F00FB7CC3 /* CoreGraphics.framework */,
