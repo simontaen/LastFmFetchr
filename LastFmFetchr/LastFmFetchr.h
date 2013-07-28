@@ -86,8 +86,9 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 
 /// Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
-									 success:(void (^)(NSDictionary *JSON))success
-									 failure:(void (^)(NSOperation *operation, NSError *error))failure;
+							 mbid:(NSString *)mbid
+						  success:(void (^)(NSDictionary *JSON))success
+						  failure:(void (^)(NSOperation *operation, NSError *error))failure;
 
 #pragma mark - Requests Management
 

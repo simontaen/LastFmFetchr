@@ -9,6 +9,7 @@
 #import "LastFmFetchr.h"
 #import "AFNetworking.h"
 #import "AFLastFmAPIClient.h"
+#import "FCYAsserts.h"
 #import "SDURLCache.h"
 
 
@@ -50,6 +51,7 @@ NSString *const kLFMBaseURLString = @"http://ws.audioscrobbler.com/2.0";
 
 // Last.fm API parameters
 NSString *const kLFMParameterMethod = @"method";
+NSString *const kLFMParameterMbid = @"mbid";
 NSString *const kLFMParameterArtist = @"artist";
 
 // Last.fm API method parameter values
@@ -70,12 +72,21 @@ NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 
 /// Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
+							 mbid:(NSString *)mbid
 						  success:(void (^)(NSDictionary *JSON))success
 						  failure:(void (^)(NSOperation *operation, NSError *error))failure
 {
+	FCYAssert([artist length] || [mbid length], @"Parameter artist or mbid is mandatory");
+	
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
 	params[kLFMParameterMethod] = kLFMMethodArtistGetInfo;
-	params[kLFMParameterArtist] = artist;
+	if ([artist length]) {
+		params[kLFMParameterArtist] = artist;
+	}
+	if ([mbid length]) {
+		params[kLFMParameterMbid] = mbid;
+	}
+	
 	
 #ifndef NDEBUG
 	NSLog(@"LastFmFetchr: Request %@", kLFMMethodArtistGetInfo);

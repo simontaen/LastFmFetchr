@@ -13,7 +13,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{	
+{
 	LastFmFetchr *lastFmFetchr = [LastFmFetchr sharedManager];
 	lastFmFetchr.apiKey = @"aed3367b0133ab707cb4e5b6b04da3e7";
 	lastFmFetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
@@ -22,61 +22,58 @@
 	
 	int __block counter = 0;
 	NSLog(@"Counter %i", counter);
-//	for (int i = 0; i < 5; i ++) {
-//		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
-//												 success:^(id JSON) {
-//													 if (JSON[@"error"]) {
-//														 NSLog(@"Error: %@", [lastFmFetchr messageForError:nil withResponse:JSON]);
-//													 } else {
-//														 NSLog(@"Counter %i", --counter);
-//														 //NSLog(@"JSON Response was: %@", JSON);
-//														 if (![JSON isKindOfClass:[NSDictionary class]]) {
-//															 NSLog(@"JSON is Kind of class %@", [[JSON class] description]);
-//														 }
-//														 NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
-//													 }
-//												 }
-//												 failure:^(id response, NSError *error) {
-//													 NSLog(@"Error: %@", [lastFmFetchr messageForError:error withResponse:response]);
-//												 }];
-//		if (i % 2 == 0) {
-//			[operations addObject:op];
-//		}
-//		NSLog(@"Counter %i", ++counter);
-//	}
-//	
+	for (int i = 0; i < 3; i ++) {
+		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
+													mbid:nil
+												 success:^(id JSON) {
+													 NSLog(@"Received data for Artist %@", [JSON artistName]);
+													 NSLog(@"Counter %i", --counter);
+												 }
+												 failure:^(NSOperation *operation, NSError *error) {
+													 NSLog(@"Error: %@", [lastFmFetchr messageForError:error withOperation:operation]);
+													 NSLog(@"Counter %i", --counter);
+												 }];
+		NSLog(@"Counter %i", ++counter);
+		if (i % 2 == 0) {
+			[operations addObject:op];
+		}
+	}
+	
 	for (NSOperation *op in operations) {
 		[op cancel];
+		NSLog(@"Cancelled operation");
+		NSLog(@"Counter %i", --counter);
 	}
 	
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
+							  mbid:nil
 						   success:^(NSDictionary *JSON) {
-							   NSLog(@"Counter %i", --counter);
 							   // NSLog(@"JSON Response was: %@", JSON);
 							   /*
-							   NSLog(@"-------------------------------------------------------------------------------");
-							   NSLog(@"USING STRAIGHT KEYS");
-							   NSLog(@"-------------------------------------------------------------------------------");
-							   NSLog(@"kLFMArtist_Members %@", [JSON valueForKeyPath:kLFMArtist_Members]);
-							   //NSLog(@"kLFMArtistBio %@", JSON[kLFMArtistBio]);
-							   NSLog(@"kLFMArtistBio_Content %@", [JSON valueForKeyPath:kLFMArtistBio_Content]);
-							   NSLog(@"kLFMArtistBio_Formation %@", [JSON valueForKeyPath:kLFMArtistBio_Formation]);
-							   NSLog(@"kLFMArtistBio_Link %@", [JSON valueForKeyPath:kLFMArtistBio_Link]);
-							   NSLog(@"kLFMArtistBio_PlaceFormed %@", [JSON valueForKeyPath:kLFMArtistBio_PlaceFormed]);
-							   NSLog(@"kLFMArtistBio_Published %@", [JSON valueForKeyPath:kLFMArtistBio_Published]);
-							   NSLog(@"kLFMArtistBio_Summary %@", [JSON valueForKeyPath:kLFMArtistBio_Summary]);
-							   NSLog(@"kLFMArtistBio_YearFormed %@", [JSON valueForKeyPath:kLFMArtistBio_YearFormed]);
-							   NSLog(@"kLFMArtistImageList %@", JSON[kLFMArtistImageList]);
-							   NSLog(@"kLFMArtistMusicBrianzId %@", JSON[kLFMArtistMusicBrianzId]);
-							   NSLog(@"kLFMArtistName %@", JSON[kLFMArtistName]);
-							   NSLog(@"kLFMArtistIsOnTour %@", JSON[kLFMArtistIsOnTour]);
-							   NSLog(@"kLFMArtist_SimilarArtists %@", [JSON valueForKeyPath:kLFMArtist_SimilarArtists]);
-							   NSLog(@"kLFMArtistStats_Listeners %@", [JSON valueForKeyPath:kLFMArtistStats_Listeners]);
-							   NSLog(@"kLFMArtistStats_Playcount %@", [JSON valueForKeyPath:kLFMArtistStats_Playcount]);
-							   NSLog(@"kLFMArtistStreamable %@", JSON[kLFMArtistStreamable]);
-							   NSLog(@"kLFMArtist_Tags %@", [JSON valueForKeyPath:kLFMArtist_Tags]);
-							   NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
-							   */
+								NSLog(@"-------------------------------------------------------------------------------");
+								NSLog(@"USING STRAIGHT KEYS");
+								NSLog(@"-------------------------------------------------------------------------------");
+								NSLog(@"kLFMArtist_Members %@", [JSON valueForKeyPath:kLFMArtist_Members]);
+								//NSLog(@"kLFMArtistBio %@", JSON[kLFMArtistBio]);
+								NSLog(@"kLFMArtistBio_Content %@", [JSON valueForKeyPath:kLFMArtistBio_Content]);
+								NSLog(@"kLFMArtistBio_Formation %@", [JSON valueForKeyPath:kLFMArtistBio_Formation]);
+								NSLog(@"kLFMArtistBio_Link %@", [JSON valueForKeyPath:kLFMArtistBio_Link]);
+								NSLog(@"kLFMArtistBio_PlaceFormed %@", [JSON valueForKeyPath:kLFMArtistBio_PlaceFormed]);
+								NSLog(@"kLFMArtistBio_Published %@", [JSON valueForKeyPath:kLFMArtistBio_Published]);
+								NSLog(@"kLFMArtistBio_Summary %@", [JSON valueForKeyPath:kLFMArtistBio_Summary]);
+								NSLog(@"kLFMArtistBio_YearFormed %@", [JSON valueForKeyPath:kLFMArtistBio_YearFormed]);
+								NSLog(@"kLFMArtistImageList %@", JSON[kLFMArtistImageList]);
+								NSLog(@"kLFMArtistMusicBrianzId %@", JSON[kLFMArtistMusicBrianzId]);
+								NSLog(@"kLFMArtistName %@", JSON[kLFMArtistName]);
+								NSLog(@"kLFMArtistIsOnTour %@", JSON[kLFMArtistIsOnTour]);
+								NSLog(@"kLFMArtist_SimilarArtists %@", [JSON valueForKeyPath:kLFMArtist_SimilarArtists]);
+								NSLog(@"kLFMArtistStats_Listeners %@", [JSON valueForKeyPath:kLFMArtistStats_Listeners]);
+								NSLog(@"kLFMArtistStats_Playcount %@", [JSON valueForKeyPath:kLFMArtistStats_Playcount]);
+								NSLog(@"kLFMArtistStreamable %@", JSON[kLFMArtistStreamable]);
+								NSLog(@"kLFMArtist_Tags %@", [JSON valueForKeyPath:kLFMArtist_Tags]);
+								NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
+								*/
+							   /*
 							   NSLog(@"-------------------------------------------------------------------------------");
 							   NSLog(@"NSDictionary+LastFmFetchr");
 							   NSLog(@"-------------------------------------------------------------------------------");
@@ -120,17 +117,20 @@
 							   NSLog(@"artistTagURLs %@", [JSON artistTagURLs]);
 							   NSLog(@"artistLastFmPage %@", [JSON artistLastFmPage]);
 							   NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
+								*/
+							   NSLog(@"Received data for Artist %@", [JSON artistName]);
+							   NSLog(@"Counter %i", --counter);
 						   }
 						   failure:^(NSOperation *operation, NSError *error) {
-							   NSLog(@"Counter %i", --counter);
 							   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withOperation:operation]);
+							   NSLog(@"Counter %i", --counter);
 						   }];
 	NSLog(@"Counter %i", ++counter);
-		
+	
 	
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -139,7 +139,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
 	// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
