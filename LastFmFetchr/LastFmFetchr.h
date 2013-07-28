@@ -32,11 +32,12 @@ extern NSString *const kLFMArtistStreamable;
 extern NSString *const kLFMArtist_Tags;
 extern NSString *const kLFMArtistLastFmPageURL;
 
+
 // ------------ API Error codes, see http://www.last.fm/api/errorcodes ------------------
 
 extern NSString *const kLFMSericeErrorDomain;
 
-enum LFMServiceErrorCodes {
+typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 	kLFMErrorInvalidService = 2,
 	kLFMErrorInvalidMethod = 3,
 	kLFMErrorAuthenticationFailed = 4,
