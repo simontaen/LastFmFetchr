@@ -38,8 +38,9 @@ NSString *const kLFMArtistLastFmPageURL = @"url";
 
 
 // ----------------------------------------------------------------------
-// ALBUM Keys to JSON responses from Last.fm
+// ALBUM keys to JSON responses from Last.fm
 // ----------------------------------------------------------------------
+// album.getInfo
 NSString *const kLFMAlbumArtistName = @"artist";
 NSString *const kLFMAlbumId = @"id";
 NSString *const kLFMAlbumImageList = @"image";
@@ -54,7 +55,11 @@ NSString *const kLFMAlbumLastFmPageURL = @"url";
 NSString *const kLFMAlbumWiki_Content = @"wiki.content";
 NSString *const kLFMAlbumWiki_Published = @"wiki.published";
 NSString *const kLFMAlbumWiki_Summary = @"wiki.summary";
+// artist.getTopAlbums
 NSString *const kLFMAlbum_RankInAllArtistAlbums = @"@attr.rank";
+NSString *const kLFMAlbumArtist_MusicBrianzId = @"artist.mbid";
+NSString *const kLFMAlbumArtist_Name = @"artist.name";
+NSString *const kLFMAlbumArtist_LastFmPageURL = @"artist.url";
 
 
 // ----------------------------------------------------------------------

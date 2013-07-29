@@ -34,8 +34,9 @@ extern NSString *const kLFMArtistLastFmPageURL;
 
 
 // ----------------------------------------------------------------------
-// ALBUM Keys to JSON responses from Last.fm 
+// ALBUM keys to JSON responses from Last.fm 
 // ----------------------------------------------------------------------
+// album.getInfo
 extern NSString *const kLFMAlbumArtistName;
 extern NSString *const kLFMAlbumId;
 extern NSString *const kLFMAlbumImageList;
@@ -50,7 +51,11 @@ extern NSString *const kLFMAlbumLastFmPageURL;
 extern NSString *const kLFMAlbumWiki_Content;
 extern NSString *const kLFMAlbumWiki_Published;
 extern NSString *const kLFMAlbumWiki_Summary;
+// artist.getTopAlbums
 extern NSString *const kLFMAlbum_RankInAllArtistAlbums;
+extern NSString *const kLFMAlbumArtist_MusicBrianzId;
+extern NSString *const kLFMAlbumArtist_Name;
+extern NSString *const kLFMAlbumArtist_LastFmPageURL;
 
 
 // ----------------------------------------------------------------------
@@ -120,6 +125,9 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 						  failure:(LastFmFetchrAPIFailure)failure;
 
 // This will just get the first 50 currently
+// You COULD accept explicit success handlers that return NSDictionary subclasses
+// that only allow valid methods on the returned object.
+// The keys could be reused behind the scences and the curious ones could still use them
 - (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
 								 mbid:(NSString *)mbid
 							  success:(LastFmFetchrAPISuccess)success
