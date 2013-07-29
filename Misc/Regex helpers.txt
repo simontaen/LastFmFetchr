@@ -1,0 +1,22 @@
+# Key const
+## Regex
+(NSString \*const kLFM.*) = @".*";
+## Replace
+extern $1;
+
+# Method stubs
+## Regex
+/// .*\s(- .*);
+(- .*);
+## Replace
+
+$1
+{
+	return [self notNilStringForKeyPath:<#key#>];
+}
+
+# NSLog statements
+## Regex
+/// .*\s- \(.*\)(.*);
+## Replace
+NSLog(@"$1 %@", [JSON $1]);

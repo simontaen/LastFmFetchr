@@ -182,7 +182,7 @@
 						  }];
 	NSLog(@"Counter %i", ++counter);
 	
-	[lastFmFetchr getAllAlbumsbyArtist:@"Bruce Springsteen"
+	[lastFmFetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 								  mbid:nil
 							   success:^(NSDictionary *JSON) {
 								   NSLog(@"JSON Response was: %@", JSON);

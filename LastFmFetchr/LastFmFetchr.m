@@ -56,6 +56,7 @@ NSString *const kLFMAlbumWiki_Content = @"wiki.content";
 NSString *const kLFMAlbumWiki_Published = @"wiki.published";
 NSString *const kLFMAlbumWiki_Summary = @"wiki.summary";
 // artist.getTopAlbums
+NSString *const kLFMAlbum_ArtistsAlbumList = @"album";
 NSString *const kLFMAlbum_RankInAllArtistAlbums = @"@attr.rank";
 NSString *const kLFMAlbumArtist_MusicBrianzId = @"artist.mbid";
 NSString *const kLFMAlbumArtist_Name = @"artist.name";

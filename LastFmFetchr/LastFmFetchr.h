@@ -52,6 +52,7 @@ extern NSString *const kLFMAlbumWiki_Content;
 extern NSString *const kLFMAlbumWiki_Published;
 extern NSString *const kLFMAlbumWiki_Summary;
 // artist.getTopAlbums
+extern NSString *const kLFMAlbum_ArtistsAlbumList;
 extern NSString *const kLFMAlbum_RankInAllArtistAlbums;
 extern NSString *const kLFMAlbumArtist_MusicBrianzId;
 extern NSString *const kLFMAlbumArtist_Name;

@@ -23,7 +23,89 @@ NSString *const kEmpty = @"";
 
 @implementation NSDictionary (LastFmFetchr)
 
+// ----------------------------------------------------------------------
+// HELPERS
+// ----------------------------------------------------------------------
+- (NSArray *)tagNamesArrayWithTagListKeyPath:(NSString *)tagListKeyPath
+{
+	id obj = [self valueForKeyPath:tagListKeyPath];
+	if (![obj isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *array = (NSArray *)obj;
+	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[array count]];
+	
+	for (NSDictionary *dict in array) {
+		[tags addObject:[dict[@"name"] description]];
+	}
+	return tags;
+}
+
+- (NSArray *)tagURLsArrayWithTagListKeyPath:(NSString *)tagListKeyPath
+{
+	id obj = [self valueForKeyPath:tagListKeyPath];
+	if (![obj isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *array = (NSArray *)obj;
+	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[array count]];
+	
+	for (NSDictionary *dict in array) {
+		[tags addObject:[NSURL URLWithString:[dict[@"url"] description]]];
+	}
+	
+	return tags;
+}
+
+- (NSString *)smallImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[0][@"#text"] description];
+	}
+	return kEmpty;
+}
+
+- (NSString *)mediumImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[1][@"#text"] description];
+	}
+	return kEmpty;
+}
+
+- (NSString *)largeImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[2][@"#text"] description];
+	}
+	return kEmpty;
+}
+
+- (NSString *)extraLargeImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[3][@"#text"] description];
+	}
+	return kEmpty;
+}
+
+- (NSString *)megaImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[4][@"#text"] description];
+	}
+	return kEmpty;
+}
+
+
+// ----------------------------------------------------------------------
 // artist.getInfo
+// ----------------------------------------------------------------------
 - (NSString *)artistMembers
 {
 	return [self notNilStringForKeyPath:kLFMArtist_Members];
@@ -271,8 +353,9 @@ NSString *const kEmpty = @"";
 }
 
 
+// ----------------------------------------------------------------------
 // album.getInfo
-
+// ----------------------------------------------------------------------
 - (NSString *)albumArtistName
 {
 	return [self notNilStringForKeyPath:kLFMAlbumArtistName];
@@ -451,82 +534,28 @@ NSString *const kEmpty = @"";
 }
 
 
-// ----------------- HELPERS -----------------
-
-- (NSArray *)tagNamesArrayWithTagListKeyPath:(NSString *)tagListKeyPath
+// ----------------------------------------------------------------------
+// artist.getTopAlbums
+// ----------------------------------------------------------------------
+- (NSArray *)albumArtistsAlbumList
 {
-	id obj = [self valueForKeyPath:tagListKeyPath];
-	if (![obj isKindOfClass:[NSArray class]]) {
-		return nil;
-	}
-	NSArray *array = (NSArray *)obj;
-	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[array count]];
-	
-	for (NSDictionary *dict in array) {
-		[tags addObject:[dict[@"name"] description]];
-	}
-	return tags;
-}
-
-- (NSArray *)tagURLsArrayWithTagListKeyPath:(NSString *)tagListKeyPath
-{
-	id obj = [self valueForKeyPath:tagListKeyPath];
-	if (![obj isKindOfClass:[NSArray class]]) {
-		return nil;
-	}
-	NSArray *array = (NSArray *)obj;
-	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[array count]];
-	
-	for (NSDictionary *dict in array) {
-		[tags addObject:[NSURL URLWithString:[dict[@"url"] description]]];
-	}
-	
-	return tags;
-}
-
-- (NSString *)smallImageForImageListKeyPath:(NSString *)imageListKeyPath
-{
-	id obj = [self valueForKeyPath:imageListKeyPath];
+	id obj = [self valueForKeyPath:kLFMAlbum_ArtistsAlbumList];
 	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[0][@"#text"] description];
+		return obj;
 	}
-	return kEmpty;
+	return nil;
 }
 
-- (NSString *)mediumImageForImageListKeyPath:(NSString *)imageListKeyPath
+
+- (NSString *)albumRankInAllArtistAlbums
 {
-	id obj = [self valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[1][@"#text"] description];
-	}
-	return kEmpty;
+	return [self notNilStringForKeyPath:kLFMAlbum_RankInAllArtistAlbums];
 }
 
-- (NSString *)largeImageForImageListKeyPath:(NSString *)imageListKeyPath
-{
-	id obj = [self valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[2][@"#text"] description];
-	}
-	return kEmpty;
-}
 
-- (NSString *)extraLargeImageForImageListKeyPath:(NSString *)imageListKeyPath
+- (NSNumber *)albumRankInAllArtistAlbumsNumber
 {
-	id obj = [self valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[3][@"#text"] description];
-	}
-	return kEmpty;
-}
-
-- (NSString *)megaImageForImageListKeyPath:(NSString *)imageListKeyPath
-{
-	id obj = [self valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[4][@"#text"] description];
-	}
-	return kEmpty;
+	return [NSNumber numberWithInt:[[self albumRankInAllArtistAlbums] intValue]];
 }
 
 @end

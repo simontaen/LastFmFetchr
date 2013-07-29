@@ -160,4 +160,9 @@
 /// Never-nil NSString of the albums wiki summary
 - (NSString *)albumWikiSummary;
 
+// artist.getTopAlbums
+- (NSArray *)albumArtistsAlbumList;
+- (NSString *)albumRankInAllArtistAlbums;
+- (NSNumber *)albumRankInAllArtistAlbumsNumber;
+
 @end
