@@ -54,6 +54,7 @@ NSString *const kLFMAlbumLastFmPageURL = @"url";
 NSString *const kLFMAlbumWiki_Content = @"wiki.content";
 NSString *const kLFMAlbumWiki_Published = @"wiki.published";
 NSString *const kLFMAlbumWiki_Summary = @"wiki.summary";
+NSString *const kLFMAlbum_RankInAllArtistAlbums = @"@attr.rank";
 
 
 // ----------------------------------------------------------------------
@@ -82,6 +83,7 @@ NSString *const kLFMParameterAlbum = @"album";
 
 // Last.fm API method parameter values
 NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
+NSString *const kLFMMethodArtistGetTopAlbums = @"artist.getTopAlbums";
 NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 
@@ -141,12 +143,52 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 				 }];
 }
 
+- (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
+								 mbid:(NSString *)mbid
+							  success:(LastFmFetchrAPISuccess)success
+							  failure:(LastFmFetchrAPIFailure)failure
+{
+	FCYAssert([artist length] || [mbid length], @"Must provide artist or mbid");
+	
+	// perpare the params
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	// add the Last.fm method
+	params[kLFMParameterMethod] = kLFMMethodArtistGetTopAlbums;
+	// add user params
+	if ([artist length]) {
+		params[kLFMParameterArtist] = artist;
+	}
+	if ([mbid length]) {
+		params[kLFMParameterMbid] = mbid;
+	}
+	
+#ifndef NDEBUG
+	NSLog(@"LastFmFetchr: Request %@", kLFMMethodArtistGetTopAlbums);
+#endif
+	
+	return [self getPath:@""
+			  parameters:[self addDefaultParameters:params]
+				 success:^(AFHTTPRequestOperation *operation, id JSON) {
+					 [self handleAFNetworkingSuccess:JSON
+										   operation:operation
+									methodParamValue:kLFMMethodArtistGetTopAlbums
+									  jsonContentKey:@"topalbums"
+											 success:success
+											 failure:failure];
+				 }
+				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+					 [self handleAFNetworkingFailure:error
+										   operation:operation
+											 failure:failure];
+				 }];
+}
+
 #pragma mark - Album methods
 - (NSOperation *)getInfoForAlbum:(NSString *)album
 						byArtist:(NSString *)artist
 							mbid:(NSString *)mbid
-						 success:(void (^)(NSDictionary *JSON))success
-						 failure:(void (^)(NSOperation *operation, NSError *error))failure;
+						 success:(LastFmFetchrAPISuccess)success
+						 failure:(LastFmFetchrAPIFailure)failure;
 {
 	FCYAssert(([artist length] && [album length]) || [mbid length], @"Must provide @[artist,album] or mbid");
 	
@@ -205,7 +247,11 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 														userInfo:@{ NSLocalizedDescriptionKey : JSON[kLFMSericeErrorMessage], kLFMParameterMethod : methodParamValue}];
 				failure(operation, error);
 			} else {
-				success((NSDictionary *)(JSON[jsonContentKey]));
+				if (jsonContentKey) {
+					success((NSDictionary *)(JSON[jsonContentKey]));
+				} else {
+					success((NSDictionary *)(JSON));
+				}
 			}
 			
 		} else {

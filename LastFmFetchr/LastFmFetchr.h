@@ -50,6 +50,7 @@ extern NSString *const kLFMAlbumLastFmPageURL;
 extern NSString *const kLFMAlbumWiki_Content;
 extern NSString *const kLFMAlbumWiki_Published;
 extern NSString *const kLFMAlbumWiki_Summary;
+extern NSString *const kLFMAlbum_RankInAllArtistAlbums;
 
 
 // ----------------------------------------------------------------------
@@ -117,6 +118,12 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 							 mbid:(NSString *)mbid
 						  success:(LastFmFetchrAPISuccess)success
 						  failure:(LastFmFetchrAPIFailure)failure;
+
+// This will just get the first 50 currently
+- (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
+								 mbid:(NSString *)mbid
+							  success:(LastFmFetchrAPISuccess)success
+							  failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Album methods
 - (NSOperation *)getInfoForAlbum:(NSString *)album

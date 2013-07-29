@@ -1,4 +1,3 @@
-// album.getInfo
 NSString *const kLFMAlbumArtist = @"artist";
 NSString *const kLFMAlbumId = @"id";
 NSString *const kLFMAlbumImageList = @"image";
