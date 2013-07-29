@@ -12,11 +12,11 @@
 #import "FCYAsserts.h"
 #import "SDURLCache.h"
 
+// By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
-// ------------ Keys to the JSON response from Last.fm ------------------
-// By convention you need to use valueForKeyPath: if the constant name contains an underbar '_'
-
-// artist.getInfo
+// ----------------------------------------------------------------------
+// ARTIST keys to JSON responses from Last.fm
+// ----------------------------------------------------------------------
 NSString *const kLFMArtist_Members = @"bandmembers.member";
 NSString *const kLFMArtistBio_Content = @"bio.content";
 NSString *const kLFMArtistBio_FormationYears = @"bio.formationlist.formation";
@@ -36,7 +36,10 @@ NSString *const kLFMArtistStreamable = @"streamable";
 NSString *const kLFMArtist_Tags = @"tags.tag";
 NSString *const kLFMArtistLastFmPageURL = @"url";
 
-// album.getInfo
+
+// ----------------------------------------------------------------------
+// ALBUM Keys to JSON responses from Last.fm
+// ----------------------------------------------------------------------
 NSString *const kLFMAlbumArtistName = @"artist";
 NSString *const kLFMAlbumId = @"id";
 NSString *const kLFMAlbumImageList = @"image";
@@ -52,12 +55,19 @@ NSString *const kLFMAlbumWiki_Content = @"wiki.content";
 NSString *const kLFMAlbumWiki_Published = @"wiki.published";
 NSString *const kLFMAlbumWiki_Summary = @"wiki.summary";
 
-// ------------ API Error codes, see http://www.last.fm/api/errorcodes ------------------
 
+// ----------------------------------------------------------------------
+// API Error codes, see http://www.last.fm/api/errorcodes
+// ----------------------------------------------------------------------
 NSString *const kLFMSericeErrorDomain = @"com.lastfmfetchr.service.errors";
 
-// ------------------- PRIVATE CONSTANTS -------------------
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+// PRIVATE CONSTANTS
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
 
+// Keys to JSON error response to Last.fm
 NSString *const kLFMSericeErrorCode = @"error";
 NSString *const kLFMSericeErrorMessage = @"message";
 

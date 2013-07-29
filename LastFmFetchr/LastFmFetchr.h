@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-// ------------ Keys to the JSON response from Last.fm ------------------
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
-// artist.getInfo
+// ----------------------------------------------------------------------
+// ARTIST keys to JSON responses from Last.fm 
+// ----------------------------------------------------------------------
 extern NSString *const kLFMArtist_Members;
 extern NSString *const kLFMArtistBio_Content;
 extern NSString *const kLFMArtistBio_FormationYears;
@@ -31,7 +32,10 @@ extern NSString *const kLFMArtistStreamable;
 extern NSString *const kLFMArtist_Tags;
 extern NSString *const kLFMArtistLastFmPageURL;
 
-// album.getInfo
+
+// ----------------------------------------------------------------------
+// ALBUM Keys to JSON responses from Last.fm 
+// ----------------------------------------------------------------------
 extern NSString *const kLFMAlbumArtistName;
 extern NSString *const kLFMAlbumId;
 extern NSString *const kLFMAlbumImageList;
@@ -47,8 +51,10 @@ extern NSString *const kLFMAlbumWiki_Content;
 extern NSString *const kLFMAlbumWiki_Published;
 extern NSString *const kLFMAlbumWiki_Summary;
 
-// ------------ API Error codes, see http://www.last.fm/api/errorcodes ------------------
 
+// ----------------------------------------------------------------------
+// API Error codes, see http://www.last.fm/api/errorcodes
+// ----------------------------------------------------------------------
 extern NSString *const kLFMSericeErrorDomain;
 
 typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
@@ -81,7 +87,9 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 };
 
 
-// ------------ Block handler typedefs ------------------
+// ----------------------------------------------------------------------
+// Block handler typedefs
+// ----------------------------------------------------------------------
 typedef void (^LastFmFetchrAPISuccess)(NSDictionary *JSON);
 typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 
