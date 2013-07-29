@@ -27,7 +27,7 @@
 - (NSString *)artistBioLink;
 /// NSURL to the artists last.fm wiki page
 - (NSURL *)artistBioLinkURL;
-/// Never-nil NSString of where the artists was formed
+/// Never-nil NSString of where the artist was formed
 - (NSString *)artistBioPlaceFormed;
 /// Never-nil NSString of when the artists bio was published
 - (NSString *)artistBioPublished;
@@ -89,7 +89,7 @@
 - (NSArray *)artistTagNames;
 /// (ordered) Array of Last.fm tag links as NSURLs
 - (NSArray *)artistTagURLs;
-/// Never-nil JSON NSString of the artists Last.fm page
+/// Never-nil NSString of the artists Last.fm page
 - (NSString *)artistLastFmPage;
 /// NSURL to the artists Last.fm page
 - (NSURL *)artistLastFmPageURL;
@@ -135,17 +135,17 @@
 - (NSString *)albumReleasedate;
 /// NSDate of the albums releasedate
 - (NSDate *)albumReleasedateDate;
-/// Never-nil JSON NSString of the albums toptags
+/// Never-nil NSString of the albums toptags
 - (NSString *)albumToptags;
 /// (ordered) Array of albums toptags as NSStrings
 - (NSArray *)albumToptagNames;
 /// (ordered) Array of Last.fm tag links as NSURLs
 - (NSArray *)albumToptagURLs;
-/// Never-nil JSON NSString of the album tracks
+/// Never-nil NSString of the album tracks
 - (NSString *)albumTracks;
 /// NSArray of NSDictionaries of the album tracks
 - (NSArray *)albumTracksArray;
-/// Never-nil JSON NSString of the albums Last.fm page
+/// Never-nil NSString of the albums Last.fm page
 - (NSString *)albumLastFmPage;
 /// NSURL to the albums Last.fm page
 - (NSURL *)albumLastFmPageURL;
