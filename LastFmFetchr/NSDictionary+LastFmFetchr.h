@@ -17,79 +17,79 @@
 - (NSString *)artistMembers;
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
 - (NSArray *)artistMemberArray;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists bio content
 - (NSString *)artistBioContent;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists formation years (yearfrom, yearto)
 - (NSString *)artistBioFormationYears;
 /// NSArray of NSDates, [1] = year from, [2] = year to
 - (NSArray *)artistBioFormationYearDates;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists last.fm wiki page
 - (NSString *)artistBioLink;
-/// NSURL to the artists last.fm bio page
+/// NSURL to the artists last.fm wiki page
 - (NSURL *)artistBioLinkURL;
-/// Straight JSON ouput
+/// Never-nil NSString of where the artists was formed
 - (NSString *)artistBioPlaceFormed;
-/// Straight JSON ouput
+/// Never-nil NSString of when the artists bio was published
 - (NSString *)artistBioPublished;
-/// NSDate of when the artists Bio was published
+/// NSDate of when the artists bio was published
 - (NSDate *)artistBioPublishedDate;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists bio summary
 - (NSString *)artistBioSummary;
-/// Straight JSON ouput
+/// Never-nil NSString of when the artist was formed
 - (NSString *)artistBioYearFormed;
-/// NSDate of when the Band was formed
+/// NSDate of when the artist was formed
 - (NSDate *)artistBioYearFormedDate;
-/// Straight JSON ouput
+/// Never-nil NSString of the url
 - (NSString *)artistImageSmall;
 /// NSURL to the artists image size small
 - (NSURL *)artistImageSmallURL;
-/// Straight JSON ouput
+/// Never-nil NSString of the url
 - (NSString *)artistImageMedium;
 /// NSURL to the artists image size medium
 - (NSURL *)artistImageMediumURL;
-/// Straight JSON ouput
+/// Never-nil NSString of the url
 - (NSString *)artistImageLarge;
 /// NSURL to the artists image size large
 - (NSURL *)artistImageLargeURL;
-/// Straight JSON ouput
+/// Never-nil NSString of the url
 - (NSString *)artistImageExtraLarge;
 /// NSURL to the artists image size extra large
 - (NSURL *)artistImageExtraLargeURL;
-/// Straight JSON ouput
+/// Never-nil NSString of the url
 - (NSString *)artistImageMega;
 /// NSURL to the artists image size mega
 - (NSURL *)artistImageMegaURL;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists music brianz id
 - (NSString *)artistMusicBrianzId;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists name
 - (NSString *)artistName;
-/// Straight JSON ouput
+/// Never-nil NSString, 1=YES, 0=NO
 - (NSString *)artistIsOnTour;
 /// Boolean indicating if the artist is on tour or not
 - (BOOL)artistIsOnTourBool;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists similar artists
 - (NSString *)artistSimilarArtists;
 /// NSArray of NSDictionaries of similar artists
 - (NSArray *)artistSimilarArtistsArray;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists listeners
 - (NSString *)artistListeners;
 /// NSNumber of listeners as long long
 - (NSNumber *)artistListenersNumber;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists playcount
 - (NSString *)artistPlaycount;
 /// NSNumber of playcount as long long
 - (NSNumber *)artistPlaycountNumber;
-/// Straight JSON ouput
+/// Never-nil NSString indicating if it's streamable
 - (NSString *)artistStreamable;
 /// Boolean indicating if the artists content is streamable
 - (BOOL)artistStreamableBool;
-/// Straight JSON ouput
+/// Never-nil NSString of the artists tags
 - (NSString *)artistTags;
 /// (ordered) Array of Names as NSStrings
 - (NSArray *)artistTagNames;
 /// (ordered) Array of Last.fm tag links as NSURLs
 - (NSArray *)artistTagURLs;
-/// Straight JSON ouput
+/// Never-nil JSON NSString of the artists Last.fm page
 - (NSString *)artistLastFmPage;
 /// NSURL to the artists Last.fm page
 - (NSURL *)artistLastFmPageURL;
