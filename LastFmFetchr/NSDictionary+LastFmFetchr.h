@@ -99,6 +99,8 @@
 - (NSString *)albumArtistName;
 /// Never-nil NSString of the album Id
 - (NSString *)albumId;
+/// NSNumber of the album Id as long long
+- (NSNumber *)albumIdNumber;
 /// Never-nil NSString of the url
 - (NSString *)albumImageSmall;
 /// NSURL to the albums image size small

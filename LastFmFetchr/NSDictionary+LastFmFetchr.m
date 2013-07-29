@@ -283,6 +283,11 @@ NSString *const kEmpty = @"";
 	return [self notNilStringForKeyPath:kLFMAlbumId];
 }
 
+- (NSNumber *)albumIdNumber
+{
+	return [NSNumber numberWithLongLong:[[self albumId] longLongValue]];
+}
+
 - (NSString *)albumImageSmall
 {
 	return [self smallImageForImageListKeyPath:kLFMAlbumImageList];
