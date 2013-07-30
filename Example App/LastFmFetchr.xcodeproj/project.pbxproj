@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D5316BAD425D4DB0AF1A9361 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 449EFFBCEB0F48E995AF2770 /* libPods.a */; };
-		F4018FF6179FD5B8006285CA /* NSDictionary+LastFmFetchr.m in Sources */ = {isa = PBXBuildFile; fileRef = F4018FF5179FD5B8006285CA /* NSDictionary+LastFmFetchr.m */; };
 		F4208E8E179DA12B00790491 /* AFLastFmAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */; };
 		F428593317A55DB60047297B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593217A55DB60047297B /* SystemConfiguration.framework */; };
 		F428593517A55DBD0047297B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593417A55DBD0047297B /* MobileCoreServices.framework */; };
@@ -31,8 +30,6 @@
 
 /* Begin PBXFileReference section */
 		449EFFBCEB0F48E995AF2770 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4018FF4179FD5B8006285CA /* NSDictionary+LastFmFetchr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+LastFmFetchr.h"; path = "../../LastFmFetchr/NSDictionary+LastFmFetchr.h"; sourceTree = "<group>"; };
-		F4018FF5179FD5B8006285CA /* NSDictionary+LastFmFetchr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+LastFmFetchr.m"; path = "../../LastFmFetchr/NSDictionary+LastFmFetchr.m"; sourceTree = "<group>"; };
 		F4208E8C179DA12B00790491 /* AFLastFmAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFLastFmAPIClient.h; path = ../../LastFmFetchr/AFLastFmAPIClient.h; sourceTree = "<group>"; };
 		F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFLastFmAPIClient.m; path = ../../LastFmFetchr/AFLastFmAPIClient.m; sourceTree = "<group>"; };
 		F428593217A55DB60047297B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -121,8 +118,6 @@
 				F4ABF51517A8104C00DEF135 /* Dictinarys  */,
 				F4ED9CE3179D7BE3007C038B /* LastFmFetchr.h */,
 				F4ED9CE4179D7BE3007C038B /* LastFmFetchr.m */,
-				F4018FF4179FD5B8006285CA /* NSDictionary+LastFmFetchr.h */,
-				F4018FF5179FD5B8006285CA /* NSDictionary+LastFmFetchr.m */,
 			);
 			path = LastFmFetchr;
 			sourceTree = "<group>";
@@ -273,7 +268,6 @@
 				F4A7C125179D7B1F00FB7CC3 /* AppDelegate.m in Sources */,
 				F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */,
 				F4208E8E179DA12B00790491 /* AFLastFmAPIClient.m in Sources */,
-				F4018FF6179FD5B8006285CA /* NSDictionary+LastFmFetchr.m in Sources */,
 				F4ABF51417A8104000DEF135 /* LFMDictionary.m in Sources */,
 				F4ABF51817A8108100DEF135 /* LFMArtistsGetInfoDict.m in Sources */,
 				F4ABF51B17A810DE00DEF135 /* LFMAlbumGetInfoDict.m in Sources */,
