@@ -175,7 +175,15 @@
 	[lastFmFetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 								  mbid:nil
 							   success:^(LFMArtistGetTopAlbums *data) {
-								   NSLog(@"JSON Response was: %@", data.JSON);
+								   //NSLog(@"JSON Response was: %@", data.JSON);
+								   NSLog(@"-------------------------------------------------------------------------------");
+								   //NSLog(@"artistsAlbumList %@", [data artistsAlbumList]);
+								   NSLog(@"a album %@", [data artistsAlbumList][0]);
+								   NSDictionary *aAlbum = [data artistsAlbumList][0];
+								   NSLog(@"rankInAllArtistAlbums %@", aAlbum[@"@attr"][@"rank"]);
+								   //NSLog(@"rankInAllArtistAlbumsNumber %@", [data rankInAllArtistAlbumsNumber]);
+								   NSLog(@"artistName %@", aAlbum[@"artist"][@"name"]);
+
 								   
 								   NSLog(@"Received TopAlbums by Artist %@", [data artistName]);
 								   NSLog(@"Counter %i", --counter);

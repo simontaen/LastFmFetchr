@@ -139,7 +139,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 									methodParamValue:kLFMMethodArtistGetInfo
 									  jsonContentKey:kLFMParameterArtist
 											 success:^(NSDictionary *data) {
-												 success([[LFMArtistsGetInfo alloc] initWithJson:JSON]);
+												 success([[LFMArtistsGetInfo alloc] initWithJson:data]);
 											 }
 											 failure:failure];
 				 }
@@ -181,7 +181,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 									methodParamValue:kLFMMethodArtistGetTopAlbums
 									  jsonContentKey:@"topalbums"
 											 success:^(NSDictionary *data) {
-												 success([[LFMArtistGetTopAlbums alloc] initWithJson:JSON]);
+												 success([[LFMArtistGetTopAlbums alloc] initWithJson:data]);
 											 }
 											 failure:failure];
 				 }
@@ -228,7 +228,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 									methodParamValue:kLFMMethodAlbumGetInfo
 									  jsonContentKey:kLFMParameterAlbum
 											 success:^(NSDictionary *data) {
-												 success([[LFMAlbumGetInfo alloc] initWithJson:JSON]);
+												 success([[LFMAlbumGetInfo alloc] initWithJson:data]);
 											 }
 											 failure:failure];
 				 }
