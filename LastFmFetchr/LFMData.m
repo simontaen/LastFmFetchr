@@ -1,15 +1,15 @@
 //
-//  LFMDictionary.m
+//  LFMData.m
 //  LastFmFetchr
 //
 //  Created by Simon Tännler on 30/07/13.
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMDictionary.h"
+#import "LFMData.h"
 #import "LastFmFetchr.h"
 
-@implementation LFMDictionary
+@implementation LFMData
 
 - (NSArray *)tagNamesArrayWithTagListKeyPath:(NSString *)tagListKeyPath
 {

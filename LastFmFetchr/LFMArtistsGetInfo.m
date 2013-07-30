@@ -1,15 +1,15 @@
 //
-//  LFMArtistsGetInfoDict.m
+//  LFMArtistsGetInfo.m
 //  LastFmFetchr
 //
 //  Created by Simon Tännler on 30/07/13.
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMArtistsGetInfoDict.h"
+#import "LFMArtistsGetInfo.h"
 #import "LastFmFetchr.h"
 
-@implementation LFMArtistsGetInfoDict
+@implementation LFMArtistsGetInfo
 
 - (NSString *)artistMembers
 {

@@ -27,7 +27,7 @@
 	for (int i = 0; i < 3; i ++) {
 		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
 													mbid:nil
-												 success:^(LFMArtistsGetInfoDict *data) {
+												 success:^(LFMArtistsGetInfo *data) {
 													 NSLog(@"Received data for Artist %@", [data artistName]);
 													 NSLog(@"Counter %i", --counter);
 												 }
@@ -49,7 +49,7 @@
 	
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
 							  mbid:nil
-						   success:^(LFMArtistsGetInfoDict *data) {
+						   success:^(LFMArtistsGetInfo *data) {
 							   /*
 								NSLog(@"-------------------------------------------------------------------------------");
 								NSLog(@"kLFMArtist_Members %@", [self.JSON valueForKeyPath:kLFMArtist_Members]);
@@ -129,7 +129,7 @@
 	[lastFmFetchr getInfoForAlbum:@"Highway to Hell"
 						 byArtist:@"AC/DC"
 							 mbid:nil
-						  success:^(LFMAlbumGetInfoDict *data) {
+						  success:^(LFMAlbumGetInfo *data) {
 							  /*
 							   NSLog(@"-------------------------------------------------------------------------------");
 							   NSLog(@"albumArtistName %@", [data albumArtistName]);
@@ -175,7 +175,7 @@
 	
 	[lastFmFetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 								  mbid:nil
-							   success:^(LFMArtistGetTopAlbumsDict *data) {
+							   success:^(LFMArtistGetTopAlbums *data) {
 								   NSLog(@"JSON Response was: %@", data.JSON);
 								   NSLog(@"-------------------------------------------------------------------------------");
 								   NSLog(@"Received TopAlbums by Artist %@", [data albumArtistName]);

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LFMArtistsGetInfoDict.h"
-#import "LFMArtistGetTopAlbumsDict.h"
-#import "LFMAlbumGetInfoDict.h"
+#import "LFMArtistsGetInfo.h"
+#import "LFMArtistGetTopAlbums.h"
+#import "LFMAlbumGetInfo.h"
 
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
@@ -122,7 +122,7 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 #pragma mark - Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
-						  success:(void (^)(LFMArtistsGetInfoDict *data))success
+						  success:(void (^)(LFMArtistsGetInfo *data))success
 						  failure:(LastFmFetchrAPIFailure)failure;
 
 // This will just get the first 50 currently
@@ -131,14 +131,14 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 // The keys could be reused behind the scences and the curious ones could still use them
 - (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
 								 mbid:(NSString *)mbid
-							  success:(void (^)(LFMArtistGetTopAlbumsDict *data))success
+							  success:(void (^)(LFMArtistGetTopAlbums *data))success
 							  failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Album methods
 - (NSOperation *)getInfoForAlbum:(NSString *)album
 						byArtist:(NSString *)artist
 							mbid:(NSString *)mbid
-						 success:(void (^)(LFMAlbumGetInfoDict *data))success
+						 success:(void (^)(LFMAlbumGetInfo *data))success
 						 failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Requests Management

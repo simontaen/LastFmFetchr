@@ -1,14 +1,14 @@
 //
-//  LFMAlbumGetInfoDict.h
+//  LFMAlbumGetInfo.h
 //  LastFmFetchr
 //
 //  Created by Simon Tännler on 30/07/13.
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMDictionary.h"
+#import "LFMData.h"
 
-@interface LFMAlbumGetInfoDict : LFMDictionary
+@interface LFMAlbumGetInfo : LFMData
 
 /// Never-nil NSString of the albums artist name
 - (NSString *)albumArtistName;

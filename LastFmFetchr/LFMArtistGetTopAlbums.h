@@ -1,14 +1,14 @@
 //
-//  LFMArtistGetTopAlbumsDict.h
+//  LFMArtistGetTopAlbums.h
 //  LastFmFetchr
 //
 //  Created by Simon Tännler on 30/07/13.
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMDictionary.h"
+#import "LFMData.h"
 
-@interface LFMArtistGetTopAlbumsDict : LFMDictionary
+@interface LFMArtistGetTopAlbums : LFMData
 
 - (NSArray *)albumArtistsAlbumList;
 - (NSString *)albumRankInAllArtistAlbums;

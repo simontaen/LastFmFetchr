@@ -1,5 +1,5 @@
 //
-//  LFMDictionary.h
+//  LFMData.h
 //  LastFmFetchr
 //
 //  Created by Simon Tännler on 30/07/13.
@@ -12,7 +12,7 @@
 
 static NSString *const kEmpty = @"";
 
-@interface LFMDictionary : NSObject
+@interface LFMData : NSObject
 
 @property (strong, nonatomic) NSDictionary *JSON;
 
