@@ -10,4 +10,9 @@
 
 @interface LFMArtistGetTopAlbumsDict : LFMDictionary
 
+- (NSArray *)albumArtistsAlbumList;
+- (NSString *)albumRankInAllArtistAlbums;
+- (NSNumber *)albumRankInAllArtistAlbumsNumber;
+- (NSString *)albumArtistName;
+
 @end

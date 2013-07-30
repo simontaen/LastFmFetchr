@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "LastFmFetchr.h"
-#import "NSDictionary+LastFmFetchr.h"
 
 @implementation AppDelegate
 
@@ -28,7 +27,7 @@
 	for (int i = 0; i < 3; i ++) {
 		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
 													mbid:nil
-												 success:^(id JSON) {
+												 success:^(LFMArtistsGetInfoDict *JSON) {
 													 NSLog(@"Received data for Artist %@", [JSON artistName]);
 													 NSLog(@"Counter %i", --counter);
 												 }
@@ -50,7 +49,7 @@
 	
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
 							  mbid:nil
-						   success:^(NSDictionary *JSON) {
+						   success:^(LFMArtistsGetInfoDict *JSON) {
 							   // NSLog(@"JSON Response was: %@", JSON);
 							   /*
 								NSLog(@"-------------------------------------------------------------------------------");
@@ -135,7 +134,7 @@
 	[lastFmFetchr getInfoForAlbum:@"Highway to Hell"
 						 byArtist:@"AC/DC"
 							 mbid:nil
-						  success:^(NSDictionary *JSON) {
+						  success:^(LFMAlbumGetInfoDict *JSON) {
 							  //NSLog(@"JSON Response was: %@", JSON);
 							  /*
 							   NSLog(@"-------------------------------------------------------------------------------");
@@ -184,7 +183,7 @@
 	
 	[lastFmFetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 								  mbid:nil
-							   success:^(NSDictionary *JSON) {
+							   success:^(LFMArtistGetTopAlbumsDict *JSON) {
 								   NSLog(@"JSON Response was: %@", JSON);
 								   NSLog(@"-------------------------------------------------------------------------------");
 								   NSLog(@"NSDictionary+LastFmFetchr");
