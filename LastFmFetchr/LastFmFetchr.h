@@ -98,7 +98,6 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 // ----------------------------------------------------------------------
 // Block handler typedefs
 // ----------------------------------------------------------------------
-//typedef void (^LastFmFetchrAPISuccess)(NSDictionary *JSON);
 typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 
 
@@ -123,7 +122,7 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 #pragma mark - Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
-						  success:(void (^)(LFMArtistsGetInfoDict *JSON))success
+						  success:(void (^)(LFMArtistsGetInfoDict *data))success
 						  failure:(LastFmFetchrAPIFailure)failure;
 
 // This will just get the first 50 currently
@@ -132,14 +131,14 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 // The keys could be reused behind the scences and the curious ones could still use them
 - (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
 								 mbid:(NSString *)mbid
-							  success:(void (^)(LFMArtistGetTopAlbumsDict *JSON))success
+							  success:(void (^)(LFMArtistGetTopAlbumsDict *data))success
 							  failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Album methods
 - (NSOperation *)getInfoForAlbum:(NSString *)album
 						byArtist:(NSString *)artist
 							mbid:(NSString *)mbid
-						 success:(void (^)(LFMAlbumGetInfoDict *JSON))success
+						 success:(void (^)(LFMAlbumGetInfoDict *data))success
 						 failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Requests Management

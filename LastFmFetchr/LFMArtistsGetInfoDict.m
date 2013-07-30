@@ -38,7 +38,7 @@
 
 - (NSArray *)artistBioFormationYearDates
 {
-	id obj = [self valueForKeyPath:kLFMArtistBio_FormationYears];
+	id obj = [self.JSON valueForKeyPath:kLFMArtistBio_FormationYears];
 	if (![obj isKindOfClass:[NSDictionary class]]) {
 		return nil;
 	}
@@ -57,7 +57,7 @@
 
 - (NSURL *)artistBioLinkURL
 {
-	id obj = [self valueForKeyPath:kLFMArtistBio_Link];
+	id obj = [self.JSON valueForKeyPath:kLFMArtistBio_Link];
 	if (![obj isKindOfClass:[NSDictionary class]]) {
 		return nil;
 	}
@@ -182,7 +182,7 @@
 
 - (NSArray *)artistSimilarArtistsArray
 {
-	id obj = [self valueForKeyPath:kLFMArtist_SimilarArtists];
+	id obj = [self.JSON valueForKeyPath:kLFMArtist_SimilarArtists];
 	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}

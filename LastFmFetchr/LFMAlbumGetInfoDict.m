@@ -141,7 +141,7 @@
 
 - (NSArray *)albumTracksArray
 {
-	id obj = [self valueForKeyPath:kLFMAlbum_Tracks];
+	id obj = [self.JSON valueForKeyPath:kLFMAlbum_Tracks];
 	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}

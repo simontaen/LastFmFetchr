@@ -12,9 +12,11 @@
 
 static NSString *const kEmpty = @"";
 
-@interface LFMDictionary : NSDictionary
+@interface LFMDictionary : NSObject
 
-+ (instancetype)dictionaryWithDictionary:(NSDictionary *)dict;
+@property (strong, nonatomic) NSDictionary *JSON;
+
+- (instancetype)initWithJson:(NSDictionary *)JSON;
 
 - (NSArray *)tagNamesArrayWithTagListKeyPath:(NSString *)tagListKeyPath;
 - (NSArray *)tagURLsArrayWithTagListKeyPath:(NSString *)tagListKeyPath;

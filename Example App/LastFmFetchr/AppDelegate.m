@@ -27,8 +27,8 @@
 	for (int i = 0; i < 3; i ++) {
 		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
 													mbid:nil
-												 success:^(LFMArtistsGetInfoDict *JSON) {
-													 NSLog(@"Received data for Artist %@", [JSON artistName]);
+												 success:^(LFMArtistsGetInfoDict *data) {
+													 NSLog(@"Received data for Artist %@", [data artistName]);
 													 NSLog(@"Counter %i", --counter);
 												 }
 												 failure:^(NSOperation *operation, NSError *error) {
@@ -49,77 +49,72 @@
 	
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
 							  mbid:nil
-						   success:^(LFMArtistsGetInfoDict *JSON) {
-							   // NSLog(@"JSON Response was: %@", JSON);
+						   success:^(LFMArtistsGetInfoDict *data) {
 							   /*
 								NSLog(@"-------------------------------------------------------------------------------");
-								NSLog(@"USING STRAIGHT KEYS");
-								NSLog(@"-------------------------------------------------------------------------------");
-								NSLog(@"kLFMArtist_Members %@", [JSON valueForKeyPath:kLFMArtist_Members]);
-								NSLog(@"kLFMArtistBio_Content %@", [JSON valueForKeyPath:kLFMArtistBio_Content]);
-								NSLog(@"kLFMArtistBio_Formation %@", [JSON valueForKeyPath:kLFMArtistBio_Formation]);
-								NSLog(@"kLFMArtistBio_Link %@", [JSON valueForKeyPath:kLFMArtistBio_Link]);
-								NSLog(@"kLFMArtistBio_PlaceFormed %@", [JSON valueForKeyPath:kLFMArtistBio_PlaceFormed]);
-								NSLog(@"kLFMArtistBio_Published %@", [JSON valueForKeyPath:kLFMArtistBio_Published]);
-								NSLog(@"kLFMArtistBio_Summary %@", [JSON valueForKeyPath:kLFMArtistBio_Summary]);
-								NSLog(@"kLFMArtistBio_YearFormed %@", [JSON valueForKeyPath:kLFMArtistBio_YearFormed]);
-								NSLog(@"kLFMArtistImageList %@", JSON[kLFMArtistImageList]);
-								NSLog(@"kLFMArtistMusicBrianzId %@", JSON[kLFMArtistMusicBrianzId]);
-								NSLog(@"kLFMArtistName %@", JSON[kLFMArtistName]);
-								NSLog(@"kLFMArtistIsOnTour %@", JSON[kLFMArtistIsOnTour]);
-								NSLog(@"kLFMArtist_SimilarArtists %@", [JSON valueForKeyPath:kLFMArtist_SimilarArtists]);
-								NSLog(@"kLFMArtistStats_Listeners %@", [JSON valueForKeyPath:kLFMArtistStats_Listeners]);
-								NSLog(@"kLFMArtistStats_Playcount %@", [JSON valueForKeyPath:kLFMArtistStats_Playcount]);
-								NSLog(@"kLFMArtistStreamable %@", JSON[kLFMArtistStreamable]);
-								NSLog(@"kLFMArtist_Tags %@", [JSON valueForKeyPath:kLFMArtist_Tags]);
-								NSLog(@"kLFMArtistLastFmPageURL %@", JSON[kLFMArtistLastFmPageURL]);
+								NSLog(@"kLFMArtist_Members %@", [self.JSON valueForKeyPath:kLFMArtist_Members]);
+								NSLog(@"kLFMArtistBio_Content %@", [self.JSON valueForKeyPath:kLFMArtistBio_Content]);
+								NSLog(@"kLFMArtistBio_Formation %@", [self.JSON valueForKeyPath:kLFMArtistBio_Formation]);
+								NSLog(@"kLFMArtistBio_Link %@", [self.JSON valueForKeyPath:kLFMArtistBio_Link]);
+								NSLog(@"kLFMArtistBio_PlaceFormed %@", [self.JSON valueForKeyPath:kLFMArtistBio_PlaceFormed]);
+								NSLog(@"kLFMArtistBio_Published %@", [self.JSON valueForKeyPath:kLFMArtistBio_Published]);
+								NSLog(@"kLFMArtistBio_Summary %@", [self.JSON valueForKeyPath:kLFMArtistBio_Summary]);
+								NSLog(@"kLFMArtistBio_YearFormed %@", [self.JSON valueForKeyPath:kLFMArtistBio_YearFormed]);
+								NSLog(@"kLFMArtistImageList %@", self.JSON[kLFMArtistImageList]);
+								NSLog(@"kLFMArtistMusicBrianzId %@", self.JSON[kLFMArtistMusicBrianzId]);
+								NSLog(@"kLFMArtistName %@", self.JSON[kLFMArtistName]);
+								NSLog(@"kLFMArtistIsOnTour %@", self.JSON[kLFMArtistIsOnTour]);
+								NSLog(@"kLFMArtist_SimilarArtists %@", [self.JSON valueForKeyPath:kLFMArtist_SimilarArtists]);
+								NSLog(@"kLFMArtistStats_Listeners %@", [self.JSON valueForKeyPath:kLFMArtistStats_Listeners]);
+								NSLog(@"kLFMArtistStats_Playcount %@", [self.JSON valueForKeyPath:kLFMArtistStats_Playcount]);
+								NSLog(@"kLFMArtistStreamable %@", self.JSON[kLFMArtistStreamable]);
+								NSLog(@"kLFMArtist_Tags %@", [self.JSON valueForKeyPath:kLFMArtist_Tags]);
+								NSLog(@"kLFMArtistLastFmPageURL %@", self.JSON[kLFMArtistLastFmPageURL]);
 								*/
 							   /*
 								NSLog(@"-------------------------------------------------------------------------------");
-								NSLog(@"NSDictionary+LastFmFetchr");
-								NSLog(@"-------------------------------------------------------------------------------");
-								NSLog(@"artistMembers %@", [JSON artistMembers]);
-								NSLog(@"artistMemberArray %@", [JSON artistMemberArray]);
-								NSLog(@"artistBioContent %@", [JSON artistBioContent]);
-								NSLog(@"artistBioFormationYears %@", [JSON artistBioFormationYears]);
-								NSLog(@"artistBioFormationYearDates %@", [JSON artistBioFormationYearDates]);
-								NSLog(@"artistBioLink %@", [JSON artistBioLink]);
-								NSLog(@"artistBioLinkURL %@", [JSON artistBioLinkURL]);
-								NSLog(@"artistBioPlaceFormed %@", [JSON artistBioPlaceFormed]);
-								NSLog(@"artistBioPublished %@", [JSON artistBioPublished]);
-								NSLog(@"artistBioPublishedDate %@", [JSON artistBioPublishedDate]);
-								NSLog(@"artistBioSummary %@", [JSON artistBioSummary]);
-								NSLog(@"artistBioYearFormed %@", [JSON artistBioYearFormed]);
-								NSLog(@"artistBioYearFormedDate %@", [JSON artistBioYearFormedDate]);
-								NSLog(@"artistImageSmall %@", [JSON artistImageSmall]);
-								NSLog(@"artistImageSmallURL %@", [JSON artistImageSmallURL]);
-								NSLog(@"artistImageMedium %@", [JSON artistImageMedium]);
-								NSLog(@"artistImageMediumURL %@", [JSON artistImageMediumURL]);
-								NSLog(@"artistImageLarge %@", [JSON artistImageLarge]);
-								NSLog(@"artistImageLargeURL %@", [JSON artistImageLargeURL]);
-								NSLog(@"artistImageExtraLarge %@", [JSON artistImageExtraLarge]);
-								NSLog(@"artistImageExtraLargeURL %@", [JSON artistImageExtraLargeURL]);
-								NSLog(@"artistImageMega %@", [JSON artistImageMega]);
-								NSLog(@"artistImageMegaURL %@", [JSON artistImageMegaURL]);
-								NSLog(@"artistMusicBrianzId %@", [JSON artistMusicBrianzId]);
-								NSLog(@"artistName %@", [JSON artistName]);
-								NSLog(@"artistIsOnTour %@", [JSON artistIsOnTour]);
-								NSLog(@"artistIsOnTourBool %c", [JSON artistIsOnTourBool]);
-								NSLog(@"artistSimilarArtists %@", [JSON artistSimilarArtists]);
-								NSLog(@"artistSimilarArtistsArray %@", [JSON artistSimilarArtistsArray]);
-								NSLog(@"artistListeners %@", [JSON artistListeners]);
-								NSLog(@"artistListenersNumber %@", [JSON artistListenersNumber]);
-								NSLog(@"artistPlaycount %@", [JSON artistPlaycount]);
-								NSLog(@"artistPlaycountNumber %@", [JSON artistPlaycountNumber]);
-								NSLog(@"artistStreamable %@", [JSON artistStreamable]);
-								NSLog(@"artistStreamableBool %c", [JSON artistStreamableBool]);
-								NSLog(@"artistTags %@", [JSON artistTags]);
-								NSLog(@"artistTagNames %@", [JSON artistTagNames]);
-								NSLog(@"artistTagURLs %@", [JSON artistTagURLs]);
-								NSLog(@"artistLastFmPage %@", [JSON artistLastFmPage]);
-								NSLog(@"artistLastFmPageURL %@", [JSON artistLastFmPageURL]);
+								NSLog(@"artistMembers %@", [data artistMembers]);
+								NSLog(@"artistMemberArray %@", [data artistMemberArray]);
+								NSLog(@"artistBioContent %@", [data artistBioContent]);
+								NSLog(@"artistBioFormationYears %@", [data artistBioFormationYears]);
+								NSLog(@"artistBioFormationYearDates %@", [data artistBioFormationYearDates]);
+								NSLog(@"artistBioLink %@", [data artistBioLink]);
+								NSLog(@"artistBioLinkURL %@", [data artistBioLinkURL]);
+								NSLog(@"artistBioPlaceFormed %@", [data artistBioPlaceFormed]);
+								NSLog(@"artistBioPublished %@", [data artistBioPublished]);
+								NSLog(@"artistBioPublishedDate %@", [data artistBioPublishedDate]);
+								NSLog(@"artistBioSummary %@", [data artistBioSummary]);
+								NSLog(@"artistBioYearFormed %@", [data artistBioYearFormed]);
+								NSLog(@"artistBioYearFormedDate %@", [data artistBioYearFormedDate]);
+								NSLog(@"artistImageSmall %@", [data artistImageSmall]);
+								NSLog(@"artistImageSmallURL %@", [data artistImageSmallURL]);
+								NSLog(@"artistImageMedium %@", [data artistImageMedium]);
+								NSLog(@"artistImageMediumURL %@", [data artistImageMediumURL]);
+								NSLog(@"artistImageLarge %@", [data artistImageLarge]);
+								NSLog(@"artistImageLargeURL %@", [data artistImageLargeURL]);
+								NSLog(@"artistImageExtraLarge %@", [data artistImageExtraLarge]);
+								NSLog(@"artistImageExtraLargeURL %@", [data artistImageExtraLargeURL]);
+								NSLog(@"artistImageMega %@", [data artistImageMega]);
+								NSLog(@"artistImageMegaURL %@", [data artistImageMegaURL]);
+								NSLog(@"artistMusicBrianzId %@", [data artistMusicBrianzId]);
+								NSLog(@"artistName %@", [data artistName]);
+								NSLog(@"artistIsOnTour %@", [data artistIsOnTour]);
+								NSLog(@"artistIsOnTourBool %c", [data artistIsOnTourBool]);
+								NSLog(@"artistSimilarArtists %@", [data artistSimilarArtists]);
+								NSLog(@"artistSimilarArtistsArray %@", [data artistSimilarArtistsArray]);
+								NSLog(@"artistListeners %@", [data artistListeners]);
+								NSLog(@"artistListenersNumber %@", [data artistListenersNumber]);
+								NSLog(@"artistPlaycount %@", [data artistPlaycount]);
+								NSLog(@"artistPlaycountNumber %@", [data artistPlaycountNumber]);
+								NSLog(@"artistStreamable %@", [data artistStreamable]);
+								NSLog(@"artistStreamableBool %c", [data artistStreamableBool]);
+								NSLog(@"artistTags %@", [data artistTags]);
+								NSLog(@"artistTagNames %@", [data artistTagNames]);
+								NSLog(@"artistTagURLs %@", [data artistTagURLs]);
+								NSLog(@"artistLastFmPage %@", [data artistLastFmPage]);
+								NSLog(@"artistLastFmPageURL %@", [data artistLastFmPageURL]);
 								*/
-							   NSLog(@"Received data for Artist %@", [JSON artistName]);
+							   NSLog(@"Received data for Artist %@", [data artistName]);
 							   NSLog(@"Counter %i", --counter);
 						   }
 						   failure:^(NSOperation *operation, NSError *error) {
@@ -128,51 +123,48 @@
 						   }];
 	NSLog(@"Counter %i", ++counter);
 	
-	// ------------ Album calls ------------------
 	
+	// ------------ Album calls ------------------
 	
 	[lastFmFetchr getInfoForAlbum:@"Highway to Hell"
 						 byArtist:@"AC/DC"
 							 mbid:nil
-						  success:^(LFMAlbumGetInfoDict *JSON) {
-							  //NSLog(@"JSON Response was: %@", JSON);
+						  success:^(LFMAlbumGetInfoDict *data) {
 							  /*
 							   NSLog(@"-------------------------------------------------------------------------------");
-							   NSLog(@"NSDictionary+LastFmFetchr");
-							   NSLog(@"-------------------------------------------------------------------------------");
-							   NSLog(@"albumArtistName %@", [JSON albumArtistName]);
-							   NSLog(@"albumId %@", [JSON albumId]);
-							   NSLog(@"albumImageSmall %@", [JSON albumImageSmall]);
-							   NSLog(@"albumImageSmallURL %@", [JSON albumImageSmallURL]);
-							   NSLog(@"albumImageMedium %@", [JSON albumImageMedium]);
-							   NSLog(@"albumImageMediumURL %@", [JSON albumImageMediumURL]);
-							   NSLog(@"albumImageLarge %@", [JSON albumImageLarge]);
-							   NSLog(@"albumImageLargeURL %@", [JSON albumImageLargeURL]);
-							   NSLog(@"albumImageExtraLarge %@", [JSON albumImageExtraLarge]);
-							   NSLog(@"albumImageExtraLargeURL %@", [JSON albumImageExtraLargeURL]);
-							   NSLog(@"albumImageMega %@", [JSON albumImageMega]);
-							   NSLog(@"albumImageMegaURL %@", [JSON albumImageMegaURL]);
-							   NSLog(@"albumListeners %@", [JSON albumListeners]);
-							   NSLog(@"albumListenersNumber %@", [JSON albumListenersNumber]);
-							   NSLog(@"albumMusicBrianzId %@", [JSON albumMusicBrianzId]);
-							   NSLog(@"albumName %@", [JSON albumName]);
-							   NSLog(@"albumPlaycount %@", [JSON albumPlaycount]);
-							   NSLog(@"albumPlaycountNumber %@", [JSON albumPlaycountNumber]);
-							   NSLog(@"albumReleasedate %@", [JSON albumReleasedate]);
-							   NSLog(@"albumReleasedateDate %@", [JSON albumReleasedateDate]);
-							   NSLog(@"albumToptags %@", [JSON albumToptags]);
-							   NSLog(@"albumToptagNames %@", [JSON albumToptagNames]);
-							   NSLog(@"albumToptagURLs %@", [JSON albumToptagURLs]);
-							   NSLog(@"albumTracks %@", [JSON albumTracks]);
-							   NSLog(@"albumTracksArray %@", [JSON albumTracksArray]);
-							   NSLog(@"albumLastFmPage %@", [JSON albumLastFmPage]);
-							   NSLog(@"albumLastFmPageURL %@", [JSON albumLastFmPageURL]);
-							   NSLog(@"albumWikiContent %@", [JSON albumWikiContent]);
-							   NSLog(@"albumWikiPublished %@", [JSON albumWikiPublished]);
-							   NSLog(@"albumWikiPublishedDate %@", [JSON albumWikiPublishedDate]);
-							   NSLog(@"albumWikiSummary %@", [JSON albumWikiSummary]);
+							   NSLog(@"albumArtistName %@", [data albumArtistName]);
+							   NSLog(@"albumId %@", [data albumId]);
+							   NSLog(@"albumImageSmall %@", [data albumImageSmall]);
+							   NSLog(@"albumImageSmallURL %@", [data albumImageSmallURL]);
+							   NSLog(@"albumImageMedium %@", [data albumImageMedium]);
+							   NSLog(@"albumImageMediumURL %@", [data albumImageMediumURL]);
+							   NSLog(@"albumImageLarge %@", [data albumImageLarge]);
+							   NSLog(@"albumImageLargeURL %@", [data albumImageLargeURL]);
+							   NSLog(@"albumImageExtraLarge %@", [data albumImageExtraLarge]);
+							   NSLog(@"albumImageExtraLargeURL %@", [data albumImageExtraLargeURL]);
+							   NSLog(@"albumImageMega %@", [data albumImageMega]);
+							   NSLog(@"albumImageMegaURL %@", [data albumImageMegaURL]);
+							   NSLog(@"albumListeners %@", [data albumListeners]);
+							   NSLog(@"albumListenersNumber %@", [data albumListenersNumber]);
+							   NSLog(@"albumMusicBrianzId %@", [data albumMusicBrianzId]);
+							   NSLog(@"albumName %@", [data albumName]);
+							   NSLog(@"albumPlaycount %@", [data albumPlaycount]);
+							   NSLog(@"albumPlaycountNumber %@", [data albumPlaycountNumber]);
+							   NSLog(@"albumReleasedate %@", [data albumReleasedate]);
+							   NSLog(@"albumReleasedateDate %@", [data albumReleasedateDate]);
+							   NSLog(@"albumToptags %@", [data albumToptags]);
+							   NSLog(@"albumToptagNames %@", [data albumToptagNames]);
+							   NSLog(@"albumToptagURLs %@", [data albumToptagURLs]);
+							   NSLog(@"albumTracks %@", [data albumTracks]);
+							   NSLog(@"albumTracksArray %@", [data albumTracksArray]);
+							   NSLog(@"albumLastFmPage %@", [data albumLastFmPage]);
+							   NSLog(@"albumLastFmPageURL %@", [data albumLastFmPageURL]);
+							   NSLog(@"albumWikiContent %@", [data albumWikiContent]);
+							   NSLog(@"albumWikiPublished %@", [data albumWikiPublished]);
+							   NSLog(@"albumWikiPublishedDate %@", [data albumWikiPublishedDate]);
+							   NSLog(@"albumWikiSummary %@", [data albumWikiSummary]);
 							   */
-							  NSLog(@"Received data for Album %@ by Artist %@", [JSON albumName], [JSON albumArtistName]);
+							  NSLog(@"Received data for Album %@ by Artist %@", [data albumName], [data albumArtistName]);
 							  NSLog(@"Counter %i", --counter);
 						  }
 						  failure:^(NSOperation *operation, NSError *error) {
@@ -183,12 +175,10 @@
 	
 	[lastFmFetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 								  mbid:nil
-							   success:^(LFMArtistGetTopAlbumsDict *JSON) {
-								   NSLog(@"JSON Response was: %@", JSON);
+							   success:^(LFMArtistGetTopAlbumsDict *data) {
+								   NSLog(@"JSON Response was: %@", data.JSON);
 								   NSLog(@"-------------------------------------------------------------------------------");
-								   NSLog(@"NSDictionary+LastFmFetchr");
-								   NSLog(@"-------------------------------------------------------------------------------");
-								   NSLog(@"Received TopAlbums by Artist %@", [JSON albumArtistName]);
+								   NSLog(@"Received TopAlbums by Artist %@", [data albumArtistName]);
 								   NSLog(@"Counter %i", --counter);
 								   
 							   }

@@ -11,14 +11,9 @@
 
 @implementation LFMDictionary
 
-+ (instancetype)dictionaryWithDictionary:(NSDictionary *)dict
-{
-	return [NSDictionary dictionaryWithDictionary:dict];
-}
-
 - (NSArray *)tagNamesArrayWithTagListKeyPath:(NSString *)tagListKeyPath
 {
-	id obj = [self valueForKeyPath:tagListKeyPath];
+	id obj = [self.JSON valueForKeyPath:tagListKeyPath];
 	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
@@ -33,7 +28,7 @@
 
 - (NSArray *)tagURLsArrayWithTagListKeyPath:(NSString *)tagListKeyPath
 {
-	id obj = [self valueForKeyPath:tagListKeyPath];
+	id obj = [self.JSON valueForKeyPath:tagListKeyPath];
 	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
@@ -49,7 +44,7 @@
 
 - (NSString *)smallImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self valueForKeyPath:imageListKeyPath];
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
 	if ([obj isKindOfClass:[NSArray class]]) {
 		return [obj[0][@"#text"] description];
 	}
@@ -58,7 +53,7 @@
 
 - (NSString *)mediumImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self valueForKeyPath:imageListKeyPath];
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
 	if ([obj isKindOfClass:[NSArray class]]) {
 		return [obj[1][@"#text"] description];
 	}
@@ -67,7 +62,7 @@
 
 - (NSString *)largeImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self valueForKeyPath:imageListKeyPath];
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
 	if ([obj isKindOfClass:[NSArray class]]) {
 		return [obj[2][@"#text"] description];
 	}
@@ -76,7 +71,7 @@
 
 - (NSString *)extraLargeImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self valueForKeyPath:imageListKeyPath];
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
 	if ([obj isKindOfClass:[NSArray class]]) {
 		return [obj[3][@"#text"] description];
 	}
@@ -85,7 +80,7 @@
 
 - (NSString *)megaImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self valueForKeyPath:imageListKeyPath];
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
 	if ([obj isKindOfClass:[NSArray class]]) {
 		return [obj[4][@"#text"] description];
 	}
@@ -94,11 +89,20 @@
 
 - (NSString *)notNilStringForKeyPath:(NSString *)keyPath
 {
-	id obj = [self valueForKeyPath:keyPath];
+	id obj = [self.JSON valueForKeyPath:keyPath];
 	if (obj) {
 		return [obj description];
 	}
 	return kEmpty;
+}
+
+- (instancetype)initWithJson:(NSDictionary *)JSON;
+{
+	self = [super init];
+	if (self) {
+		_JSON = JSON;
+	}
+	return self;
 }
 
 @end
