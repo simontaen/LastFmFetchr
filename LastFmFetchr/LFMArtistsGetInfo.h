@@ -11,84 +11,84 @@
 @interface LFMArtistsGetInfo : LFMData
 
 /// Never-nil NSString of members of the artist
-- (NSString *)artistMembers;
+- (NSString *)members;
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
-- (NSArray *)artistMemberArray;
+- (NSArray *)memberArray;
 /// Never-nil NSString of the artists bio content
-- (NSString *)artistBioContent;
+- (NSString *)bioContent;
 /// Never-nil NSString of the artists formation years (yearfrom, yearto)
-- (NSString *)artistBioFormationYears;
+- (NSString *)bioFormationYears;
 /// NSArray of NSDates, [1] = year from, [2] = year to
-- (NSArray *)artistBioFormationYearDates;
+- (NSArray *)bioFormationYearDates;
 /// Never-nil NSString of the artists last.fm wiki page
-- (NSString *)artistBioLink;
+- (NSString *)bioLink;
 /// NSURL to the artists last.fm wiki page
-- (NSURL *)artistBioLinkURL;
+- (NSURL *)bioLinkURL;
 /// Never-nil NSString of where the artist was formed
-- (NSString *)artistBioPlaceFormed;
+- (NSString *)bioPlaceFormed;
 /// Never-nil NSString of when the artists bio was published
-- (NSString *)artistBioPublished;
+- (NSString *)bioPublished;
 /// NSDate of when the artists bio was published
-- (NSDate *)artistBioPublishedDate;
+- (NSDate *)bioPublishedDate;
 /// Never-nil NSString of the artists bio summary
-- (NSString *)artistBioSummary;
+- (NSString *)bioSummary;
 /// Never-nil NSString of when the artist was formed
-- (NSString *)artistBioYearFormed;
+- (NSString *)bioYearFormed;
 /// NSDate of when the artist was formed
-- (NSDate *)artistBioYearFormedDate;
+- (NSDate *)bioYearFormedDate;
 /// Never-nil NSString of the url
-- (NSString *)artistImageSmall;
+- (NSString *)imageSmall;
 /// NSURL to the artists image size small
-- (NSURL *)artistImageSmallURL;
+- (NSURL *)imageSmallURL;
 /// Never-nil NSString of the url
-- (NSString *)artistImageMedium;
+- (NSString *)imageMedium;
 /// NSURL to the artists image size medium
-- (NSURL *)artistImageMediumURL;
+- (NSURL *)imageMediumURL;
 /// Never-nil NSString of the url
-- (NSString *)artistImageLarge;
+- (NSString *)imageLarge;
 /// NSURL to the artists image size large
-- (NSURL *)artistImageLargeURL;
+- (NSURL *)imageLargeURL;
 /// Never-nil NSString of the url
-- (NSString *)artistImageExtraLarge;
+- (NSString *)imageExtraLarge;
 /// NSURL to the artists image size extra large
-- (NSURL *)artistImageExtraLargeURL;
+- (NSURL *)imageExtraLargeURL;
 /// Never-nil NSString of the url
-- (NSString *)artistImageMega;
+- (NSString *)imageMega;
 /// NSURL to the artists image size mega
-- (NSURL *)artistImageMegaURL;
+- (NSURL *)imageMegaURL;
 /// Never-nil NSString of the artists music brianz id
-- (NSString *)artistMusicBrianzId;
+- (NSString *)musicBrianzId;
 /// Never-nil NSString of the artists name
-- (NSString *)artistName;
+- (NSString *)name;
 /// Never-nil NSString, 1=YES, 0=NO
-- (NSString *)artistIsOnTour;
+- (NSString *)isOnTour;
 /// Boolean indicating if the artist is on tour or not
-- (BOOL)artistIsOnTourBool;
+- (BOOL)isOnTourBool;
 /// Never-nil NSString of the artists similar artists
-- (NSString *)artistSimilarArtists;
+- (NSString *)similarArtists;
 /// NSArray of NSDictionaries of similar artists
-- (NSArray *)artistSimilarArtistsArray;
+- (NSArray *)similarArtistsArray;
 /// Never-nil NSString of the artists listeners
-- (NSString *)artistListeners;
+- (NSString *)listeners;
 /// NSNumber of listeners as long long
-- (NSNumber *)artistListenersNumber;
+- (NSNumber *)listenersNumber;
 /// Never-nil NSString of the artists playcount
-- (NSString *)artistPlaycount;
+- (NSString *)playcount;
 /// NSNumber of playcount as long long
-- (NSNumber *)artistPlaycountNumber;
+- (NSNumber *)playcountNumber;
 /// Never-nil NSString indicating if it's streamable
-- (NSString *)artistStreamable;
+- (NSString *)streamable;
 /// Boolean indicating if the artists content is streamable
-- (BOOL)artistStreamableBool;
+- (BOOL)streamableBool;
 /// Never-nil NSString of the artists tags
-- (NSString *)artistTags;
+- (NSString *)tags;
 /// (ordered) Array of Names as NSStrings
-- (NSArray *)artistTagNames;
+- (NSArray *)tagNames;
 /// (ordered) Array of Last.fm tag links as NSURLs
-- (NSArray *)artistTagURLs;
+- (NSArray *)tagURLs;
 /// Never-nil NSString of the artists Last.fm page
-- (NSString *)artistLastFmPage;
+- (NSString *)lastFmPage;
 /// NSURL to the artists Last.fm page
-- (NSURL *)artistLastFmPageURL;
+- (NSURL *)lastFmPageURL;
 
 @end

@@ -11,7 +11,7 @@
 
 @implementation LFMArtistGetTopAlbums
 
-- (NSArray *)albumArtistsAlbumList
+- (NSArray *)artistsAlbumList
 {
 	id obj = [self.JSON valueForKeyPath:kLFMAlbum_ArtistsAlbumList];
 	if ([obj isKindOfClass:[NSArray class]]) {
@@ -20,17 +20,17 @@
 	return nil;
 }
 
-- (NSString *)albumRankInAllArtistAlbums
+- (NSString *)rankInAllArtistAlbums
 {
 	return [self notNilStringForKeyPath:kLFMAlbum_RankInAllArtistAlbums];
 }
 
-- (NSNumber *)albumRankInAllArtistAlbumsNumber
+- (NSNumber *)rankInAllArtistAlbumsNumber
 {
-	return [NSNumber numberWithInt:[[self albumRankInAllArtistAlbums] intValue]];
+	return [NSNumber numberWithInt:[[self rankInAllArtistAlbums] intValue]];
 }
 
-- (NSString *)albumArtistName
+- (NSString *)artistName
 {
 	return [self notNilStringForKeyPath:kLFMAlbumArtist_Name];
 }

@@ -11,135 +11,135 @@
 
 @implementation LFMAlbumGetInfo
 
-- (NSString *)albumArtistName
+- (NSString *)artistName
 {
 	return [self notNilStringForKeyPath:kLFMAlbumArtistName];
 }
 
-- (NSString *)albumId
+- (NSString *)identification
 {
 	return [self notNilStringForKeyPath:kLFMAlbumId];
 }
 
-- (NSNumber *)albumIdNumber
+- (NSNumber *)idNumber
 {
-	return [NSNumber numberWithLongLong:[[self albumId] longLongValue]];
+	return [NSNumber numberWithLongLong:[[self identification] longLongValue]];
 }
 
-- (NSString *)albumImageSmall
+- (NSString *)imageSmall
 {
 	return [self smallImageForImageListKeyPath:kLFMAlbumImageList];
 }
 
-- (NSURL *)albumImageSmallURL
+- (NSURL *)imageSmallURL
 {
-	return [NSURL URLWithString:[self albumImageSmall]];
+	return [NSURL URLWithString:[self imageSmall]];
 }
 
-- (NSString *)albumImageMedium
+- (NSString *)imageMedium
 {
 	return [self mediumImageForImageListKeyPath:kLFMAlbumImageList];
 }
 
-- (NSURL *)albumImageMediumURL
+- (NSURL *)imageMediumURL
 {
-	return [NSURL URLWithString:[self albumImageMedium]];
+	return [NSURL URLWithString:[self imageMedium]];
 }
 
-- (NSString *)albumImageLarge
+- (NSString *)imageLarge
 {
 	return [self largeImageForImageListKeyPath:kLFMAlbumImageList];
 }
 
-- (NSURL *)albumImageLargeURL
+- (NSURL *)imageLargeURL
 {
-	return [NSURL URLWithString:[self albumImageLarge]];
+	return [NSURL URLWithString:[self imageLarge]];
 }
 
-- (NSString *)albumImageExtraLarge
+- (NSString *)imageExtraLarge
 {
 	return [self extraLargeImageForImageListKeyPath:kLFMAlbumImageList];
 }
 
-- (NSURL *)albumImageExtraLargeURL
+- (NSURL *)imageExtraLargeURL
 {
-	return [NSURL URLWithString:[self albumImageExtraLarge]];
+	return [NSURL URLWithString:[self imageExtraLarge]];
 }
 
-- (NSString *)albumImageMega
+- (NSString *)imageMega
 {
 	return [self megaImageForImageListKeyPath:kLFMAlbumImageList];
 }
 
-- (NSURL *)albumImageMegaURL
+- (NSURL *)imageMegaURL
 {
-	return [NSURL URLWithString:[self albumImageMega]];
+	return [NSURL URLWithString:[self imageMega]];
 }
 
-- (NSString *)albumListeners
+- (NSString *)listeners
 {
 	return [self notNilStringForKeyPath:kLFMAlbumListeners];
 }
 
-- (NSNumber *)albumListenersNumber
+- (NSNumber *)listenersNumber
 {
-	return [NSNumber numberWithLongLong:[[self albumListeners] longLongValue]];
+	return [NSNumber numberWithLongLong:[[self listeners] longLongValue]];
 }
 
-- (NSString *)albumMusicBrianzId
+- (NSString *)musicBrianzId
 {
 	return [self notNilStringForKeyPath:kLFMAlbumMusicBrianzId];
 }
 
-- (NSString *)albumName
+- (NSString *)name
 {
 	return [self notNilStringForKeyPath:kLFMAlbumName];
 }
 
-- (NSString *)albumPlaycount
+- (NSString *)playcount
 {
 	return [self notNilStringForKeyPath:kLFMAlbumPlaycount];
 }
 
-- (NSNumber *)albumPlaycountNumber
+- (NSNumber *)playcountNumber
 {
-	return [NSNumber numberWithLongLong:[[self albumPlaycount] longLongValue]];
+	return [NSNumber numberWithLongLong:[[self playcount] longLongValue]];
 }
 
-- (NSString *)albumReleasedate
+- (NSString *)releasedate
 {
 	return [[self notNilStringForKeyPath:kLFMAlbumReleasedate] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
-- (NSDate *)albumReleasedateDate
+- (NSDate *)releasedateDate
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
 	
-	return [formatter dateFromString:[[self albumReleasedate] stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"]];
+	return [formatter dateFromString:[[self releasedate] stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"]];
 }
 
-- (NSString *)albumToptags
+- (NSString *)toptags
 {
 	return [self notNilStringForKeyPath:kLFMAlbum_Toptags];
 }
 
-- (NSArray *)albumToptagNames
+- (NSArray *)toptagNames
 {
 	return [self tagNamesArrayWithTagListKeyPath:kLFMAlbum_Toptags];
 }
 
-- (NSArray *)albumToptagURLs
+- (NSArray *)toptagURLs
 {
 	return [self tagURLsArrayWithTagListKeyPath:kLFMAlbum_Toptags];
 }
 
-- (NSString *)albumTracks
+- (NSString *)tracks
 {
 	return [self notNilStringForKeyPath:kLFMAlbum_Tracks];
 }
 
-- (NSArray *)albumTracksArray
+- (NSArray *)tracksArray
 {
 	id obj = [self.JSON valueForKeyPath:kLFMAlbum_Tracks];
 	if (![obj isKindOfClass:[NSArray class]]) {
@@ -155,35 +155,35 @@
 	return tracks;
 }
 
-- (NSString *)albumLastFmPage
+- (NSString *)lastFmPage
 {
 	return [self notNilStringForKeyPath:kLFMAlbumLastFmPageURL];
 }
 
-- (NSURL *)albumLastFmPageURL
+- (NSURL *)lastFmPageURL
 {
-	return [NSURL URLWithString:[self albumLastFmPage]];
+	return [NSURL URLWithString:[self lastFmPage]];
 }
 
-- (NSString *)albumWikiContent
+- (NSString *)wikiContent
 {
 	return [self notNilStringForKeyPath:kLFMAlbumWiki_Content];
 }
 
-- (NSString *)albumWikiPublished
+- (NSString *)wikiPublished
 {
 	return [self notNilStringForKeyPath:kLFMAlbumWiki_Published];
 }
 
-- (NSDate *)albumWikiPublishedDate
+- (NSDate *)wikiPublishedDate
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
 	
-	return [formatter dateFromString:[self albumWikiPublished]];
+	return [formatter dateFromString:[self wikiPublished]];
 }
 
-- (NSString *)albumWikiSummary
+- (NSString *)wikiSummary
 {
 	return [self notNilStringForKeyPath:kLFMAlbumWiki_Summary];
 }

@@ -11,14 +11,14 @@
 
 @implementation LFMArtistsGetInfo
 
-- (NSString *)artistMembers
+- (NSString *)members
 {
 	return [self notNilStringForKeyPath:kLFMArtist_Members];
 }
 
-- (NSArray *)artistMemberArray
+- (NSArray *)memberArray
 {
-	id obj = [self artistMembers];
+	id obj = [self members];
 	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
@@ -26,17 +26,17 @@
 	return array;
 }
 
-- (NSString *)artistBioContent
+- (NSString *)bioContent
 {
 	return [self notNilStringForKeyPath:kLFMArtistBio_Content];
 }
 
-- (NSString *)artistBioFormationYears
+- (NSString *)bioFormationYears
 {
 	return [self notNilStringForKeyPath:kLFMArtistBio_FormationYears];
 }
 
-- (NSArray *)artistBioFormationYearDates
+- (NSArray *)bioFormationYearDates
 {
 	id obj = [self.JSON valueForKeyPath:kLFMArtistBio_FormationYears];
 	if (![obj isKindOfClass:[NSDictionary class]]) {
@@ -50,12 +50,12 @@
 	return @[[formatter dateFromString:dict[@"yearfrom"]], [formatter dateFromString:dict[@"yearto"]]];
 }
 
-- (NSString *)artistBioLink
+- (NSString *)bioLink
 {
 	return [self notNilStringForKeyPath:kLFMArtistBio_Link];
 }
 
-- (NSURL *)artistBioLinkURL
+- (NSURL *)bioLinkURL
 {
 	id obj = [self.JSON valueForKeyPath:kLFMArtistBio_Link];
 	if (![obj isKindOfClass:[NSDictionary class]]) {
@@ -66,121 +66,121 @@
 	return [NSURL URLWithString:dict[@"href"]];
 }
 
-- (NSString *)artistBioPlaceFormed
+- (NSString *)bioPlaceFormed
 {
 	return [self notNilStringForKeyPath:kLFMArtistBio_PlaceFormed];
 }
 
-- (NSString *)artistBioPublished
+- (NSString *)bioPublished
 {
 	return [self notNilStringForKeyPath:kLFMArtistBio_Published];
 }
 
-- (NSDate *)artistBioPublishedDate
+- (NSDate *)bioPublishedDate
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
 	
-	return [formatter dateFromString:[self artistBioPublished]];
+	return [formatter dateFromString:[self bioPublished]];
 }
 
-- (NSString *)artistBioSummary
+- (NSString *)bioSummary
 {
 	return [self notNilStringForKeyPath:kLFMArtistBio_Summary];
 }
 
-- (NSString *)artistBioYearFormed
+- (NSString *)bioYearFormed
 {
 	return [self notNilStringForKeyPath:kLFMArtistBio_YearFormed];
 }
 
-- (NSDate *)artistBioYearFormedDate
+- (NSDate *)bioYearFormedDate
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy"];
 	
-	return [formatter dateFromString:[self artistBioYearFormed]];
+	return [formatter dateFromString:[self bioYearFormed]];
 }
 
-- (NSString *)artistImageSmall
+- (NSString *)imageSmall
 {
 	return [self smallImageForImageListKeyPath:kLFMArtistImageList];
 }
 
-- (NSURL *)artistImageSmallURL;
+- (NSURL *)imageSmallURL
 {
-	return [NSURL URLWithString:[self artistImageSmall]];
+	return [NSURL URLWithString:[self imageSmall]];
 }
 
-- (NSString *)artistImageMedium
+- (NSString *)imageMedium
 {
 	return [self mediumImageForImageListKeyPath:kLFMArtistImageList];
 }
 
-- (NSURL *)artistImageMediumURL;
+- (NSURL *)imageMediumURL
 {
-	return [NSURL URLWithString:[self artistImageMedium]];
+	return [NSURL URLWithString:[self imageMedium]];
 }
 
-- (NSString *)artistImageLarge
+- (NSString *)imageLarge
 {
 	return [self largeImageForImageListKeyPath:kLFMArtistImageList];
 }
 
-- (NSURL *)artistImageLargeURL;
+- (NSURL *)imageLargeURL
 {
-	return [NSURL URLWithString:[self artistImageLarge]];
+	return [NSURL URLWithString:[self imageLarge]];
 }
 
-- (NSString *)artistImageExtraLarge
+- (NSString *)imageExtraLarge
 {
 	return [self extraLargeImageForImageListKeyPath:kLFMArtistImageList];
 }
 
-- (NSURL *)artistImageExtraLargeURL;
+- (NSURL *)imageExtraLargeURL
 {
-	return [NSURL URLWithString:[self artistImageExtraLarge]];
+	return [NSURL URLWithString:[self imageExtraLarge]];
 }
 
-- (NSString *)artistImageMega
+- (NSString *)imageMega
 {
 	return [self megaImageForImageListKeyPath:kLFMArtistImageList];
 }
 
-- (NSURL *)artistImageMegaURL
+- (NSURL *)imageMegaURL
 {
-	return [NSURL URLWithString:[self artistImageMega]];
+	return [NSURL URLWithString:[self imageMega]];
 }
 
-- (NSString *)artistMusicBrianzId
+- (NSString *)musicBrianzId
 {
 	return [self notNilStringForKeyPath:kLFMArtistMusicBrianzId];
 }
 
-- (NSString *)artistName
+- (NSString *)name
 {
 	return [self notNilStringForKeyPath:kLFMArtistName];
 }
 
-- (NSString *)artistIsOnTour
+- (NSString *)isOnTour
 {
 	return [self notNilStringForKeyPath:kLFMArtistIsOnTour];
 }
 
-- (BOOL)artistIsOnTourBool
+- (BOOL)isOnTourBool
 {
-	if ([@"1" isEqual:[self artistIsOnTour]]) {
+	if ([@"1" isEqual:[self isOnTour]]) {
 		return YES;
 	}
 	return NO;
 }
 
-- (NSString *)artistSimilarArtists
+- (NSString *)similarArtists
 {
 	return [self notNilStringForKeyPath:kLFMArtist_SimilarArtists];
 }
 
-- (NSArray *)artistSimilarArtistsArray
+- (NSArray *)similarArtistsArray
 {
 	id obj = [self.JSON valueForKeyPath:kLFMArtist_SimilarArtists];
 	if (![obj isKindOfClass:[NSArray class]]) {
@@ -190,62 +190,62 @@
 	return lfm;
 }
 
-- (NSString *)artistListeners
+- (NSString *)listeners
 {
 	return [self notNilStringForKeyPath:kLFMArtistStats_Listeners];
 }
 
-- (NSNumber *)artistListenersNumber
+- (NSNumber *)listenersNumber
 {
-	return [NSNumber numberWithLongLong:[[self artistListeners] longLongValue]];
+	return [NSNumber numberWithLongLong:[[self listeners] longLongValue]];
 }
 
-- (NSString *)artistPlaycount
+- (NSString *)playcount
 {
 	return [self notNilStringForKeyPath:kLFMArtistStats_Playcount];
 }
 
-- (NSNumber *)artistPlaycountNumber;
+- (NSNumber *)playcountNumber
 {
-	return [NSNumber numberWithLongLong:[[self artistPlaycount] longLongValue]];
+	return [NSNumber numberWithLongLong:[[self playcount] longLongValue]];
 }
 
-- (NSString *)artistStreamable
+- (NSString *)streamable
 {
 	return [self notNilStringForKeyPath:kLFMArtistStreamable];
 }
 
-- (BOOL)artistStreamableBool
+- (BOOL)streamableBool
 {
-	if ([@"1" isEqual:[self artistStreamable]]) {
+	if ([@"1" isEqual:[self streamable]]) {
 		return YES;
 	}
 	return NO;
 }
 
-- (NSString *)artistTags
+- (NSString *)tags
 {
 	return [self notNilStringForKeyPath:kLFMArtist_Tags];
 }
 
-- (NSArray *)artistTagNames
+- (NSArray *)tagNames
 {
 	return [self tagNamesArrayWithTagListKeyPath:kLFMArtist_Tags];
 }
 
-- (NSArray *)artistTagURLs
+- (NSArray *)tagURLs
 {
 	return [self tagURLsArrayWithTagListKeyPath:kLFMArtist_Tags];
 }
 
-- (NSString *)artistLastFmPage
+- (NSString *)lastFmPage
 {
 	return [self notNilStringForKeyPath:kLFMArtistLastFmPageURL];
 }
 
-- (NSURL *)artistLastFmPageURL
+- (NSURL *)lastFmPageURL
 {
-	return [NSURL URLWithString:[self artistLastFmPage]];
+	return [NSURL URLWithString:[self lastFmPage]];
 }
 
 @end

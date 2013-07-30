@@ -11,68 +11,68 @@
 @interface LFMAlbumGetInfo : LFMData
 
 /// Never-nil NSString of the albums artist name
-- (NSString *)albumArtistName;
+- (NSString *)artistName;
 /// Never-nil NSString of the album Id
-- (NSString *)albumId;
+- (NSString *)identification;
 /// NSNumber of the album Id as long long
-- (NSNumber *)albumIdNumber;
+- (NSNumber *)idNumber;
 /// Never-nil NSString of the url
-- (NSString *)albumImageSmall;
+- (NSString *)imageSmall;
 /// NSURL to the albums image size small
-- (NSURL *)albumImageSmallURL;
+- (NSURL *)imageSmallURL;
 /// Never-nil NSString of the url
-- (NSString *)albumImageMedium;
+- (NSString *)imageMedium;
 /// NSURL to the albums image size medium
-- (NSURL *)albumImageMediumURL;
+- (NSURL *)imageMediumURL;
 /// Never-nil NSString of the url
-- (NSString *)albumImageLarge;
+- (NSString *)imageLarge;
 /// NSURL to the albums image size large
-- (NSURL *)albumImageLargeURL;
+- (NSURL *)imageLargeURL;
 /// Never-nil NSString of the url
-- (NSString *)albumImageExtraLarge;
+- (NSString *)imageExtraLarge;
 /// NSURL to the albums image size extra large
-- (NSURL *)albumImageExtraLargeURL;
+- (NSURL *)imageExtraLargeURL;
 /// Never-nil NSString of the url
-- (NSString *)albumImageMega;
+- (NSString *)imageMega;
 /// NSURL to the albums image size mega
-- (NSURL *)albumImageMegaURL;
+- (NSURL *)imageMegaURL;
 /// Never-nil NSString of the number of album listeners
-- (NSString *)albumListeners;
+- (NSString *)listeners;
 /// NSNumber of listeners as long long
-- (NSNumber *)albumListenersNumber;
+- (NSNumber *)listenersNumber;
 /// Never-nil NSString of the albums music brianz id
-- (NSString *)albumMusicBrianzId;
+- (NSString *)musicBrianzId;
 /// Never-nil NSString of the albums name
-- (NSString *)albumName;
+- (NSString *)name;
 /// Never-nil NSString of the albums playcount
-- (NSString *)albumPlaycount;
+- (NSString *)playcount;
 /// NSNumber of playcounts as long long
-- (NSNumber *)albumPlaycountNumber;
+- (NSNumber *)playcountNumber;
 /// Never-nil NSString of the albums releasedate (trimmed)
-- (NSString *)albumReleasedate;
+- (NSString *)releasedate;
 /// NSDate of the albums releasedate
-- (NSDate *)albumReleasedateDate;
+- (NSDate *)releasedateDate;
 /// Never-nil NSString of the albums toptags
-- (NSString *)albumToptags;
+- (NSString *)toptags;
 /// (ordered) Array of albums toptags as NSStrings
-- (NSArray *)albumToptagNames;
+- (NSArray *)toptagNames;
 /// (ordered) Array of Last.fm tag links as NSURLs
-- (NSArray *)albumToptagURLs;
+- (NSArray *)toptagURLs;
 /// Never-nil NSString of the album tracks
-- (NSString *)albumTracks;
+- (NSString *)tracks;
 /// NSArray of NSDictionaries of the album tracks
-- (NSArray *)albumTracksArray;
+- (NSArray *)tracksArray;
 /// Never-nil NSString of the albums Last.fm page
-- (NSString *)albumLastFmPage;
+- (NSString *)lastFmPage;
 /// NSURL to the albums Last.fm page
-- (NSURL *)albumLastFmPageURL;
+- (NSURL *)lastFmPageURL;
 /// Never-nil NSString of the albums wiki content
-- (NSString *)albumWikiContent;
+- (NSString *)wikiContent;
 /// Never-nil NSString of the albums wiki publishing date
-- (NSString *)albumWikiPublished;
+- (NSString *)wikiPublished;
 /// NSDate of when the wiki was published
-- (NSDate *)albumWikiPublishedDate;
+- (NSDate *)wikiPublishedDate;
 /// Never-nil NSString of the albums wiki summary
-- (NSString *)albumWikiSummary;
+- (NSString *)wikiSummary;
 
 @end
