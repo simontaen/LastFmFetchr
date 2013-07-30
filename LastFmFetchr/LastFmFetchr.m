@@ -40,7 +40,6 @@ NSString *const kLFMArtistLastFmPageURL = @"url";
 // ----------------------------------------------------------------------
 // ALBUM keys to JSON responses from Last.fm
 // ----------------------------------------------------------------------
-// album.getInfo
 NSString *const kLFMAlbumArtistName = @"artist";
 NSString *const kLFMAlbumId = @"id";
 NSString *const kLFMAlbumImageList = @"image";
@@ -55,7 +54,6 @@ NSString *const kLFMAlbumLastFmPageURL = @"url";
 NSString *const kLFMAlbumWiki_Content = @"wiki.content";
 NSString *const kLFMAlbumWiki_Published = @"wiki.published";
 NSString *const kLFMAlbumWiki_Summary = @"wiki.summary";
-// artist.getTopAlbums
 NSString *const kLFMAlbum_ArtistsAlbumList = @"album";
 NSString *const kLFMAlbum_RankInAllArtistAlbums = @"@attr.rank";
 NSString *const kLFMAlbumArtist_MusicBrianzId = @"artist.mbid";
@@ -88,6 +86,7 @@ NSString *const kLFMParameterArtist = @"artist";
 NSString *const kLFMParameterAlbum = @"album";
 
 // Last.fm API method parameter values
+// Each of these have a separate Method and a NSDictionary Subclass
 NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 NSString *const kLFMMethodArtistGetTopAlbums = @"artist.getTopAlbums";
 NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
@@ -111,7 +110,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #pragma mark - Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
-						  success:(LastFmFetchrAPISuccess)success
+						  success:(void (^)(LFMArtistsGetInfoDict *JSON))success
 						  failure:(LastFmFetchrAPIFailure)failure
 {
 	FCYAssert([artist length] || [mbid length], @"Must provide artist or mbid");
@@ -139,7 +138,9 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 										   operation:operation
 									methodParamValue:kLFMMethodArtistGetInfo
 									  jsonContentKey:kLFMParameterArtist
-											 success:success
+											 success:^(NSDictionary *JSON) {
+												 success((LFMArtistsGetInfoDict *)JSON);
+											 }
 											 failure:failure];
 				 }
 				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -151,7 +152,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 - (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
 								 mbid:(NSString *)mbid
-							  success:(LastFmFetchrAPISuccess)success
+							  success:(void (^)(LFMArtistGetTopAlbumsDict *JSON))success
 							  failure:(LastFmFetchrAPIFailure)failure
 {
 	FCYAssert([artist length] || [mbid length], @"Must provide artist or mbid");
@@ -179,7 +180,9 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 										   operation:operation
 									methodParamValue:kLFMMethodArtistGetTopAlbums
 									  jsonContentKey:@"topalbums"
-											 success:success
+											 success:^(NSDictionary *JSON) {
+												 success((LFMArtistGetTopAlbumsDict *)JSON);
+											 }
 											 failure:failure];
 				 }
 				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -193,7 +196,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 - (NSOperation *)getInfoForAlbum:(NSString *)album
 						byArtist:(NSString *)artist
 							mbid:(NSString *)mbid
-						 success:(LastFmFetchrAPISuccess)success
+						 success:(void (^)(LFMAlbumGetInfoDict *JSON))success
 						 failure:(LastFmFetchrAPIFailure)failure;
 {
 	FCYAssert(([artist length] && [album length]) || [mbid length], @"Must provide @[artist,album] or mbid");
@@ -224,7 +227,9 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 										   operation:operation
 									methodParamValue:kLFMMethodAlbumGetInfo
 									  jsonContentKey:kLFMParameterAlbum
-											 success:success
+											 success:^(NSDictionary *JSON) {
+												 success((LFMAlbumGetInfoDict *)JSON);
+											 }
 											 failure:failure];
 				 }
 				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -241,7 +246,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 						operation:(AFHTTPRequestOperation *)operation
 				 methodParamValue:(NSString *)methodParamValue
 				   jsonContentKey:(NSString *)jsonContentKey
-						  success:(LastFmFetchrAPISuccess)success
+						  success:(void (^)(NSDictionary *JSON))success
 						  failure:(LastFmFetchrAPIFailure)failure
 {
 	if (!operation.isCancelled) {
@@ -354,7 +359,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	return  operation;
 }
 
-/// add default request parameters (format, api_key) 
+/// add default request parameters (format, api_key)
 - (NSDictionary *)addDefaultParameters:(NSMutableDictionary *)parameters
 {
 	// Check if we have an API key set,

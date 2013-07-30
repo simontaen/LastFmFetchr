@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LFMArtistsGetInfoDict.h"
+#import "LFMArtistGetTopAlbumsDict.h"
+#import "LFMAlbumGetInfoDict.h"
 
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
@@ -36,7 +39,6 @@ extern NSString *const kLFMArtistLastFmPageURL;
 // ----------------------------------------------------------------------
 // ALBUM keys to JSON responses from Last.fm 
 // ----------------------------------------------------------------------
-// album.getInfo
 extern NSString *const kLFMAlbumArtistName;
 extern NSString *const kLFMAlbumId;
 extern NSString *const kLFMAlbumImageList;
@@ -51,7 +53,6 @@ extern NSString *const kLFMAlbumLastFmPageURL;
 extern NSString *const kLFMAlbumWiki_Content;
 extern NSString *const kLFMAlbumWiki_Published;
 extern NSString *const kLFMAlbumWiki_Summary;
-// artist.getTopAlbums
 extern NSString *const kLFMAlbum_ArtistsAlbumList;
 extern NSString *const kLFMAlbum_RankInAllArtistAlbums;
 extern NSString *const kLFMAlbumArtist_MusicBrianzId;
@@ -97,7 +98,7 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 // ----------------------------------------------------------------------
 // Block handler typedefs
 // ----------------------------------------------------------------------
-typedef void (^LastFmFetchrAPISuccess)(NSDictionary *JSON);
+//typedef void (^LastFmFetchrAPISuccess)(NSDictionary *JSON);
 typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 
 
@@ -122,7 +123,7 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 #pragma mark - Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
-						  success:(LastFmFetchrAPISuccess)success
+						  success:(void (^)(LFMArtistsGetInfoDict *JSON))success
 						  failure:(LastFmFetchrAPIFailure)failure;
 
 // This will just get the first 50 currently
@@ -131,14 +132,14 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 // The keys could be reused behind the scences and the curious ones could still use them
 - (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
 								 mbid:(NSString *)mbid
-							  success:(LastFmFetchrAPISuccess)success
+							  success:(void (^)(LFMArtistGetTopAlbumsDict *JSON))success
 							  failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Album methods
 - (NSOperation *)getInfoForAlbum:(NSString *)album
 						byArtist:(NSString *)artist
 							mbid:(NSString *)mbid
-						 success:(LastFmFetchrAPISuccess)success
+						 success:(void (^)(LFMAlbumGetInfoDict *JSON))success
 						 failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Requests Management
