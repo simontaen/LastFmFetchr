@@ -11,6 +11,8 @@
 		F4208E8E179DA12B00790491 /* AFLastFmAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */; };
 		F428593317A55DB60047297B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593217A55DB60047297B /* SystemConfiguration.framework */; };
 		F428593517A55DBD0047297B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593417A55DBD0047297B /* MobileCoreServices.framework */; };
+		F447077D17A961D600C1D604 /* LFMAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = F447077C17A961D600C1D604 /* LFMAlbum.m */; };
+		F447078017A9652D00C1D604 /* LFMAlbumTopAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = F447077F17A9652D00C1D604 /* LFMAlbumTopAlbum.m */; };
 		F4A7C115179D7B1F00FB7CC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */; };
 		F4A7C117179D7B1F00FB7CC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C116179D7B1F00FB7CC3 /* Foundation.framework */; };
 		F4A7C119179D7B1F00FB7CC3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C118179D7B1F00FB7CC3 /* CoreGraphics.framework */; };
@@ -34,6 +36,10 @@
 		F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFLastFmAPIClient.m; path = ../../LastFmFetchr/AFLastFmAPIClient.m; sourceTree = "<group>"; };
 		F428593217A55DB60047297B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F428593417A55DBD0047297B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F447077B17A961D600C1D604 /* LFMAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbum.h; path = ../../LastFmFetchr/LFMAlbum.h; sourceTree = "<group>"; };
+		F447077C17A961D600C1D604 /* LFMAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMAlbum.m; path = ../../LastFmFetchr/LFMAlbum.m; sourceTree = "<group>"; };
+		F447077E17A9652D00C1D604 /* LFMAlbumTopAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbumTopAlbum.h; path = ../../LastFmFetchr/LFMAlbumTopAlbum.h; sourceTree = "<group>"; };
+		F447077F17A9652D00C1D604 /* LFMAlbumTopAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMAlbumTopAlbum.m; path = ../../LastFmFetchr/LFMAlbumTopAlbum.m; sourceTree = "<group>"; };
 		F4A7C111179D7B1F00FB7CC3 /* LastFmFetchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LastFmFetchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F4A7C116179D7B1F00FB7CC3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -143,10 +149,14 @@
 				F4ABF51317A8104000DEF135 /* LFMData.m */,
 				F4ABF51617A8108100DEF135 /* LFMArtistsGetInfo.h */,
 				F4ABF51717A8108100DEF135 /* LFMArtistsGetInfo.m */,
-				F4ABF51917A810DE00DEF135 /* LFMAlbumGetInfo.h */,
-				F4ABF51A17A810DE00DEF135 /* LFMAlbumGetInfo.m */,
 				F4ABF51C17A8111700DEF135 /* LFMArtistGetTopAlbums.h */,
 				F4ABF51D17A8111700DEF135 /* LFMArtistGetTopAlbums.m */,
+				F447077B17A961D600C1D604 /* LFMAlbum.h */,
+				F447077C17A961D600C1D604 /* LFMAlbum.m */,
+				F447077E17A9652D00C1D604 /* LFMAlbumTopAlbum.h */,
+				F447077F17A9652D00C1D604 /* LFMAlbumTopAlbum.m */,
+				F4ABF51917A810DE00DEF135 /* LFMAlbumGetInfo.h */,
+				F4ABF51A17A810DE00DEF135 /* LFMAlbumGetInfo.m */,
 			);
 			name = "Dictinarys ";
 			sourceTree = "<group>";
@@ -272,6 +282,8 @@
 				F4ABF51817A8108100DEF135 /* LFMArtistsGetInfo.m in Sources */,
 				F4ABF51B17A810DE00DEF135 /* LFMAlbumGetInfo.m in Sources */,
 				F4ABF51E17A8111700DEF135 /* LFMArtistGetTopAlbums.m in Sources */,
+				F447077D17A961D600C1D604 /* LFMAlbum.m in Sources */,
+				F447078017A9652D00C1D604 /* LFMAlbumTopAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

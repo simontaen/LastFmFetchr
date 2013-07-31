@@ -8,31 +8,34 @@
 
 #import "LFMArtistGetTopAlbums.h"
 #import "LastFmFetchr.h"
+#import "LFMAlbumTopAlbum.h"
 
 @implementation LFMArtistGetTopAlbums
+
+- (NSString *)artistName
+{
+	//return [self notNilStringForKeyPath:kLFMAlbumArtist_Name];
+	id obj = self.JSON[@"@attr"][@"artist"];
+	if (obj) {
+		return [obj description];
+	}
+	return kEmpty;
+}
 
 - (NSArray *)artistsAlbumList
 {
 	id obj = [self.JSON valueForKeyPath:kLFMAlbum_ArtistsAlbumList];
 	if ([obj isKindOfClass:[NSArray class]]) {
-		return obj;
+		NSArray *array = (NSArray *)obj;
+		NSMutableArray *albums = [NSMutableArray arrayWithCapacity:[array count]];
+		for (id album in array) {
+			if ([album isKindOfClass:[NSDictionary class]]) {
+				[albums addObject:[[LFMAlbumTopAlbum alloc] initWithJson:album]];
+			}
+		}
+		return albums;
 	}
 	return nil;
-}
-
-- (NSString *)rankInAllArtistAlbums
-{
-	return [self notNilStringForKeyPath:kLFMAlbum_RankInAllArtistAlbums];
-}
-
-- (NSNumber *)rankInAllArtistAlbumsNumber
-{
-	return [NSNumber numberWithInt:[[self rankInAllArtistAlbums] intValue]];
-}
-
-- (NSString *)artistName
-{
-	return [self notNilStringForKeyPath:kLFMAlbumArtist_Name];
 }
 
 @end

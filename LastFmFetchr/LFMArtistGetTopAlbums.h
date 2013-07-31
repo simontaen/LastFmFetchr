@@ -11,12 +11,8 @@
 @interface LFMArtistGetTopAlbums : LFMData
 
 /// 
-- (NSArray *)artistsAlbumList;
-/// 
-- (NSString *)rankInAllArtistAlbums;
-/// 
-- (NSNumber *)rankInAllArtistAlbumsNumber;
-/// 
 - (NSString *)artistName;
+///	of LFMAlbumTopAlbum's
+- (NSArray *)artistsAlbumList;
 
 @end

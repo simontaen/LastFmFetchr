@@ -177,12 +177,30 @@
 							   success:^(LFMArtistGetTopAlbums *data) {
 								   //NSLog(@"JSON Response was: %@", data.JSON);
 								   NSLog(@"-------------------------------------------------------------------------------");
-								   //NSLog(@"artistsAlbumList %@", [data artistsAlbumList]);
-								   NSLog(@"a album %@", [data artistsAlbumList][0]);
-								   NSDictionary *aAlbum = [data artistsAlbumList][0];
-								   NSLog(@"rankInAllArtistAlbums %@", aAlbum[@"@attr"][@"rank"]);
-								   //NSLog(@"rankInAllArtistAlbumsNumber %@", [data rankInAllArtistAlbumsNumber]);
-								   NSLog(@"artistName %@", aAlbum[@"artist"][@"name"]);
+								   
+								   NSLog(@"artistName %@", [data artistName]);
+								   // of LFMAlbumTopAlbum
+								   NSArray *albums = [data artistsAlbumList];
+								   for (LFMAlbumTopAlbum *album in albums) {
+									   NSLog(@"---------------------- %@ ----------------------", [album name]);
+
+									   NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);
+									   NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbumsNumber]);
+									   
+									   NSLog(@"imageSmall %@", [album imageSmall]);
+									   NSLog(@"imageSmallURL %@", [album imageSmallURL]);
+									   NSLog(@"imageMedium %@", [album imageMedium]);
+									   NSLog(@"imageMediumURL %@", [album imageMediumURL]);
+									   NSLog(@"imageLarge %@", [album imageLarge]);
+									   NSLog(@"imageLargeURL %@", [album imageLargeURL]);
+									   NSLog(@"imageExtraLarge %@", [album imageExtraLarge]);
+									   NSLog(@"imageExtraLargeURL %@", [album imageExtraLargeURL]);
+									   NSLog(@"musicBrianzId %@", [album musicBrianzId]);
+									   NSLog(@"playcount %@", [album playcount]);
+									   NSLog(@"playcountNumber %@", [album playcountNumber]);
+									   NSLog(@"lastFmPage %@", [album lastFmPage]);
+									   NSLog(@"lastFmPageURL %@", [album lastFmPageURL]);
+								   }
 
 								   
 								   NSLog(@"Received TopAlbums by Artist %@", [data artistName]);

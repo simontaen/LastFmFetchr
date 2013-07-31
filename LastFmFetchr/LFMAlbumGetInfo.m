@@ -26,56 +26,6 @@
 	return [NSNumber numberWithLongLong:[[self identification] longLongValue]];
 }
 
-- (NSString *)imageSmall
-{
-	return [self smallImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageSmallURL
-{
-	return [NSURL URLWithString:[self imageSmall]];
-}
-
-- (NSString *)imageMedium
-{
-	return [self mediumImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageMediumURL
-{
-	return [NSURL URLWithString:[self imageMedium]];
-}
-
-- (NSString *)imageLarge
-{
-	return [self largeImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageLargeURL
-{
-	return [NSURL URLWithString:[self imageLarge]];
-}
-
-- (NSString *)imageExtraLarge
-{
-	return [self extraLargeImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageExtraLargeURL
-{
-	return [NSURL URLWithString:[self imageExtraLarge]];
-}
-
-- (NSString *)imageMega
-{
-	return [self megaImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageMegaURL
-{
-	return [NSURL URLWithString:[self imageMega]];
-}
-
 - (NSString *)listeners
 {
 	return [self notNilStringForKeyPath:kLFMAlbumListeners];
@@ -86,24 +36,14 @@
 	return [NSNumber numberWithLongLong:[[self listeners] longLongValue]];
 }
 
-- (NSString *)musicBrianzId
+- (NSString *)imageMega
 {
-	return [self notNilStringForKeyPath:kLFMAlbumMusicBrianzId];
+	return [self megaImageForImageListKeyPath:kLFMAlbumImageList];
 }
 
-- (NSString *)name
+- (NSURL *)imageMegaURL
 {
-	return [self notNilStringForKeyPath:kLFMAlbumName];
-}
-
-- (NSString *)playcount
-{
-	return [self notNilStringForKeyPath:kLFMAlbumPlaycount];
-}
-
-- (NSNumber *)playcountNumber
-{
-	return [NSNumber numberWithLongLong:[[self playcount] longLongValue]];
+	return [NSURL URLWithString:[self imageMega]];
 }
 
 - (NSString *)releasedate
@@ -153,16 +93,6 @@
 	}
 	
 	return tracks;
-}
-
-- (NSString *)lastFmPage
-{
-	return [self notNilStringForKeyPath:kLFMAlbumLastFmPageURL];
-}
-
-- (NSURL *)lastFmPageURL
-{
-	return [NSURL URLWithString:[self lastFmPage]];
 }
 
 - (NSString *)wikiContent

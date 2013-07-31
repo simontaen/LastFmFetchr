@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "LFMArtistsGetInfo.h"
 #import "LFMArtistGetTopAlbums.h"
+#import "LFMAlbum.h"
 #import "LFMAlbumGetInfo.h"
+#import "LFMAlbumTopAlbum.h"
 
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
