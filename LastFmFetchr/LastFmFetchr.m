@@ -407,13 +407,10 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 		
 		// Enable cache
 		SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:24 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
-		/*
-		 NSURLCache *URLCache = [[NSURLCache alloc] init];
-		 [URLCache setMemoryCapacity:8 * 1024 * 1024];
-		 [URLCache setDiskCapacity:24 * 1024 * 1024];
-		 */
+		//NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:24 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
 		[NSURLCache setSharedURLCache:URLCache];
 		NSLog(@"Cache is being logged to: %@", [SDURLCache defaultCachePath]);
+		
 	}
 	return self;
 }
