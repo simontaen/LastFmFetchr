@@ -1,3 +1,3 @@
 pod 'AFNetworking', '~> 1.3.1'
 pod 'SDURLCache', '~> 1.2.0'
-pod 'FCYAsserts', '~> 1.2.0'
+#pod 'FCYAsserts', '~> 1.2.0'

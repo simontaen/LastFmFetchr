@@ -9,7 +9,6 @@
 #import "LastFmFetchr.h"
 #import "AFNetworking.h"
 #import "AFLastFmAPIClient.h"
-#import "FCYAsserts.h"
 #import "SDURLCache.h"
 
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
@@ -113,7 +112,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 						  success:(void (^)(LFMArtistGetInfo *data))success
 						  failure:(LastFmFetchrAPIFailure)failure
 {
-	FCYAssert([artist length] || [mbid length], @"Must provide artist or mbid");
+	NSParameterAssert([artist length] || [mbid length]);
 	
 	// perpare the params
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -155,7 +154,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 							  success:(void (^)(LFMArtistGetTopAlbums *data))success
 							  failure:(LastFmFetchrAPIFailure)failure
 {
-	FCYAssert([artist length] || [mbid length], @"Must provide artist or mbid");
+	NSParameterAssert([artist length] || [mbid length]);
 	
 	// perpare the params
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -199,7 +198,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 						 success:(void (^)(LFMAlbumGetInfo *data))success
 						 failure:(LastFmFetchrAPIFailure)failure;
 {
-	FCYAssert(([artist length] && [album length]) || [mbid length], @"Must provide @[artist,album] or mbid");
+	NSParameterAssert(([artist length] && [album length]) || [mbid length]);
 	
 	// perpare the params
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
