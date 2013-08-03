@@ -1,5 +1,5 @@
 //
-//  LFMArtistsGetInfo.h
+//  LFMArtistGetInfo.h
 //  LastFmFetchr
 //
 //  Created by Simon Tännler on 30/07/13.
@@ -8,7 +8,7 @@
 
 #import "LFMData.h"
 
-@interface LFMArtistsGetInfo : LFMData
+@interface LFMArtistGetInfo : LFMData
 
 /// Never-nil NSString of members of the artist
 - (NSString *)members;

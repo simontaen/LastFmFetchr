@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LFMArtistsGetInfo.h"
+#import "LFMArtistGetInfo.h"
 #import "LFMArtistGetTopAlbums.h"
 #import "LFMAlbum.h"
 #import "LFMAlbumGetInfo.h"
@@ -124,7 +124,7 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
 #pragma mark - Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
-						  success:(void (^)(LFMArtistsGetInfo *data))success
+						  success:(void (^)(LFMArtistGetInfo *data))success
 						  failure:(LastFmFetchrAPIFailure)failure;
 
 // This will just get the first 50 currently

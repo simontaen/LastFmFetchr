@@ -27,7 +27,7 @@
 	for (int i = 0; i < 3; i ++) {
 		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
 													mbid:nil
-												 success:^(LFMArtistsGetInfo *data) {
+												 success:^(LFMArtistGetInfo *data) {
 													 NSLog(@"Received data for Artist %@", [data name]);
 													 NSLog(@"Counter %i", --counter);
 												 }
@@ -49,7 +49,7 @@
 	
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
 							  mbid:nil
-						   success:^(LFMArtistsGetInfo *data) {
+						   success:^(LFMArtistGetInfo *data) {
 							   /*
 								NSLog(@"kLFMArtist_Members %@", [self.JSON valueForKeyPath:kLFMArtist_Members]);
 								NSLog(@"kLFMArtistBio_Content %@", [self.JSON valueForKeyPath:kLFMArtistBio_Content]);

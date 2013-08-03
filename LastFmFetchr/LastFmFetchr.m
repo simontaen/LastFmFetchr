@@ -110,7 +110,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #pragma mark - Artist methods
 - (NSOperation *)getInfoForArtist:(NSString *)artist
 							 mbid:(NSString *)mbid
-						  success:(void (^)(LFMArtistsGetInfo *data))success
+						  success:(void (^)(LFMArtistGetInfo *data))success
 						  failure:(LastFmFetchrAPIFailure)failure
 {
 	FCYAssert([artist length] || [mbid length], @"Must provide artist or mbid");
@@ -128,7 +128,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	}
 	
 #ifndef NDEBUG
-	NSLog(@"LastFmFetchr: Request %@", kLFMMethodArtistGetInfo);
+	NSLog(@"LastFmFetchr: Request %@ (%@)", kLFMMethodArtistGetInfo, artist);
 #endif
 	
 	return [self getPath:@""
@@ -139,7 +139,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 									methodParamValue:kLFMMethodArtistGetInfo
 									  jsonContentKey:kLFMParameterArtist
 											 success:^(NSDictionary *data) {
-												 success([[LFMArtistsGetInfo alloc] initWithJson:data]);
+												 success([[LFMArtistGetInfo alloc] initWithJson:data]);
 											 }
 											 failure:failure];
 				 }
@@ -170,7 +170,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	}
 	
 #ifndef NDEBUG
-	NSLog(@"LastFmFetchr: Request %@", kLFMMethodArtistGetTopAlbums);
+	NSLog(@"LastFmFetchr: Request %@ (%@)", kLFMMethodArtistGetTopAlbums, artist);
 #endif
 	
 	return [self getPath:@""
@@ -217,7 +217,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	}
 	
 #ifndef NDEBUG
-	NSLog(@"LastFmFetchr: Request %@", kLFMMethodAlbumGetInfo);
+	NSLog(@"LastFmFetchr: Request %@ (%@:%@)", kLFMMethodAlbumGetInfo, artist, album);
 #endif
 	
 	return [self getPath:@""

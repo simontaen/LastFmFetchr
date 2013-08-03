@@ -24,7 +24,7 @@
 		F4A7C12B179D7B1F00FB7CC3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A7C12A179D7B1F00FB7CC3 /* Default-568h@2x.png */; };
 		F4A7C12E179D7B1F00FB7CC3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4A7C12C179D7B1F00FB7CC3 /* MainStoryboard.storyboard */; };
 		F4ABF51417A8104000DEF135 /* LFMData.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51317A8104000DEF135 /* LFMData.m */; };
-		F4ABF51817A8108100DEF135 /* LFMArtistsGetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51717A8108100DEF135 /* LFMArtistsGetInfo.m */; };
+		F4ABF51817A8108100DEF135 /* LFMArtistGetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51717A8108100DEF135 /* LFMArtistGetInfo.m */; };
 		F4ABF51B17A810DE00DEF135 /* LFMAlbumGetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51A17A810DE00DEF135 /* LFMAlbumGetInfo.m */; };
 		F4ABF51E17A8111700DEF135 /* LFMArtistGetTopAlbums.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51D17A8111700DEF135 /* LFMArtistGetTopAlbums.m */; };
 		F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ED9CE4179D7BE3007C038B /* LastFmFetchr.m */; };
@@ -56,8 +56,8 @@
 		F4A7C12D179D7B1F00FB7CC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		F4ABF51217A8104000DEF135 /* LFMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMData.h; path = ../../LastFmFetchr/LFMData.h; sourceTree = "<group>"; };
 		F4ABF51317A8104000DEF135 /* LFMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMData.m; path = ../../LastFmFetchr/LFMData.m; sourceTree = "<group>"; };
-		F4ABF51617A8108100DEF135 /* LFMArtistsGetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMArtistsGetInfo.h; path = ../../LastFmFetchr/LFMArtistsGetInfo.h; sourceTree = "<group>"; };
-		F4ABF51717A8108100DEF135 /* LFMArtistsGetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistsGetInfo.m; path = ../../LastFmFetchr/LFMArtistsGetInfo.m; sourceTree = "<group>"; };
+		F4ABF51617A8108100DEF135 /* LFMArtistGetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMArtistGetInfo.h; path = ../../LastFmFetchr/LFMArtistGetInfo.h; sourceTree = "<group>"; };
+		F4ABF51717A8108100DEF135 /* LFMArtistGetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistGetInfo.m; path = ../../LastFmFetchr/LFMArtistGetInfo.m; sourceTree = "<group>"; };
 		F4ABF51917A810DE00DEF135 /* LFMAlbumGetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbumGetInfo.h; path = ../../LastFmFetchr/LFMAlbumGetInfo.h; sourceTree = "<group>"; };
 		F4ABF51A17A810DE00DEF135 /* LFMAlbumGetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMAlbumGetInfo.m; path = ../../LastFmFetchr/LFMAlbumGetInfo.m; sourceTree = "<group>"; };
 		F4ABF51C17A8111700DEF135 /* LFMArtistGetTopAlbums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMArtistGetTopAlbums.h; path = ../../LastFmFetchr/LFMArtistGetTopAlbums.h; sourceTree = "<group>"; };
@@ -147,8 +147,8 @@
 			children = (
 				F4ABF51217A8104000DEF135 /* LFMData.h */,
 				F4ABF51317A8104000DEF135 /* LFMData.m */,
-				F4ABF51617A8108100DEF135 /* LFMArtistsGetInfo.h */,
-				F4ABF51717A8108100DEF135 /* LFMArtistsGetInfo.m */,
+				F4ABF51617A8108100DEF135 /* LFMArtistGetInfo.h */,
+				F4ABF51717A8108100DEF135 /* LFMArtistGetInfo.m */,
 				F4ABF51C17A8111700DEF135 /* LFMArtistGetTopAlbums.h */,
 				F4ABF51D17A8111700DEF135 /* LFMArtistGetTopAlbums.m */,
 				F447077B17A961D600C1D604 /* LFMAlbum.h */,
@@ -279,7 +279,7 @@
 				F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */,
 				F4208E8E179DA12B00790491 /* AFLastFmAPIClient.m in Sources */,
 				F4ABF51417A8104000DEF135 /* LFMData.m in Sources */,
-				F4ABF51817A8108100DEF135 /* LFMArtistsGetInfo.m in Sources */,
+				F4ABF51817A8108100DEF135 /* LFMArtistGetInfo.m in Sources */,
 				F4ABF51B17A810DE00DEF135 /* LFMAlbumGetInfo.m in Sources */,
 				F4ABF51E17A8111700DEF135 /* LFMArtistGetTopAlbums.m in Sources */,
 				F447077D17A961D600C1D604 /* LFMAlbum.m in Sources */,
