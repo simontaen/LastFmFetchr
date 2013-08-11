@@ -14,12 +14,14 @@
 
 - (NSString *)artistName
 {
-	//return [self notNilStringForKeyPath:kLFMAlbumArtist_Name];
+	return [self notNilStringForKeyPath:kLFMAlbumArtist_Name];
+	/*
 	id obj = self.JSON[@"@attr"][@"artist"];
 	if (obj) {
 		return [obj description];
 	}
 	return kEmpty;
+	 */
 }
 
 - (NSArray *)artistsAlbumList

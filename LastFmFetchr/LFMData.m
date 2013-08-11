@@ -13,7 +13,14 @@
 
 - (NSArray *)tagNamesArrayWithTagListKeyPath:(NSString *)tagListKeyPath
 {
-	id obj = [self.JSON valueForKeyPath:tagListKeyPath];
+	id obj = self.JSON;
+	// this is nil value save
+	for (NSString *key in [tagListKeyPath componentsSeparatedByString:@"."]) {
+		if ([obj isKindOfClass:[NSDictionary class]]) {
+			obj = obj[key];
+		}
+	}
+	
 	if (![obj isKindOfClass:[NSArray class]]) {
 		return nil;
 	}
@@ -28,10 +35,14 @@
 
 - (NSArray *)tagURLsArrayWithTagListKeyPath:(NSString *)tagListKeyPath
 {
-	id obj = [self.JSON valueForKeyPath:tagListKeyPath];
-	if (![obj isKindOfClass:[NSArray class]]) {
-		return nil;
+	id obj = self.JSON;
+	// this is nil value save
+	for (NSString *key in [tagListKeyPath componentsSeparatedByString:@"."]) {
+		if ([obj isKindOfClass:[NSDictionary class]]) {
+			obj = obj[key];
+		}
 	}
+	
 	NSArray *array = (NSArray *)obj;
 	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[array count]];
 	
@@ -89,7 +100,16 @@
 
 - (NSString *)notNilStringForKeyPath:(NSString *)keyPath
 {
-	id obj = [self.JSON valueForKeyPath:keyPath];
+	id obj = self.JSON;
+	// this is nil value save
+	for (NSString *key in [keyPath componentsSeparatedByString:@"."]) {
+		if ([obj isKindOfClass:[NSDictionary class]]) {
+			obj = obj[key];
+		} else {
+			return nil;
+		}
+	}
+
 	if (obj) {
 		return [obj description];
 	}

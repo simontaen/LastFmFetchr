@@ -13,12 +13,15 @@
 
 - (NSString *)rankInAllArtistAlbums
 {
-	//return [self notNilStringForKeyPath:kLFMAlbum_RankInAllArtistAlbums];
+	// check the doc on objectForKeyedSubscript: on why this doesn't work
+	return [self notNilStringForKeyPath:kLFMAlbum_RankInAllArtistAlbums];
+	/*
 	id obj = self.JSON[@"@attr"][@"rank"];
 	if (obj) {
 		return [obj description];
 	}
 	return kEmpty;
+	 */
 }
 
 - (NSNumber *)rankInAllArtistAlbumsNumber
