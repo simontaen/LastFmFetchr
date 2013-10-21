@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D5316BAD425D4DB0AF1A9361 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 449EFFBCEB0F48E995AF2770 /* libPods.a */; };
-		F4208E8E179DA12B00790491 /* AFLastFmAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */; };
 		F428593317A55DB60047297B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593217A55DB60047297B /* SystemConfiguration.framework */; };
 		F428593517A55DBD0047297B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593417A55DBD0047297B /* MobileCoreServices.framework */; };
 		F447077D17A961D600C1D604 /* LFMAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = F447077C17A961D600C1D604 /* LFMAlbum.m */; };
@@ -32,8 +31,6 @@
 
 /* Begin PBXFileReference section */
 		449EFFBCEB0F48E995AF2770 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4208E8C179DA12B00790491 /* AFLastFmAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFLastFmAPIClient.h; path = ../../LastFmFetchr/AFLastFmAPIClient.h; sourceTree = "<group>"; };
-		F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFLastFmAPIClient.m; path = ../../LastFmFetchr/AFLastFmAPIClient.m; sourceTree = "<group>"; };
 		F428593217A55DB60047297B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F428593417A55DBD0047297B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F447077B17A961D600C1D604 /* LFMAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbum.h; path = ../../LastFmFetchr/LFMAlbum.h; sourceTree = "<group>"; };
@@ -119,8 +116,6 @@
 		F4A7C11A179D7B1F00FB7CC3 /* LastFmFetchr */ = {
 			isa = PBXGroup;
 			children = (
-				F4208E8C179DA12B00790491 /* AFLastFmAPIClient.h */,
-				F4208E8D179DA12B00790491 /* AFLastFmAPIClient.m */,
 				F4ABF51517A8104C00DEF135 /* Dictinarys  */,
 				F4ED9CE3179D7BE3007C038B /* LastFmFetchr.h */,
 				F4ED9CE4179D7BE3007C038B /* LastFmFetchr.m */,
@@ -277,7 +272,6 @@
 				F4A7C121179D7B1F00FB7CC3 /* main.m in Sources */,
 				F4A7C125179D7B1F00FB7CC3 /* AppDelegate.m in Sources */,
 				F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */,
-				F4208E8E179DA12B00790491 /* AFLastFmAPIClient.m in Sources */,
 				F4ABF51417A8104000DEF135 /* LFMData.m in Sources */,
 				F4ABF51817A8108100DEF135 /* LFMArtistGetInfo.m in Sources */,
 				F4ABF51B17A810DE00DEF135 /* LFMAlbumGetInfo.m in Sources */,
@@ -334,7 +328,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -358,7 +352,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

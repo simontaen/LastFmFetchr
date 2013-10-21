@@ -13,11 +13,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	LastFmFetchr *lastFmFetchr = [LastFmFetchr sharedManager];
+	LastFmFetchr *lastFmFetchr = [LastFmFetchr fetchr];
 	lastFmFetchr.apiKey = @"aed3367b0133ab707cb4e5b6b04da3e7";
 	lastFmFetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
 	
-	NSMutableSet *operations = [NSMutableSet set];
+	NSMutableSet *tasks = [NSMutableSet set];
 	
 	
 	// ------------ Artist calls ------------------
@@ -25,25 +25,25 @@
 	int __block counter = 0;
 	NSLog(@"Counter %i", counter);
 	for (int i = 0; i < 3; i ++) {
-		NSOperation *op = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
-													mbid:nil
-												 success:^(LFMArtistGetInfo *data) {
-													 NSLog(@"Received data for Artist %@", [data name]);
-													 NSLog(@"Counter %i", --counter);
-												 }
-												 failure:^(NSOperation *operation, NSError *error) {
-													 NSLog(@"Error: %@", [lastFmFetchr messageForError:error withOperation:operation]);
-													 NSLog(@"Counter %i", --counter);
-												 }];
+		NSURLSessionDataTask *task = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
+															   mbid:nil
+															success:^(LFMArtistGetInfo *data) {
+																NSLog(@"Received data for Artist %@", [data name]);
+																NSLog(@"Counter %i", --counter);
+															}
+															failure:^(NSURLSessionDataTask *task, NSError *error) {
+																NSLog(@"Error: %@", [lastFmFetchr messageForError:error withTask:task]);
+																NSLog(@"Counter %i", --counter);
+															}];
 		NSLog(@"Counter %i", ++counter);
 		if (i % 2 == 0) {
-			[operations addObject:op];
+			[tasks addObject:task];
 		}
 	}
 	
-	for (NSOperation *op in operations) {
-		[op cancel];
-		NSLog(@"Cancelled operation");
+	for (NSURLSessionDataTask *task in tasks) {
+		[task cancel];
+		NSLog(@"Cancelled task");
 		NSLog(@"Counter %i", --counter);
 	}
 	
@@ -116,8 +116,8 @@
 							   NSLog(@"Received data for Artist %@", [data name]);
 							   NSLog(@"Counter %i", --counter);
 						   }
-						   failure:^(NSOperation *operation, NSError *error) {
-							   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withOperation:operation]);
+						   failure:^(NSURLSessionDataTask *task, NSError *error) {
+							   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withTask:task]);
 							   NSLog(@"Counter %i", --counter);
 						   }];
 	NSLog(@"Counter %i", ++counter);
@@ -166,8 +166,8 @@
 							  NSLog(@"Received data for Album %@ by Artist %@", [data name], [data artistName]);
 							  NSLog(@"Counter %i", --counter);
 						  }
-						  failure:^(NSOperation *operation, NSError *error) {
-							  NSLog(@"Error: %@", [lastFmFetchr messageForError:error withOperation:operation]);
+						  failure:^(NSURLSessionDataTask *task, NSError *error) {
+							  NSLog(@"Error: %@", [lastFmFetchr messageForError:error withTask:task]);
 							  NSLog(@"Counter %i", --counter);
 						  }];
 	NSLog(@"Counter %i", ++counter);
@@ -183,7 +183,7 @@
 								   NSArray *albums = [data artistsAlbumList];
 								   for (LFMAlbumTopAlbum *album in albums) {
 									   NSLog(@"---------------------- %@ ----------------------", [album name]);
-
+									   
 									   NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);
 									   NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbumsNumber]);
 									   
@@ -201,14 +201,14 @@
 									   NSLog(@"lastFmPage %@", [album lastFmPage]);
 									   NSLog(@"lastFmPageURL %@", [album lastFmPageURL]);
 								   }
-
+								   
 								   
 								   NSLog(@"Received TopAlbums by Artist %@", [data artistName]);
 								   NSLog(@"Counter %i", --counter);
 								   
 							   }
-							   failure:^(NSOperation *operation, NSError *error) {
-								   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withOperation:operation]);
+							   failure:^(NSURLSessionDataTask *task, NSError *error) {
+								   NSLog(@"Error: %@", [lastFmFetchr messageForError:error withTask:task]);
 								   NSLog(@"Counter %i", --counter);
 							   }];
 	NSLog(@"Counter %i", ++counter);

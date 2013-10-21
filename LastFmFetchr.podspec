@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '6.0'
   s.source_files = 'LastFmFetchr/*'
   s.requires_arc = true
-  s.dependency 'AFNetworking', '~> 1.3.1'
-  s.dependency 'SDURLCache', '~> 1.2.0'
-  s.dependency 'FCYAsserts', '~> 1.2.0'
+  s.dependency 'AFNetworking', '~> 2.0'
+  s.dependency 'KZPropertyMapper', '~> 2.0'
+  s.dependency 'FCYAsserts', '~> 1.2'
 end

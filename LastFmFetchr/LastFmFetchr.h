@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPSessionManager.h"
+
 #import "LFMArtistGetInfo.h"
 #import "LFMArtistGetTopAlbums.h"
 #import "LFMAlbum.h"
@@ -100,10 +102,10 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 // ----------------------------------------------------------------------
 // Block handler typedefs
 // ----------------------------------------------------------------------
-typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
+typedef void (^LastFmFetchrAPIFailure)(NSURLSessionDataTask *task, NSError *error);
 
 
-@interface LastFmFetchr : NSObject
+@interface LastFmFetchr : AFHTTPSessionManager
 
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *apiKey;
@@ -122,41 +124,41 @@ typedef void (^LastFmFetchrAPIFailure)(NSOperation *operation, NSError *error);
  */
 
 #pragma mark - Artist methods
-- (NSOperation *)getInfoForArtist:(NSString *)artist
-							 mbid:(NSString *)mbid
-						  success:(void (^)(LFMArtistGetInfo *data))success
-						  failure:(LastFmFetchrAPIFailure)failure;
+- (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
+									  mbid:(NSString *)mbid
+								   success:(void (^)(LFMArtistGetInfo *data))success
+								   failure:(LastFmFetchrAPIFailure)failure;
 
 // This will just get the first 50 currently
 // You COULD accept explicit success handlers that return NSDictionary subclasses
 // that only allow valid methods on the returned object.
 // The keys could be reused behind the scences and the curious ones could still use them
-- (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
-								 mbid:(NSString *)mbid
-							  success:(void (^)(LFMArtistGetTopAlbums *data))success
-							  failure:(LastFmFetchrAPIFailure)failure;
+- (NSURLSessionDataTask *)getAllAlbumsByArtist:(NSString *)artist
+										  mbid:(NSString *)mbid
+									   success:(void (^)(LFMArtistGetTopAlbums *data))success
+									   failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Album methods
-- (NSOperation *)getInfoForAlbum:(NSString *)album
-						byArtist:(NSString *)artist
-							mbid:(NSString *)mbid
-						 success:(void (^)(LFMAlbumGetInfo *data))success
-						 failure:(LastFmFetchrAPIFailure)failure;
+- (NSURLSessionDataTask *)getInfoForAlbum:(NSString *)album
+								 byArtist:(NSString *)artist
+									 mbid:(NSString *)mbid
+								  success:(void (^)(LFMAlbumGetInfo *data))success
+								  failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Requests Management
 
-/// Cancels all requests that are currently queued or being executed
-- (void)cancelAllRequests;
+/// Cancels all tasks that are currently run
+- (void)cancelAllTasks;
 
 #pragma mark - Error Handling
 
 /// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
-- (NSString *)messageForError:(NSError *)error withOperation:(id)response;
+- (NSString *)messageForError:(NSError *)error withTask:(NSURLSessionDataTask *)task;
 
 #pragma mark - Singleton Methods
 
 /// Initializes and returns the LastFmFetchr singleton object
 /// @return The singleton object
-+ (instancetype)sharedManager;
++ (instancetype)fetchr;
 
 @end

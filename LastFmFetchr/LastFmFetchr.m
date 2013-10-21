@@ -8,8 +8,6 @@
 
 #import "LastFmFetchr.h"
 #import "AFNetworking.h"
-#import "AFLastFmAPIClient.h"
-#import "SDURLCache.h"
 
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
 
@@ -93,11 +91,9 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 @interface LastFmFetchr ()
 {
-	// The client to talk the Last.fm
-	AFLastFmAPIClient *lastFmApiClient;
-	// probably not needed
+	// TODO: probably not needed
 	NSUserDefaults *userDefaults;
-	// probably not needed
+	// TODO: probably not needed
 	dispatch_queue_t async_queue;
 }
 @end
@@ -107,10 +103,10 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #pragma mark - API calls
 
 #pragma mark - Artist methods
-- (NSOperation *)getInfoForArtist:(NSString *)artist
-							 mbid:(NSString *)mbid
-						  success:(void (^)(LFMArtistGetInfo *data))success
-						  failure:(LastFmFetchrAPIFailure)failure
+- (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
+									  mbid:(NSString *)mbid
+								   success:(void (^)(LFMArtistGetInfo *data))success
+								   failure:(LastFmFetchrAPIFailure)failure
 {
 	NSParameterAssert([artist length] || [mbid length]);
 	
@@ -130,29 +126,31 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	NSLog(@"LastFmFetchr: Request %@ (%@)", kLFMMethodArtistGetInfo, artist);
 #endif
 	
-	return [self getPath:@""
-			  parameters:[self addDefaultParameters:params]
-				 success:^(AFHTTPRequestOperation *operation, id JSON) {
-					 [self handleAFNetworkingSuccess:JSON
-										   operation:operation
-									methodParamValue:kLFMMethodArtistGetInfo
-									  jsonContentKey:kLFMParameterArtist
-											 success:^(NSDictionary *data) {
-												 success([[LFMArtistGetInfo alloc] initWithJson:data]);
-											 }
-											 failure:failure];
-				 }
-				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-					 [self handleAFNetworkingFailure:error
-										   operation:operation
-											 failure:failure];
-				 }];
+	NSURLSessionDataTask *task = [self GET:@""
+								parameters:[self addDefaultParameters:params]
+								   success:^(NSURLSessionDataTask *task, id JSON) {
+									   [self handleAFNetworkingSuccess:JSON
+																  task:task
+													  methodParamValue:kLFMMethodArtistGetInfo
+														jsonContentKey:kLFMParameterArtist
+															   success:^(NSDictionary *data) {
+																   success([[LFMArtistGetInfo alloc] initWithJson:data]);
+															   }
+															   failure:failure];
+								   }
+								   failure:^(NSURLSessionDataTask *task, NSError *error) {
+									   [self handleAFNetworkingFailure:error
+																  task:task
+															   failure:failure];
+								   }];
+	[task resume];
+	return task;
 }
 
-- (NSOperation *)getAllAlbumsByArtist:(NSString *)artist
-								 mbid:(NSString *)mbid
-							  success:(void (^)(LFMArtistGetTopAlbums *data))success
-							  failure:(LastFmFetchrAPIFailure)failure
+- (NSURLSessionDataTask *)getAllAlbumsByArtist:(NSString *)artist
+										  mbid:(NSString *)mbid
+									   success:(void (^)(LFMArtistGetTopAlbums *data))success
+									   failure:(LastFmFetchrAPIFailure)failure
 {
 	NSParameterAssert([artist length] || [mbid length]);
 	
@@ -172,31 +170,33 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	NSLog(@"LastFmFetchr: Request %@ (%@)", kLFMMethodArtistGetTopAlbums, artist);
 #endif
 	
-	return [self getPath:@""
-			  parameters:[self addDefaultParameters:params]
-				 success:^(AFHTTPRequestOperation *operation, id JSON) {
-					 [self handleAFNetworkingSuccess:JSON
-										   operation:operation
-									methodParamValue:kLFMMethodArtistGetTopAlbums
-									  jsonContentKey:@"topalbums"
-											 success:^(NSDictionary *data) {
-												 success([[LFMArtistGetTopAlbums alloc] initWithJson:data]);
-											 }
-											 failure:failure];
-				 }
-				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-					 [self handleAFNetworkingFailure:error
-										   operation:operation
-											 failure:failure];
-				 }];
+	NSURLSessionDataTask *task = [self GET:@""
+								parameters:[self addDefaultParameters:params]
+								   success:^(NSURLSessionDataTask *task, id JSON) {
+									   [self handleAFNetworkingSuccess:JSON
+																  task:task
+													  methodParamValue:kLFMMethodArtistGetTopAlbums
+														jsonContentKey:@"topalbums"
+															   success:^(NSDictionary *data) {
+																   success([[LFMArtistGetTopAlbums alloc] initWithJson:data]);
+															   }
+															   failure:failure];
+								   }
+								   failure:^(NSURLSessionDataTask *task, NSError *error) {
+									   [self handleAFNetworkingFailure:error
+																  task:task
+															   failure:failure];
+								   }];
+	[task resume];
+	return task;
 }
 
 #pragma mark - Album methods
-- (NSOperation *)getInfoForAlbum:(NSString *)album
-						byArtist:(NSString *)artist
-							mbid:(NSString *)mbid
-						 success:(void (^)(LFMAlbumGetInfo *data))success
-						 failure:(LastFmFetchrAPIFailure)failure;
+- (NSURLSessionDataTask *)getInfoForAlbum:(NSString *)album
+								 byArtist:(NSString *)artist
+									 mbid:(NSString *)mbid
+								  success:(void (^)(LFMAlbumGetInfo *data))success
+								  failure:(LastFmFetchrAPIFailure)failure;
 {
 	NSParameterAssert(([artist length] && [album length]) || [mbid length]);
 	
@@ -219,43 +219,45 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	NSLog(@"LastFmFetchr: Request %@ (%@:%@)", kLFMMethodAlbumGetInfo, artist, album);
 #endif
 	
-	return [self getPath:@""
-			  parameters:[self addDefaultParameters:params]
-				 success:^(AFHTTPRequestOperation *operation, id JSON) {
-					 [self handleAFNetworkingSuccess:JSON
-										   operation:operation
-									methodParamValue:kLFMMethodAlbumGetInfo
-									  jsonContentKey:kLFMParameterAlbum
-											 success:^(NSDictionary *data) {
-												 success([[LFMAlbumGetInfo alloc] initWithJson:data]);
-											 }
-											 failure:failure];
-				 }
-				 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-					 [self handleAFNetworkingFailure:error
-										   operation:operation
-											 failure:failure];
-				 }];
+	NSURLSessionDataTask *task = [self GET:@""
+								parameters:[self addDefaultParameters:params]
+								   success:^(NSURLSessionDataTask *task, id JSON) {
+									   [self handleAFNetworkingSuccess:JSON
+																  task:task
+													  methodParamValue:kLFMMethodAlbumGetInfo
+														jsonContentKey:kLFMParameterAlbum
+															   success:^(NSDictionary *data) {
+																   success([[LFMAlbumGetInfo alloc] initWithJson:data]);
+															   }
+															   failure:failure];
+								   }
+								   failure:^(NSURLSessionDataTask *task, NSError *error) {
+									   [self handleAFNetworkingFailure:error
+																  task:task
+															   failure:failure];
+								   }];
+	[task resume];
+	return task;
 }
 
 # pragma mark - AFNetworking handlers
 
 /// called when AFNetworking comes back with a success
 - (void)handleAFNetworkingSuccess:(id)JSON
-						operation:(AFHTTPRequestOperation *)operation
+							 task:(NSURLSessionDataTask *)task
 				 methodParamValue:(NSString *)methodParamValue
 				   jsonContentKey:(NSString *)jsonContentKey
 						  success:(void (^)(NSDictionary *data))success
 						  failure:(LastFmFetchrAPIFailure)failure
 {
-	if (!operation.isCancelled) {
+	if ([task state] != NSURLSessionTaskStateCanceling) {
 		if ([JSON isKindOfClass:[NSDictionary class]]) {
 			
 			if (JSON[kLFMSericeErrorCode]) {
 				NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
 															code:[JSON[kLFMSericeErrorCode] intValue]
 														userInfo:@{ NSLocalizedDescriptionKey : JSON[kLFMSericeErrorMessage], kLFMParameterMethod : methodParamValue}];
-				failure(operation, error);
+				failure(task, error);
 			} else {
 				if (jsonContentKey) {
 					success((NSDictionary *)(JSON[jsonContentKey]));
@@ -268,33 +270,33 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 			NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
 														code:0
 													userInfo:@{ NSLocalizedDescriptionKey : @"Invalid service response", kLFMParameterMethod : kLFMMethodArtistGetInfo}];
-			failure(operation, error);
+			failure(task, error);
 		}
 	}
 }
 
 /// called when AFNetworking comes back with a failure
 - (void)handleAFNetworkingFailure:(NSError *)error
-						operation:(AFHTTPRequestOperation *)operation
+							 task:(NSURLSessionDataTask *)task
 						  failure:(LastFmFetchrAPIFailure)failure
 {
-	if (!operation.isCancelled) failure(operation, error);
+	if ([task state] != NSURLSessionTaskStateCanceling) failure(task, error);
 }
 
 #pragma mark - Error Handling
 
 /// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
-- (NSString *)messageForError:(NSError *)error withOperation:(NSOperation *)operation
+- (NSString *)messageForError:(NSError *)error withTask:(NSURLSessionDataTask *)task
 {
 	NSString *errorMsg = @"";
-	if ([operation isKindOfClass:[AFHTTPRequestOperation class]]) {
-		
-		int statusCode = ((AFHTTPRequestOperation *)operation).response.statusCode;
+	NSURLResponse *response = task.response;
+	if ([response isKindOfClass:[NSURLResponse class]]) {
+		int statusCode = ((NSHTTPURLResponse *)response).statusCode;
 		errorMsg = [NSHTTPURLResponse localizedStringForStatusCode:statusCode];
 		errorMsg = [errorMsg stringByAppendingFormat:@" (code %d). ", statusCode];
-		
 	}
-	
+
+	// TODO: this probably won't work correctly
 	errorMsg = [errorMsg stringByAppendingString:error.localizedDescription];
 	
 	NSString *method = error.userInfo[kLFMParameterMethod];
@@ -310,57 +312,20 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 #pragma mark - Requests Management
 
-/// Cancels all requests that are currently queued or being executed
-- (void)cancelAllRequests
+/// Cancels all tasks that are currently run
+- (void)cancelAllTasks
 {
-	[lastFmApiClient cancelAllHTTPOperationsWithMethod:nil path:nil];
-}
-
-# pragma mark - Private Methods
-
-/// DO NOT modify the operation returned, very possible race-condition, see https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
-- (AFHTTPRequestOperation *)getPath:(NSString *)path
-						 parameters:(NSDictionary *)parameters
-							success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-							failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
-	// using the decomposed convenience method from the AFHTTPClient
-	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"GET" path:path parameters:parameters];
-    AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure];
-	/*
-	 actually is a registerHTTPOperationClass
-	 AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
-	 For all the delegate methods it provides a block property which gets called if set.
-	 You would do something like http://blackpixel.com/blog/2012/05/caching-and-nsurlconnection.html here
-	 operation setCacheResponseBlock:
-	 */
-    [lastFmApiClient enqueueHTTPRequestOperation:operation];
-	return operation;
-}
-
-/// DO NOT modify the operation returned, very possible race-condition, see https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
-- (AFHTTPRequestOperation *)postPath:(NSString *)path
-						  parameters:(NSDictionary *)parameters
-							 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-							 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
-	// using the decomposed convenience method from the AFHTTPClient
-	NSURLRequest *request = [lastFmApiClient requestWithMethod:@"POST" path:path parameters:parameters];
-	AFHTTPRequestOperation *operation = [lastFmApiClient HTTPRequestOperationWithRequest:request success:success failure:failure];
-	/*
-	 actually is a registerHTTPOperationClass
-	 AFHTTPRequestOperation's superclass AFURLConnectionOperation is the NSURLConnectionDelegate.
-	 For all the delegate methods it provides a block property which gets called if set.
-	 You would do something like http://blackpixel.com/blog/2012/05/caching-and-nsurlconnection.html here
-	 operation setCacheResponseBlock:
-	 */
-    [lastFmApiClient enqueueHTTPRequestOperation:operation];
-	return  operation;
+	for (NSURLSessionTask *task in self.tasks) {
+		[task cancel];
+	}
 }
 
 /// add default request parameters (format, api_key)
 - (NSDictionary *)addDefaultParameters:(NSMutableDictionary *)parameters
 {
+	
+	// TODO: This can be refactored! DO NOT NEED!
+	
 	// Check if we have an API key set,
 	[self checkForAPIKey];
 	
@@ -390,29 +355,39 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 # pragma mark - Singleton Methods
 
-+ (instancetype)sharedManager
++ (instancetype)fetchr
 {
-	static LastFmFetchr *_sharedManager;
+	static LastFmFetchr *_fetchr = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		_sharedManager = [[self alloc] init];
+		
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        [config setHTTPAdditionalHeaders:@{ @"User-Agent" : @"LastFmFetchr/0.0.1 (iOS) AFNetworking/2.0.x"}];
+		// Accept HTTP Header? @{ @"Accept" : @"application/json"}
+        
+        NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024
+                                                          diskCapacity:50 * 1024 * 1024
+                                                              diskPath:nil];
+        [config setURLCache:cache];
+        
+        _fetchr = [[LastFmFetchr alloc] initWithBaseURL:[NSURL URLWithString:@"http://ws.audioscrobbler.com/2.0/"]
+								   sessionConfiguration:config];
+		
+		// Request Serializer
+		// http://www.last.fm/api/intro
+		// http://www.last.fm/api/rest
+		AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+		requestSerializer.stringEncoding = NSUTF8StringEncoding;
+		_fetchr.requestSerializer = requestSerializer;
+		
+		// Use JSON API
+		AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
+		responseSerializer.stringEncoding = NSUTF8StringEncoding;
+        _fetchr.responseSerializer = responseSerializer;
+		
+		
 	});
-	return _sharedManager;
-}
-
-- (id)init {
-	if (self = [super init]) {
-		// Init code here
-		lastFmApiClient = [AFLastFmAPIClient sharedClient];
-		
-		// Enable cache
-		SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:24 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
-		//NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:8 * 1024 * 1024 diskCapacity:24 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
-		[NSURLCache setSharedURLCache:URLCache];
-		NSLog(@"Cache is being logged to: %@", [SDURLCache defaultCachePath]);
-		
-	}
-	return self;
+	return _fetchr;
 }
 
 @end
