@@ -6,6 +6,7 @@ Code.todo
 	* Response serializer ok? @done
 	* Request searializer ok? @done
 * [Check this to avoid manual parsing code](http://www.merowing.info/2013/07/stop-writing-data-parsing-code-in-your-apps)
+* Think about just one completion handler like [here](http://nsscreencast.com/episodes/91-afnetworking-2-0)
 * Comment style refactoring using [this xcode plugin](https://github.com/onevcat/VVDocumenter-Xcode)
 * Check if NSURLCache is working
 * Draw the UI for the App FIRST!

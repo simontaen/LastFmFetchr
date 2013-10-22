@@ -178,6 +178,7 @@
 								   //NSLog(@"JSON Response was: %@", data.JSON);
 								   NSLog(@"-------------------------------------------------------------------------------");
 								   
+								   NSLog(@"artistName2 %@", data.artistName2 );
 								   NSLog(@"artistName %@", [data artistName]);
 								   // of LFMAlbumTopAlbum
 								   NSArray *albums = [data artistsAlbumList];

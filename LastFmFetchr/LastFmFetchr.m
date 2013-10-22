@@ -129,19 +129,19 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	NSURLSessionDataTask *task = [self GET:@""
 								parameters:[self addDefaultParameters:params]
 								   success:^(NSURLSessionDataTask *task, id JSON) {
-									   [self handleAFNetworkingSuccess:JSON
-																  task:task
-													  methodParamValue:kLFMMethodArtistGetInfo
-														jsonContentKey:kLFMParameterArtist
-															   success:^(NSDictionary *data) {
-																   success([[LFMArtistGetInfo alloc] initWithJson:data]);
-															   }
-															   failure:failure];
+									   [self handleRequestSuccess:JSON
+															 task:task
+												 methodParamValue:kLFMMethodArtistGetInfo
+												   jsonContentKey:kLFMParameterArtist
+														  success:^(NSDictionary *data) {
+															  success([[LFMArtistGetInfo alloc] initWithJson:data]);
+														  }
+														  failure:failure];
 								   }
 								   failure:^(NSURLSessionDataTask *task, NSError *error) {
-									   [self handleAFNetworkingFailure:error
-																  task:task
-															   failure:failure];
+									   [self handleRequestFailure:error
+															 task:task
+														  failure:failure];
 								   }];
 	[task resume];
 	return task;
@@ -173,19 +173,19 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	NSURLSessionDataTask *task = [self GET:@""
 								parameters:[self addDefaultParameters:params]
 								   success:^(NSURLSessionDataTask *task, id JSON) {
-									   [self handleAFNetworkingSuccess:JSON
-																  task:task
-													  methodParamValue:kLFMMethodArtistGetTopAlbums
-														jsonContentKey:@"topalbums"
-															   success:^(NSDictionary *data) {
-																   success([[LFMArtistGetTopAlbums alloc] initWithJson:data]);
-															   }
-															   failure:failure];
+									   [self handleRequestSuccess:JSON
+															 task:task
+												 methodParamValue:kLFMMethodArtistGetTopAlbums
+												   jsonContentKey:@"topalbums"
+														  success:^(NSDictionary *data) {
+															  success([[LFMArtistGetTopAlbums alloc] initWithJson:data]);
+														  }
+														  failure:failure];
 								   }
 								   failure:^(NSURLSessionDataTask *task, NSError *error) {
-									   [self handleAFNetworkingFailure:error
-																  task:task
-															   failure:failure];
+									   [self handleRequestFailure:error
+															 task:task
+														  failure:failure];
 								   }];
 	[task resume];
 	return task;
@@ -222,19 +222,19 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	NSURLSessionDataTask *task = [self GET:@""
 								parameters:[self addDefaultParameters:params]
 								   success:^(NSURLSessionDataTask *task, id JSON) {
-									   [self handleAFNetworkingSuccess:JSON
-																  task:task
-													  methodParamValue:kLFMMethodAlbumGetInfo
-														jsonContentKey:kLFMParameterAlbum
-															   success:^(NSDictionary *data) {
-																   success([[LFMAlbumGetInfo alloc] initWithJson:data]);
-															   }
-															   failure:failure];
+									   [self handleRequestSuccess:JSON
+															 task:task
+												 methodParamValue:kLFMMethodAlbumGetInfo
+												   jsonContentKey:kLFMParameterAlbum
+														  success:^(NSDictionary *data) {
+															  success([[LFMAlbumGetInfo alloc] initWithJson:data]);
+														  }
+														  failure:failure];
 								   }
 								   failure:^(NSURLSessionDataTask *task, NSError *error) {
-									   [self handleAFNetworkingFailure:error
-																  task:task
-															   failure:failure];
+									   [self handleRequestFailure:error
+															 task:task
+														  failure:failure];
 								   }];
 	[task resume];
 	return task;
@@ -242,23 +242,38 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 # pragma mark - AFNetworking handlers
 
-/// called when AFNetworking comes back with a success
-- (void)handleAFNetworkingSuccess:(id)JSON
-							 task:(NSURLSessionDataTask *)task
-				 methodParamValue:(NSString *)methodParamValue
-				   jsonContentKey:(NSString *)jsonContentKey
-						  success:(void (^)(NSDictionary *data))success
-						  failure:(LastFmFetchrAPIFailure)failure
+/**
+ *  Called when the session task calls its success callback (request comes back successfully). Does very
+ *  basic error handling to make sure the the actual success callback only gets called when there is content.
+ *  TODO: you might be able to fetch the methodParamValue from the task
+ *
+ *  @param JSON             the pure JSON coming from the API
+ *  @param task             the task executing the request
+ *  @param methodParamValue the method that was called on the API
+ *  @param success          the success callback to call
+ *  @param failure          the failure callback to call
+ */
+- (void)handleRequestSuccess:(id)JSON
+						task:(NSURLSessionDataTask *)task
+			methodParamValue:(NSString *)methodParamValue
+			  jsonContentKey:(NSString *)jsonContentKey
+					 success:(void (^)(NSDictionary *data))success
+					 failure:(LastFmFetchrAPIFailure)failure
 {
 	if ([task state] != NSURLSessionTaskStateCanceling) {
-		if ([JSON isKindOfClass:[NSDictionary class]]) {
-			
+		
+		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
+		
+		if ([JSON isKindOfClass:[NSDictionary class]] && httpResponse.statusCode == 200) {
+			// So far so good
 			if (JSON[kLFMSericeErrorCode]) {
+				// still an error
 				NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
 															code:[JSON[kLFMSericeErrorCode] intValue]
 														userInfo:@{ NSLocalizedDescriptionKey : JSON[kLFMSericeErrorMessage], kLFMParameterMethod : methodParamValue}];
 				failure(task, error);
 			} else {
+				// now we are actually fine
 				if (jsonContentKey) {
 					success((NSDictionary *)(JSON[jsonContentKey]));
 				} else {
@@ -267,20 +282,31 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 			}
 			
 		} else {
+			// API behaves weird, I don't even know what is going on now.
+			NSString *errorDesc = [NSString stringWithFormat:@"Invalid service response, HTTP %d", httpResponse.statusCode];
 			NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
 														code:0
-													userInfo:@{ NSLocalizedDescriptionKey : @"Invalid service response", kLFMParameterMethod : kLFMMethodArtistGetInfo}];
+													userInfo:@{ NSLocalizedDescriptionKey : errorDesc, kLFMParameterMethod : methodParamValue}];
 			failure(task, error);
 		}
 	}
+	// If the task is canceling, I assume you don't even care about the request anymore
 }
 
-/// called when AFNetworking comes back with a failure
-- (void)handleAFNetworkingFailure:(NSError *)error
-							 task:(NSURLSessionDataTask *)task
-						  failure:(LastFmFetchrAPIFailure)failure
+/**
+ *  Called when the session task calls its failure callback (request comes back with a failure).
+ *
+ *  @param error   the error coming from the API
+ *  @param task    the task executing the request
+ *  @param failure the failure callback to call
+ */
+- (void)handleRequestFailure:(NSError *)error
+						task:(NSURLSessionDataTask *)task
+					 failure:(LastFmFetchrAPIFailure)failure
 {
+	// TODO: This probably needs more work, or might even be obsolete
 	if ([task state] != NSURLSessionTaskStateCanceling) failure(task, error);
+	// If the task is canceling, I assume you don't even care about the request anymore
 }
 
 #pragma mark - Error Handling
@@ -312,7 +338,9 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 #pragma mark - Requests Management
 
-/// Cancels all tasks that are currently run
+/**
+ *  Cancels all tasks that are currently run
+ */
 - (void)cancelAllTasks
 {
 	for (NSURLSessionTask *task in self.tasks) {
@@ -320,7 +348,13 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	}
 }
 
-/// add default request parameters (format, api_key)
+/**
+ *  Add default request parameters
+ *
+ *  @param parameters given parameters
+ *
+ *  @return given parameters plus "format" and "api_key"
+ */
 - (NSDictionary *)addDefaultParameters:(NSMutableDictionary *)parameters
 {
 	
@@ -339,7 +373,9 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	return parameters;
 }
 
-/// Check for an empty API key
+/**
+ *  Check for an empty API key
+ */
 - (void)checkForAPIKey
 {
 	static dispatch_once_t onceToken;
@@ -384,7 +420,6 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 		AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
 		responseSerializer.stringEncoding = NSUTF8StringEncoding;
         _fetchr.responseSerializer = responseSerializer;
-		
 		
 	});
 	return _fetchr;

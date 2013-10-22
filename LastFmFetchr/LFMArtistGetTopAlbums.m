@@ -9,8 +9,23 @@
 #import "LFMArtistGetTopAlbums.h"
 #import "LastFmFetchr.h"
 #import "LFMAlbumTopAlbum.h"
+#import "KZPropertyMapper.h"
 
 @implementation LFMArtistGetTopAlbums
+
+- (instancetype)initWithJson:(NSDictionary *)JSON {
+    self = [super initWithJson:JSON];
+    if (self) {
+		[KZPropertyMapper mapValuesFrom:JSON
+							 toInstance:self
+						   usingMapping:@{
+										  @"@attr" : @{
+												  @"artist" : KZProperty(artistName2)
+												  }
+										  }];
+    }
+    return self;
+}
 
 - (NSString *)artistName
 {

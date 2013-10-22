@@ -102,6 +102,10 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 // ----------------------------------------------------------------------
 // Block handler typedefs
 // ----------------------------------------------------------------------
+// TODO: Who cares about the task in a failure case? Won't one completion handler just suffice?
+// the caller actually gets it returned AND I can return it in both success and failure case, definitly refactor!
+// Much simpler only having one!
+// Also see: http://nsscreencast.com/episodes/91-afnetworking-2-0
 typedef void (^LastFmFetchrAPIFailure)(NSURLSessionDataTask *task, NSError *error);
 
 
