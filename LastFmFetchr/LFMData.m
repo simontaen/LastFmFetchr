@@ -8,6 +8,7 @@
 
 #import "LFMData.h"
 #import "LastFmFetchr.h"
+#import "KZPropertyMapper.h"
 
 @implementation LFMData
 
@@ -121,6 +122,7 @@
 	self = [super init];
 	if (self) {
 		_JSON = JSON;
+		[KZPropertyMapper logIgnoredValues:NO];
 	}
 	return self;
 }

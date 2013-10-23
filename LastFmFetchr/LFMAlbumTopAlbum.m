@@ -8,25 +8,22 @@
 
 #import "LFMAlbumTopAlbum.h"
 #import "LastFmFetchr.h"
+#import "KZPropertyMapper.h"
 
 @implementation LFMAlbumTopAlbum
 
-- (NSString *)rankInAllArtistAlbums
-{
-	// check the doc on objectForKeyedSubscript: on why this doesn't work
-	return [self notNilStringForKeyPath:kLFMAlbum_RankInAllArtistAlbums];
-	/*
-	id obj = self.JSON[@"@attr"][@"rank"];
-	if (obj) {
-		return [obj description];
-	}
-	return kEmpty;
-	 */
-}
-
-- (NSNumber *)rankInAllArtistAlbumsNumber
-{
-	return [NSNumber numberWithInt:[[self rankInAllArtistAlbums] intValue]];
+- (instancetype)initWithJson:(NSDictionary *)JSON {
+    self = [super initWithJson:JSON];
+    if (self) {
+		[KZPropertyMapper mapValuesFrom:JSON
+							 toInstance:self
+						   usingMapping:@{
+										  @"@attr" : @{
+												  @"rank" : KZProperty(rankInAllArtistAlbums)
+												  }
+										  }];
+    }
+    return self;
 }
 
 @end

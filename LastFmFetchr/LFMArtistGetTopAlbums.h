@@ -10,11 +10,8 @@
 
 @interface LFMArtistGetTopAlbums : LFMData
 
-@property (nonatomic, strong) NSString *artistName2;
-
-/// 
-- (NSString *)artistName;
+@property (nonatomic, strong) NSString *artist;
 ///	of LFMAlbumTopAlbum's
-- (NSArray *)artistsAlbumList;
+@property (nonatomic, strong) NSArray *albums;
 
 @end

@@ -17,13 +17,14 @@
 	lastFmFetchr.apiKey = @"aed3367b0133ab707cb4e5b6b04da3e7";
 	lastFmFetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
 	
-	NSMutableSet *tasks = [NSMutableSet set];
-	
 	
 	// ------------ Artist calls ------------------
 	
 	int __block counter = 0;
 	NSLog(@"Counter %i", counter);
+	/*
+	NSMutableSet *tasks = [NSMutableSet set];
+	 
 	for (int i = 0; i < 3; i ++) {
 		NSURLSessionDataTask *task = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
 															   mbid:nil
@@ -41,15 +42,20 @@
 		}
 	}
 	
+	
 	for (NSURLSessionDataTask *task in tasks) {
 		[task cancel];
 		NSLog(@"Cancelled task");
 		NSLog(@"Counter %i", --counter);
 	}
+	 */
 	
 	[lastFmFetchr getInfoForArtist:@"Pink Floyd"
 							  mbid:nil
 						   success:^(LFMArtistGetInfo *data) {
+							   //NSLog(@"JSON Response was: %@", data.JSON);
+							   NSLog(@"------------------------------ getInfoForArtist -----------------------------------");
+
 							   /*
 								NSLog(@"kLFMArtist_Members %@", [self.JSON valueForKeyPath:kLFMArtist_Members]);
 								NSLog(@"kLFMArtistBio_Content %@", [self.JSON valueForKeyPath:kLFMArtistBio_Content]);
@@ -129,40 +135,44 @@
 						 byArtist:@"AC/DC"
 							 mbid:nil
 						  success:^(LFMAlbumGetInfo *data) {
-							  /*
-							   NSLog(@"artistName %@", [data artistName]);
-							   NSLog(@"identification %@", [data identification]);
-							   NSLog(@"idNumber %@", [data idNumber]);
-							   NSLog(@"imageSmall %@", [data imageSmall]);
-							   NSLog(@"imageSmallURL %@", [data imageSmallURL]);
-							   NSLog(@"imageMedium %@", [data imageMedium]);
-							   NSLog(@"imageMediumURL %@", [data imageMediumURL]);
-							   NSLog(@"imageLarge %@", [data imageLarge]);
-							   NSLog(@"imageLargeURL %@", [data imageLargeURL]);
-							   NSLog(@"imageExtraLarge %@", [data imageExtraLarge]);
-							   NSLog(@"imageExtraLargeURL %@", [data imageExtraLargeURL]);
-							   NSLog(@"imageMega %@", [data imageMega]);
-							   NSLog(@"imageMegaURL %@", [data imageMegaURL]);
-							   NSLog(@"listeners %@", [data listeners]);
-							   NSLog(@"listenersNumber %@", [data listenersNumber]);
-							   NSLog(@"musicBrianzId %@", [data musicBrianzId]);
-							   NSLog(@"name %@", [data name]);
-							   NSLog(@"playcount %@", [data playcount]);
-							   NSLog(@"playcountNumber %@", [data playcountNumber]);
-							   NSLog(@"releasedate %@", [data releasedate]);
-							   NSLog(@"releasedateDate %@", [data releasedateDate]);
-							   NSLog(@"toptags %@", [data toptags]);
-							   NSLog(@"toptagNames %@", [data toptagNames]);
-							   NSLog(@"toptagURLs %@", [data toptagURLs]);
-							   NSLog(@"tracks %@", [data tracks]);
-							   NSLog(@"tracksArray %@", [data tracksArray]);
-							   NSLog(@"lastFmPage %@", [data lastFmPage]);
-							   NSLog(@"lastFmPageURL %@", [data lastFmPageURL]);
-							   NSLog(@"wikiContent %@", [data wikiContent]);
-							   NSLog(@"wikiPublished %@", [data wikiPublished]);
-							   NSLog(@"wikiPublishedDate %@", [data wikiPublishedDate]);
-							   NSLog(@"wikiSummary %@", [data wikiSummary]);
-							   */
+							  //NSLog(@"JSON Response was: %@", data.JSON);
+							  NSLog(@"------------------------------- getInfoForAlbum --------------------------------");
+							  
+							  NSLog(@"artistName %@", [data artistName]);
+							  //NSLog(@"identification %@", [data identification]);
+							  NSLog(@"lfmId %@", [data lfmId]);
+							  NSLog(@"imageSmall %@", [data imageSmall]);
+							  //NSLog(@"imageSmallURL %@", [data imageSmallURL]);
+							  NSLog(@"imageMedium %@", [data imageMedium]);
+							  //NSLog(@"imageMediumURL %@", [data imageMediumURL]);
+							  NSLog(@"imageLarge %@", [data imageLarge]);
+							  //NSLog(@"imageLargeURL %@", [data imageLargeURL]);
+							  NSLog(@"imageExtraLarge %@", [data imageExtraLarge]);
+							  //NSLog(@"imageExtraLargeURL %@", [data imageExtraLargeURL]);
+							  NSLog(@"imageMega %@", [data imageMega]);
+							  //NSLog(@"imageMegaURL %@", [data imageMegaURL]);
+							  NSLog(@"listeners %@", [data listeners]);
+							  //NSLog(@"listenersNumber %@", [data listenersNumber]);
+							  NSLog(@"musicBrianzId %@", [data musicBrianzId]);
+							  NSLog(@"name %@", [data name]);
+							  NSLog(@"playcount %@", [data playcount]);
+							  //NSLog(@"playcountNumber %@", [data playcountNumber]);
+							  //NSLog(@"releasedate %@", [data releasedate]);
+							  NSLog(@"releaseDate %@", [data releaseDate]);
+							  //NSLog(@"toptags %@", [data toptags]);
+							  NSLog(@"toptagNames %@", [data toptagNames]);
+							  NSLog(@"toptagURLs %@", [data toptagURLs]);
+							  NSLog(@"tracks %@", [data tracks]);
+							  //NSLog(@"tracksArray %@", [data tracksArray]);
+							  NSLog(@"lastFmPage %@", [data lastFmPage]);
+							  //NSLog(@"lastFmPageURL %@", [data lastFmPageURL]);
+							  //NSLog(@"wikiContent %@", [data wikiContent]);
+							  NSLog(@"omitting wikiContent");
+							  //NSLog(@"wikiPublished %@", [data wikiPublished]);
+							  NSLog(@"wikiPublishedDate %@", [data wikiPublishedDate]);
+							  //NSLog(@"wikiSummary %@", [data wikiSummary]);
+							  NSLog(@"omitting wikiSummary");
+							  
 							  NSLog(@"Received data for Album %@ by Artist %@", [data name], [data artistName]);
 							  NSLog(@"Counter %i", --counter);
 						  }
@@ -176,35 +186,35 @@
 								  mbid:nil
 							   success:^(LFMArtistGetTopAlbums *data) {
 								   //NSLog(@"JSON Response was: %@", data.JSON);
-								   NSLog(@"-------------------------------------------------------------------------------");
+								   NSLog(@"----------------------------- getAllAlbumsByArtist -------------------------------");
 								   
-								   NSLog(@"artistName2 %@", data.artistName2 );
-								   NSLog(@"artistName %@", [data artistName]);
+								   NSLog(@"artistName %@", data.artist);
 								   // of LFMAlbumTopAlbum
-								   NSArray *albums = [data artistsAlbumList];
-								   for (LFMAlbumTopAlbum *album in albums) {
+								   NSArray *albums = data.albums;
+								   for (int i = 0; i < 3; i++) {
+									   LFMAlbumTopAlbum *album = albums[i];
 									   NSLog(@"---------------------- %@ ----------------------", [album name]);
 									   
 									   NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);
-									   NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbumsNumber]);
+									   NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbums]);
 									   
 									   NSLog(@"imageSmall %@", [album imageSmall]);
-									   NSLog(@"imageSmallURL %@", [album imageSmallURL]);
+									   //NSLog(@"imageSmallURL %@", [album imageSmallURL]);
 									   NSLog(@"imageMedium %@", [album imageMedium]);
-									   NSLog(@"imageMediumURL %@", [album imageMediumURL]);
+									   //NSLog(@"imageMediumURL %@", [album imageMediumURL]);
 									   NSLog(@"imageLarge %@", [album imageLarge]);
-									   NSLog(@"imageLargeURL %@", [album imageLargeURL]);
+									   //NSLog(@"imageLargeURL %@", [album imageLargeURL]);
 									   NSLog(@"imageExtraLarge %@", [album imageExtraLarge]);
-									   NSLog(@"imageExtraLargeURL %@", [album imageExtraLargeURL]);
+									   //NSLog(@"imageExtraLargeURL %@", [album imageExtraLargeURL]);
 									   NSLog(@"musicBrianzId %@", [album musicBrianzId]);
 									   NSLog(@"playcount %@", [album playcount]);
-									   NSLog(@"playcountNumber %@", [album playcountNumber]);
+									   //NSLog(@"playcountNumber %@", [album playcountNumber]);
 									   NSLog(@"lastFmPage %@", [album lastFmPage]);
-									   NSLog(@"lastFmPageURL %@", [album lastFmPageURL]);
+									   //NSLog(@"lastFmPageURL %@", [album lastFmPageURL]);
 								   }
 								   
 								   
-								   NSLog(@"Received TopAlbums by Artist %@", [data artistName]);
+								   NSLog(@"Received %d TopAlbums by Artist %@", [albums count], data.artist);
 								   NSLog(@"Counter %i", --counter);
 								   
 							   }
@@ -213,7 +223,6 @@
 								   NSLog(@"Counter %i", --counter);
 							   }];
 	NSLog(@"Counter %i", ++counter);
-	
 	
 	
 	

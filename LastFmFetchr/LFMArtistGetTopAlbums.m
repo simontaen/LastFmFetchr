@@ -20,26 +20,16 @@
 							 toInstance:self
 						   usingMapping:@{
 										  @"@attr" : @{
-												  @"artist" : KZProperty(artistName2)
-												  }
+												  @"artist" : KZProperty(artist)
+												  },
+										  // TODO: not sure about this
+										  @"album" : KZCall(albumsFromString:, albums)
 										  }];
     }
     return self;
 }
 
-- (NSString *)artistName
-{
-	return [self notNilStringForKeyPath:kLFMAlbumArtist_Name];
-	/*
-	id obj = self.JSON[@"@attr"][@"artist"];
-	if (obj) {
-		return [obj description];
-	}
-	return kEmpty;
-	 */
-}
-
-- (NSArray *)artistsAlbumList
+- (NSArray *)albumsFromString:(NSString *)albumsString
 {
 	id obj = [self.JSON valueForKeyPath:kLFMAlbum_ArtistsAlbumList];
 	if ([obj isKindOfClass:[NSArray class]]) {

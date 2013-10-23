@@ -10,9 +10,6 @@
 
 @interface LFMAlbumTopAlbum : LFMAlbum
 
-///
-- (NSString *)rankInAllArtistAlbums;
-///
-- (NSNumber *)rankInAllArtistAlbumsNumber;
+@property (nonatomic, strong) NSNumber *rankInAllArtistAlbums;
 
 @end

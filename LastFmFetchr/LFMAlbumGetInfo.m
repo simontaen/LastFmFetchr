@@ -8,114 +8,54 @@
 
 #import "LFMAlbumGetInfo.h"
 #import "LastFmFetchr.h"
+#import "KZPropertyMapper.h"
 
 @implementation LFMAlbumGetInfo
 
-- (NSString *)artistName
-{
-	return [self notNilStringForKeyPath:kLFMAlbumArtistName];
+- (instancetype)initWithJson:(NSDictionary *)JSON {
+    self = [super initWithJson:JSON];
+    if (self) {
+		[KZPropertyMapper mapValuesFrom:JSON
+							 toInstance:self
+						   usingMapping:@{
+										  @"artist" : KZProperty(artistName),
+										  @"id" : KZProperty(lfmId),
+										  @"image" : @{
+												  @4 : @{ @"#text" : KZBox(URL, imageMega) }
+												  },
+										  @"listeners" : KZProperty(listeners),
+										  @"releasedate" : KZCall(releaseDateFromString:, releaseDate),
+										  // TODO: toptagNames and toptagURLs need separate handler
+										  // also you should create an LFMTag class so I could return an array
+										  @"tracks" : @{ // TODO: here too, LFMTracks
+												  @"tracks" : KZProperty(tracks)
+												  },
+										  @"wiki" : @{
+												  @"content" : KZProperty(wikiContent),
+												  @"published" : KZCall(wikiPublishedDateFromString:, wikiPublishedDate),
+												  @"summary" : KZProperty(wikiSummary)
+												  }
+										  }];
+    }
+    return self;
 }
 
-- (NSString *)identification
-{
-	return [self notNilStringForKeyPath:kLFMAlbumId];
-}
+#pragma mark - Private Methods
 
-- (NSNumber *)idNumber
-{
-	return [NSNumber numberWithLongLong:[[self identification] longLongValue]];
-}
-
-- (NSString *)listeners
-{
-	return [self notNilStringForKeyPath:kLFMAlbumListeners];
-}
-
-- (NSNumber *)listenersNumber
-{
-	return [NSNumber numberWithLongLong:[[self listeners] longLongValue]];
-}
-
-- (NSString *)imageMega
-{
-	return [self megaImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageMegaURL
-{
-	return [NSURL URLWithString:[self imageMega]];
-}
-
-- (NSString *)releasedate
-{
-	return [[self notNilStringForKeyPath:kLFMAlbumReleasedate] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-}
-
-- (NSDate *)releasedateDate
+- (NSDate *)releaseDateFromString:(NSString *)dateString
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
 	
-	return [formatter dateFromString:[[self releasedate] stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"]];
+	return [formatter dateFromString:[dateString stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"]];
 }
 
-- (NSString *)toptags
-{
-	return [self notNilStringForKeyPath:kLFMAlbum_Toptags];
-}
-
-- (NSArray *)toptagNames
-{
-	return [self tagNamesArrayWithTagListKeyPath:kLFMAlbum_Toptags];
-}
-
-- (NSArray *)toptagURLs
-{
-	return [self tagURLsArrayWithTagListKeyPath:kLFMAlbum_Toptags];
-}
-
-- (NSString *)tracks
-{
-	return [self notNilStringForKeyPath:kLFMAlbum_Tracks];
-}
-
-- (NSArray *)tracksArray
-{
-	id obj = [self.JSON valueForKeyPath:kLFMAlbum_Tracks];
-	if (![obj isKindOfClass:[NSArray class]]) {
-		return nil;
-	}
-	NSArray *array = (NSArray *)obj;
-	NSMutableArray *tracks = [NSMutableArray arrayWithCapacity:[array count]];
-	
-	for (NSDictionary *dict in array) {
-		[tracks addObject:dict];
-	}
-	
-	return tracks;
-}
-
-- (NSString *)wikiContent
-{
-	return [self notNilStringForKeyPath:kLFMAlbumWiki_Content];
-}
-
-- (NSString *)wikiPublished
-{
-	return [self notNilStringForKeyPath:kLFMAlbumWiki_Published];
-}
-
-- (NSDate *)wikiPublishedDate
+- (NSDate *)wikiPublishedDateFromString:(NSString *)dateString
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
 	
-	return [formatter dateFromString:[self wikiPublished]];
-}
-
-- (NSString *)wikiSummary
-{
-	return [self notNilStringForKeyPath:kLFMAlbumWiki_Summary];
+	return [formatter dateFromString:dateString];
 }
 
 @end

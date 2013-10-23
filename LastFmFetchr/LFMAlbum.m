@@ -8,77 +8,29 @@
 
 #import "LFMAlbum.h"
 #import "LastFmFetchr.h"
+#import "KZPropertyMapper.h"
 
 @implementation LFMAlbum
 
-- (NSString *)imageSmall
-{
-	return [self smallImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageSmallURL
-{
-	return [NSURL URLWithString:[self imageSmall]];
-}
-
-- (NSString *)imageMedium
-{
-	return [self mediumImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageMediumURL
-{
-	return [NSURL URLWithString:[self imageMedium]];
-}
-
-- (NSString *)imageLarge
-{
-	return [self largeImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageLargeURL
-{
-	return [NSURL URLWithString:[self imageLarge]];
-}
-
-- (NSString *)imageExtraLarge
-{
-	return [self extraLargeImageForImageListKeyPath:kLFMAlbumImageList];
-}
-
-- (NSURL *)imageExtraLargeURL
-{
-	return [NSURL URLWithString:[self imageExtraLarge]];
-}
-
-- (NSString *)musicBrianzId
-{
-	return [self notNilStringForKeyPath:kLFMAlbumMusicBrianzId];
-}
-
-- (NSString *)name
-{
-	return [self notNilStringForKeyPath:kLFMAlbumName];
-}
-
-- (NSString *)playcount
-{
-	return [self notNilStringForKeyPath:kLFMAlbumPlaycount];
-}
-
-- (NSNumber *)playcountNumber
-{
-	return [NSNumber numberWithLongLong:[[self playcount] longLongValue]];
-}
-
-- (NSString *)lastFmPage
-{
-	return [self notNilStringForKeyPath:kLFMAlbumLastFmPageURL];
-}
-
-- (NSURL *)lastFmPageURL
-{
-	return [NSURL URLWithString:[self lastFmPage]];
+- (instancetype)initWithJson:(NSDictionary *)JSON {
+    self = [super initWithJson:JSON];
+    if (self) {
+		[KZPropertyMapper mapValuesFrom:JSON
+							 toInstance:self
+						   usingMapping:@{
+										  @"image" : @{
+												  @0 : @{ @"#text" : KZBox(URL, imageSmall) },
+												  @1 : @{ @"#text" : KZBox(URL, imageMedium) },
+												  @2 : @{ @"#text" : KZBox(URL, imageLarge) },
+												  @3 : @{ @"#text" : KZBox(URL, imageExtraLarge) }
+												  },
+										  @"mbid" : KZProperty(musicBrianzId),
+										  @"name" : KZProperty(name),
+										  @"playcount" : KZProperty(playcount),
+										  @"url" : KZProperty(lastFmPage)
+										  }];
+    }
+    return self;
 }
 
 @end
