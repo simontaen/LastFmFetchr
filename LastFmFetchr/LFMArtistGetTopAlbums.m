@@ -29,7 +29,7 @@
     return self;
 }
 
-- (NSArray *)albumsFromString:(NSString *)albumsString
+- (NSArray *)albumsFromString:(NSString *)string
 {
 	id obj = [self.JSON valueForKeyPath:kLFMAlbum_ArtistsAlbumList];
 	if ([obj isKindOfClass:[NSArray class]]) {

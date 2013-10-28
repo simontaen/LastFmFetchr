@@ -273,6 +273,8 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 														userInfo:@{ NSLocalizedDescriptionKey : JSON[kLFMSericeErrorMessage], kLFMParameterMethod : methodParamValue}];
 				failure(task, error);
 			} else {
+				// DEBUG: NSLog(@"JSON Response was: %@", JSON);
+				
 				// now we are actually fine
 				if (jsonContentKey) {
 					success((NSDictionary *)(JSON[jsonContentKey]));

@@ -118,15 +118,6 @@ typedef void (^LastFmFetchrAPIFailure)(NSURLSessionDataTask *task, NSError *erro
 
 #pragma mark - API calls
 
-/*
- Be aware of https://github.com/AFNetworking/AFNetworking/issues/405
- ONLY use the returned operation for cancelling reasons
- DO NOT try to modify it or else you'll run into a race condition, also see
- https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ#why-dont-afhttpclients--getpath-et-al-return-the-operation-instead-of-void
- IF you cancel an operation, the CALLBACK WILL NOT FIRE, the response will be ignored in any case!
- Also the data is NOT being cached (TODO: is this verified?)
- */
-
 #pragma mark - Artist methods
 - (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
 									  mbid:(NSString *)mbid

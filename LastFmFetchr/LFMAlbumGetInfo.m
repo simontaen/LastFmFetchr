@@ -27,8 +27,8 @@
 										  @"releasedate" : KZCall(releaseDateFromString:, releaseDate),
 										  // TODO: toptagNames and toptagURLs need separate handler
 										  // also you should create an LFMTag class so I could return an array
-										  @"tracks" : @{ // TODO: here too, LFMTracks
-												  @"tracks" : KZProperty(tracks)
+										  @"tracks" : @{ // TODO: here too, LFMTrack
+												  @"track" : KZProperty(tracks)
 												  },
 										  @"wiki" : @{
 												  @"content" : KZProperty(wikiContent),
