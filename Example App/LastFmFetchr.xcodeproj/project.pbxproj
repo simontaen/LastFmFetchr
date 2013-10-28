@@ -116,7 +116,7 @@
 		F4A7C11A179D7B1F00FB7CC3 /* LastFmFetchr */ = {
 			isa = PBXGroup;
 			children = (
-				F4ABF51517A8104C00DEF135 /* Dictinarys  */,
+				F4ABF51517A8104C00DEF135 /* Dictionarys  */,
 				F4ED9CE3179D7BE3007C038B /* LastFmFetchr.h */,
 				F4ED9CE4179D7BE3007C038B /* LastFmFetchr.m */,
 			);
@@ -137,7 +137,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F4ABF51517A8104C00DEF135 /* Dictinarys  */ = {
+		F4ABF51517A8104C00DEF135 /* Dictionarys  */ = {
 			isa = PBXGroup;
 			children = (
 				F4ABF51217A8104000DEF135 /* LFMData.h */,
@@ -153,7 +153,7 @@
 				F4ABF51917A810DE00DEF135 /* LFMAlbumGetInfo.h */,
 				F4ABF51A17A810DE00DEF135 /* LFMAlbumGetInfo.m */,
 			);
-			name = "Dictinarys ";
+			name = "Dictionarys ";
 			sourceTree = "<group>";
 		};
 		F4ED9CE2179D7B9A007C038B /* Example App */ = {

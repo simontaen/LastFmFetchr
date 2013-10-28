@@ -29,6 +29,7 @@
     return self;
 }
 
+// TODO: can't I get an NSDictionary here?
 - (NSArray *)albumsFromString:(NSString *)string
 {
 	id obj = [self.JSON valueForKeyPath:kLFMAlbum_ArtistsAlbumList];

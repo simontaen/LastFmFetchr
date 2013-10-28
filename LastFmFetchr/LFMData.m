@@ -12,6 +12,15 @@
 
 @implementation LFMData
 
+#pragma mark - Property Mapper Helpers
+
+- (BOOL)boolFromString:(NSString *)boolString
+{
+	return [@"1" isEqual:boolString];
+}
+
+#pragma mark - Others
+
 - (NSArray *)tagNamesArrayWithTagListKeyPath:(NSString *)tagListKeyPath
 {
 	id obj = self.JSON;
@@ -121,6 +130,7 @@
 {
 	self = [super init];
 	if (self) {
+		// TODO: it would be good not to have to cache!
 		_JSON = JSON;
 		[KZPropertyMapper logIgnoredValues:NO];
 	}

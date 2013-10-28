@@ -39,7 +39,7 @@
 												  },
 										  @"mbid" : KZProperty(musicBrianzId),
 										  @"name" : KZProperty(name),
-										  @"ontour" : KZCall(isOnTourFromString:, isOnTour),
+										  @"ontour" : KZCall(boolFromString:, isOnTour),
 										  @"similar" : @{ // TODO: LFMArtistSuperclass
 												  @"artist" : KZProperty(similarArtists)
 												  },
@@ -47,7 +47,7 @@
 												  @"listeners" : KZProperty(listeners),
 												  @"playcount" : KZProperty(playcount)
 												  },
-										  @"streamable" : KZCall(isStreamableFromString:, isStreamable),
+										  @"streamable" : KZCall(boolFromString:, isStreamable),
 										  // TODO: tagNames and tagURLs need separate handler
 										  // also you should create an LFMTag class so I could return an array
 										  @"url" : KZProperty(lastFmPage)
@@ -86,22 +86,6 @@
 	[formatter setDateFormat:@"yyyy"];
 	
 	return [formatter dateFromString:yearFormedString];
-}
-
-- (BOOL)isOnTourFromString:(NSString *)onTourString
-{
-	if ([@"1" isEqual:onTourString]) {
-		return YES;
-	}
-	return NO;
-}
-
-- (BOOL)isStreamableFromString:(NSString *)streamableString
-{
-	if ([@"1" isEqual:streamableString]) {
-		return YES;
-	}
-	return NO;
 }
 
 @end
