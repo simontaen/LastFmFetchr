@@ -105,8 +105,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #pragma mark - Artist methods
 - (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
 									  mbid:(NSString *)mbid
-								   success:(void (^)(LFMArtistInfo *data))success
-								   failure:(LastFmFetchrAPIFailure)failure
+								completion:(void (^)(LFMArtistInfo *data, NSError *error))completion
 {
 	NSParameterAssert([artist length] || [mbid length]);
 	
@@ -134,14 +133,25 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodArtistGetInfo
 												   jsonContentKey:kLFMParameterArtist
 														  success:^(NSDictionary *data) {
-															  success([[LFMArtistInfo alloc] initWithJson:data]);
+															  LFMArtistInfo *lfmData = [[LFMArtistInfo alloc] initWithJson:data];
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(lfmData, nil);
+															  });
 														  }
-														  failure:failure];
+														  failure:^(NSError *error) {
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(nil, error);
+															  });
+														  }];
 								   }
 								   failure:^(NSURLSessionDataTask *task, NSError *error) {
 									   [self handleRequestFailure:error
 															 task:task
-														  failure:failure];
+														  failure:^(NSError *error) {
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(nil, error);
+															  });
+														  }];
 								   }];
 	[task resume];
 	return task;
@@ -149,8 +159,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 - (NSURLSessionDataTask *)getAllAlbumsByArtist:(NSString *)artist
 										  mbid:(NSString *)mbid
-									   success:(void (^)(LFMArtistsTopAlbums *data))success
-									   failure:(LastFmFetchrAPIFailure)failure
+									completion:(void (^)(LFMArtistsTopAlbums *data, NSError *error))completion
 {
 	NSParameterAssert([artist length] || [mbid length]);
 	
@@ -178,14 +187,25 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodArtistGetTopAlbums
 												   jsonContentKey:@"topalbums"
 														  success:^(NSDictionary *data) {
-															  success([[LFMArtistsTopAlbums alloc] initWithJson:data]);
+															  LFMArtistsTopAlbums *lfmData = [[LFMArtistsTopAlbums alloc] initWithJson:data];
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(lfmData, nil);
+															  });
 														  }
-														  failure:failure];
+														  failure:^(NSError *error) {
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(nil, error);
+															  });
+														  }];
 								   }
 								   failure:^(NSURLSessionDataTask *task, NSError *error) {
 									   [self handleRequestFailure:error
 															 task:task
-														  failure:failure];
+														  failure:^(NSError *error) {
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(nil, error);
+															  });
+														  }];
 								   }];
 	[task resume];
 	return task;
@@ -195,8 +215,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 - (NSURLSessionDataTask *)getInfoForAlbum:(NSString *)album
 								 byArtist:(NSString *)artist
 									 mbid:(NSString *)mbid
-								  success:(void (^)(LFMAlbumInfo *data))success
-								  failure:(LastFmFetchrAPIFailure)failure;
+							   completion:(void (^)(LFMAlbumInfo *data, NSError *error))completion
 {
 	NSParameterAssert(([artist length] && [album length]) || [mbid length]);
 	
@@ -227,14 +246,25 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodAlbumGetInfo
 												   jsonContentKey:kLFMParameterAlbum
 														  success:^(NSDictionary *data) {
-															  success([[LFMAlbumInfo alloc] initWithJson:data]);
+															  LFMAlbumInfo *lfmData = [[LFMAlbumInfo alloc] initWithJson:data];
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(lfmData, nil);
+															  });
 														  }
-														  failure:failure];
+														  failure:^(NSError *error) {
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(nil, error);
+															  });
+														  }];
 								   }
 								   failure:^(NSURLSessionDataTask *task, NSError *error) {
 									   [self handleRequestFailure:error
 															 task:task
-														  failure:failure];
+														  failure:^(NSError *error) {
+															  dispatch_async(dispatch_get_main_queue(), ^{
+																  completion(nil, error);
+															  });
+														  }];
 								   }];
 	[task resume];
 	return task;
@@ -258,7 +288,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 			methodParamValue:(NSString *)methodParamValue
 			  jsonContentKey:(NSString *)jsonContentKey
 					 success:(void (^)(NSDictionary *data))success
-					 failure:(LastFmFetchrAPIFailure)failure
+					 failure:(void (^)(NSError *error))failure
 {
 	if ([task state] != NSURLSessionTaskStateCanceling) {
 		
@@ -271,7 +301,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 				NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
 															code:[JSON[kLFMSericeErrorCode] intValue]
 														userInfo:@{ NSLocalizedDescriptionKey : JSON[kLFMSericeErrorMessage], kLFMParameterMethod : methodParamValue}];
-				failure(task, error);
+				failure(error);
 			} else {
 				// DEBUG: NSLog(@"JSON Response was: %@", JSON);
 				
@@ -289,7 +319,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 			NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
 														code:0
 													userInfo:@{ NSLocalizedDescriptionKey : errorDesc, kLFMParameterMethod : methodParamValue}];
-			failure(task, error);
+			failure(error);
 		}
 	}
 	// If the task is canceling, I assume you don't even care about the request anymore
@@ -304,38 +334,11 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
  */
 - (void)handleRequestFailure:(NSError *)error
 						task:(NSURLSessionDataTask *)task
-					 failure:(LastFmFetchrAPIFailure)failure
+					 failure:(void (^)(NSError *error))failure
 {
 	// TODO: This probably needs more work, or might even be obsolete
-	if ([task state] != NSURLSessionTaskStateCanceling) failure(task, error);
+	if ([task state] != NSURLSessionTaskStateCanceling) failure(error);
 	// If the task is canceling, I assume you don't even care about the request anymore
-}
-
-#pragma mark - Error Handling
-
-/// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
-- (NSString *)messageForError:(NSError *)error withTask:(NSURLSessionDataTask *)task
-{
-	NSString *errorMsg = @"";
-	NSURLResponse *response = task.response;
-	if ([response isKindOfClass:[NSURLResponse class]]) {
-		int statusCode = ((NSHTTPURLResponse *)response).statusCode;
-		errorMsg = [NSHTTPURLResponse localizedStringForStatusCode:statusCode];
-		errorMsg = [errorMsg stringByAppendingFormat:@" (code %d). ", statusCode];
-	}
-
-	// TODO: this probably won't work correctly
-	errorMsg = [errorMsg stringByAppendingString:error.localizedDescription];
-	
-	NSString *method = error.userInfo[kLFMParameterMethod];
-	
-	if (method.length) {
-		errorMsg = [errorMsg stringByAppendingFormat:@" (Method '%@').", method];
-	} else {
-		errorMsg = [errorMsg stringByAppendingString:@"."];
-	}
-	
-	return errorMsg;
 }
 
 #pragma mark - Requests Management

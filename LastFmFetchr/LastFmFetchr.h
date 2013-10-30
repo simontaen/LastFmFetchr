@@ -99,16 +99,6 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 };
 
 
-// ----------------------------------------------------------------------
-// Block handler typedefs
-// ----------------------------------------------------------------------
-// TODO: Who cares about the task in a failure case? Won't one completion handler just suffice?
-// the caller actually gets it returned AND I can return it in both success and failure case, definitly refactor!
-// Much simpler only having one!
-// Also see: http://nsscreencast.com/episodes/91-afnetworking-2-0
-typedef void (^LastFmFetchrAPIFailure)(NSURLSessionDataTask *task, NSError *error);
-
-
 @interface LastFmFetchr : AFHTTPSessionManager
 
 @property (strong, nonatomic) NSString *username;
@@ -117,12 +107,12 @@ typedef void (^LastFmFetchrAPIFailure)(NSURLSessionDataTask *task, NSError *erro
 
 
 #pragma mark - API calls
+// every call guarantees to call the completion handler on the main thread
 
 #pragma mark - Artist methods
 - (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
 									  mbid:(NSString *)mbid
-								   success:(void (^)(LFMArtistInfo *data))success
-								   failure:(LastFmFetchrAPIFailure)failure;
+								completion:(void (^)(LFMArtistInfo *data, NSError *error))completion;
 
 // This will just get the first 50 currently
 // You COULD accept explicit success handlers that return NSDictionary subclasses
@@ -130,25 +120,18 @@ typedef void (^LastFmFetchrAPIFailure)(NSURLSessionDataTask *task, NSError *erro
 // The keys could be reused behind the scences and the curious ones could still use them
 - (NSURLSessionDataTask *)getAllAlbumsByArtist:(NSString *)artist
 										  mbid:(NSString *)mbid
-									   success:(void (^)(LFMArtistsTopAlbums *data))success
-									   failure:(LastFmFetchrAPIFailure)failure;
+									completion:(void (^)(LFMArtistsTopAlbums *data, NSError *error))completion;
 
 #pragma mark - Album methods
 - (NSURLSessionDataTask *)getInfoForAlbum:(NSString *)album
 								 byArtist:(NSString *)artist
 									 mbid:(NSString *)mbid
-								  success:(void (^)(LFMAlbumInfo *data))success
-								  failure:(LastFmFetchrAPIFailure)failure;
+							   completion:(void (^)(LFMAlbumInfo *data, NSError *error))completion;
 
 #pragma mark - Requests Management
 
 /// Cancels all tasks that are currently run
 - (void)cancelAllTasks;
-
-#pragma mark - Error Handling
-
-/// Returns a string with the JSON error message, if given, or the appropriate localized description for the NSError object
-- (NSString *)messageForError:(NSError *)error withTask:(NSURLSessionDataTask *)task;
 
 #pragma mark - Singleton Methods
 
