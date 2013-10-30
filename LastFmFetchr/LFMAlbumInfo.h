@@ -8,7 +8,7 @@
 
 #import "LFMAlbum.h"
 
-@interface LFMAlbumGetInfo : LFMAlbum
+@interface LFMAlbumInfo : LFMAlbum
 
 @property (nonatomic, strong) NSString *artistName;
 @property (nonatomic, strong) NSNumber *lfmId;

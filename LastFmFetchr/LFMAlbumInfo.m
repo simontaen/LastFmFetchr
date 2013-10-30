@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMAlbumGetInfo.h"
+#import "LFMAlbumInfo.h"
 #import "LastFmFetchr.h"
 #import "KZPropertyMapper.h"
 
-@implementation LFMAlbumGetInfo
+@implementation LFMAlbumInfo
 
 - (instancetype)initWithJson:(NSDictionary *)JSON {
     self = [super initWithJson:JSON];

@@ -8,7 +8,7 @@
 
 #import "LFMData.h"
 
-@interface LFMArtistGetTopAlbums : LFMData
+@interface LFMArtistsTopAlbums : LFMData
 
 @property (nonatomic, strong) NSString *artist;
 ///	of LFMAlbumTopAlbum's

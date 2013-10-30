@@ -8,7 +8,7 @@
 
 #import "LFMData.h"
 
-@interface LFMArtistGetInfo : LFMData
+@interface LFMArtistInfo : LFMData
 
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
 @property (nonatomic, strong) NSArray *members;

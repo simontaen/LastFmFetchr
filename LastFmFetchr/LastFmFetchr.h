@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPSessionManager.h"
 
-#import "LFMArtistGetInfo.h"
-#import "LFMArtistGetTopAlbums.h"
+#import "LFMArtistInfo.h"
+#import "LFMArtistsTopAlbums.h"
 #import "LFMAlbum.h"
-#import "LFMAlbumGetInfo.h"
+#import "LFMAlbumInfo.h"
 #import "LFMAlbumTopAlbum.h"
 
 // By convention you need to use valueForKey: if the constant name contains an underbar '_'
@@ -121,7 +121,7 @@ typedef void (^LastFmFetchrAPIFailure)(NSURLSessionDataTask *task, NSError *erro
 #pragma mark - Artist methods
 - (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
 									  mbid:(NSString *)mbid
-								   success:(void (^)(LFMArtistGetInfo *data))success
+								   success:(void (^)(LFMArtistInfo *data))success
 								   failure:(LastFmFetchrAPIFailure)failure;
 
 // This will just get the first 50 currently
@@ -130,14 +130,14 @@ typedef void (^LastFmFetchrAPIFailure)(NSURLSessionDataTask *task, NSError *erro
 // The keys could be reused behind the scences and the curious ones could still use them
 - (NSURLSessionDataTask *)getAllAlbumsByArtist:(NSString *)artist
 										  mbid:(NSString *)mbid
-									   success:(void (^)(LFMArtistGetTopAlbums *data))success
+									   success:(void (^)(LFMArtistsTopAlbums *data))success
 									   failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Album methods
 - (NSURLSessionDataTask *)getInfoForAlbum:(NSString *)album
 								 byArtist:(NSString *)artist
 									 mbid:(NSString *)mbid
-								  success:(void (^)(LFMAlbumGetInfo *data))success
+								  success:(void (^)(LFMAlbumInfo *data))success
 								  failure:(LastFmFetchrAPIFailure)failure;
 
 #pragma mark - Requests Management

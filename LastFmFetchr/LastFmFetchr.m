@@ -105,7 +105,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #pragma mark - Artist methods
 - (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
 									  mbid:(NSString *)mbid
-								   success:(void (^)(LFMArtistGetInfo *data))success
+								   success:(void (^)(LFMArtistInfo *data))success
 								   failure:(LastFmFetchrAPIFailure)failure
 {
 	NSParameterAssert([artist length] || [mbid length]);
@@ -134,7 +134,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodArtistGetInfo
 												   jsonContentKey:kLFMParameterArtist
 														  success:^(NSDictionary *data) {
-															  success([[LFMArtistGetInfo alloc] initWithJson:data]);
+															  success([[LFMArtistInfo alloc] initWithJson:data]);
 														  }
 														  failure:failure];
 								   }
@@ -149,7 +149,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 - (NSURLSessionDataTask *)getAllAlbumsByArtist:(NSString *)artist
 										  mbid:(NSString *)mbid
-									   success:(void (^)(LFMArtistGetTopAlbums *data))success
+									   success:(void (^)(LFMArtistsTopAlbums *data))success
 									   failure:(LastFmFetchrAPIFailure)failure
 {
 	NSParameterAssert([artist length] || [mbid length]);
@@ -178,7 +178,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodArtistGetTopAlbums
 												   jsonContentKey:@"topalbums"
 														  success:^(NSDictionary *data) {
-															  success([[LFMArtistGetTopAlbums alloc] initWithJson:data]);
+															  success([[LFMArtistsTopAlbums alloc] initWithJson:data]);
 														  }
 														  failure:failure];
 								   }
@@ -195,7 +195,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 - (NSURLSessionDataTask *)getInfoForAlbum:(NSString *)album
 								 byArtist:(NSString *)artist
 									 mbid:(NSString *)mbid
-								  success:(void (^)(LFMAlbumGetInfo *data))success
+								  success:(void (^)(LFMAlbumInfo *data))success
 								  failure:(LastFmFetchrAPIFailure)failure;
 {
 	NSParameterAssert(([artist length] && [album length]) || [mbid length]);
@@ -227,7 +227,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodAlbumGetInfo
 												   jsonContentKey:kLFMParameterAlbum
 														  success:^(NSDictionary *data) {
-															  success([[LFMAlbumGetInfo alloc] initWithJson:data]);
+															  success([[LFMAlbumInfo alloc] initWithJson:data]);
 														  }
 														  failure:failure];
 								   }

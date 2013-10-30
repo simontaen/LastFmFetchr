@@ -23,9 +23,9 @@
 		F4A7C12B179D7B1F00FB7CC3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A7C12A179D7B1F00FB7CC3 /* Default-568h@2x.png */; };
 		F4A7C12E179D7B1F00FB7CC3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4A7C12C179D7B1F00FB7CC3 /* MainStoryboard.storyboard */; };
 		F4ABF51417A8104000DEF135 /* LFMData.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51317A8104000DEF135 /* LFMData.m */; };
-		F4ABF51817A8108100DEF135 /* LFMArtistGetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51717A8108100DEF135 /* LFMArtistGetInfo.m */; };
-		F4ABF51B17A810DE00DEF135 /* LFMAlbumGetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51A17A810DE00DEF135 /* LFMAlbumGetInfo.m */; };
-		F4ABF51E17A8111700DEF135 /* LFMArtistGetTopAlbums.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51D17A8111700DEF135 /* LFMArtistGetTopAlbums.m */; };
+		F4ABF51817A8108100DEF135 /* LFMArtistInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51717A8108100DEF135 /* LFMArtistInfo.m */; };
+		F4ABF51B17A810DE00DEF135 /* LFMAlbumInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51A17A810DE00DEF135 /* LFMAlbumInfo.m */; };
+		F4ABF51E17A8111700DEF135 /* LFMArtistsTopAlbums.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51D17A8111700DEF135 /* LFMArtistsTopAlbums.m */; };
 		F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ED9CE4179D7BE3007C038B /* LastFmFetchr.m */; };
 /* End PBXBuildFile section */
 
@@ -53,12 +53,12 @@
 		F4A7C12D179D7B1F00FB7CC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		F4ABF51217A8104000DEF135 /* LFMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMData.h; path = ../../LastFmFetchr/LFMData.h; sourceTree = "<group>"; };
 		F4ABF51317A8104000DEF135 /* LFMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMData.m; path = ../../LastFmFetchr/LFMData.m; sourceTree = "<group>"; };
-		F4ABF51617A8108100DEF135 /* LFMArtistGetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMArtistGetInfo.h; path = ../../LastFmFetchr/LFMArtistGetInfo.h; sourceTree = "<group>"; };
-		F4ABF51717A8108100DEF135 /* LFMArtistGetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistGetInfo.m; path = ../../LastFmFetchr/LFMArtistGetInfo.m; sourceTree = "<group>"; };
-		F4ABF51917A810DE00DEF135 /* LFMAlbumGetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbumGetInfo.h; path = ../../LastFmFetchr/LFMAlbumGetInfo.h; sourceTree = "<group>"; };
-		F4ABF51A17A810DE00DEF135 /* LFMAlbumGetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMAlbumGetInfo.m; path = ../../LastFmFetchr/LFMAlbumGetInfo.m; sourceTree = "<group>"; };
-		F4ABF51C17A8111700DEF135 /* LFMArtistGetTopAlbums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMArtistGetTopAlbums.h; path = ../../LastFmFetchr/LFMArtistGetTopAlbums.h; sourceTree = "<group>"; };
-		F4ABF51D17A8111700DEF135 /* LFMArtistGetTopAlbums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistGetTopAlbums.m; path = ../../LastFmFetchr/LFMArtistGetTopAlbums.m; sourceTree = "<group>"; };
+		F4ABF51617A8108100DEF135 /* LFMArtistInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMArtistInfo.h; path = ../../LastFmFetchr/LFMArtistInfo.h; sourceTree = "<group>"; };
+		F4ABF51717A8108100DEF135 /* LFMArtistInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistInfo.m; path = ../../LastFmFetchr/LFMArtistInfo.m; sourceTree = "<group>"; };
+		F4ABF51917A810DE00DEF135 /* LFMAlbumInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbumInfo.h; path = ../../LastFmFetchr/LFMAlbumInfo.h; sourceTree = "<group>"; };
+		F4ABF51A17A810DE00DEF135 /* LFMAlbumInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMAlbumInfo.m; path = ../../LastFmFetchr/LFMAlbumInfo.m; sourceTree = "<group>"; };
+		F4ABF51C17A8111700DEF135 /* LFMArtistsTopAlbums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMArtistsTopAlbums.h; path = ../../LastFmFetchr/LFMArtistsTopAlbums.h; sourceTree = "<group>"; };
+		F4ABF51D17A8111700DEF135 /* LFMArtistsTopAlbums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistsTopAlbums.m; path = ../../LastFmFetchr/LFMArtistsTopAlbums.m; sourceTree = "<group>"; };
 		F4ED9CE3179D7BE3007C038B /* LastFmFetchr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LastFmFetchr.h; path = ../../LastFmFetchr/LastFmFetchr.h; sourceTree = "<group>"; };
 		F4ED9CE4179D7BE3007C038B /* LastFmFetchr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LastFmFetchr.m; path = ../../LastFmFetchr/LastFmFetchr.m; sourceTree = "<group>"; };
 		FC799CC8DEB24E7698423372 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -142,16 +142,16 @@
 			children = (
 				F4ABF51217A8104000DEF135 /* LFMData.h */,
 				F4ABF51317A8104000DEF135 /* LFMData.m */,
-				F4ABF51617A8108100DEF135 /* LFMArtistGetInfo.h */,
-				F4ABF51717A8108100DEF135 /* LFMArtistGetInfo.m */,
-				F4ABF51C17A8111700DEF135 /* LFMArtistGetTopAlbums.h */,
-				F4ABF51D17A8111700DEF135 /* LFMArtistGetTopAlbums.m */,
+				F4ABF51617A8108100DEF135 /* LFMArtistInfo.h */,
+				F4ABF51717A8108100DEF135 /* LFMArtistInfo.m */,
+				F4ABF51C17A8111700DEF135 /* LFMArtistsTopAlbums.h */,
+				F4ABF51D17A8111700DEF135 /* LFMArtistsTopAlbums.m */,
 				F447077B17A961D600C1D604 /* LFMAlbum.h */,
 				F447077C17A961D600C1D604 /* LFMAlbum.m */,
 				F447077E17A9652D00C1D604 /* LFMAlbumTopAlbum.h */,
 				F447077F17A9652D00C1D604 /* LFMAlbumTopAlbum.m */,
-				F4ABF51917A810DE00DEF135 /* LFMAlbumGetInfo.h */,
-				F4ABF51A17A810DE00DEF135 /* LFMAlbumGetInfo.m */,
+				F4ABF51917A810DE00DEF135 /* LFMAlbumInfo.h */,
+				F4ABF51A17A810DE00DEF135 /* LFMAlbumInfo.m */,
 			);
 			name = "Dictionarys ";
 			sourceTree = "<group>";
@@ -273,9 +273,9 @@
 				F4A7C125179D7B1F00FB7CC3 /* AppDelegate.m in Sources */,
 				F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */,
 				F4ABF51417A8104000DEF135 /* LFMData.m in Sources */,
-				F4ABF51817A8108100DEF135 /* LFMArtistGetInfo.m in Sources */,
-				F4ABF51B17A810DE00DEF135 /* LFMAlbumGetInfo.m in Sources */,
-				F4ABF51E17A8111700DEF135 /* LFMArtistGetTopAlbums.m in Sources */,
+				F4ABF51817A8108100DEF135 /* LFMArtistInfo.m in Sources */,
+				F4ABF51B17A810DE00DEF135 /* LFMAlbumInfo.m in Sources */,
+				F4ABF51E17A8111700DEF135 /* LFMArtistsTopAlbums.m in Sources */,
 				F447077D17A961D600C1D604 /* LFMAlbum.m in Sources */,
 				F447078017A9652D00C1D604 /* LFMAlbumTopAlbum.m in Sources */,
 			);

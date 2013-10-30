@@ -52,7 +52,7 @@
 	
 	[fetchr getInfoForArtist:@"Pink Floyd"
 						mbid:nil
-					 success:^(LFMArtistGetInfo *data) {
+					 success:^(LFMArtistInfo *data) {
 						 //NSLog(@"JSON Response was: %@", data.JSON);
 						 NSLog(@"------------------------------ getInfoForArtist -----------------------------------");
 						 
@@ -134,7 +134,7 @@
 	[fetchr getInfoForAlbum:@"Highway to Hell"
 				   byArtist:@"AC/DC"
 					   mbid:nil
-					success:^(LFMAlbumGetInfo *data) {
+					success:^(LFMAlbumInfo *data) {
 						//NSLog(@"JSON Response was: %@", data.JSON);
 						NSLog(@"------------------------------- getInfoForAlbum --------------------------------");
 						
@@ -184,7 +184,7 @@
 	
 	[fetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 							mbid:nil
-						 success:^(LFMArtistGetTopAlbums *data) {
+						 success:^(LFMArtistsTopAlbums *data) {
 							 //NSLog(@"JSON Response was: %@", data.JSON);
 							 NSLog(@"----------------------------- getAllAlbumsByArtist -------------------------------");
 							 

@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMArtistGetTopAlbums.h"
+#import "LFMArtistsTopAlbums.h"
 #import "LastFmFetchr.h"
 #import "LFMAlbumTopAlbum.h"
 #import "KZPropertyMapper.h"
 
-@implementation LFMArtistGetTopAlbums
+@implementation LFMArtistsTopAlbums
 
 - (instancetype)initWithJson:(NSDictionary *)JSON {
     self = [super initWithJson:JSON];
