@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMData.h"
+#import "LFMArtist.h"
 
-@interface LFMArtistInfo : LFMData
+@interface LFMArtistInfo : LFMArtist
 
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
 @property (nonatomic, strong) NSArray *members;
