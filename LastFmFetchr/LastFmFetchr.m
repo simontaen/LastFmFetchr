@@ -89,14 +89,6 @@ NSString *const kLFMMethodArtistGetTopAlbums = @"artist.getTopAlbums";
 NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 
-@interface LastFmFetchr ()
-{
-	// TODO: probably not needed
-	NSUserDefaults *userDefaults;
-	// TODO: probably not needed
-	dispatch_queue_t async_queue;
-}
-@end
 
 @implementation LastFmFetchr
 
@@ -126,7 +118,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #endif
 	
 	NSURLSessionDataTask *task = [self GET:@""
-								parameters:[self addDefaultParameters:params]
+								parameters:params
 								   success:^(NSURLSessionDataTask *task, id JSON) {
 									   [self handleRequestSuccess:JSON
 															 task:task
@@ -180,7 +172,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #endif
 	
 	NSURLSessionDataTask *task = [self GET:@""
-								parameters:[self addDefaultParameters:params]
+								parameters:params
 								   success:^(NSURLSessionDataTask *task, id JSON) {
 									   [self handleRequestSuccess:JSON
 															 task:task
@@ -239,7 +231,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #endif
 	
 	NSURLSessionDataTask *task = [self GET:@""
-								parameters:[self addDefaultParameters:params]
+								parameters:params
 								   success:^(NSURLSessionDataTask *task, id JSON) {
 									   [self handleRequestSuccess:JSON
 															 task:task
@@ -275,7 +267,6 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 /**
  *  Called when the session task calls its success callback (request comes back successfully). Does very
  *  basic error handling to make sure the the actual success callback only gets called when there is content.
- *  TODO: you might be able to fetch the methodParamValue from the task
  *
  *  @param JSON             the pure JSON coming from the API
  *  @param task             the task executing the request
@@ -336,7 +327,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 						task:(NSURLSessionDataTask *)task
 					 failure:(void (^)(NSError *error))failure
 {
-	// TODO: This probably needs more work, or might even be obsolete
+	// This probably needs more work, but we will figure it out on the go
 	if ([task state] != NSURLSessionTaskStateCanceling) failure(error);
 	// If the task is canceling, I assume you don't even care about the request anymore
 }
@@ -353,48 +344,24 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	}
 }
 
-/**
- *  Add default request parameters
- *
- *  @param parameters given parameters
- *
- *  @return given parameters plus "format" and "api_key"
- */
-- (NSDictionary *)addDefaultParameters:(NSMutableDictionary *)parameters
+
+# pragma mark - Static Methods
+
++(instancetype)setApiKey:(NSString *)key //apiSecret:(NSString *)secret
 {
+	LastFmFetchr *fetchr = [LastFmFetchr fetchr];
+	NSMutableDictionary *params = [fetchr.requestSerializer.HTTPAdditionalParameters mutableCopy];
 	
-	// TODO: This can be refactored! DO NOT NEED!
+	if (key && key.length) {
+		[params addEntriesFromDictionary:@{ @"api_key" : key}];
+	} else {
+		[params removeObjectForKey:@"api_key"];
+	}
 	
-	// Check if we have an API key set,
-	[self checkForAPIKey];
+	fetchr.requestSerializer.HTTPAdditionalParameters = params;
 	
-	static NSDictionary *defaultParameters;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		defaultParameters = @{ @"format" : @"json", @"api_key" : self.apiKey};
-	});
-	
-	[parameters addEntriesFromDictionary:defaultParameters];
-	return parameters;
+	return fetchr;
 }
-
-/**
- *  Check for an empty API key
- */
-- (void)checkForAPIKey
-{
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		if (!self.apiKey || !self.apiKey.length) {
-			[NSException raise:@"LastFmFetchr" format:@"Your Last.fm API key must be populated before you can access the API.", nil];
-		}
-	});
-}
-
-// make sure you can only call this once
-//- (void)setApiKey:(NSString *)apiKey
-
-# pragma mark - Singleton Methods
 
 + (instancetype)fetchr
 {
@@ -402,9 +369,11 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		
+		// http://www.objc.io/issue-5/from-nsurlconnection-to-nsurlsession.html
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-        [config setHTTPAdditionalHeaders:@{ @"User-Agent" : @"LastFmFetchr/0.0.1 (iOS) AFNetworking/2.0.x"}];
-		// Accept HTTP Header? @{ @"Accept" : @"application/json"}
+        [config setHTTPAdditionalHeaders:@{ @"User-Agent" : @"LastFmFetchr/0.0.1 (iOS) AFNetworking/2.0.x",
+											@"Accept" : @"application/json"
+											}];
         
         NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024
                                                           diskCapacity:50 * 1024 * 1024
@@ -415,13 +384,13 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 								   sessionConfiguration:config];
 		
 		// Request Serializer
-		// http://www.last.fm/api/intro
-		// http://www.last.fm/api/rest
 		AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-		requestSerializer.stringEncoding = NSUTF8StringEncoding;
+		requestSerializer.stringEncoding = NSUTF8StringEncoding; // http://www.last.fm/api/intro
+		requestSerializer.HTTPAdditionalParameters = @{ @"format" : @"json" // http://www.last.fm/api/rest
+														};
 		_fetchr.requestSerializer = requestSerializer;
 		
-		// Use JSON API
+		// Response Serializer, use JSON API
 		AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
 		responseSerializer.stringEncoding = NSUTF8StringEncoding;
         _fetchr.responseSerializer = responseSerializer;

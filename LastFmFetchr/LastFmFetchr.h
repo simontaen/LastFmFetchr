@@ -101,9 +101,8 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 
 @interface LastFmFetchr : AFHTTPSessionManager
 
-@property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) NSString *apiKey;
-@property (strong, nonatomic) NSString *apiSecret;
+#pragma mark - Properties
+//@property (strong, nonatomic) NSString *username;
 
 
 #pragma mark - API calls
@@ -133,10 +132,20 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 /// Cancels all tasks that are currently run
 - (void)cancelAllTasks;
 
-#pragma mark - Singleton Methods
+#pragma mark - Static Methods
 
-/// Initializes and returns the LastFmFetchr singleton object
-/// @return The singleton object
+/**
+ *  If nessecary will initialize the LastFmFetchr calling fetchr.
+ *  If api_key is set, it will be sent with each request.
+ *
+ *  @param key The api_key for the LastFm API
+ *
+ *  @return The LastFmFetchr
+ */
++(instancetype)setApiKey:(NSString *)key; //apiSecret:(NSString *)secret
+
+/// Initializes and returns the LastFmFetchr
+/// @return The LastFmFetchr
 + (instancetype)fetchr;
 
 @end

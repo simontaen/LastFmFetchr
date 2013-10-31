@@ -1,3 +1,3 @@
-pod 'AFNetworking', '~> 2.0'
+pod 'AFNetworking', :path => '/Users/simon/Documents/code/ObjC/GitHub/AFNetworking/'
 pod 'KZPropertyMapper', '~> 2.0'
 pod 'FCYAsserts', '~> 1.2'

@@ -13,9 +13,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	LastFmFetchr *fetchr = [LastFmFetchr fetchr];
-	fetchr.apiKey = @"aed3367b0133ab707cb4e5b6b04da3e7";
-	fetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
+	LastFmFetchr *fetchr = [LastFmFetchr setApiKey:@"aed3367b0133ab707cb4e5b6b04da3e7"];
+	//fetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
 	
 	
 	// ------------ Artist calls ------------------

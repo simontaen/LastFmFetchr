@@ -16,17 +16,12 @@ static NSString *const kEmpty = @"";
 
 @property (strong, nonatomic) NSDictionary *JSON;
 
-- (instancetype)initWithJson:(NSDictionary *)JSON;
-
-- (NSArray *)tagNamesArrayWithTagListKeyPath:(NSString *)tagListKeyPath;
-- (NSArray *)tagURLsArrayWithTagListKeyPath:(NSString *)tagListKeyPath;
-
-- (NSString *)smallImageForImageListKeyPath:(NSString *)imageListKeyPath;
-- (NSString *)mediumImageForImageListKeyPath:(NSString *)imageListKeyPath;
-- (NSString *)largeImageForImageListKeyPath:(NSString *)imageListKeyPath;
-- (NSString *)extraLargeImageForImageListKeyPath:(NSString *)imageListKeyPath;
-- (NSString *)megaImageForImageListKeyPath:(NSString *)imageListKeyPath;
+#pragma mark - Access to JSON
 
 - (NSString *)notNilStringForKeyPath:(NSString *)keyPath;
+
+#pragma mark - Lifecycle
+
+- (instancetype)initWithJson:(NSDictionary *)JSON;
 
 @end
