@@ -12,6 +12,8 @@ Code.todo
 * Refactor the request generation and adding of default params @done
 * Check if NSURLCache is working @done
 * Comment style refactoring using [this xcode plugin](https://github.com/onevcat/VVDocumenter-Xcode)
+* Fix TODO's in fetchr
+* Update Passions to the new fetchr @done
 * Draw the UI for the App FIRST!
 * Get the AlbumView using a UICollectionView backed by the NSFetchedResultsController (CoreData) working (see links from nshipster and ash furrow)
 * Implement the OAuth [Authentication](http://www.last.fm/api/authentication)
