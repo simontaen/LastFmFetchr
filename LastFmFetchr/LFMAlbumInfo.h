@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *artistName;
 @property (nonatomic, strong) NSNumber *lfmId;
 @property (nonatomic, strong) NSURL *imageMega;
+@property (nonatomic, strong) NSString *imageMegaString;
 @property (nonatomic, strong) NSNumber *listeners;
 @property (nonatomic, strong) NSDate *releaseDate;
 /// (ordered) Array of albums toptags as NSStrings

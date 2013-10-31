@@ -41,6 +41,13 @@
     return self;
 }
 
+#pragma mark - Property Getter Implementations
+
+-(NSString *)imageMegaString
+{
+	return [[self.imageMega absoluteString] description];
+}
+
 #pragma mark - Private Methods
 
 - (NSDate *)releaseDateFromString:(NSString *)dateString

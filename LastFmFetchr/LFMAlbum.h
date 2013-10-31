@@ -15,6 +15,10 @@
 @property (nonatomic, strong) NSURL *imageMedium;
 @property (nonatomic, strong) NSURL *imageLarge;
 @property (nonatomic, strong) NSURL *imageExtraLarge;
+@property (nonatomic, strong) NSString *imageSmallString;
+@property (nonatomic, strong) NSString *imageMediumString;
+@property (nonatomic, strong) NSString *imageLargeString;
+@property (nonatomic, strong) NSString *imageExtraLargeString;
 @property (nonatomic, strong) NSString *musicBrianzId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSNumber *playcount;

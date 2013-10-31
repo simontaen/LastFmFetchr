@@ -20,11 +20,16 @@
 							 toInstance:self
 						   usingMapping:@{
 										  @"@attr" : @{
-												  @"rank" : KZProperty(rankInAllArtistAlbums)
+												  @"rank" : KZCall(rankFromString:, rankInAllArtistAlbums)
 												  }
 										  }];
     }
     return self;
+}
+
+- (NSNumber *)rankFromString:(NSString *)rankString
+{
+	return [NSNumber numberWithInt:[[rankString description] intValue]];
 }
 
 @end

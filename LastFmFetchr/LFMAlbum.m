@@ -33,4 +33,26 @@
     return self;
 }
 
+#pragma mark - Property Getter Implementations
+
+-(NSString *)imageSmallString
+{
+	return [[self.imageSmall absoluteString] description];
+}
+
+-(NSString *)imageMediumString
+{
+	return [[self.imageMedium absoluteString] description];
+}
+
+-(NSString *)imageLargeString
+{
+	return [[self.imageLarge absoluteString] description];
+}
+
+-(NSString *)imageExtraLargeString
+{
+	return [[self.imageExtraLarge absoluteString] description];
+}
+
 @end
