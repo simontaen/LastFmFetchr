@@ -23,17 +23,14 @@
 										  @"@attr" : @{
 												  @"artist" : KZProperty(artist)
 												  },
-										  // TODO: not sure about this
-										  @"album" : KZCall(albumsFromString:, albums)
+										  @"album" : KZCall(albumsFromArray:, albums)
 										  }];
     }
     return self;
 }
 
-// TODO: can't I get an NSDictionary here?
-- (NSArray *)albumsFromString:(NSString *)string
+- (NSArray *)albumsFromArray:(id)obj
 {
-	id obj = [self.JSON valueForKeyPath:kLFMAlbum_ArtistsAlbumList];
 	if ([obj isKindOfClass:[NSArray class]]) {
 		NSArray *array = (NSArray *)obj;
 		NSMutableArray *albums = [NSMutableArray arrayWithCapacity:[array count]];

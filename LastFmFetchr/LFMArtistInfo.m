@@ -24,7 +24,7 @@
 												  },
 										  @"bio" : @{
 												  @"content" : KZProperty(bioContent),
-												  @"formationlist" : KZCall(bioFormationYearsFromString:, bioFormationYears),
+												  @"formationlist" : KZCall(bioFormationYearsFromDictionary:, bioFormationYears),
 												  @"links.link.href" : KZBox(URL, lastFmWikiPage),
 												  @"placeformed" : KZProperty(bioPlaceFormed),
 												  @"published" : KZCall(bioPublishedDateFromString:, bioPublishedDate),
@@ -59,9 +59,8 @@
 
 #pragma mark - Private Methods
 
-- (NSArray *)bioFormationYearsFromString:(NSString *)string
+- (NSArray *)bioFormationYearsFromDictionary:(id)obj
 {
-	id obj = [self.JSON valueForKeyPath:kLFMArtistBio_FormationYears];
 	if (![obj isKindOfClass:[NSDictionary class]]) {
 		return nil;
 	}
@@ -70,7 +69,7 @@
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy"];
 	
-	return @[[formatter dateFromString:dict[@"yearfrom"]], [formatter dateFromString:dict[@"yearto"]]];
+	return @[[formatter dateFromString:dict[@"formation"][@"yearfrom"]], [formatter dateFromString:dict[@"formation"][@"yearto"]]];
 }
 
 - (NSDate *)bioPublishedDateFromString:(NSString *)publishedString
