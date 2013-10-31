@@ -15,6 +15,7 @@
 - (instancetype)initWithJson:(NSDictionary *)JSON {
     self = [super initWithJson:JSON];
     if (self) {
+		// http://www.last.fm/api/show/album.getInfo
 		[KZPropertyMapper mapValuesFrom:JSON
 							 toInstance:self
 						   usingMapping:@{
