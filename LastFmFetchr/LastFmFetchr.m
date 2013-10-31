@@ -9,55 +9,6 @@
 #import "LastFmFetchr.h"
 #import "AFNetworking.h"
 
-// By convention you need to use valueForKey: if the constant name contains an underbar '_'
-
-// ----------------------------------------------------------------------
-// ARTIST keys to JSON responses from Last.fm
-// ----------------------------------------------------------------------
-NSString *const kLFMArtist_Members = @"bandmembers.member";
-NSString *const kLFMArtistBio_Content = @"bio.content";
-NSString *const kLFMArtistBio_FormationYears = @"bio.formationlist.formation";
-NSString *const kLFMArtistBio_Link = @"bio.links.link";
-NSString *const kLFMArtistBio_PlaceFormed = @"bio.placeformed";
-NSString *const kLFMArtistBio_Published = @"bio.published";
-NSString *const kLFMArtistBio_Summary = @"bio.summary";
-NSString *const kLFMArtistBio_YearFormed = @"bio.yearformed";
-NSString *const kLFMArtistImageList = @"image";
-NSString *const kLFMArtistMusicBrianzId = @"mbid";
-NSString *const kLFMArtistName = @"name";
-NSString *const kLFMArtistIsOnTour = @"ontour";
-NSString *const kLFMArtist_SimilarArtists = @"similar.artist";
-NSString *const kLFMArtistStats_Listeners = @"stats.listeners";
-NSString *const kLFMArtistStats_Playcount = @"stats.playcount";
-NSString *const kLFMArtistStreamable = @"streamable";
-NSString *const kLFMArtist_Tags = @"tags.tag";
-NSString *const kLFMArtistLastFmPageURL = @"url";
-
-
-// ----------------------------------------------------------------------
-// ALBUM keys to JSON responses from Last.fm
-// ----------------------------------------------------------------------
-NSString *const kLFMAlbumArtistName = @"artist";
-NSString *const kLFMAlbumId = @"id";
-NSString *const kLFMAlbumImageList = @"image";
-NSString *const kLFMAlbumListeners = @"listeners";
-NSString *const kLFMAlbumMusicBrianzId = @"mbid";
-NSString *const kLFMAlbumName = @"name";
-NSString *const kLFMAlbumPlaycount = @"playcount";
-NSString *const kLFMAlbumReleasedate = @"releasedate";
-NSString *const kLFMAlbum_Toptags = @"toptags.tag";
-NSString *const kLFMAlbum_Tracks = @"tracks.track";
-NSString *const kLFMAlbumLastFmPageURL = @"url";
-NSString *const kLFMAlbumWiki_Content = @"wiki.content";
-NSString *const kLFMAlbumWiki_Published = @"wiki.published";
-NSString *const kLFMAlbumWiki_Summary = @"wiki.summary";
-NSString *const kLFMAlbum_ArtistsAlbumList = @"album";
-NSString *const kLFMAlbum_RankInAllArtistAlbums = @"@attr.rank";
-NSString *const kLFMAlbumArtist_MusicBrianzId = @"artist.mbid";
-NSString *const kLFMAlbumArtist_Name = @"@attr.artist";
-NSString *const kLFMAlbumArtist_LastFmPageURL = @"artist.url";
-
-
 // ----------------------------------------------------------------------
 // API Error codes, see http://www.last.fm/api/errorcodes
 // ----------------------------------------------------------------------

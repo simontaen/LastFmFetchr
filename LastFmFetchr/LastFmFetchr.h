@@ -15,55 +15,6 @@
 #import "LFMAlbumInfo.h"
 #import "LFMAlbumTopAlbum.h"
 
-// By convention you need to use valueForKey: if the constant name contains an underbar '_'
-
-// ----------------------------------------------------------------------
-// ARTIST keys to JSON responses from Last.fm 
-// ----------------------------------------------------------------------
-extern NSString *const kLFMArtist_Members;
-extern NSString *const kLFMArtistBio_Content;
-extern NSString *const kLFMArtistBio_FormationYears;
-extern NSString *const kLFMArtistBio_Link;
-extern NSString *const kLFMArtistBio_PlaceFormed;
-extern NSString *const kLFMArtistBio_Published;
-extern NSString *const kLFMArtistBio_Summary;
-extern NSString *const kLFMArtistBio_YearFormed;
-extern NSString *const kLFMArtistImageList;
-extern NSString *const kLFMArtistMusicBrianzId;
-extern NSString *const kLFMArtistName;
-extern NSString *const kLFMArtistIsOnTour;
-extern NSString *const kLFMArtist_SimilarArtists;
-extern NSString *const kLFMArtistStats_Listeners;
-extern NSString *const kLFMArtistStats_Playcount;
-extern NSString *const kLFMArtistStreamable;
-extern NSString *const kLFMArtist_Tags;
-extern NSString *const kLFMArtistLastFmPageURL;
-
-
-// ----------------------------------------------------------------------
-// ALBUM keys to JSON responses from Last.fm 
-// ----------------------------------------------------------------------
-extern NSString *const kLFMAlbumArtistName;
-extern NSString *const kLFMAlbumId;
-extern NSString *const kLFMAlbumImageList;
-extern NSString *const kLFMAlbumListeners;
-extern NSString *const kLFMAlbumMusicBrianzId;
-extern NSString *const kLFMAlbumName;
-extern NSString *const kLFMAlbumPlaycount;
-extern NSString *const kLFMAlbumReleasedate;
-extern NSString *const kLFMAlbum_Toptags;
-extern NSString *const kLFMAlbum_Tracks;
-extern NSString *const kLFMAlbumLastFmPageURL;
-extern NSString *const kLFMAlbumWiki_Content;
-extern NSString *const kLFMAlbumWiki_Published;
-extern NSString *const kLFMAlbumWiki_Summary;
-extern NSString *const kLFMAlbum_ArtistsAlbumList;
-extern NSString *const kLFMAlbum_RankInAllArtistAlbums;
-extern NSString *const kLFMAlbumArtist_MusicBrianzId;
-extern NSString *const kLFMAlbumArtist_Name;
-extern NSString *const kLFMAlbumArtist_LastFmPageURL;
-
-
 // ----------------------------------------------------------------------
 // API Error codes, see http://www.last.fm/api/errorcodes
 // ----------------------------------------------------------------------
