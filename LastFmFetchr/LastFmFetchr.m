@@ -321,14 +321,17 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 	dispatch_once(&onceToken, ^{
 		
 		// http://www.objc.io/issue-5/from-nsurlconnection-to-nsurlsession.html
+		// http://nsscreencast.com/episodes/91-afnetworking-2-0
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         [config setHTTPAdditionalHeaders:@{ @"User-Agent" : @"LastFmFetchr/0.0.1 (iOS) AFNetworking/2.0.x",
 											@"Accept" : @"application/json"
 											}];
         
-        NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024
-                                                          diskCapacity:50 * 1024 * 1024
-                                                              diskPath:nil];
+		// NSURLCache does not cache LastFm responses as they do not signal proper caching headers
+        NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024 diskCapacity:50 * 1024 * 1024 diskPath:nil];
+		
+		// http://nsscreencast.com/episodes/15-http-caching
+		//SDURLCache *cache = [[SDURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024 diskCapacity:50 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
         [config setURLCache:cache];
         
         _fetchr = [[LastFmFetchr alloc] initWithBaseURL:[NSURL URLWithString:@"http://ws.audioscrobbler.com/2.0/"]

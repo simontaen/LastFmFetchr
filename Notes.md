@@ -11,7 +11,7 @@ Code.todo
 * Think about just one completion handler like [here](http://nsscreencast.com/episodes/91-afnetworking-2-0) @done
 * Refactor the request generation and adding of default params @done
 * Comment style refactoring using [this xcode plugin](https://github.com/onevcat/VVDocumenter-Xcode)
-* Check if NSURLCache is working
+* Check if NSURLCache is working @done
 * Draw the UI for the App FIRST!
 * Get the AlbumView using a UICollectionView backed by the NSFetchedResultsController (CoreData) working (see links from nshipster and ash furrow)
 * Implement the OAuth [Authentication](http://www.last.fm/api/authentication)
