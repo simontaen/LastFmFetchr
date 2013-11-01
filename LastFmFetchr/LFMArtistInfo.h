@@ -7,36 +7,33 @@
 //
 
 #import "LFMArtist.h"
+#import "LFMData+ImagesSmallToXL.h"
 
 @interface LFMArtistInfo : LFMArtist
 
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
-@property (nonatomic, strong) NSArray *members;
-@property (nonatomic, strong) NSString *bioContent;
+@property (nonatomic, strong, readonly) NSArray *members;
+@property (nonatomic, strong, readonly) NSString *bioContent;
 /// NSArray of NSDates, [1] = year from, [2] = year to
-@property (nonatomic, strong) NSArray *bioFormationYears;
-@property (nonatomic, strong) NSURL *lastFmWikiPage;
-@property (nonatomic, strong) NSString *bioPlaceFormed;
-@property (nonatomic, strong) NSDate *bioPublishedDate;
-@property (nonatomic, strong) NSString *bioSummary;
-@property (nonatomic, strong) NSDate *bioYearFormedDate;
-@property (nonatomic, strong) NSURL *imageSmall;
-@property (nonatomic, strong) NSURL *imageMedium;
-@property (nonatomic, strong) NSURL *imageLarge;
-@property (nonatomic, strong) NSURL *imageExtraLarge;
-@property (nonatomic, strong) NSURL *imageMega;
-@property (nonatomic, strong) NSString *musicBrianzId;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic) BOOL isOnTour;
+@property (nonatomic, strong, readonly) NSArray *bioFormationYears;
+@property (nonatomic, strong, readonly) NSURL *lastFmWikiPage;
+@property (nonatomic, strong, readonly) NSString *bioPlaceFormed;
+@property (nonatomic, strong, readonly) NSDate *bioPublishedDate;
+@property (nonatomic, strong, readonly) NSString *bioSummary;
+@property (nonatomic, strong, readonly) NSDate *bioYearFormedDate;
+@property (nonatomic, strong, readonly) NSURL *imageMega;
+@property (nonatomic, strong, readonly) NSString *musicBrianzId;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, readonly) BOOL isOnTour;
 /// NSArray of NSDictionaries of similar artists
-@property (nonatomic, strong) NSArray *similarArtists;
-@property (nonatomic, strong) NSNumber *listeners;
-@property (nonatomic, strong) NSNumber *playcount;
-@property (nonatomic) BOOL isStreamable;
+@property (nonatomic, strong, readonly) NSArray *similarArtists;
+@property (nonatomic, strong, readonly) NSNumber *listeners;
+@property (nonatomic, strong, readonly) NSNumber *playcount;
+@property (nonatomic, readonly) BOOL isStreamable;
 /// (ordered) Array of Names as NSStrings
-@property (nonatomic, strong) NSArray *tagNames;
+@property (nonatomic, strong, readonly) NSArray *tagNames;
 /// (ordered) Array of Last.fm tag links as NSURLs
-@property (nonatomic, strong) NSArray *tagURLs;
-@property (nonatomic, strong) NSURL *lastFmPage;
+@property (nonatomic, strong, readonly) NSArray *tagURLs;
+@property (nonatomic, strong, readonly) NSURL *lastFmPage;
 
 @end

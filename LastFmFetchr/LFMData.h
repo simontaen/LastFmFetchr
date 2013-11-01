@@ -14,7 +14,7 @@ static NSString *const kEmpty = @"";
 
 @interface LFMData : NSObject
 
-@property (strong, nonatomic) NSDictionary *JSON;
+@property (nonatomic, strong, readonly) NSDictionary *JSON;
 
 #pragma mark - Access to JSON
 

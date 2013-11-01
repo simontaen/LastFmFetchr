@@ -10,6 +10,7 @@
 		D5316BAD425D4DB0AF1A9361 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 449EFFBCEB0F48E995AF2770 /* libPods.a */; };
 		F428593317A55DB60047297B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593217A55DB60047297B /* SystemConfiguration.framework */; };
 		F428593517A55DBD0047297B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593417A55DBD0047297B /* MobileCoreServices.framework */; };
+		F4375FAF1823B92800E9672C /* LFMData+ImagesSmallToXL.m in Sources */ = {isa = PBXBuildFile; fileRef = F4375FAE1823B92800E9672C /* LFMData+ImagesSmallToXL.m */; };
 		F447077D17A961D600C1D604 /* LFMAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = F447077C17A961D600C1D604 /* LFMAlbum.m */; };
 		F447078017A9652D00C1D604 /* LFMAlbumTopAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = F447077F17A9652D00C1D604 /* LFMAlbumTopAlbum.m */; };
 		F4A508541821A62D00D8179F /* LFMArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A508531821A62D00D8179F /* LFMArtist.m */; };
@@ -34,6 +35,8 @@
 		449EFFBCEB0F48E995AF2770 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F428593217A55DB60047297B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F428593417A55DBD0047297B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F4375FAD1823B92800E9672C /* LFMData+ImagesSmallToXL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LFMData+ImagesSmallToXL.h"; path = "../../LastFmFetchr/LFMData+ImagesSmallToXL.h"; sourceTree = "<group>"; };
+		F4375FAE1823B92800E9672C /* LFMData+ImagesSmallToXL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LFMData+ImagesSmallToXL.m"; path = "../../LastFmFetchr/LFMData+ImagesSmallToXL.m"; sourceTree = "<group>"; };
 		F447077B17A961D600C1D604 /* LFMAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbum.h; path = ../../LastFmFetchr/LFMAlbum.h; sourceTree = "<group>"; };
 		F447077C17A961D600C1D604 /* LFMAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMAlbum.m; path = ../../LastFmFetchr/LFMAlbum.m; sourceTree = "<group>"; };
 		F447077E17A9652D00C1D604 /* LFMAlbumTopAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbumTopAlbum.h; path = ../../LastFmFetchr/LFMAlbumTopAlbum.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 			children = (
 				F4ABF51217A8104000DEF135 /* LFMData.h */,
 				F4ABF51317A8104000DEF135 /* LFMData.m */,
+				F4375FAD1823B92800E9672C /* LFMData+ImagesSmallToXL.h */,
+				F4375FAE1823B92800E9672C /* LFMData+ImagesSmallToXL.m */,
 				F4A508521821A62D00D8179F /* LFMArtist.h */,
 				F4A508531821A62D00D8179F /* LFMArtist.m */,
 				F4ABF51617A8108100DEF135 /* LFMArtistInfo.h */,
@@ -276,6 +281,7 @@
 			files = (
 				F4A7C121179D7B1F00FB7CC3 /* main.m in Sources */,
 				F4A7C125179D7B1F00FB7CC3 /* AppDelegate.m in Sources */,
+				F4375FAF1823B92800E9672C /* LFMData+ImagesSmallToXL.m in Sources */,
 				F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */,
 				F4ABF51417A8104000DEF135 /* LFMData.m in Sources */,
 				F4ABF51817A8108100DEF135 /* LFMArtistInfo.m in Sources */,

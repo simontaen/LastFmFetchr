@@ -10,20 +10,20 @@
 
 @interface LFMAlbumInfo : LFMAlbum
 
-@property (nonatomic, strong) NSString *artistName;
-@property (nonatomic, strong) NSNumber *lfmId;
-@property (nonatomic, strong) NSURL *imageMega;
-@property (nonatomic, strong) NSString *imageMegaString;
-@property (nonatomic, strong) NSNumber *listeners;
-@property (nonatomic, strong) NSDate *releaseDate;
+@property (nonatomic, strong, readonly) NSString *artistName;
+@property (nonatomic, strong, readonly) NSNumber *lfmId;
+@property (nonatomic, strong, readonly) NSURL *imageMega;
+@property (nonatomic, strong, readonly) NSString *imageMegaString;
+@property (nonatomic, strong, readonly) NSNumber *listeners;
+@property (nonatomic, strong, readonly) NSDate *releaseDate;
 /// (ordered) Array of albums toptags as NSStrings
-@property (nonatomic, strong) NSArray *toptagNames;
+@property (nonatomic, strong, readonly) NSArray *toptagNames;
 /// (ordered) Array of Last.fm tag links as NSURLs
-@property (nonatomic, strong) NSArray *toptagURLs;
+@property (nonatomic, strong, readonly) NSArray *toptagURLs;
 /// NSArray of NSDictionaries of the album tracks
-@property (nonatomic, strong) NSArray *tracks;
-@property (nonatomic, strong) NSString *wikiContent;
-@property (nonatomic, strong) NSDate *wikiPublishedDate;
-@property (nonatomic, strong) NSString *wikiSummary;
+@property (nonatomic, strong, readonly) NSArray *tracks;
+@property (nonatomic, strong, readonly) NSString *wikiContent;
+@property (nonatomic, strong, readonly) NSDate *wikiPublishedDate;
+@property (nonatomic, strong, readonly) NSString *wikiSummary;
 
 @end

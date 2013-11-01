@@ -55,29 +55,7 @@
 						 if (!error) {
 							 //NSLog(@"JSON Response was: %@", data.JSON);
 							 NSLog(@"------------------------------ getInfoForArtist -----------------------------------");
-							 
-							 /*
-							  NSLog(@"kLFMArtist_Members %@", [self.JSON valueForKeyPath:kLFMArtist_Members]);
-							  NSLog(@"kLFMArtistBio_Content %@", [self.JSON valueForKeyPath:kLFMArtistBio_Content]);
-							  NSLog(@"kLFMArtistBio_Formation %@", [self.JSON valueForKeyPath:kLFMArtistBio_Formation]);
-							  NSLog(@"kLFMArtistBio_Link %@", [self.JSON valueForKeyPath:kLFMArtistBio_Link]);
-							  NSLog(@"kLFMArtistBio_PlaceFormed %@", [self.JSON valueForKeyPath:kLFMArtistBio_PlaceFormed]);
-							  NSLog(@"kLFMArtistBio_Published %@", [self.JSON valueForKeyPath:kLFMArtistBio_Published]);
-							  NSLog(@"kLFMArtistBio_Summary %@", [self.JSON valueForKeyPath:kLFMArtistBio_Summary]);
-							  NSLog(@"kLFMArtistBio_YearFormed %@", [self.JSON valueForKeyPath:kLFMArtistBio_YearFormed]);
-							  NSLog(@"kLFMArtistImageList %@", self.JSON[kLFMArtistImageList]);
-							  NSLog(@"kLFMArtistMusicBrianzId %@", self.JSON[kLFMArtistMusicBrianzId]);
-							  NSLog(@"kLFMArtistName %@", self.JSON[kLFMArtistName]);
-							  NSLog(@"kLFMArtistIsOnTour %@", self.JSON[kLFMArtistIsOnTour]);
-							  NSLog(@"kLFMArtist_SimilarArtists %@", [self.JSON valueForKeyPath:kLFMArtist_SimilarArtists]);
-							  NSLog(@"kLFMArtistStats_Listeners %@", [self.JSON valueForKeyPath:kLFMArtistStats_Listeners]);
-							  NSLog(@"kLFMArtistStats_Playcount %@", [self.JSON valueForKeyPath:kLFMArtistStats_Playcount]);
-							  NSLog(@"kLFMArtistStreamable %@", self.JSON[kLFMArtistStreamable]);
-							  NSLog(@"kLFMArtist_Tags %@", [self.JSON valueForKeyPath:kLFMArtist_Tags]);
-							  NSLog(@"kLFMArtistLastFmPageURL %@", self.JSON[kLFMArtistLastFmPageURL]);
-							  */
-							 /*
-							  NSLog(@"-------------------------------------------------------------------------------");
+							/*
 							  NSLog(@"members %@", [data members]);
 							  NSLog(@"memberArray %@", [data memberArray]);
 							  NSLog(@"bioContent %@", [data bioContent]);
@@ -91,17 +69,19 @@
 							  NSLog(@"bioSummary %@", [data bioSummary]);
 							  NSLog(@"bioYearFormed %@", [data bioYearFormed]);
 							  NSLog(@"bioYearFormedDate %@", [data bioYearFormedDate]);
-							  NSLog(@"imageSmall %@", [data imageSmall]);
-							  NSLog(@"imageSmallURL %@", [data imageSmallURL]);
-							  NSLog(@"imageMedium %@", [data imageMedium]);
-							  NSLog(@"imageMediumURL %@", [data imageMediumURL]);
-							  NSLog(@"imageLarge %@", [data imageLarge]);
-							  NSLog(@"imageLargeURL %@", [data imageLargeURL]);
-							  NSLog(@"imageExtraLarge %@", [data imageExtraLarge]);
-							  NSLog(@"imageExtraLargeURL %@", [data imageExtraLargeURL]);
-							  NSLog(@"imageMega %@", [data imageMega]);
-							  NSLog(@"imageMegaURL %@", [data imageMegaURL]);
-							  NSLog(@"musicBrianzId %@", [data musicBrianzId]);
+							 */
+							  NSLog(@"imageSmall %@", data.imageSmall);
+							  NSLog(@"imageSmallURL %@", data.imageSmallString);
+							  NSLog(@"imageMedium %@", data.imageMedium);
+							  NSLog(@"imageMediumURL %@", data.imageMediumString);
+							  NSLog(@"imageLarge %@", data.imageLarge);
+							  NSLog(@"imageLargeURL %@", data.imageLargeString);
+							  NSLog(@"imageExtraLarge %@", data.imageExtraLarge);
+							  NSLog(@"imageExtraLargeURL %@", data.imageExtraLargeString);
+							  NSLog(@"imageMega %@", data.imageMega);
+							 //NSLog(@"imageMegaURL %@", data.imageMegaSting);
+							 /*
+							 NSLog(@"musicBrianzId %@", [data musicBrianzId]);
 							  NSLog(@"name %@", [data name]);
 							  NSLog(@"isOnTour %@", [data isOnTour]);
 							  NSLog(@"isOnTourBool %c", [data isOnTourBool]);
@@ -119,6 +99,7 @@
 							  NSLog(@"lastFmPage %@", [data lastFmPage]);
 							  NSLog(@"lastFmPageURL %@", [data lastFmPageURL]);
 							  */
+
 							 NSLog(@"Received data for Artist %@", [data name]);
 							 NSLog(@"Counter %i", --counter);
 						 } else {
