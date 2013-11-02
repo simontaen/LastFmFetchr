@@ -7,7 +7,7 @@
 //
 
 #import "LFMArtist.h"
-#import "LFMData+ImagesSmallToXL.h"
+#import "LFMData+ImagesSmallToMega.h"
 
 @interface LFMArtistInfo : LFMArtist
 
@@ -21,7 +21,6 @@
 @property (nonatomic, strong, readonly) NSDate *bioPublishedDate;
 @property (nonatomic, strong, readonly) NSString *bioSummary;
 @property (nonatomic, strong, readonly) NSDate *bioYearFormedDate;
-@property (nonatomic, strong, readonly) NSURL *imageMega;
 @property (nonatomic, strong, readonly) NSString *musicBrianzId;
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, readonly) BOOL isOnTour;

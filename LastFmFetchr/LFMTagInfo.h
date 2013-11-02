@@ -7,11 +7,10 @@
 //
 
 #import "LFMTag.h"
+#import "LFMData+ImagesSmallToMega.h"
 
 @interface LFMTagInfo : LFMTag
 
-@property (nonatomic, strong, readonly) NSURL *imageMega;
-@property (nonatomic, strong, readonly) NSString *imageMegaString;
 @property (nonatomic, strong, readonly) NSNumber *listeners;
 @property (nonatomic, strong, readonly) NSDate *releaseDate;
 

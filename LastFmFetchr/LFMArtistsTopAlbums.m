@@ -7,9 +7,8 @@
 //
 
 #import "LFMArtistsTopAlbums.h"
-#import "LastFmFetchr.h"
-#import "LFMAlbumTopAlbum.h"
 #import "KZPropertyMapper.h"
+#import "LFMAlbumTopAlbum.h"
 
 @implementation LFMArtistsTopAlbums
 

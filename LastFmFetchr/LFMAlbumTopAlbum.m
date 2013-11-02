@@ -7,7 +7,6 @@
 //
 
 #import "LFMAlbumTopAlbum.h"
-#import "LastFmFetchr.h"
 #import "KZPropertyMapper.h"
 
 @implementation LFMAlbumTopAlbum

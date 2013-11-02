@@ -77,6 +77,7 @@
 							 NSLog(@"imageExtraLargeString %@", data.imageExtraLargeString);
 							 
 							 NSLog(@"imageMega %@", data.imageMega);
+							 NSLog(@"imageMegaString %@", data.imageMegaString);
 							 
 							 NSLog(@"musicBrianzId %@", data.musicBrianzId);
 							 NSLog(@"name %@", data.name);
@@ -123,6 +124,7 @@
 						 NSLog(@"imageExtraLargeString %@", data.imageExtraLargeString);
 						 
 						 NSLog(@"imageMega %@", data.imageMega);
+						 NSLog(@"imageMegaString %@", data.imageMegaString);
 						 
 						 NSLog(@"listeners %@", data.listeners);
 						 NSLog(@"releaseDate %@", data.releaseDate);

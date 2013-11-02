@@ -7,7 +7,6 @@
 //
 
 #import "LFMAlbumInfo.h"
-#import "LastFmFetchr.h"
 #import "KZPropertyMapper.h"
 
 @implementation LFMAlbumInfo
@@ -43,13 +42,6 @@
 										  }];
     }
     return self;
-}
-
-#pragma mark - Property Getter Implementations
-
--(NSString *)imageMegaString
-{
-	return [[self.imageMega absoluteString] description];
 }
 
 #pragma mark - Private Methods
