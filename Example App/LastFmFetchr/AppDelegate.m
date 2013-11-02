@@ -55,53 +55,43 @@
 						 if (!error) {
 							 //NSLog(@"JSON Response was: %@", data.JSON);
 							 NSLog(@"------------------------------ getInfoForArtist -----------------------------------");
-							/*
-							  NSLog(@"members %@", [data members]);
-							  NSLog(@"memberArray %@", [data memberArray]);
-							  NSLog(@"bioContent %@", [data bioContent]);
-							  NSLog(@"bioFormationYears %@", [data bioFormationYears]);
-							  NSLog(@"bioFormationYearDates %@", [data bioFormationYearDates]);
-							  NSLog(@"bioLink %@", [data bioLink]);
-							  NSLog(@"bioLinkURL %@", [data bioLinkURL]);
-							  NSLog(@"bioPlaceFormed %@", [data bioPlaceFormed]);
-							  NSLog(@"bioPublished %@", [data bioPublished]);
-							  NSLog(@"bioPublishedDate %@", [data bioPublishedDate]);
-							  NSLog(@"bioSummary %@", [data bioSummary]);
-							  NSLog(@"bioYearFormed %@", [data bioYearFormed]);
-							  NSLog(@"bioYearFormedDate %@", [data bioYearFormedDate]);
-							 */
-							  NSLog(@"imageSmall %@", data.imageSmall);
-							  NSLog(@"imageSmallURL %@", data.imageSmallString);
-							  NSLog(@"imageMedium %@", data.imageMedium);
-							  NSLog(@"imageMediumURL %@", data.imageMediumString);
-							  NSLog(@"imageLarge %@", data.imageLarge);
-							  NSLog(@"imageLargeURL %@", data.imageLargeString);
-							  NSLog(@"imageExtraLarge %@", data.imageExtraLarge);
-							  NSLog(@"imageExtraLargeURL %@", data.imageExtraLargeString);
-							  NSLog(@"imageMega %@", data.imageMega);
-							 //NSLog(@"imageMegaURL %@", data.imageMegaSting);
-							 /*
-							 NSLog(@"musicBrianzId %@", [data musicBrianzId]);
-							  NSLog(@"name %@", [data name]);
-							  NSLog(@"isOnTour %@", [data isOnTour]);
-							  NSLog(@"isOnTourBool %c", [data isOnTourBool]);
-							  NSLog(@"similarArtists %@", [data similarArtists]);
-							  NSLog(@"similarArtistsArray %@", [data similarArtistsArray]);
-							  NSLog(@"listeners %@", [data listeners]);
-							  NSLog(@"listenersNumber %@", [data listenersNumber]);
-							  NSLog(@"playcount %@", [data playcount]);
-							  NSLog(@"playcountNumber %@", [data playcountNumber]);
-							  NSLog(@"streamable %@", [data streamable]);
-							  NSLog(@"streamableBool %c", [data streamableBool]);
-							  NSLog(@"tags %@", [data tags]);
-							  NSLog(@"tagNames %@", [data tagNames]);
-							  NSLog(@"tagURLs %@", [data tagURLs]);
-							  NSLog(@"lastFmPage %@", [data lastFmPage]);
-							  NSLog(@"lastFmPageURL %@", [data lastFmPageURL]);
-							  */
-
-							 NSLog(@"Received data for Artist %@", [data name]);
+							 //NSLog(@"members %@", data.members);
+							 NSLog(@"omitting members");
+							 //NSLog(@"bioContent %@", data.bioContent);
+							 NSLog(@"omitting bioContent");
+							 NSLog(@"bioFormationYears %@", data.bioFormationYears);
+							 NSLog(@"lfmWikiPage %@", data.lfmWikiPage);
+							 NSLog(@"bioPlaceFormed %@", data.bioPlaceFormed);
+							 NSLog(@"bioPublishedDate %@", data.bioPublishedDate);
+							 //NSLog(@"bioSummary %@", data.bioSummary);
+							 NSLog(@"omitting bioSummary");
+							 NSLog(@"bioYearFormedDate %@", data.bioYearFormedDate);
+							 
+							 NSLog(@"imageSmall %@", data.imageSmall);
+							 NSLog(@"imageSmallString %@", data.imageSmallString);
+							 NSLog(@"imageMedium %@", data.imageMedium);
+							 NSLog(@"imageMediumString %@", data.imageMediumString);
+							 NSLog(@"imageLarge %@", data.imageLarge);
+							 NSLog(@"imageLargeString %@", data.imageLargeString);
+							 NSLog(@"imageExtraLarge %@", data.imageExtraLarge);
+							 NSLog(@"imageExtraLargeString %@", data.imageExtraLargeString);
+							 
+							 NSLog(@"imageMega %@", data.imageMega);
+							 
+							 NSLog(@"musicBrianzId %@", data.musicBrianzId);
+							 NSLog(@"name %@", data.name);
+							 NSLog(@"isOnTour %hhd", data.isOnTour);
+							 //NSLog(@"similarArtists %@", data.similarArtists);
+							 NSLog(@"omitting similarArtists");
+							 NSLog(@"listeners %@", data.listeners);
+							 NSLog(@"playcount %@", data.playcount);
+							 NSLog(@"isStreamable %c", data.isStreamable);
+							 NSLog(@"tags %@", data.tags);
+							 NSLog(@"lfmPage %@", data.lfmPage);
+							 
+							 NSLog(@"Received data for Artist %@", data.name);
 							 NSLog(@"Counter %i", --counter);
+							 
 						 } else {
 							 NSLog(@"Error: %@", [error localizedDescription]);
 							 NSLog(@"Counter %i", --counter);
@@ -117,50 +107,43 @@
 					   mbid:nil
 				 completion:^(LFMAlbumInfo *data, NSError *error) {
 					 if (!error) {
-						//NSLog(@"JSON Response was: %@", data.JSON);
-						NSLog(@"------------------------------- getInfoForAlbum --------------------------------");
-						
-						NSLog(@"artistName %@", [data artistName]);
-						//NSLog(@"identification %@", [data identification]);
-						NSLog(@"lfmId %@", [data lfmId]);
-						NSLog(@"imageSmall %@", [data imageSmall]);
-						//NSLog(@"imageSmallURL %@", [data imageSmallURL]);
-						NSLog(@"imageMedium %@", [data imageMedium]);
-						//NSLog(@"imageMediumURL %@", [data imageMediumURL]);
-						NSLog(@"imageLarge %@", [data imageLarge]);
-						//NSLog(@"imageLargeURL %@", [data imageLargeURL]);
-						NSLog(@"imageExtraLarge %@", [data imageExtraLarge]);
-						//NSLog(@"imageExtraLargeURL %@", [data imageExtraLargeURL]);
-						NSLog(@"imageMega %@", [data imageMega]);
-						//NSLog(@"imageMegaURL %@", [data imageMegaURL]);
-						NSLog(@"listeners %@", [data listeners]);
-						//NSLog(@"listenersNumber %@", [data listenersNumber]);
-						NSLog(@"musicBrianzId %@", [data musicBrianzId]);
-						NSLog(@"name %@", [data name]);
-						NSLog(@"playcount %@", [data playcount]);
-						//NSLog(@"playcountNumber %@", [data playcountNumber]);
-						//NSLog(@"releasedate %@", [data releasedate]);
-						NSLog(@"releaseDate %@", [data releaseDate]);
-						//NSLog(@"toptags %@", [data toptags]);
-						NSLog(@"toptagNames %@", [data toptagNames]);
-						NSLog(@"toptagURLs %@", [data toptagURLs]);
-						NSLog(@"tracks %@", [data tracks]);
-						//NSLog(@"tracksArray %@", [data tracksArray]);
-						NSLog(@"lastFmPage %@", [data lastFmPage]);
-						//NSLog(@"lastFmPageURL %@", [data lastFmPageURL]);
-						//NSLog(@"wikiContent %@", [data wikiContent]);
-						NSLog(@"omitting wikiContent");
-						//NSLog(@"wikiPublished %@", [data wikiPublished]);
-						NSLog(@"wikiPublishedDate %@", [data wikiPublishedDate]);
-						//NSLog(@"wikiSummary %@", [data wikiSummary]);
-						NSLog(@"omitting wikiSummary");
-						
-						NSLog(@"Received data for Album %@ by Artist %@", [data name], [data artistName]);
-						NSLog(@"Counter %i", --counter);
+						 //NSLog(@"JSON Response was: %@", data.JSON);
+						 NSLog(@"------------------------------- getInfoForAlbum --------------------------------");
+						 
+						 NSLog(@"artistName %@", data.artistName);
+						 NSLog(@"lfmId %@", data.lfmId);
+						 
+						 NSLog(@"imageSmall %@", data.imageSmall);
+						 NSLog(@"imageSmallString %@", data.imageSmallString);
+						 NSLog(@"imageMedium %@", data.imageMedium);
+						 NSLog(@"imageMediumString %@", data.imageMediumString);
+						 NSLog(@"imageLarge %@", data.imageLarge);
+						 NSLog(@"imageLargeString %@", data.imageLargeString);
+						 NSLog(@"imageExtraLarge %@", data.imageExtraLarge);
+						 NSLog(@"imageExtraLargeString %@", data.imageExtraLargeString);
+						 
+						 NSLog(@"imageMega %@", data.imageMega);
+						 
+						 NSLog(@"listeners %@", data.listeners);
+						 NSLog(@"releaseDate %@", data.releaseDate);
+						 NSLog(@"toptags %@", data.topTags);
+						 NSLog(@"omitting tracks");
+						 NSLog(@"omitting wikiContent");
+						 NSLog(@"wikiPublishedDate %@", data.wikiPublishedDate);
+						 NSLog(@"omitting wikiSummary");
+						 
+						 NSLog(@"musicBrianzId %@", data.musicBrianzId);
+						 NSLog(@"name %@", data.name);
+						 NSLog(@"playcount %@", data.playcount);
+						 NSLog(@"lfmPage %@", data.lfmPage);
+						 
+						 NSLog(@"Received data for Album %@ by Artist %@", data.name, data.artistName);
+						 NSLog(@"Counter %i", --counter);
+						 
 					 } else {
-						NSLog(@"Error: %@", [error localizedDescription]);
-						NSLog(@"Counter %i", --counter);
-					};
+						 NSLog(@"Error: %@", [error localizedDescription]);
+						 NSLog(@"Counter %i", --counter);
+					 };
 				 }];
 	NSLog(@"Counter %i", ++counter);
 	
@@ -192,7 +175,7 @@
 								 NSLog(@"musicBrianzId %@", [album musicBrianzId]);
 								 NSLog(@"playcount %@", [album playcount]);
 								 //NSLog(@"playcountNumber %@", [album playcountNumber]);
-								 NSLog(@"lastFmPage %@", [album lastFmPage]);
+								 NSLog(@"lfmPage %@", [album lfmPage]);
 								 //NSLog(@"lastFmPageURL %@", [album lastFmPageURL]);
 							 }
 							 

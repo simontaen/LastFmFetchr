@@ -26,8 +26,12 @@
 												  },
 										  @"listeners" : KZProperty(listeners),
 										  @"releasedate" : KZCall(releaseDateFromString:, releaseDate),
-										  // TODO: toptagNames and toptagURLs need separate handler
-										  // also you should create an LFMTag class so I could return an array
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+										  @"toptags" : @{
+												  @"tag" : KZCall(tagsFromArray:, topTags)
+												  },
+#pragma clang diagnostic pop
 										  @"tracks" : @{ // TODO: here too, LFMTrack
 												  @"track" : KZProperty(tracks)
 												  },

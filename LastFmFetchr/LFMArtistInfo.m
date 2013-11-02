@@ -7,7 +7,6 @@
 //
 
 #import "LFMArtistInfo.h"
-#import "LastFmFetchr.h"
 #import "KZPropertyMapper.h"
 
 @implementation LFMArtistInfo
@@ -25,7 +24,7 @@
 										  @"bio" : @{
 												  @"content" : KZProperty(bioContent),
 												  @"formationlist" : KZCall(bioFormationYearsFromDictionary:, bioFormationYears),
-												  @"links.link.href" : KZBox(URL, lastFmWikiPage),
+												  @"links.link.href" : KZBox(URL, lfmWikiPage),
 												  @"placeformed" : KZProperty(bioPlaceFormed),
 												  @"published" : KZCall(bioPublishedDateFromString:, bioPublishedDate),
 												  @"summary" : KZProperty(bioSummary),
@@ -54,10 +53,11 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 										  @"streamable" : KZCall(boolFromString:, isStreamable),
+										  @"tags" : @{
+												  @"tag" : KZCall(tagsFromArray:, tags)
+												  },
 #pragma clang diagnostic pop
-										  // TODO: tagNames and tagURLs need separate handler
-										  // also you should create an LFMTag class so I could return an array
-										  @"url" : KZProperty(lastFmPage)
+										  @"url" : KZProperty(lfmPage)
 										  }];
     }
     return self;
@@ -75,7 +75,7 @@
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy"];
 	
-	return @[[formatter dateFromString:[dict valueForKeyPath:@"formation.yearfrom"]], [formatter dateFromString:[dict valueForKeyPath:@"formation.yearfrom"]]];
+	return @[[formatter dateFromString:[dict valueForKeyPath:@"formation.yearfrom"]], [formatter dateFromString:[dict valueForKeyPath:@"formation.yearto"]]];
 }
 
 - (NSDate *)bioPublishedDateFromString:(NSString *)publishedString

@@ -8,6 +8,7 @@
 
 #import "LFMData.h"
 #import "KZPropertyMapper.h"
+#import "LFMTag.h"
 
 @implementation LFMData
 
@@ -16,6 +17,24 @@
 - (BOOL)boolFromString:(NSString *)boolString
 {
 	return [@"1" isEqual:boolString];
+}
+
+- (NSArray *)tagsFromArray:(id)obj
+{
+	if (![obj isKindOfClass:[NSArray class]]) {
+		return [NSArray array];
+	}
+	NSArray *jsonArray = (NSArray *)obj;
+	NSMutableArray *tagArray = [NSMutableArray arrayWithCapacity:[jsonArray count]];
+	
+	for (id JSON in jsonArray) {
+		if (![JSON isKindOfClass:[NSDictionary class]]) {
+			return nil;
+		}
+		[tagArray addObject:[[LFMTag alloc] initWithJson:(NSDictionary *)JSON]];
+	}
+	
+	return tagArray;
 }
 
 #pragma mark - Access to JSON

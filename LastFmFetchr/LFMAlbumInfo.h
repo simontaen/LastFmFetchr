@@ -16,10 +16,8 @@
 @property (nonatomic, strong, readonly) NSString *imageMegaString;
 @property (nonatomic, strong, readonly) NSNumber *listeners;
 @property (nonatomic, strong, readonly) NSDate *releaseDate;
-/// (ordered) Array of albums toptags as NSStrings
-@property (nonatomic, strong, readonly) NSArray *toptagNames;
-/// (ordered) Array of Last.fm tag links as NSURLs
-@property (nonatomic, strong, readonly) NSArray *toptagURLs;
+/// (ordered) Array of LFMTag
+@property (nonatomic, strong, readonly) NSArray *topTags;
 /// NSArray of NSDictionaries of the album tracks
 @property (nonatomic, strong, readonly) NSArray *tracks;
 @property (nonatomic, strong, readonly) NSString *wikiContent;

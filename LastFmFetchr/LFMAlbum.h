@@ -14,6 +14,6 @@
 @property (nonatomic, strong, readonly) NSString *musicBrianzId;
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) NSNumber *playcount;
-@property (nonatomic, strong, readonly) NSURL *lastFmPage;
+@property (nonatomic, strong, readonly) NSURL *lfmPage;
 
 @end

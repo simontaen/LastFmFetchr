@@ -27,7 +27,7 @@
 										  @"mbid" : KZProperty(musicBrianzId),
 										  @"name" : KZProperty(name),
 										  @"playcount" : KZProperty(playcount),
-										  @"url" : KZProperty(lastFmPage)
+										  @"url" : KZProperty(lfmPage)
 										  }];
     }
     return self;

@@ -16,7 +16,7 @@
 @property (nonatomic, strong, readonly) NSString *bioContent;
 /// NSArray of NSDates, [1] = year from, [2] = year to
 @property (nonatomic, strong, readonly) NSArray *bioFormationYears;
-@property (nonatomic, strong, readonly) NSURL *lastFmWikiPage;
+@property (nonatomic, strong, readonly) NSURL *lfmWikiPage;
 @property (nonatomic, strong, readonly) NSString *bioPlaceFormed;
 @property (nonatomic, strong, readonly) NSDate *bioPublishedDate;
 @property (nonatomic, strong, readonly) NSString *bioSummary;
@@ -30,10 +30,8 @@
 @property (nonatomic, strong, readonly) NSNumber *listeners;
 @property (nonatomic, strong, readonly) NSNumber *playcount;
 @property (nonatomic, readonly) BOOL isStreamable;
-/// (ordered) Array of Names as NSStrings
-@property (nonatomic, strong, readonly) NSArray *tagNames;
-/// (ordered) Array of Last.fm tag links as NSURLs
-@property (nonatomic, strong, readonly) NSArray *tagURLs;
-@property (nonatomic, strong, readonly) NSURL *lastFmPage;
+/// (ordered) Array of LFMTag
+@property (nonatomic, strong, readonly) NSArray *tags;
+@property (nonatomic, strong, readonly) NSURL *lfmPage;
 
 @end
