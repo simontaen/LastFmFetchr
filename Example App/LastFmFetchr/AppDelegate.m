@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LastFmFetchr.h"
+#import "LFMTesting.h"
 
 @implementation AppDelegate
 
@@ -15,6 +16,8 @@
 {
 	LastFmFetchr *fetchr = [LastFmFetchr setApiKey:@"aed3367b0133ab707cb4e5b6b04da3e7"];
 	//fetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
+	
+	//[[LFMTesting alloc] initForTesting];
 	
 	
 	// ------------ Artist calls ------------------
