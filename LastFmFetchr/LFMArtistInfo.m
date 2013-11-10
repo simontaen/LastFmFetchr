@@ -48,9 +48,7 @@
 												  @"playcount" : KZProperty(playcount)
 												  },
 										  @"streamable" : KZCall(boolFromString:, isStreamable),
-										  @"tags" : @{
-												  @"tag" : KZCall(tagsFromArray:, tags)
-												  },
+										  @"tags" : KZCall(tagsFromDictionary:, tags),
 										  @"url" : KZProperty(lfmPage)
 										  }];
     }

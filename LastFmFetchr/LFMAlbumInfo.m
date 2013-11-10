@@ -25,9 +25,7 @@
 												  },
 										  @"listeners" : KZProperty(listeners),
 										  @"releasedate" : KZCall(releaseDateFromString:, releaseDate),
-										  @"toptags" : @{
-												  @"tag" : KZCall(tagsFromArray:, topTags)
-												  },
+										  @"toptags" : KZCall(tagsFromDictionary:, topTags),
 										  @"tracks" : @{ // TODO: here too, LFMTrack
 												  @"track" : KZProperty(tracks)
 												  },

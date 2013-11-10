@@ -19,7 +19,7 @@ static NSString *const kEmpty = @"";
 #pragma mark - Property Mapper Helpers
 
 - (BOOL)boolFromString:(NSString *)boolString;
-- (NSArray *)tagsFromArray:(id)obj;
+- (NSArray *)tagsFromDictionary:(id)obj;
 
 #pragma mark - Access to JSON
 

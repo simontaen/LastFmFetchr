@@ -19,15 +19,23 @@
 	return [@"1" isEqual:boolString];
 }
 
-- (NSArray *)tagsFromArray:(id)obj
+- (NSArray *)tagsFromDictionary:(id)obj
 {
-	if (![obj isKindOfClass:[NSArray class]]) {
+	if (![obj isKindOfClass:[NSDictionary class]]) {
 		return [NSArray array];
 	}
-	NSArray *jsonArray = (NSArray *)obj;
-	NSMutableArray *tagArray = [NSMutableArray arrayWithCapacity:[jsonArray count]];
+	NSDictionary *dict = (NSDictionary *)obj;
 	
-	for (id JSON in jsonArray) {
+	id jsonArray = dict[@"tag"];
+	
+	if (![jsonArray isKindOfClass:[NSArray class]]) {
+		return [NSArray array];
+	}
+	NSArray *array = (NSArray *)jsonArray;
+	
+	NSMutableArray *tagArray = [NSMutableArray arrayWithCapacity:[array count]];
+	
+	for (id JSON in array) {
 		if (![JSON isKindOfClass:[NSDictionary class]]) {
 			return nil;
 		}
