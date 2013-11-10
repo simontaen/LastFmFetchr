@@ -65,42 +65,22 @@ static void *ImageExtraLargeKey;
 
 -(NSString *)imageSmallString
 {
-	static NSString *smallString = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		smallString = [[self.imageSmall absoluteString] description];
-	});
-	return smallString;
+	return [[self.imageSmall absoluteString] description];
 }
 
 -(NSString *)imageMediumString
 {
-	static NSString *mediumString = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		mediumString = [[self.imageMedium absoluteString] description];
-	});
-	return mediumString;
+	return [[self.imageMedium absoluteString] description];
 }
 
 -(NSString *)imageLargeString
 {
-	static NSString *largeString = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		largeString = [[self.imageLarge absoluteString] description];
-	});
-	return largeString;
+	return [[self.imageLarge absoluteString] description];
 }
 
 -(NSString *)imageExtraLargeString
 {
-	static NSString *extraLargeString = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		extraLargeString = [[self.imageExtraLarge absoluteString] description];
-	});
-	return extraLargeString;
+	return [[self.imageExtraLarge absoluteString] description];
 }
 
 @end

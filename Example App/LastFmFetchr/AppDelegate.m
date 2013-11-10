@@ -159,7 +159,7 @@
 							 //NSLog(@"JSON Response was: %@", data.JSON);
 							 NSLog(@"----------------------------- getAllAlbumsByArtist -------------------------------");
 							 
-							 NSLog(@"artistName %@", data.artist);
+							 NSLog(@"artistName %@", data.artistName);
 							 // of LFMAlbumTopAlbum
 							 NSArray *albums = data.albums;
 							 for (int i = 0; i < 3; i++) {
@@ -185,7 +185,7 @@
 							 }
 							 
 							 
-							 NSLog(@"Received %d TopAlbums by Artist %@", [albums count], data.artist);
+							 NSLog(@"Received %d TopAlbums by Artist %@", [albums count], data.artistName);
 							 NSLog(@"Counter %i", --counter);
 							 
 						  } else {

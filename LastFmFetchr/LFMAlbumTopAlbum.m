@@ -20,7 +20,8 @@
 						   usingMapping:@{
 										  @"@attr" : @{
 												  @"rank" : KZCall(rankFromString:, rankInAllArtistAlbums)
-												  }
+												  },
+										  @"artist" : KZCall(artistFromDictionary:, artist)
 										  }];
     }
     return self;
@@ -30,5 +31,16 @@
 {
 	return [NSNumber numberWithInt:[[rankString description] intValue]];
 }
+
+- (LFMArtist *)artistFromDictionary:(id)obj
+{
+	if (![obj isKindOfClass:[NSDictionary class]]) {
+		return nil;
+	}
+	NSDictionary *dict = (NSDictionary *)obj;
+	
+	return [[LFMArtist alloc] initWithJson:dict];
+}
+
 
 @end

@@ -26,12 +26,7 @@ static void *ImageMegaKey;
 
 -(NSString *)imageMegaString
 {
-	static NSString *megaString = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		megaString = [[self.imageMega absoluteString] description];
-	});
-	return megaString;
+	return [[self.imageMega absoluteString] description];
 }
 
 @end

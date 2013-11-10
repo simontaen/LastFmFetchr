@@ -10,4 +10,8 @@
 
 @interface LFMArtist : LFMData
 
+@property (nonatomic, strong, readonly) NSString *musicBrianzId;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSURL *lfmPage;
+
 @end

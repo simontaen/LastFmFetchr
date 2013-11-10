@@ -7,13 +7,20 @@
 //
 
 #import "LFMArtist.h"
+#import "KZPropertyMapper.h"
 
 @implementation LFMArtist
 
 - (instancetype)initWithJson:(NSDictionary *)JSON {
     self = [super initWithJson:JSON];
     if (self) {
-		// possible KZPropertyManager call
+		[KZPropertyMapper mapValuesFrom:JSON
+							 toInstance:self
+						   usingMapping:@{
+										  @"mbid" : KZProperty(musicBrianzId),
+										  @"name" : KZProperty(name),
+										  @"url" : KZProperty(lfmPage)
+										  }];
     }
     return self;
 }

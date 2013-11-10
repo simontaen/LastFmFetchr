@@ -7,9 +7,11 @@
 //
 
 #import "LFMAlbum.h"
+#import "LFMArtist.h"
 
 @interface LFMAlbumTopAlbum : LFMAlbum
 
 @property (nonatomic, strong, readonly) NSNumber *rankInAllArtistAlbums;
+@property (nonatomic, strong, readonly) LFMArtist *artist;
 
 @end

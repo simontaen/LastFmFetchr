@@ -20,7 +20,7 @@
 							 toInstance:self
 						   usingMapping:@{
 										  @"@attr" : @{
-												  @"artist" : KZProperty(artist)
+												  @"artist" : KZProperty(artistName)
 												  },
 										  @"album" : KZCall(albumsFromArray:, albums)
 										  }];

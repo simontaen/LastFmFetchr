@@ -72,7 +72,8 @@
 	self = [super init];
 	if (self) {
 		_JSON = JSON;
-		[KZPropertyMapper logIgnoredValues:NO];
+		// TODO: must implement something where only one mapping run is performed
+		[KZPropertyMapper logIgnoredValues:YES];
 	}
 	return self;
 }

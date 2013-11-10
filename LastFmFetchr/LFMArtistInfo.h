@@ -24,8 +24,6 @@
 @property (nonatomic, strong, readonly) NSDate *bioPublishedDate;
 @property (nonatomic, strong, readonly) NSString *bioSummary;
 @property (nonatomic, strong, readonly) NSDate *bioYearFormedDate;
-@property (nonatomic, strong, readonly) NSString *musicBrianzId;
-@property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, readonly) BOOL isOnTour;
 /// NSArray of NSDictionaries of similar artists
 @property (nonatomic, strong, readonly) NSArray *similarArtists;
@@ -34,6 +32,5 @@
 @property (nonatomic, readonly) BOOL isStreamable;
 /// (ordered) Array of LFMTag
 @property (nonatomic, strong, readonly) NSArray *tags;
-@property (nonatomic, strong, readonly) NSURL *lfmPage;
 
 @end
