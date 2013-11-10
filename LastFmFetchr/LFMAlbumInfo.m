@@ -25,12 +25,9 @@
 												  },
 										  @"listeners" : KZProperty(listeners),
 										  @"releasedate" : KZCall(releaseDateFromString:, releaseDate),
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
 										  @"toptags" : @{
 												  @"tag" : KZCall(tagsFromArray:, topTags)
 												  },
-#pragma clang diagnostic pop
 										  @"tracks" : @{ // TODO: here too, LFMTrack
 												  @"track" : KZProperty(tracks)
 												  },

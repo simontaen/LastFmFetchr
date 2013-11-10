@@ -39,10 +39,7 @@
 												  },
 										  @"mbid" : KZProperty(musicBrianzId),
 										  @"name" : KZProperty(name),
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
 										  @"ontour" : KZCall(boolFromString:, isOnTour),
-#pragma clang diagnostic pop
 										  @"similar" : @{ // TODO: LFMArtistSuperclass
 												  @"artist" : KZProperty(similarArtists)
 												  },
@@ -50,13 +47,10 @@
 												  @"listeners" : KZProperty(listeners),
 												  @"playcount" : KZProperty(playcount)
 												  },
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
 										  @"streamable" : KZCall(boolFromString:, isStreamable),
 										  @"tags" : @{
 												  @"tag" : KZCall(tagsFromArray:, tags)
 												  },
-#pragma clang diagnostic pop
 										  @"url" : KZProperty(lfmPage)
 										  }];
     }
