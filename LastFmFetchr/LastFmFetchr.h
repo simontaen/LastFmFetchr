@@ -14,6 +14,8 @@
 #import "LFMAlbum.h"
 #import "LFMAlbumInfo.h"
 #import "LFMAlbumTopAlbum.h"
+#import "LFMTag.h"
+#import "LFMTagInfo.h"
 
 // ----------------------------------------------------------------------
 // API Error codes, see http://www.last.fm/api/errorcodes
