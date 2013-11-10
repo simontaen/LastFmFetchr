@@ -8,6 +8,7 @@
 
 #import "LastFmFetchr.h"
 #import "AFNetworking.h"
+#import "SDURLCache.h"
 
 // ----------------------------------------------------------------------
 // API Error codes, see http://www.last.fm/api/errorcodes
@@ -328,10 +329,10 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 											}];
         
 		// NSURLCache does not cache LastFm responses as they do not signal proper caching headers
-        NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024 diskCapacity:50 * 1024 * 1024 diskPath:nil];
+        //NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024 diskCapacity:50 * 1024 * 1024 diskPath:nil];
 		
 		// http://nsscreencast.com/episodes/15-http-caching
-		//SDURLCache *cache = [[SDURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024 diskCapacity:50 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
+		SDURLCache *cache = [[SDURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024 diskCapacity:50 * 1024 * 1024 diskPath:[SDURLCache defaultCachePath]];
         [config setURLCache:cache];
         
         _fetchr = [[LastFmFetchr alloc] initWithBaseURL:[NSURL URLWithString:@"http://ws.audioscrobbler.com/2.0/"]
