@@ -69,7 +69,16 @@
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy"];
 	
-	return @[[formatter dateFromString:[dict valueForKeyPath:@"formation.yearfrom"]], [formatter dateFromString:[dict valueForKeyPath:@"formation.yearto"]]];
+	NSDate *yearfrom = [formatter dateFromString:[dict valueForKeyPath:@"formation.yearfrom"]];
+	NSDate *yearto = [formatter dateFromString:[dict valueForKeyPath:@"formation.yearto"]];
+	
+	if (yearfrom && yearto) {
+		return @[yearfrom, yearto];
+	} else if (yearfrom) {
+		return @[yearfrom];
+	} else {
+		return [NSArray array];
+	}
 }
 
 - (NSDate *)bioPublishedDateFromString:(NSString *)publishedString

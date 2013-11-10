@@ -14,7 +14,10 @@
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
 @property (nonatomic, strong, readonly) NSArray *members;
 @property (nonatomic, strong, readonly) NSString *bioContent;
-/// NSArray of NSDates, [1] = year from, [2] = year to
+/**
+ *  NSArray of NSDates, [1] = year from, [2] = year to (if available).
+ *  Returns an empty array if neither are defined.
+ */
 @property (nonatomic, strong, readonly) NSArray *bioFormationYears;
 @property (nonatomic, strong, readonly) NSURL *lfmWikiPage;
 @property (nonatomic, strong, readonly) NSString *bioPlaceFormed;
