@@ -9,6 +9,8 @@ Code.todo
 * Draw the UI for the App FIRST!
 	* Because you focus on solving the wrong problems if you don't!
 * Get the AlbumView using a UICollectionView backed by the NSFetchedResultsController (CoreData) working (see links from nshipster and ash furrow)
+* Since performance is an Issue with KZPropertyMapper, switch back to using methods @done
+* Cache results in iVars
 * Implement the OAuth [Authentication](http://www.last.fm/api/authentication)
 
 

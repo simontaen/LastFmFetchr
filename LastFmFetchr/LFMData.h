@@ -16,10 +16,11 @@ static NSString *const kEmpty = @"";
 
 @property (nonatomic, strong, readonly) NSDictionary *JSON;
 
-#pragma mark - Property Mapper Helpers
+#pragma mark - Mapping Helpers
 
 - (BOOL)boolFromString:(NSString *)boolString;
 - (NSArray *)tagsFromDictionary:(id)obj;
+- (NSNumber *)longLongNumberForKeyPath:(NSString *)key;
 
 #pragma mark - Access to JSON
 

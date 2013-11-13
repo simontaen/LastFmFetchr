@@ -7,26 +7,24 @@
 //
 
 #import "LFMTag.h"
-#import "KZPropertyMapper.h"
 
 @implementation LFMTag
-
-- (instancetype)initWithJson:(NSDictionary *)JSON {
-    self = [super initWithJson:JSON];
-    if (self) {
-		[KZPropertyMapper mapValuesFrom:JSON
-							 toInstance:self
-						   usingMapping:@{
-										  @"name" : KZProperty(name),
-										  @"url" : KZBox(URL, lfmPage)
-										  }];
-    }
-    return self;
-}
 
 - (NSString *)description
 {
 	return self.name;
+}
+
+#pragma mark -
+
+- (NSString *)name
+{
+	return [self notNilStringForKeyPath:@"name"];
+}
+
+- (NSArray *)lfmPage
+{
+	return [NSURL URLWithString:[self notNilStringForKeyPath:@"url"]];
 }
 
 @end

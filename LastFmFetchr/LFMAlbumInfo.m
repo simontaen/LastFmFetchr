@@ -7,54 +7,74 @@
 //
 
 #import "LFMAlbumInfo.h"
-#import "KZPropertyMapper.h"
 
 @implementation LFMAlbumInfo
 
-- (instancetype)initWithJson:(NSDictionary *)JSON {
-    self = [super initWithJson:JSON];
-    if (self) {
-		// http://www.last.fm/api/show/album.getInfo
-		[KZPropertyMapper mapValuesFrom:JSON
-							 toInstance:self
-						   usingMapping:@{
-										  @"artist" : KZProperty(artistName),
-										  @"id" : KZProperty(lfmId),
-										  @"image" : @{
-												  @4 : @{ @"#text" : KZBox(URL, imageMega) }
-												  },
-										  @"listeners" : KZProperty(listeners),
-										  @"releasedate" : KZCall(releaseDateFromString:, releaseDate),
-										  @"toptags" : KZCall(tagsFromDictionary:, topTags),
-										  @"tracks" : @{ // TODO: here too, LFMTrack
-												  @"track" : KZProperty(tracks)
-												  },
-										  @"wiki" : @{
-												  @"content" : KZProperty(wikiContent),
-												  @"published" : KZCall(wikiPublishedDateFromString:, wikiPublishedDate),
-												  @"summary" : KZProperty(wikiSummary)
-												  }
-										  }];
-    }
-    return self;
+#pragma mark - http://www.last.fm/api/show/album.getInfo
+
+- (NSString *)artistName
+{
+	return [self notNilStringForKeyPath:@"artist"];
 }
 
-#pragma mark - Private Methods
+- (NSNumber *)lfmId
+{
+	return [self longLongNumberForKeyPath:@"id"];
+}
 
-- (NSDate *)releaseDateFromString:(NSString *)dateString
+- (NSNumber *)listeners
+{
+	return [self longLongNumberForKeyPath:@"listeners"];
+}
+
+- (NSDate *)releaseDate
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
 	
+	NSString *dateString = [[self notNilStringForKeyPath:@"releasedate"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	
 	return [formatter dateFromString:[dateString stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"]];
 }
 
-- (NSDate *)wikiPublishedDateFromString:(NSString *)dateString
+- (NSArray *)topTags
+{
+	return [self tagsFromDictionary:@"toptags"];
+}
+
+// TODO: LFMTrack
+- (NSArray *)tracks
+{
+	id obj = [self.JSON valueForKeyPath:@"tracks.track"];
+	if (![obj isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *array = (NSArray *)obj;
+	NSMutableArray *tracks = [NSMutableArray arrayWithCapacity:[array count]];
+	
+	for (NSDictionary *dict in array) {
+		[tracks addObject:dict];
+	}
+	
+	return tracks;
+}
+
+- (NSString *)wikiContent
+{
+	return [self notNilStringForKeyPath:@"wiki.content"];
+}
+
+- (NSDate *)wikiPublishedDate
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
 	
-	return [formatter dateFromString:dateString];
+	return [formatter dateFromString:[self notNilStringForKeyPath:@"wiki.published"]];
+}
+
+- (NSString *)wikiSummary
+{
+	return [self notNilStringForKeyPath:@"wiki.summary"];
 }
 
 @end

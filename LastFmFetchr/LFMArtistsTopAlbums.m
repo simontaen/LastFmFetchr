@@ -7,29 +7,21 @@
 //
 
 #import "LFMArtistsTopAlbums.h"
-#import "KZPropertyMapper.h"
 #import "LFMAlbumTopAlbum.h"
 
 @implementation LFMArtistsTopAlbums
 
-- (instancetype)initWithJson:(NSDictionary *)JSON {
-    self = [super initWithJson:JSON];
-    if (self) {
-		// http://www.last.fm/api/show/artist.getTopAlbums
-		[KZPropertyMapper mapValuesFrom:JSON
-							 toInstance:self
-						   usingMapping:@{
-										  @"@attr" : @{
-												  @"artist" : KZProperty(artistName)
-												  },
-										  @"album" : KZCall(albumsFromArray:, albums)
-										  }];
-    }
-    return self;
+#pragma mark - http://www.last.fm/api/show/artist.getTopAlbums
+
+- (NSString *)artistName
+{
+	return [self notNilStringForKeyPath:@"attr.artist"];
 }
 
-- (NSArray *)albumsFromArray:(id)obj
+- (NSArray *)albums
 {
+	id obj = [self.JSON valueForKeyPath:@"album"];
+	
 	if ([obj isKindOfClass:[NSArray class]]) {
 		NSArray *array = (NSArray *)obj;
 		NSMutableArray *albums = [NSMutableArray arrayWithCapacity:[array count]];

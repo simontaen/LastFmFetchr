@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
   s.source_files = 'LastFmFetchr/*'
   s.requires_arc = true
   s.dependency 'AFNetworking', '~> 2.0'
-  s.dependency 'KZPropertyMapper', '~> 2.0'
   s.dependency 'FCYAsserts', '~> 1.2'
   s.dependency 'SDURLCache'
 end

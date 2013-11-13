@@ -26,41 +26,49 @@ static void *ImageExtraLargeKey;
 @dynamic imageSmall;
 
 - (NSURL *)imageSmall {
-    return objc_getAssociatedObject(self, ImageSmallKey);
-}
-
-- (void)setImageSmall:(NSURL *)newImageSmall {
-    objc_setAssociatedObject(self, ImageSmallKey, newImageSmall, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    id obj = objc_getAssociatedObject(self, ImageSmallKey);
+	if (!obj) {
+		NSURL *url = [NSURL URLWithString:[self smallImageForImageListKeyPath:@"image"]];
+		objc_setAssociatedObject(self, ImageSmallKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+		return url;
+	}
+	return obj;
 }
 
 @dynamic imageMedium;
 
 - (NSURL *)imageMedium {
-    return objc_getAssociatedObject(self, ImageMediumKey);
-}
-
-- (void)setImageMedium:(NSURL *)newImageMedium {
-    objc_setAssociatedObject(self, ImageMediumKey, newImageMedium, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    id obj = objc_getAssociatedObject(self, ImageMediumKey);
+	if (!obj) {
+		NSURL *url = [NSURL URLWithString:[self mediumImageForImageListKeyPath:@"image"]];
+		objc_setAssociatedObject(self, ImageMediumKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+		return url;
+	}
+	return obj;
 }
 
 @dynamic imageLarge;
 
 - (NSURL *)imageLarge {
-    return objc_getAssociatedObject(self, ImageLargeKey);
-}
-
-- (void)setImageLarge:(NSURL *)newImageLarge {
-    objc_setAssociatedObject(self, ImageLargeKey, newImageLarge, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    id obj = objc_getAssociatedObject(self, ImageLargeKey);
+	if (!obj) {
+		NSURL *url = [NSURL URLWithString:[self largeImageForImageListKeyPath:@"image"]];
+		objc_setAssociatedObject(self, ImageLargeKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+		return url;
+	}
+	return obj;
 }
 
 @dynamic imageExtraLarge;
 
 - (NSURL *)imageExtraLarge {
-    return objc_getAssociatedObject(self, ImageExtraLargeKey);
-}
-
-- (void)setImageExtraLarge:(NSURL *)newImageExtraLarge {
-    objc_setAssociatedObject(self, ImageExtraLargeKey, newImageExtraLarge, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    id obj = objc_getAssociatedObject(self, ImageExtraLargeKey);
+	if (!obj) {
+		NSURL *url = [NSURL URLWithString:[self extraLargeImageForImageListKeyPath:@"image"]];
+		objc_setAssociatedObject(self, ImageExtraLargeKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+		return url;
+	}
+	return obj;
 }
 
 -(NSString *)imageSmallString
@@ -81,6 +89,44 @@ static void *ImageExtraLargeKey;
 -(NSString *)imageExtraLargeString
 {
 	return [[self.imageExtraLarge absoluteString] description];
+}
+
+#pragma mark - Helpers
+
+- (NSString *)smallImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[0][@"#text"] description];
+	}
+	return kEmpty;
+}
+
+- (NSString *)mediumImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[1][@"#text"] description];
+	}
+	return kEmpty;
+}
+
+- (NSString *)largeImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[2][@"#text"] description];
+	}
+	return kEmpty;
+}
+
+- (NSString *)extraLargeImageForImageListKeyPath:(NSString *)imageListKeyPath
+{
+	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+	if ([obj isKindOfClass:[NSArray class]]) {
+		return [obj[3][@"#text"] description];
+	}
+	return kEmpty;
 }
 
 @end

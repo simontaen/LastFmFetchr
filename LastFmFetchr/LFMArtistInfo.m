@@ -7,58 +7,30 @@
 //
 
 #import "LFMArtistInfo.h"
-#import "KZPropertyMapper.h"
 
 @implementation LFMArtistInfo
 
-- (instancetype)initWithJson:(NSDictionary *)JSON {
-    self = [super initWithJson:JSON];
-    if (self) {
-		// http://www.last.fm/api/show/artist.getInfo
-		[KZPropertyMapper mapValuesFrom:JSON
-							 toInstance:self
-						   usingMapping:@{
-										  @"bandmembers" : @{ // TODO: LFMMember
-												  @"member" : KZProperty(members)
-												  },
-										  @"bio" : @{
-												  @"content" : KZProperty(bioContent),
-												  @"formationlist" : KZCall(bioFormationYearsFromDictionary:, bioFormationYears),
-												  @"links.link.href" : KZBox(URL, lfmWikiPage),
-												  @"placeformed" : KZProperty(bioPlaceFormed),
-												  @"published" : KZCall(bioPublishedDateFromString:, bioPublishedDate),
-												  @"summary" : KZProperty(bioSummary),
-												  @"yearformed" : KZCall(bioYearFormedDateFromString:, bioYearFormedDate)
-										  },
-										  @"image" : @{
-												  @0 : @{ @"#text" : KZBox(URL, imageSmall) },
-												  @1 : @{ @"#text" : KZBox(URL, imageMedium) },
-												  @2 : @{ @"#text" : KZBox(URL, imageLarge) },
-												  @3 : @{ @"#text" : KZBox(URL, imageExtraLarge) },
-												  @4 : @{ @"#text" : KZBox(URL, imageMega) }
-												  },
-										  @"mbid" : KZProperty(musicBrianzId),
-										  @"name" : KZProperty(name),
-										  @"ontour" : KZCall(boolFromString:, isOnTour),
-										  @"similar" : @{ // TODO: LFMArtistSuperclass
-												  @"artist" : KZProperty(similarArtists)
-												  },
-										  @"stats" : @{
-												  @"listeners" : KZProperty(listeners),
-												  @"playcount" : KZProperty(playcount)
-												  },
-										  @"streamable" : KZCall(boolFromString:, isStreamable),
-										  @"tags" : KZCall(tagsFromDictionary:, tags),
-										  @"url" : KZProperty(lfmPage)
-										  }];
-    }
-    return self;
+#pragma mark - http://www.last.fm/api/show/artist.getInfo
+
+- (NSArray *)members
+{
+	id obj = [self.JSON valueForKeyPath:@"bandmembers.member"];
+	if (![obj isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *array = (NSArray *)obj;
+	return array;
 }
 
-#pragma mark - Private Methods
-
-- (NSArray *)bioFormationYearsFromDictionary:(id)obj
+- (NSString *)bioContent
 {
+	return [self notNilStringForKeyPath:@"bio.content"];
+}
+
+- (NSArray *)bioFormationYears
+{
+	id obj = [self.JSON valueForKeyPath:@"bio.formationlist"];
+	
 	if (![obj isKindOfClass:[NSDictionary class]]) {
 		return nil;
 	}
@@ -79,20 +51,76 @@
 	}
 }
 
-- (NSDate *)bioPublishedDateFromString:(NSString *)publishedString
+- (NSURL *)lfmWikiPage
+{
+	id obj = [self.JSON valueForKeyPath:@"bio.links.link"];
+	if (![obj isKindOfClass:[NSDictionary class]]) {
+		return nil;
+	}
+	NSDictionary *dict = (NSDictionary *)obj;
+	
+	return [NSURL URLWithString:dict[@"href"]];
+}
+
+- (NSString *)bioPlaceFormed
+{
+	return [self notNilStringForKeyPath:@"bio.placeformed"];
+}
+
+- (NSDate *)bioPublishedDate
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
 	
-	return [formatter dateFromString:publishedString];
+	return [formatter dateFromString:[self notNilStringForKeyPath:@"bio.published"]];
 }
 
-- (NSDate *)bioYearFormedDateFromString:(NSString *)yearFormedString
+- (NSString *)bioSummary
+{
+	return [self notNilStringForKeyPath:@"bio.summary"];
+}
+
+- (NSDate *)bioYearFormedDate
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy"];
 	
-	return [formatter dateFromString:yearFormedString];
+	return [formatter dateFromString:[self notNilStringForKeyPath:@"bio.yearformed"]];
+}
+
+- (BOOL)isOnTour
+{
+	return [self boolFromString:[self notNilStringForKeyPath:@"ontour"]];
+}
+
+- (NSArray *)similarArtists
+{
+	id obj = [self.JSON valueForKeyPath:@"similar.artist"];
+	if (![obj isKindOfClass:[NSArray class]]) {
+		return nil;
+	}
+	NSArray *lfm = (NSArray *)obj;
+	return lfm;
+}
+
+- (NSNumber *)listeners
+{
+	return [self longLongNumberForKeyPath:@"stats.listeners"];
+}
+
+- (NSNumber *)playcount
+{
+	return [self longLongNumberForKeyPath:@"stats.playcount"];
+}
+
+- (BOOL)isStreamable
+{
+	return [self boolFromString:[self notNilStringForKeyPath:@"streamable"]];
+}
+
+- (NSArray *)tags
+{
+	return [self tagsFromDictionary:@"tags"];
 }
 
 @end

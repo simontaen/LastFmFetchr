@@ -7,29 +7,29 @@
 //
 
 #import "LFMAlbum.h"
-#import "KZPropertyMapper.h"
 
 @implementation LFMAlbum
 
-- (instancetype)initWithJson:(NSDictionary *)JSON {
-    self = [super initWithJson:JSON];
-    if (self) {
-		[KZPropertyMapper mapValuesFrom:JSON
-							 toInstance:self
-						   usingMapping:@{
-										  @"image" : @{
-												  @0 : @{ @"#text" : KZBox(URL, imageSmall) },
-												  @1 : @{ @"#text" : KZBox(URL, imageMedium) },
-												  @2 : @{ @"#text" : KZBox(URL, imageLarge) },
-												  @3 : @{ @"#text" : KZBox(URL, imageExtraLarge) }
-												  },
-										  @"mbid" : KZProperty(musicBrianzId),
-										  @"name" : KZProperty(name),
-										  @"playcount" : KZProperty(playcount),
-										  @"url" : KZProperty(lfmPage)
-										  }];
-    }
-    return self;
+#pragma mark -
+
+- (NSString *)musicBrianzId
+{
+	return [self notNilStringForKeyPath:@"mbid"];
+}
+
+- (NSString *)name
+{
+	return [self notNilStringForKeyPath:@"name"];
+}
+
+- (NSNumber *)playcount
+{
+	return [self longLongNumberForKeyPath:@"playcount"];
+}
+
+- (NSURL *)lfmPage
+{
+	return [NSURL URLWithString:[self notNilStringForKeyPath:@"url"]];
 }
 
 @end

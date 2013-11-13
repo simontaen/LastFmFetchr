@@ -7,12 +7,11 @@
 //
 
 #import "LFMData.h"
-#import "KZPropertyMapper.h"
 #import "LFMTag.h"
 
 @implementation LFMData
 
-#pragma mark - Property Mapper Helpers
+#pragma mark - Mapping Helpers
 
 - (BOOL)boolFromString:(NSString *)boolString
 {
@@ -45,6 +44,11 @@
 	return tagArray;
 }
 
+- (NSNumber *)longLongNumberForKeyPath:(NSString *)key
+{
+	return [NSNumber numberWithLongLong:[[self notNilStringForKeyPath:key] longLongValue]];
+}
+
 #pragma mark - Access to JSON
 
 - (NSString *)notNilStringForKeyPath:(NSString *)keyPath
@@ -58,7 +62,7 @@
 			return nil;
 		}
 	}
-
+	
 	if (obj) {
 		return [obj description];
 	}
@@ -73,7 +77,7 @@
 	if (self) {
 		_JSON = JSON;
 		// TODO: must implement something where only one mapping run is performed
-		[KZPropertyMapper logIgnoredValues:YES];
+		//[KZPropertyMapper logIgnoredValues:YES];
 	}
 	return self;
 }
