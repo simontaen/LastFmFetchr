@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "LastFmFetchr.h"
-#import "LFMTesting.h"
 
 @implementation AppDelegate
 
