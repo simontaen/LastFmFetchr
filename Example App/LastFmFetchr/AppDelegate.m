@@ -23,20 +23,21 @@
 	
 	int __block counter = 0;
 	NSLog(@"Counter %i", counter);
-	/*
+	
 	NSMutableSet *tasks = [NSMutableSet set];
-	 
+	
 	for (int i = 0; i < 3; i ++) {
-		NSURLSessionDataTask *task = [lastFmFetchr getInfoForArtist:@"Bon Jovi"
-															   mbid:nil
-															success:^(LFMArtistGetInfo *data) {
-																NSLog(@"Received data for Artist %@", [data name]);
-																NSLog(@"Counter %i", --counter);
-															}
-															failure:^(NSURLSessionDataTask *task, NSError *error) {
-																NSLog(@"Error: %@", [lastFmFetchr messageForError:error withTask:task]);
-																NSLog(@"Counter %i", --counter);
-															}];
+		NSURLSessionDataTask *task = [fetchr getInfoForArtist:@"BonJovi"
+														 mbid:nil
+												   completion:^(LFMArtistInfo *data, NSError *error) {
+													   if (error) {
+														   NSLog(@"Error: %@", [error localizedDescription]);
+													   } else {
+														   NSLog(@"Received data for Artist %@", [data name]);
+													   }
+													   NSLog(@"Counter %i", --counter);
+													   
+												   }];
 		NSLog(@"Counter %i", ++counter);
 		if (i % 2 == 0) {
 			[tasks addObject:task];
@@ -49,57 +50,55 @@
 		NSLog(@"Cancelled task");
 		NSLog(@"Counter %i", --counter);
 	}
-	 */
 	
 	[fetchr getInfoForArtist:@"Pink Floyd"
 						mbid:nil
-					 completion:^(LFMArtistInfo *data, NSError *error) {
-						 if (!error) {
-							 //NSLog(@"JSON Response was: %@", data.JSON);
-							 NSLog(@"------------------------------ getInfoForArtist -----------------------------------");
-							 //NSLog(@"members %@", data.members);
-							 NSLog(@"omitting members");
-							 //NSLog(@"bioContent %@", data.bioContent);
-							 NSLog(@"omitting bioContent");
-							 NSLog(@"bioFormationYears %@", data.bioFormationYears);
-							 NSLog(@"lfmWikiPage %@", data.lfmWikiPage);
-							 NSLog(@"bioPlaceFormed %@", data.bioPlaceFormed);
-							 NSLog(@"bioPublishedDate %@", data.bioPublishedDate);
-							 //NSLog(@"bioSummary %@", data.bioSummary);
-							 NSLog(@"omitting bioSummary");
-							 NSLog(@"bioYearFormedDate %@", data.bioYearFormedDate);
-							 
-							 NSLog(@"imageSmall %@", data.imageSmall);
-							 NSLog(@"imageSmallString %@", data.imageSmallString);
-							 NSLog(@"imageMedium %@", data.imageMedium);
-							 NSLog(@"imageMediumString %@", data.imageMediumString);
-							 NSLog(@"imageLarge %@", data.imageLarge);
-							 NSLog(@"imageLargeString %@", data.imageLargeString);
-							 NSLog(@"imageExtraLarge %@", data.imageExtraLarge);
-							 NSLog(@"imageExtraLargeString %@", data.imageExtraLargeString);
-							 
-							 NSLog(@"imageMega %@", data.imageMega);
-							 NSLog(@"imageMegaString %@", data.imageMegaString);
-							 
-							 NSLog(@"musicBrianzId %@", data.musicBrianzId);
-							 NSLog(@"name %@", data.name);
-							 NSLog(@"isOnTour %hhd", data.isOnTour);
-							 //NSLog(@"similarArtists %@", data.similarArtists);
-							 NSLog(@"omitting similarArtists");
-							 NSLog(@"listeners %@", data.listeners);
-							 NSLog(@"playcount %@", data.playcount);
-							 NSLog(@"isStreamable %c", data.isStreamable);
-							 NSLog(@"tags %@", data.tags);
-							 NSLog(@"lfmPage %@", data.lfmPage);
-							 
-							 NSLog(@"Received data for Artist %@", data.name);
-							 NSLog(@"Counter %i", --counter);
-							 
-						 } else {
-							 NSLog(@"Error: %@", [error localizedDescription]);
-							 NSLog(@"Counter %i", --counter);
-						 };
-					 }];
+				  completion:^(LFMArtistInfo *data, NSError *error) {
+					  if (error) {
+						  NSLog(@"Error: %@", [error localizedDescription]);
+					  } else {
+						  //NSLog(@"JSON Response was: %@", data.JSON);
+						  NSLog(@"------------------------------ getInfoForArtist -----------------------------------");
+						  //NSLog(@"members %@", data.members);
+						  NSLog(@"omitting members");
+						  //NSLog(@"bioContent %@", data.bioContent);
+						  NSLog(@"omitting bioContent");
+						  NSLog(@"bioFormationYears %@", data.bioFormationYears);
+						  NSLog(@"lfmWikiPage %@", data.lfmWikiPage);
+						  NSLog(@"bioPlaceFormed %@", data.bioPlaceFormed);
+						  NSLog(@"bioPublishedDate %@", data.bioPublishedDate);
+						  //NSLog(@"bioSummary %@", data.bioSummary);
+						  NSLog(@"omitting bioSummary");
+						  NSLog(@"bioYearFormedDate %@", data.bioYearFormedDate);
+						  
+						  NSLog(@"imageSmall %@", data.imageSmall);
+						  NSLog(@"imageSmallString %@", data.imageSmallString);
+						  NSLog(@"imageMedium %@", data.imageMedium);
+						  NSLog(@"imageMediumString %@", data.imageMediumString);
+						  NSLog(@"imageLarge %@", data.imageLarge);
+						  NSLog(@"imageLargeString %@", data.imageLargeString);
+						  NSLog(@"imageExtraLarge %@", data.imageExtraLarge);
+						  NSLog(@"imageExtraLargeString %@", data.imageExtraLargeString);
+						  
+						  NSLog(@"imageMega %@", data.imageMega);
+						  NSLog(@"imageMegaString %@", data.imageMegaString);
+						  
+						  NSLog(@"musicBrianzId %@", data.musicBrianzId);
+						  NSLog(@"name %@", data.name);
+						  NSLog(@"isOnTour %hhd", data.isOnTour);
+						  //NSLog(@"similarArtists %@", data.similarArtists);
+						  NSLog(@"omitting similarArtists");
+						  NSLog(@"listeners %@", data.listeners);
+						  NSLog(@"playcount %@", data.playcount);
+						  NSLog(@"isStreamable %c", data.isStreamable);
+						  NSLog(@"tags %@", data.tags);
+						  NSLog(@"lfmPage %@", data.lfmPage);
+						  
+						  NSLog(@"Received data for Artist %@", data.name);
+						  
+					  };
+					  NSLog(@"Counter %i", --counter);
+				  }];
 	NSLog(@"Counter %i", ++counter);
 	
 	
@@ -109,7 +108,9 @@
 				   byArtist:@"AC/DC"
 					   mbid:nil
 				 completion:^(LFMAlbumInfo *data, NSError *error) {
-					 if (!error) {
+					 if (error) {
+						 NSLog(@"Error: %@", [error localizedDescription]);
+					 } else {
 						 //NSLog(@"JSON Response was: %@", data.JSON);
 						 NSLog(@"------------------------------- getInfoForAlbum --------------------------------");
 						 
@@ -142,55 +143,43 @@
 						 NSLog(@"lfmPage %@", data.lfmPage);
 						 
 						 NSLog(@"Received data for Album %@ by Artist %@", data.name, data.artistName);
-						 NSLog(@"Counter %i", --counter);
 						 
-					 } else {
-						 NSLog(@"Error: %@", [error localizedDescription]);
-						 NSLog(@"Counter %i", --counter);
 					 };
+					 NSLog(@"Counter %i", --counter);
 				 }];
 	NSLog(@"Counter %i", ++counter);
 	
 	[fetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 							mbid:nil
 					  completion:^(LFMArtistsTopAlbums *data, NSError *error) {
-						  if (!error) {
-							 //NSLog(@"JSON Response was: %@", data.JSON);
-							 NSLog(@"----------------------------- getAllAlbumsByArtist -------------------------------");
-							 
-							 NSLog(@"artistName %@", data.artistName);
-							 // of LFMAlbumTopAlbum
-							 NSArray *albums = data.albums;
-							 for (int i = 0; i < 3; i++) {
-								 LFMAlbumTopAlbum *album = albums[i];
-								 NSLog(@"---------------------- %@ ----------------------", [album name]);
-								 
-								 NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);
-								 NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbums]);
-								 
-								 NSLog(@"imageSmall %@", [album imageSmall]);
-								 //NSLog(@"imageSmallURL %@", [album imageSmallURL]);
-								 NSLog(@"imageMedium %@", [album imageMedium]);
-								 //NSLog(@"imageMediumURL %@", [album imageMediumURL]);
-								 NSLog(@"imageLarge %@", [album imageLarge]);
-								 //NSLog(@"imageLargeURL %@", [album imageLargeURL]);
-								 NSLog(@"imageExtraLarge %@", [album imageExtraLarge]);
-								 //NSLog(@"imageExtraLargeURL %@", [album imageExtraLargeURL]);
-								 NSLog(@"musicBrianzId %@", [album musicBrianzId]);
-								 NSLog(@"playcount %@", [album playcount]);
-								 //NSLog(@"playcountNumber %@", [album playcountNumber]);
-								 NSLog(@"lfmPage %@", [album lfmPage]);
-								 //NSLog(@"lastFmPageURL %@", [album lastFmPageURL]);
-							 }
-							 
-							 
-							 NSLog(@"Received %d TopAlbums by Artist %@", [albums count], data.artistName);
-							 NSLog(@"Counter %i", --counter);
-							 
+						  if (error) {
+							  NSLog(@"Error: %@", [error localizedDescription]);
 						  } else {
-							 NSLog(@"Error: %@", [error localizedDescription]);
-							 NSLog(@"Counter %i", --counter);
-						 };
+							  //NSLog(@"JSON Response was: %@", data.JSON);
+							  NSLog(@"----------------------------- getAllAlbumsByArtist -------------------------------");
+							  
+							  NSLog(@"artistName %@", data.artistName);
+							  // of LFMAlbumTopAlbum
+							  NSArray *albums = data.albums;
+							  for (int i = 0; i < 3; i++) {
+								  LFMAlbumTopAlbum *album = albums[i];
+								  NSLog(@"---------------------- %@ ----------------------", [album name]);
+								  
+								  NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);
+								  NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbums]);
+								  
+								  NSLog(@"imageSmall %@", [album imageSmall]);
+								  NSLog(@"imageMedium %@", [album imageMedium]);
+								  NSLog(@"imageLarge %@", [album imageLarge]);
+								  NSLog(@"imageExtraLarge %@", [album imageExtraLarge]);
+								  NSLog(@"musicBrianzId %@", [album musicBrianzId]);
+								  NSLog(@"playcount %@", [album playcount]);
+								  NSLog(@"lfmPage %@", [album lfmPage]);
+							  }
+							  NSLog(@"Received %d TopAlbums by Artist %@", [albums count], data.artistName);
+							  
+						  };
+						  NSLog(@"Counter %i", --counter);
 					  }];
 	NSLog(@"Counter %i", ++counter);
 	
