@@ -2,7 +2,6 @@ Code.todo
 
 * Comment style refactoring using [this xcode plugin](https://github.com/onevcat/VVDocumenter-Xcode)
 * Fix TODO's in fetchr
-* Cache results in iVars
 * Implement the OAuth [Authentication](http://www.last.fm/api/authentication)
 
 

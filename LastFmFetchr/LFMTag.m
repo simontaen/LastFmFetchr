@@ -19,12 +19,20 @@
 
 - (NSString *)name
 {
-	return [self notNilStringForKeyPath:@"name"];
+	static NSString *name = nil;
+	if (!name) {
+		name = [self notNilStringForKeyPath:@"name"];
+	}
+	return name;
 }
 
-- (NSArray *)lfmPage
+- (NSURL *)lfmPage
 {
-	return [NSURL URLWithString:[self notNilStringForKeyPath:@"url"]];
+	static NSURL *lfmPage = nil;
+	if (!lfmPage) {
+		lfmPage = [NSURL URLWithString:[self notNilStringForKeyPath:@"url"]];
+	}
+	return lfmPage;
 }
 
 @end

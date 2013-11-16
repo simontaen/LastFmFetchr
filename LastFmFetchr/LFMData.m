@@ -36,7 +36,7 @@
 	
 	for (id JSON in array) {
 		if (![JSON isKindOfClass:[NSDictionary class]]) {
-			return nil;
+			return [NSArray array];
 		}
 		[tagArray addObject:[[LFMTag alloc] initWithJson:(NSDictionary *)JSON]];
 	}
@@ -57,9 +57,10 @@
 	// this is nil value save
 	for (NSString *key in [keyPath componentsSeparatedByString:@"."]) {
 		if ([obj isKindOfClass:[NSDictionary class]]) {
+			// go "down" the keyPath
 			obj = obj[key];
 		} else {
-			return nil;
+			return kEmpty;
 		}
 	}
 	

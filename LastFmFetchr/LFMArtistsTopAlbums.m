@@ -15,24 +15,33 @@
 
 - (NSString *)artistName
 {
-	return [self notNilStringForKeyPath:@"attr.artist"];
+	static NSString *artistName = nil;
+	if (!artistName) {
+		artistName = [self notNilStringForKeyPath:@"attr.artist"];
+	}
+	return artistName;
 }
 
 - (NSArray *)albums
 {
-	id obj = [self.JSON valueForKeyPath:@"album"];
-	
-	if ([obj isKindOfClass:[NSArray class]]) {
-		NSArray *array = (NSArray *)obj;
-		NSMutableArray *albums = [NSMutableArray arrayWithCapacity:[array count]];
-		for (id album in array) {
-			if ([album isKindOfClass:[NSDictionary class]]) {
-				[albums addObject:[[LFMAlbumTopAlbum alloc] initWithJson:album]];
+	static NSArray *albums = nil;
+	if (!albums) {
+		id obj = [self.JSON valueForKeyPath:@"album"];
+		
+		if (![obj isKindOfClass:[NSArray class]]) {
+			albums = [NSArray array];
+		} else {
+			NSArray *array = (NSArray *)obj;
+			NSMutableArray *mutableAlbums = [NSMutableArray arrayWithCapacity:[array count]];
+			for (id aAlbum in array) {
+				if ([aAlbum isKindOfClass:[NSDictionary class]]) {
+					[mutableAlbums addObject:[[LFMAlbumTopAlbum alloc] initWithJson:(NSDictionary *)aAlbum]];
+				}
 			}
+			albums = [NSArray arrayWithArray:mutableAlbums];
 		}
-		return albums;
 	}
-	return nil;
+	return albums;
 }
 
 @end

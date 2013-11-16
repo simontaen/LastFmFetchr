@@ -14,67 +14,97 @@
 
 - (NSString *)artistName
 {
-	return [self notNilStringForKeyPath:@"artist"];
+	static NSString *artistName = nil;
+	if (!artistName) {
+		artistName = [self notNilStringForKeyPath:@"artist"];
+	}
+	return artistName;
 }
 
 - (NSNumber *)lfmId
 {
-	return [self longLongNumberForKeyPath:@"id"];
+	static NSNumber *lfmId = nil;
+	if (!lfmId) {
+		lfmId = [self longLongNumberForKeyPath:@"id"];
+	}
+	return lfmId;
 }
 
 - (NSNumber *)listeners
 {
-	return [self longLongNumberForKeyPath:@"listeners"];
+	static NSNumber *listeners = nil;
+	if (!listeners) {
+		return [self longLongNumberForKeyPath:@"listeners"];
+	}
+	return listeners;
 }
 
 - (NSDate *)releaseDate
 {
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
-	
-	NSString *dateString = [[self notNilStringForKeyPath:@"releasedate"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-	
-	return [formatter dateFromString:[dateString stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"]];
+	static NSDate *releaseDate = nil;
+	if (!releaseDate) {
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
+		
+		NSString *dateString = [[self notNilStringForKeyPath:@"releasedate"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		
+		releaseDate = [formatter dateFromString:[dateString stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"]];
+	}
+	return releaseDate;
 }
 
 - (NSArray *)topTags
 {
-	return [self tagsFromDictionary:@"toptags"];
+	static NSArray *topTags = nil;
+	if (!topTags) {
+		topTags = [self tagsFromDictionary:@"toptags"];
+	}
+	return topTags;
 }
 
 // TODO: LFMTrack
 - (NSArray *)tracks
 {
-	id obj = [self.JSON valueForKeyPath:@"tracks.track"];
-	if (![obj isKindOfClass:[NSArray class]]) {
-		return nil;
+	static NSArray *tracks = nil;
+	if (!tracks) {
+		id obj = [self.JSON valueForKeyPath:@"tracks.track"];
+		if (![obj isKindOfClass:[NSArray class]]) {
+			tracks = [NSArray array];
+		} else {
+			tracks = (NSArray *)obj;			
+		}
 	}
-	NSArray *array = (NSArray *)obj;
-	NSMutableArray *tracks = [NSMutableArray arrayWithCapacity:[array count]];
-	
-	for (NSDictionary *dict in array) {
-		[tracks addObject:dict];
-	}
-	
 	return tracks;
 }
 
 - (NSString *)wikiContent
 {
-	return [self notNilStringForKeyPath:@"wiki.content"];
+	static NSString *wikiContent = nil;
+	if (!wikiContent) {
+		wikiContent = [self notNilStringForKeyPath:@"wiki.content"];
+	}
+	return wikiContent;
 }
 
 - (NSDate *)wikiPublishedDate
 {
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
-	
-	return [formatter dateFromString:[self notNilStringForKeyPath:@"wiki.published"]];
+	static NSDate *wikiPublishedDate = nil;
+	if (!wikiPublishedDate) {
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
+		
+		wikiPublishedDate = [formatter dateFromString:[self notNilStringForKeyPath:@"wiki.published"]];
+	}
+	return wikiPublishedDate;
 }
 
 - (NSString *)wikiSummary
 {
-	return [self notNilStringForKeyPath:@"wiki.summary"];
+	static NSString *wikiSummary = nil;
+	if (!wikiSummary) {
+		wikiSummary = [self notNilStringForKeyPath:@"wiki.summary"];
+	}
+	return wikiSummary;
 }
 
 @end

@@ -14,19 +14,25 @@
 
 - (NSNumber *)rankInAllArtistAlbums
 {
-	return [NSNumber numberWithInt:[[self notNilStringForKeyPath:@"@attr.rank"] intValue]];
+	static NSNumber *rankInAllArtistAlbums = nil;
+	if (!rankInAllArtistAlbums) {
+		rankInAllArtistAlbums = [NSNumber numberWithInt:[[self notNilStringForKeyPath:@"@attr.rank"] intValue]];
+	}
+	return rankInAllArtistAlbums;
 }
 
 - (LFMArtist *)artist
 {
-	id obj = [self.JSON valueForKeyPath:@"artist"];
-	
-	if (![obj isKindOfClass:[NSDictionary class]]) {
-		return nil;
+	static LFMArtist *artist = nil;
+	if (!artist) {
+		id obj = [self.JSON valueForKeyPath:@"artist"];
+		
+		if ([obj isKindOfClass:[NSDictionary class]]) {
+			artist = [[LFMArtist alloc] initWithJson:(NSDictionary *)obj];
+		}
+		// intentionally returning nil, not sure what to do here.
 	}
-	NSDictionary *dict = (NSDictionary *)obj;
-	
-	return [[LFMArtist alloc] initWithJson:dict];
+	return artist;
 }
 
 @end

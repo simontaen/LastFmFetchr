@@ -14,22 +14,38 @@
 
 - (NSString *)musicBrianzId
 {
-	return [self notNilStringForKeyPath:@"mbid"];
+	static NSString *musicBrianzId = nil;
+	if (!musicBrianzId) {
+		musicBrianzId = [self notNilStringForKeyPath:@"mbid"];
+	}
+	return musicBrianzId;
 }
 
 - (NSString *)name
 {
-	return [self notNilStringForKeyPath:@"name"];
+	static NSString *name = nil;
+	if (!name) {
+		name = [self notNilStringForKeyPath:@"name"];
+	}
+	return name;
 }
 
 - (NSNumber *)playcount
 {
-	return [self longLongNumberForKeyPath:@"playcount"];
+	static NSNumber *playcount = nil;
+	if (!playcount) {
+		playcount = [self longLongNumberForKeyPath:@"playcount"];
+	}
+	return playcount;
 }
 
 - (NSURL *)lfmPage
 {
-	return [NSURL URLWithString:[self notNilStringForKeyPath:@"url"]];
+	static NSURL *lfmPage = nil;
+	if (!lfmPage) {
+		lfmPage = [NSURL URLWithString:[self notNilStringForKeyPath:@"url"]];
+	}
+	return lfmPage;
 }
 
 @end
