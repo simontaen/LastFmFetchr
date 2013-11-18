@@ -20,3 +20,10 @@ $1
 /// .*\s- \(.*\)(.*);
 ## Replace
 NSLog(@"$1 %@", [data $1]);
+
+
+# Methods from propeties
+## Regex
+@property \(.*\) (\S*( \*)?) *(\S*);
+## Replace
+- ($1)$3;

@@ -2,16 +2,17 @@
 //  LFMTagInfo.h
 //  LastFmFetchr
 //
-//  Created by Simon Tännler on 02/11/13.
+//  Created by Simon Tännler on 18/11/13.
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "LFMTag.h"
-#import "LFMData+ImagesSmallToMega.h"
 
-@interface LFMTagInfo : LFMTag
+@protocol LFMTagInfo <NSObject, LFMTag>
 
-@property (nonatomic, strong, readonly) NSNumber *listeners;
-@property (nonatomic, strong, readonly) NSDate *releaseDate;
+// TODO: Images S to Mega
+- (NSNumber *)listeners;
+- (NSDate *)releaseDate;
 
 @end

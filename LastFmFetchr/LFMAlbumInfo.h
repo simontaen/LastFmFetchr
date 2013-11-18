@@ -1,26 +1,27 @@
 //
-//  LFMAlbumGetInfo.h
+//  LFMAlbumInfo.h
 //  LastFmFetchr
 //
-//  Created by Simon Tännler on 30/07/13.
+//  Created by Simon Tännler on 18/11/13.
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "LFMAlbum.h"
-#import "LFMData+ImagesSmallToMega.h"
 
-@interface LFMAlbumInfo : LFMAlbum
+@protocol LFMAlbumInfo <NSObject, LFMAlbum>
 
-@property (nonatomic, strong, readonly) NSString *artistName;
-@property (nonatomic, strong, readonly) NSNumber *lfmId;
-@property (nonatomic, strong, readonly) NSNumber *listeners;
-@property (nonatomic, strong, readonly) NSDate *releaseDate;
+// TODO: Images S to Mega
+- (NSString *)artistName;
+- (NSNumber *)lfmId;
+- (NSNumber *)listeners;
+- (NSDate *)releaseDate;
 /// (ordered) Array of LFMTag
-@property (nonatomic, strong, readonly) NSArray *topTags;
-/// NSArray of NSDictionaries of the album tracks
-@property (nonatomic, strong, readonly) NSArray *tracks;
-@property (nonatomic, strong, readonly) NSString *wikiContent;
-@property (nonatomic, strong, readonly) NSDate *wikiPublishedDate;
-@property (nonatomic, strong, readonly) NSString *wikiSummary;
+- (NSArray *)topTags;
+/// (ordered) Array of LFMTracks
+- (NSArray *)tracks;
+- (NSString *)wikiContent;
+- (NSDate *)wikiPublishedDate;
+- (NSString *)wikiSummary;
 
 @end

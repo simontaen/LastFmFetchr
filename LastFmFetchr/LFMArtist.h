@@ -2,16 +2,16 @@
 //  LFMArtist.h
 //  LastFmFetchr
 //
-//  Created by Simon Tännler on 30/10/13.
+//  Created by Simon Tännler on 18/11/13.
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMData.h"
+#import <Foundation/Foundation.h>
 
-@interface LFMArtist : LFMData
+@protocol LFMArtist <NSObject>
 
-@property (nonatomic, strong, readonly) NSString *musicBrianzId;
-@property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, strong, readonly) NSURL *lfmPage;
+- (NSString *)musicBrianzId;
+- (NSString *)name;
+- (NSURL *)lfmPage;
 
 @end

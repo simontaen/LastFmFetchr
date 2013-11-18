@@ -1,17 +1,17 @@
 //
-//  LFMArtistGetTopAlbums.h
+//  LFMArtistsTopAlbums.h
 //  LastFmFetchr
 //
-//  Created by Simon Tännler on 30/07/13.
+//  Created by Simon Tännler on 18/11/13.
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import "LFMData.h"
+#import <Foundation/Foundation.h>
 
-@interface LFMArtistsTopAlbums : LFMData
+@protocol LFMArtistsTopAlbums <NSObject>
 
-@property (nonatomic, strong, readonly) NSString *artistName;
+- (NSString *)artistName;
 ///	of LFMAlbumTopAlbum's
-@property (nonatomic, strong, readonly) NSArray *albums;
+- (NSArray *)albums;
 
 @end

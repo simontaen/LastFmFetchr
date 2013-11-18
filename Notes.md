@@ -2,6 +2,7 @@ Code.todo
 
 * Comment style refactoring using [this xcode plugin](https://github.com/onevcat/VVDocumenter-Xcode)
 * Fix TODO's in fetchr
+* How can I call every property on an object?
 * Implement the OAuth [Authentication](http://www.last.fm/api/authentication)
 
 

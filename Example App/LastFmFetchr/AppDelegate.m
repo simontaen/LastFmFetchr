@@ -23,37 +23,10 @@
 	
 	int __block counter = 0;
 	NSLog(@"Counter %i", counter);
-	
-	NSMutableSet *tasks = [NSMutableSet set];
-	
-	for (int i = 0; i < 3; i ++) {
-		NSURLSessionDataTask *task = [fetchr getInfoForArtist:@"BonJovi"
-														 mbid:nil
-												   completion:^(LFMArtistInfo *data, NSError *error) {
-													   if (error) {
-														   NSLog(@"Error: %@", [error localizedDescription]);
-													   } else {
-														   NSLog(@"Received data for Artist %@", [data name]);
-													   }
-													   NSLog(@"Counter %i", --counter);
-													   
-												   }];
-		NSLog(@"Counter %i", ++counter);
-		if (i % 2 == 0) {
-			[tasks addObject:task];
-		}
-	}
-	
-	
-	for (NSURLSessionDataTask *task in tasks) {
-		[task cancel];
-		NSLog(@"Cancelled task");
-		NSLog(@"Counter %i", --counter);
-	}
-	
+		
 	[fetchr getInfoForArtist:@"Pink Floyd"
 						mbid:nil
-				  completion:^(LFMArtistInfo *data, NSError *error) {
+				  completion:^(id<LFMArtistInfo> data, NSError *error) {
 					  if (error) {
 						  NSLog(@"Error: %@", [error localizedDescription]);
 					  } else {
@@ -70,7 +43,7 @@
 						  //NSLog(@"bioSummary %@", data.bioSummary);
 						  NSLog(@"omitting bioSummary");
 						  NSLog(@"bioYearFormedDate %@", data.bioYearFormedDate);
-						  
+						  /*
 						  NSLog(@"imageSmall %@", data.imageSmall);
 						  NSLog(@"imageSmallString %@", data.imageSmallString);
 						  NSLog(@"imageMedium %@", data.imageMedium);
@@ -82,7 +55,7 @@
 						  
 						  NSLog(@"imageMega %@", data.imageMega);
 						  NSLog(@"imageMegaString %@", data.imageMegaString);
-						  
+						  */
 						  NSLog(@"musicBrianzId %@", data.musicBrianzId);
 						  NSLog(@"name %@", data.name);
 						  NSLog(@"isOnTour %hhd", data.isOnTour);
@@ -107,7 +80,7 @@
 	[fetchr getInfoForAlbum:@"Highway to Hell"
 				   byArtist:@"AC/DC"
 					   mbid:nil
-				 completion:^(LFMAlbumInfo *data, NSError *error) {
+				 completion:^(id<LFMAlbumInfo> data, NSError *error) {
 					 if (error) {
 						 NSLog(@"Error: %@", [error localizedDescription]);
 					 } else {
@@ -116,7 +89,7 @@
 						 
 						 NSLog(@"artistName %@", data.artistName);
 						 NSLog(@"lfmId %@", data.lfmId);
-						 
+						 /*
 						 NSLog(@"imageSmall %@", data.imageSmall);
 						 NSLog(@"imageSmallString %@", data.imageSmallString);
 						 NSLog(@"imageMedium %@", data.imageMedium);
@@ -128,11 +101,11 @@
 						 
 						 NSLog(@"imageMega %@", data.imageMega);
 						 NSLog(@"imageMegaString %@", data.imageMegaString);
-						 
+						 */
 						 NSLog(@"listeners %@", data.listeners);
 						 NSLog(@"releaseDate %@", data.releaseDate);
 						 NSLog(@"toptags %@", data.topTags);
-						 NSLog(@"omitting tracks");
+						 NSLog(@"tracks %@", data.tracks);
 						 NSLog(@"omitting wikiContent");
 						 NSLog(@"wikiPublishedDate %@", data.wikiPublishedDate);
 						 NSLog(@"omitting wikiSummary");
@@ -151,7 +124,7 @@
 	
 	[fetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 							mbid:nil
-					  completion:^(LFMArtistsTopAlbums *data, NSError *error) {
+					  completion:^(id<LFMArtistsTopAlbums> data, NSError *error) {
 						  if (error) {
 							  NSLog(@"Error: %@", [error localizedDescription]);
 						  } else {
@@ -162,16 +135,17 @@
 							  // of LFMAlbumTopAlbum
 							  NSArray *albums = data.albums;
 							  for (int i = 0; i < 3; i++) {
-								  LFMAlbumTopAlbum *album = albums[i];
+								  id<LFMAlbumTopAlbum> album = albums[i];
 								  NSLog(@"---------------------- %@ ----------------------", [album name]);
 								  
-								  NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);
-								  NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbums]);
-								  
+								  NSLog(@"rankInAllArtistAlbums %@", [album rank]);
+								  NSLog(@"rankInAllArtistAlbumsNumber %@", [album rank]);
+								  /*
 								  NSLog(@"imageSmall %@", [album imageSmall]);
 								  NSLog(@"imageMedium %@", [album imageMedium]);
 								  NSLog(@"imageLarge %@", [album imageLarge]);
 								  NSLog(@"imageExtraLarge %@", [album imageExtraLarge]);
+								   */
 								  NSLog(@"musicBrianzId %@", [album musicBrianzId]);
 								  NSLog(@"playcount %@", [album playcount]);
 								  NSLog(@"lfmPage %@", [album lfmPage]);
