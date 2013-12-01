@@ -58,7 +58,7 @@
 						  */
 						  NSLog(@"musicBrianzId %@", data.musicBrianzId);
 						  NSLog(@"name %@", data.name);
-						  NSLog(@"isOnTour %hhd", data.isOnTour);
+						  NSLog(@"isOnTour %d", data.isOnTour);
 						  //NSLog(@"similarArtists %@", data.similarArtists);
 						  NSLog(@"omitting similarArtists");
 						  NSLog(@"listeners %@", data.listeners);
@@ -150,7 +150,7 @@
 								  NSLog(@"playcount %@", [album playcount]);
 								  NSLog(@"lfmPage %@", [album lfmPage]);
 							  }
-							  NSLog(@"Received %d TopAlbums by Artist %@", [albums count], data.artistName);
+							  NSLog(@"Received %lu TopAlbums by Artist %@", (unsigned long)[albums count], data.artistName);
 							  
 						  };
 						  NSLog(@"Counter %i", --counter);

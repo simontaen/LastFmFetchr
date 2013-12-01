@@ -259,7 +259,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 			
 		} else {
 			// API behaves weird, I don't even know what is going on now.
-			NSString *errorDesc = [NSString stringWithFormat:@"Invalid service response, HTTP %d", httpResponse.statusCode];
+			NSString *errorDesc = [NSString stringWithFormat:@"Invalid service response, HTTP %ld", (long)httpResponse.statusCode];
 			NSError *error = [[NSError alloc] initWithDomain:kLFMSericeErrorDomain
 														code:0
 													userInfo:@{ NSLocalizedDescriptionKey : errorDesc, kLFMParameterMethod : methodParamValue}];
