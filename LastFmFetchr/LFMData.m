@@ -308,26 +308,47 @@
 
 #pragma mark - MTLJSONSerializing
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+    return [NSDictionary dictionary];
+}
+
 + (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionary
 {
 	if (JSONDictionary[@"artist"] != nil) {
+		// TODO: more logic needed to differentiate between sublcasses
+		// not sure if subclass could implement themselfes though
+		[LFMData setContentKey:@"artist"];
         return LFMArtistInfo.class;
     }
 	
 	if (JSONDictionary[@"album"] != nil) {
+		[LFMData setContentKey:@"album"];
         return LFMAlbumInfo.class;
     }
 	
 	if (JSONDictionary[@"topalbums"] != nil) {
+		[LFMData setContentKey:@"topalbums"];
         return LFMArtistsTopAlbums.class;
     }
 	
 	return self.class;
 }
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey
+static NSString *contentKey = nil;
+
++ (void)setContentKey:(NSString *)key
 {
-    return [NSDictionary dictionary];
+	@synchronized(self) {
+		contentKey = key;
+	}
+}
+
++ (NSString *)contentKeyWithDelimiter
+{
+	@synchronized(self) {
+		return [contentKey stringByAppendingString:kDelim];
+	}
 }
 
 #pragma mark - <key>JSONTransformer

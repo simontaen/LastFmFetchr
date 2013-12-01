@@ -11,7 +11,10 @@
 @interface LFMArtistInfo : LFMArtist
 
 // TODO: Images S to Mega
-/// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
+/**
+*  NSArray of NSDictionaries
+*  @{ name : NSString, yearfrom : NSDate, yearto : yearto }
+*/
 @property (nonatomic, strong, readonly) NSArray *members;
 @property (nonatomic, strong, readonly) NSString *bioContent;
 /**

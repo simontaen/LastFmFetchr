@@ -8,6 +8,10 @@
 
 #import "Mantle.h"
 
+static NSString *const kDelim = @".";
+
 @interface LFMData : MTLModel <MTLJSONSerializing>
+
++ (NSString *)contentKeyWithDelimiter;
 
 @end

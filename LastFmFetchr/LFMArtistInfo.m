@@ -14,21 +14,23 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
+	NSString *contentKey = [self contentKeyWithDelimiter];
+	
 	NSDictionary *mapping =  @{
-							   @"members" : @"bandmembers",
-							   @"bioContent" : @"bio.content",
-							   @"bioFormationYears" : @"bio.formationlist",
-							   @"lfmWikiPage" : @"bio.links.link.href",
-							   @"bioPlaceFormed" : @"bio.placeformed",
-							   @"bioPublishedDate" : @"bio.published",
-							   @"bioSummary" : @"bio.summary",
-							   @"bioYearFormedDate" : @"bio.yearformed",
-							   @"isOnTour" : @"ontour",
-							   @"similarArtists" : @"similar",
-							   @"listeners" : @"stats.listeners",
-							   @"playcount" : @"stats.playcount",
-							   @"isStreamable" : @"streamable",
-							   @"tags" : @"tags"
+							   @"members" : [contentKey stringByAppendingFormat:@"bandmembers"],
+							   @"bioContent" : [contentKey stringByAppendingFormat:@"bio.content"],
+							   @"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
+							   @"lfmWikiPage" : [contentKey stringByAppendingFormat:@"bio.links.link.href"],
+							   @"bioPlaceFormed" : [contentKey stringByAppendingFormat:@"bio.placeformed"],
+							   @"bioPublishedDate" : [contentKey stringByAppendingFormat:@"bio.published"],
+							   @"bioSummary" : [contentKey stringByAppendingFormat:@"bio.summary"],
+							   @"bioYearFormedDate" : [contentKey stringByAppendingFormat:@"bio.yearformed"],
+							   @"isOnTour" : [contentKey stringByAppendingFormat:@"ontour"],
+							   @"similarArtists" : [contentKey stringByAppendingFormat:@"similar"],
+							   @"listeners" : [contentKey stringByAppendingFormat:@"stats.listeners"],
+							   @"playcount" : [contentKey stringByAppendingFormat:@"stats.playcount"],
+							   @"isStreamable" : [contentKey stringByAppendingFormat:@"streamable"],
+							   @"tags" : [contentKey stringByAppendingFormat:@"tags"]
 							   };
 	
     return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];

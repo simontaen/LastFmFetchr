@@ -14,11 +14,13 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
+	NSString *contentKey = [self contentKeyWithDelimiter];
+	
 	NSDictionary *mapping =  @{
 							   // TODO: artist can be defined in LFMData
-							   @"musicBrianzId" : @"artist.mbid",
-							   @"name" : @"artist.name",
-							   @"lfmPage" : @"artist.url"
+							   @"musicBrianzId" : [contentKey stringByAppendingFormat:@"mbid"],
+							   @"name" : [contentKey stringByAppendingString:@"name"],
+							   @"lfmPage" : [contentKey stringByAppendingString:@"url"]
 							   };
 	
     return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
