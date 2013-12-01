@@ -218,11 +218,6 @@
 
 #pragma mark - Mapping Helpers
 
-- (BOOL)boolFromString:(NSString *)boolString
-{
-	return [@"1" isEqual:boolString];
-}
-
 - (NSArray *)tagsFromDictionary:(id)obj
 {
 	if (![obj isKindOfClass:[NSDictionary class]]) {
@@ -416,7 +411,6 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)isOnTourJSONTransformer
 {
-	//return [self boolFromString:[self notNilStringForKeyPath:@"ontour"]];
 	return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
 }
 
@@ -459,7 +453,6 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)isStreamableJSONTransformer
 {
-	//return [self boolFromString:[self notNilStringForKeyPath:@"streamable"]];
 	return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
 }
 
@@ -475,6 +468,8 @@ static NSString *contentKey = nil;
 }
 
 #pragma mark - JSON helpers
+
+#pragma mark - DateFormatter
 
 + (NSDateFormatter *)releaseDateFormatter
 {

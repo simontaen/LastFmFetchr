@@ -16,7 +16,7 @@
 @property (nonatomic, strong, readonly) NSNumber *duration;
 @property (nonatomic, strong, readonly) NSString *musicBrianzId;
 @property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, readonly) BOOL isTrackStreamable;
+@property (nonatomic, strong, readonly) NSNumber *isTrackStreamable;
 @property (nonatomic, strong, readonly) NSURL *lfmPage;
 
 @end

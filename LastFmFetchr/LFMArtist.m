@@ -17,7 +17,6 @@
 	NSString *contentKey = [self contentKeyWithDelimiter];
 	
 	NSDictionary *mapping =  @{
-							   // TODO: artist can be defined in LFMData
 							   @"musicBrianzId" : [contentKey stringByAppendingFormat:@"mbid"],
 							   @"name" : [contentKey stringByAppendingString:@"name"],
 							   @"lfmPage" : [contentKey stringByAppendingString:@"url"]
