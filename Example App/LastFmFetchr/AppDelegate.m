@@ -138,8 +138,8 @@
 								  id<LFMAlbumTopAlbum> album = albums[i];
 								  NSLog(@"---------------------- %@ ----------------------", [album name]);
 								  
-								  NSLog(@"rankInAllArtistAlbums %@", [album rank]);
-								  NSLog(@"rankInAllArtistAlbumsNumber %@", [album rank]);
+								  NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);
+								  NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbums]);
 								  /*
 								  NSLog(@"imageSmall %@", [album imageSmall]);
 								  NSLog(@"imageMedium %@", [album imageMedium]);
