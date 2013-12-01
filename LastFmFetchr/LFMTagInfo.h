@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "LFMTag.h"
 
-@protocol LFMTagInfo <NSObject, LFMTag>
+@interface LFMTagInfo : LFMTag
 
 // TODO: Images S to Mega
 @property (nonatomic, strong, readonly) NSNumber *listeners;

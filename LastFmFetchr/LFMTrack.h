@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "LFMData.h"
 #import "LFMArtist.h"
 
-@protocol LFMTrack <NSObject>
+@interface LFMTrack : LFMData
 
 @property (nonatomic, strong, readonly) NSNumber *rank;
 @property (nonatomic, strong, readonly) LFMArtist *artist;

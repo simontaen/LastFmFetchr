@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "LFMData.h"
 
-@protocol LFMTag <NSObject>
+@interface LFMTag : LFMData
 
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) NSURL *lfmPage;

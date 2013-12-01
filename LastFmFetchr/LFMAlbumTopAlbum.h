@@ -6,11 +6,10 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "LFMAlbum.h"
 #import "LFMArtist.h"
 
-@protocol LFMAlbumTopAlbum <NSObject, LFMAlbum>
+@interface LFMAlbumTopAlbum : LFMAlbum
 
 @property (nonatomic, strong, readonly) NSNumber *rankInAllArtistAlbums;
 @property (nonatomic, strong, readonly) LFMArtist *artist;

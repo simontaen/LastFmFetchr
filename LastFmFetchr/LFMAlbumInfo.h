@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "LFMAlbum.h"
 
-@protocol LFMAlbumInfo <NSObject, LFMAlbum>
+@interface LFMAlbumInfo : LFMAlbum
 
 // TODO: Images S to Mega
 @property (nonatomic, strong, readonly) NSString *artistName;

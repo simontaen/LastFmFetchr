@@ -95,38 +95,38 @@ static void *ImageExtraLargeKey;
 
 - (NSString *)smallImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[0][@"#text"] description];
-	}
-	return kEmpty;
+//	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+//	if ([obj isKindOfClass:[NSArray class]]) {
+//		return [obj[0][@"#text"] description];
+//	}
+	return @"";
 }
 
 - (NSString *)mediumImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[1][@"#text"] description];
-	}
-	return kEmpty;
+//	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+//	if ([obj isKindOfClass:[NSArray class]]) {
+//		return [obj[1][@"#text"] description];
+//	}
+	return @"";
 }
 
 - (NSString *)largeImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[2][@"#text"] description];
-	}
-	return kEmpty;
+//	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+//	if ([obj isKindOfClass:[NSArray class]]) {
+//		return [obj[2][@"#text"] description];
+//	}
+	return @"";
 }
 
 - (NSString *)extraLargeImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[3][@"#text"] description];
-	}
-	return kEmpty;
+//	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+//	if ([obj isKindOfClass:[NSArray class]]) {
+//		return [obj[3][@"#text"] description];
+//	}
+	return @"";
 }
 
 @end

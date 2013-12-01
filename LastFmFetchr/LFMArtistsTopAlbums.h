@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "LFMData.h"
 
-@protocol LFMArtistsTopAlbums <NSObject>
+@interface LFMArtistsTopAlbums : LFMData
 
 @property (nonatomic, strong, readonly) NSString *artistName;
 ///	of LFMAlbumTopAlbum's

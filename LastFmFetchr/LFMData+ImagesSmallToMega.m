@@ -35,11 +35,11 @@ static void *ImageMegaKey;
 
 - (NSString *)megaImageForImageListKeyPath:(NSString *)imageListKeyPath
 {
-	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
-	if ([obj isKindOfClass:[NSArray class]]) {
-		return [obj[4][@"#text"] description];
-	}
-	return kEmpty;
+//	id obj = [self.JSON valueForKeyPath:imageListKeyPath];
+//	if ([obj isKindOfClass:[NSArray class]]) {
+//		return [obj[4][@"#text"] description];
+//	}
+	return @"";
 }
 
 @end

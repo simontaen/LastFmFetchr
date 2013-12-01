@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 #pragma mark - Artist methods
 - (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
 									  mbid:(NSString *)mbid
-								completion:(void (^)(id<LFMArtistInfo> data, NSError *error))completion;
+								completion:(void (^)(LFMArtistInfo *data, NSError *error))completion;
 
 // This will just get the first 50 currently
 // You COULD accept explicit success handlers that return NSDictionary subclasses
@@ -72,13 +72,13 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 // The keys could be reused behind the scences and the curious ones could still use them
 - (NSURLSessionDataTask *)getAllAlbumsByArtist:(NSString *)artist
 										  mbid:(NSString *)mbid
-									completion:(void (^)(id<LFMArtistsTopAlbums> data, NSError *error))completion;
+									completion:(void (^)(LFMArtistsTopAlbums *data, NSError *error))completion;
 
 #pragma mark - Album methods
 - (NSURLSessionDataTask *)getInfoForAlbum:(NSString *)album
 								 byArtist:(NSString *)artist
 									 mbid:(NSString *)mbid
-							   completion:(void (^)(id<LFMAlbumInfo> data, NSError *error))completion;
+							   completion:(void (^)(LFMAlbumInfo *data, NSError *error))completion;
 
 #pragma mark - Requests Management
 

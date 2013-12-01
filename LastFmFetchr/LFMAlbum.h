@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "LFMData.h"
 
-@protocol LFMAlbum <NSObject>
+@interface LFMAlbum : LFMData
 
 // TODO: Images S to XL
 @property (nonatomic, strong, readonly) NSString *musicBrianzId;

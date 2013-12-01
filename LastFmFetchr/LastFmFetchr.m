@@ -50,7 +50,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 #pragma mark - Artist methods
 - (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
 									  mbid:(NSString *)mbid
-								completion:(void (^)(id<LFMArtistInfo> data, NSError *error))completion
+								completion:(void (^)(LFMArtistInfo *data, NSError *error))completion
 {
 	NSParameterAssert([artist length] || [mbid length]);
 	
@@ -78,7 +78,8 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodArtistGetInfo
 												   jsonContentKey:kLFMParameterArtist
 														  success:^(NSDictionary *data) {
-															  id<LFMArtistInfo> lfmData = (id<LFMArtistInfo>)[[LFMData alloc] initWithJson:data];
+															  // TODO: handle error
+															  LFMArtistInfo *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
 															  dispatch_async(dispatch_get_main_queue(), ^{
 																  completion(lfmData, nil);
 															  });
@@ -104,7 +105,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 - (NSURLSessionDataTask *)getAllAlbumsByArtist:(NSString *)artist
 										  mbid:(NSString *)mbid
-									completion:(void (^)(id<LFMArtistsTopAlbums> data, NSError *error))completion
+									completion:(void (^)(LFMArtistsTopAlbums* data, NSError *error))completion
 {
 	NSParameterAssert([artist length] || [mbid length]);
 	
@@ -132,7 +133,8 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodArtistGetTopAlbums
 												   jsonContentKey:@"topalbums"
 														  success:^(NSDictionary *data) {
-															  id<LFMArtistsTopAlbums> lfmData = (id<LFMArtistsTopAlbums>)[[LFMData alloc] initWithJson:data];
+															  // TODO: handle error
+															  LFMArtistsTopAlbums *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
 															  dispatch_async(dispatch_get_main_queue(), ^{
 																  completion(lfmData, nil);
 															  });
@@ -160,7 +162,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 - (NSURLSessionDataTask *)getInfoForAlbum:(NSString *)album
 								 byArtist:(NSString *)artist
 									 mbid:(NSString *)mbid
-							   completion:(void (^)(id<LFMAlbumInfo> data, NSError *error))completion
+							   completion:(void (^)(LFMAlbumInfo *data, NSError *error))completion
 {
 	NSParameterAssert(([artist length] && [album length]) || [mbid length]);
 	
@@ -191,7 +193,8 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 												 methodParamValue:kLFMMethodAlbumGetInfo
 												   jsonContentKey:kLFMParameterAlbum
 														  success:^(NSDictionary *data) {
-															  id<LFMAlbumInfo> lfmData = (id<LFMAlbumInfo>)[[LFMData alloc] initWithJson:data];
+															  // TODO: handle error
+															  LFMAlbumInfo *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
 															  dispatch_async(dispatch_get_main_queue(), ^{
 																  completion(lfmData, nil);
 															  });

@@ -7,19 +7,9 @@
 //
 
 #import "LFMData.h"
-#import "LFMTag.h"
-#import "LFMTrack.h"
-#import "LFMArtist.h"
-#import "LFMAlbumTopAlbum.h"
-
-@interface LFMData()
-
-@property (nonatomic, strong, readwrite) NSString *name;
-
-@end
 
 @implementation LFMData
-
+/**
 #pragma mark - LFMArtistInfo
 //http://www.last.fm/api/show/artist.getInfo
 
@@ -267,20 +257,6 @@
 	return listeners;
 }
 
-- (NSDate *)releaseDate
-{
-	static NSDate *releaseDate = nil;
-	if (!releaseDate) {
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-		[formatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
-		
-		NSString *dateString = [[self notNilStringForKeyPath:@"releasedate"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-		
-		releaseDate = [formatter dateFromString:[dateString stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"]];
-	}
-	return releaseDate;
-}
-
 - (NSArray *)topTags
 {
 	static NSArray *topTags = nil;
@@ -465,6 +441,47 @@
 		_JSON = JSON;
 	}
 	return self;
+}
+*/
+
+#pragma mark - MTLJSONSerializing
+
++ (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionar
+{
+	return self.class;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+    return [NSDictionary dictionary];
+}
+
+#pragma mark - <key>JSONTransformer
+
++ (NSValueTransformer *)releaseDateJSONTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+		NSString *string = [str stringByReplacingOccurrencesOfString:@"00:00" withString:@"-00:00"];
+        return [self.releaseDateFormatter dateFromString:string];
+    } reverseBlock:^(NSDate *date) {
+        NSString *string = [self.releaseDateFormatter stringFromDate:date];
+		return [string stringByReplacingOccurrencesOfString:@"-00:00" withString:@"00:00"];
+    }];
+}
+
+#pragma mark - JSON helpers
+
++ (NSDateFormatter *)releaseDateFormatter
+{
+	static dispatch_once_t onceToken;
+    static NSDateFormatter *releaseDateFormatter;
+	
+    dispatch_once(&onceToken, ^{
+		releaseDateFormatter = [[NSDateFormatter alloc] init];
+		[releaseDateFormatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
+	});
+	
+    return releaseDateFormatter;
 }
 
 @end

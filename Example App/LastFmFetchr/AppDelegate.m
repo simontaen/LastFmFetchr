@@ -26,7 +26,7 @@
 		
 	[fetchr getInfoForArtist:@"Pink Floyd"
 						mbid:nil
-				  completion:^(id<LFMArtistInfo> data, NSError *error) {
+				  completion:^(LFMArtistInfo *data, NSError *error) {
 					  if (error) {
 						  NSLog(@"Error: %@", [error localizedDescription]);
 					  } else {
@@ -80,7 +80,7 @@
 	[fetchr getInfoForAlbum:@"Highway to Hell"
 				   byArtist:@"AC/DC"
 					   mbid:nil
-				 completion:^(id<LFMAlbumInfo> data, NSError *error) {
+				 completion:^(LFMAlbumInfo *data, NSError *error) {
 					 if (error) {
 						 NSLog(@"Error: %@", [error localizedDescription]);
 					 } else {
@@ -124,7 +124,7 @@
 	
 	[fetchr getAllAlbumsByArtist:@"Bruce Springsteen"
 							mbid:nil
-					  completion:^(id<LFMArtistsTopAlbums> data, NSError *error) {
+					  completion:^(LFMArtistsTopAlbums *data, NSError *error) {
 						  if (error) {
 							  NSLog(@"Error: %@", [error localizedDescription]);
 						  } else {
@@ -135,7 +135,7 @@
 							  // of LFMAlbumTopAlbum
 							  NSArray *albums = data.albums;
 							  for (int i = 0; i < 3; i++) {
-								  id<LFMAlbumTopAlbum> album = albums[i];
+								  LFMAlbumTopAlbum *album = albums[i];
 								  NSLog(@"---------------------- %@ ----------------------", [album name]);
 								  
 								  NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);

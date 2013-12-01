@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "LFMArtist.h"
 
-@protocol LFMArtistInfo <NSObject, LFMArtist>
+@interface LFMArtistInfo : LFMArtist
 
 // TODO: Images S to Mega
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 edgeguard. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "LFMData.h"
 
-@protocol LFMArtist <NSObject>
+@interface LFMArtist : LFMData
 
 @property (nonatomic, strong, readonly) NSString *musicBrianzId;
 @property (nonatomic, strong, readonly) NSString *name;
