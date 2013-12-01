@@ -7,6 +7,7 @@
 //
 
 #import "LFMData.h"
+#import "LastFmFetchr.h"
 
 @implementation LFMData
 /**
@@ -36,71 +37,6 @@
 	return bioContent;
 }
 
-- (NSArray *)bioFormationYears
-{
-	static NSArray *bioFormationYears = nil;
-	if (!bioFormationYears) {
-		id obj = [self.JSON valueForKeyPath:@"bio.formationlist"];
-		
-		if (![obj isKindOfClass:[NSDictionary class]]) {
-			bioFormationYears = [NSArray array];
-		} else {
-			NSDictionary *dict = (NSDictionary *)obj;
-			
-			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-			[formatter setDateFormat:@"yyyy"];
-			
-			NSDate *yearfrom = [formatter dateFromString:[dict valueForKeyPath:@"formation.yearfrom"]];
-			NSDate *yearto = [formatter dateFromString:[dict valueForKeyPath:@"formation.yearto"]];
-			
-			if (yearfrom && yearto) {
-				bioFormationYears = @[yearfrom, yearto];
-			} else if (yearfrom) {
-				bioFormationYears = @[yearfrom];
-			} else {
-				bioFormationYears = [NSArray array];
-			}
-		}
-	}
-	return bioFormationYears;
-}
-
-- (NSURL *)lfmWikiPage
-{
-	static NSURL *lfmWikiPage = nil;
-	if (!lfmWikiPage) {
-		id obj = [self.JSON valueForKeyPath:@"bio.links.link"];
-		if (![obj isKindOfClass:[NSDictionary class]]) {
-			lfmWikiPage = [NSURL URLWithString:kEmpty];
-		} else {
-			lfmWikiPage = [NSURL URLWithString:((NSDictionary *)obj)[@"href"]];
-		}
-	}
-	return lfmWikiPage;
-}
-
-- (NSString *)bioPlaceFormed
-{
-	static NSString *bioPlaceFormed = nil;
-	if (!bioPlaceFormed) {
-		bioPlaceFormed = [self notNilStringForKeyPath:@"bio.placeformed"];
-	}
-	return bioPlaceFormed;
-}
-
-- (NSDate *)bioPublishedDate
-{
-	static NSDate *bioPublishedDate = nil;
-	if (!bioPublishedDate) {
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-		[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
-		
-		bioPublishedDate = [formatter dateFromString:[self notNilStringForKeyPath:@"bio.published"]];
-		
-	}
-	return bioPublishedDate;
-}
-
 - (NSString *)bioSummary
 {
 	static NSString *bioSummary = nil;
@@ -108,42 +44,6 @@
 		bioSummary = [self notNilStringForKeyPath:@"bio.summary"];
 	}
 	return bioSummary;
-}
-
-- (NSDate *)bioYearFormedDate
-{
-	static NSDate *bioYearFormedDate = nil;
-	if (!bioYearFormedDate) {
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-		[formatter setDateFormat:@"yyyy"];
-		
-		bioYearFormedDate = [formatter dateFromString:[self notNilStringForKeyPath:@"bio.yearformed"]];
-	}
-	return bioYearFormedDate;
-}
-
-- (BOOL)isOnTour
-{
-	return [self boolFromString:[self notNilStringForKeyPath:@"ontour"]];
-}
-
-- (NSArray *)similarArtists
-{
-	static NSArray *similarArtists = nil;
-	if (!similarArtists) {
-		id obj = [self.JSON valueForKeyPath:@"similar.artist"];
-		if (![obj isKindOfClass:[NSArray class]]) {
-			similarArtists = [NSArray array];
-		} else {
-			similarArtists = (NSArray *)obj;
-		}
-	}
-	return similarArtists;
-}
-
-- (BOOL)isStreamable
-{
-	return [self boolFromString:[self notNilStringForKeyPath:@"streamable"]];
 }
 
 - (NSArray *)tags
@@ -212,27 +112,6 @@
 	return name;
 }
 
-- (NSNumber *)playcount
-{
-	static NSNumber *playcount = nil;
-	if (!playcount) {
-		playcount = [self longLongNumberForKeyPath:@"playcount"];
-		if (!playcount) {
-			playcount = [self longLongNumberForKeyPath:@"stats.playcount"];
-		}
-	}
-	return playcount;
-}
-
-- (NSURL *)lfmPage
-{
-	static NSURL *lfmPage = nil;
-	if (!lfmPage) {
-		lfmPage = [NSURL URLWithString:[self notNilStringForKeyPath:@"url"]];
-	}
-	return lfmPage;
-}
-
 #pragma mark - LFMAlbumInfoSub
 //http://www.last.fm/api/show/album.getInfo
 
@@ -243,18 +122,6 @@
 		lfmId = [self longLongNumberForKeyPath:@"id"];
 	}
 	return lfmId;
-}
-
-- (NSNumber *)listeners
-{
-	static NSNumber *listeners = nil;
-	if (!listeners) {
-		listeners = [self longLongNumberForKeyPath:@"listeners"];
-		if (!listeners) {
-			listeners = [self longLongNumberForKeyPath:@"stats.listeners"];
-		}
-	}
-	return listeners;
 }
 
 - (NSArray *)topTags
@@ -406,11 +273,6 @@
 	return trackArray;
 }
 
-- (NSNumber *)longLongNumberForKeyPath:(NSString *)key
-{
-	return [NSNumber numberWithLongLong:[[self notNilStringForKeyPath:key] longLongValue]];
-}
-
 #pragma mark - Access to JSON
 
 - (NSString *)notNilStringForKeyPath:(NSString *)keyPath
@@ -446,8 +308,20 @@
 
 #pragma mark - MTLJSONSerializing
 
-+ (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionar
++ (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionary
 {
+	if (JSONDictionary[@"artist"] != nil) {
+        return LFMArtistInfo.class;
+    }
+	
+	if (JSONDictionary[@"album"] != nil) {
+        return LFMAlbumInfo.class;
+    }
+	
+	if (JSONDictionary[@"topalbums"] != nil) {
+        return LFMArtistsTopAlbums.class;
+    }
+	
 	return self.class;
 }
 
@@ -457,6 +331,116 @@
 }
 
 #pragma mark - <key>JSONTransformer
+
++ (NSValueTransformer *)lfmPageJSONTransformer
+{
+    return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
++ (NSValueTransformer *)bioFormationYearsJSONTransformer
+{
+	/*
+	static NSArray *bioFormationYears = nil;
+	if (!bioFormationYears) {
+		id obj = [self.JSON valueForKeyPath:@"bio.formationlist"];
+		
+		if (![obj isKindOfClass:[NSDictionary class]]) {
+			bioFormationYears = [NSArray array];
+		} else {
+			NSDictionary *dict = (NSDictionary *)obj;
+			
+			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+			[formatter setDateFormat:@"yyyy"];
+			
+			NSDate *yearfrom = [formatter dateFromString:[dict valueForKeyPath:@"formation.yearfrom"]];
+			NSDate *yearto = [formatter dateFromString:[dict valueForKeyPath:@"formation.yearto"]];
+			
+			if (yearfrom && yearto) {
+				bioFormationYears = @[yearfrom, yearto];
+			} else if (yearfrom) {
+				bioFormationYears = @[yearfrom];
+			} else {
+				bioFormationYears = [NSArray array];
+			}
+		}
+	}
+	return bioFormationYears;
+	 */
+	// TODO
+	return nil;
+}
+
++ (NSValueTransformer *)lfmWikiPageJSONTransformer
+{
+    return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
++ (NSValueTransformer *)bioPublishedDateJSONTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return [self.publishedDateFormatter dateFromString:str];
+    } reverseBlock:^(NSDate *date) {
+		return [self.publishedDateFormatter stringFromDate:date];
+    }];
+}
+
++ (NSValueTransformer *)bioYearFormedDateJSONTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return [self.yearformedDateFormatter dateFromString:str];
+    } reverseBlock:^(NSDate *date) {
+		return [self.yearformedDateFormatter stringFromDate:date];
+    }];
+}
+
++ (NSValueTransformer *)isOnTourJSONTransformer
+{
+	//return [self boolFromString:[self notNilStringForKeyPath:@"ontour"]];
+	return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
+}
+
++ (NSValueTransformer *)similarArtistsJSONTransformer
+{
+	/*
+	static NSArray *similarArtists = nil;
+	if (!similarArtists) {
+		id obj = [self.JSON valueForKeyPath:@"similar.artist"];
+		if (![obj isKindOfClass:[NSArray class]]) {
+			similarArtists = [NSArray array];
+		} else {
+			similarArtists = (NSArray *)obj;
+		}
+	}
+	return similarArtists;
+	 */
+	// TODO
+	return nil;
+}
+
++ (NSValueTransformer *)listenersJSONTransformer
+{
+	// TODO: generalize this value transformer, like for bool
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return [NSNumber numberWithLongLong:[str longLongValue]];
+    } reverseBlock:^(NSNumber *num) {
+		return [num description];
+    }];
+}
+
++ (NSValueTransformer *)playcountJSONTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return [NSNumber numberWithLongLong:[str longLongValue]];
+    } reverseBlock:^(NSNumber *num) {
+		return [num description];
+    }];
+}
+
++ (NSValueTransformer *)isStreamableJSONTransformer
+{
+	//return [self boolFromString:[self notNilStringForKeyPath:@"streamable"]];
+	return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
+}
 
 + (NSValueTransformer *)releaseDateJSONTransformer
 {
@@ -475,13 +459,33 @@
 {
 	static dispatch_once_t onceToken;
     static NSDateFormatter *releaseDateFormatter;
-	
     dispatch_once(&onceToken, ^{
 		releaseDateFormatter = [[NSDateFormatter alloc] init];
 		[releaseDateFormatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
 	});
-	
     return releaseDateFormatter;
+}
+
++ (NSDateFormatter *)publishedDateFormatter
+{
+	static dispatch_once_t onceToken;
+    static NSDateFormatter *publishedDateFormatter;
+    dispatch_once(&onceToken, ^{
+		NSDateFormatter *publishedDateFormatter = [[NSDateFormatter alloc] init];
+		[publishedDateFormatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
+	});
+    return publishedDateFormatter;
+}
+
++ (NSDateFormatter *)yearformedDateFormatter
+{
+	static dispatch_once_t onceToken;
+    static NSDateFormatter *yearformedDateFormatter;
+    dispatch_once(&onceToken, ^{
+		NSDateFormatter *yearformedDateFormatter = [[NSDateFormatter alloc] init];
+		[yearformedDateFormatter setDateFormat:@"yyyy"];
+	});
+    return yearformedDateFormatter;
 }
 
 @end

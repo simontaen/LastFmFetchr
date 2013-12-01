@@ -254,7 +254,9 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 				
 				// now we are actually fine
 				if (jsonContentKey) {
-					success((NSDictionary *)(JSON[jsonContentKey]));
+					// TODO: jsonContentKey is no longer needed
+					NSLog(@"jsonContentKey %@", jsonContentKey);
+					success((NSDictionary *)(JSON));
 				} else {
 					success((NSDictionary *)(JSON));
 				}

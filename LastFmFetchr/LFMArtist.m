@@ -10,4 +10,18 @@
 
 @implementation LFMArtist
 
+#pragma mark - MTLJSONSerializing
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+	NSDictionary *mapping =  @{
+							   // TODO: artist can be defined in LFMData
+							   @"musicBrianzId" : @"artist.mbid",
+							   @"name" : @"artist.name",
+							   @"lfmPage" : @"artist.url"
+							   };
+	
+    return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
+}
+
 @end
