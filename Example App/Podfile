@@ -1,3 +1,3 @@
-pod 'AFNetworking', :path => '/Users/simon/Documents/code/ObjC/GitHub/AFNetworking/'
+pod 'AFNetworking', :path => '/Users/simon/Documents/code/ObjC/GitHub/AFNetworking_official/'
 pod 'FCYAsserts', '~> 1.2'
 pod 'SDURLCache'
