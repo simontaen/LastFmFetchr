@@ -10,7 +10,7 @@
 
 @protocol LFMTag <NSObject>
 
-- (NSString *)name;
-- (NSURL *)lfmPage;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSURL *lfmPage;
 
 @end

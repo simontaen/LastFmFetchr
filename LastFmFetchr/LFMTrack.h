@@ -11,12 +11,12 @@
 
 @protocol LFMTrack <NSObject>
 
-- (NSNumber *)rank;
-- (id<LFMArtist>)artist;
-- (NSNumber *)duration;
-- (NSString *)musicBrianzId;
-- (NSString *)name;
-- (BOOL)isTrackStreamable;
-- (NSURL *)lfmPage;
+@property (nonatomic, strong, readonly) NSNumber *rank;
+@property (nonatomic, strong, readonly) LFMArtist *artist;
+@property (nonatomic, strong, readonly) NSNumber *duration;
+@property (nonatomic, strong, readonly) NSString *musicBrianzId;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, readonly) BOOL isTrackStreamable;
+@property (nonatomic, strong, readonly) NSURL *lfmPage;
 
 @end

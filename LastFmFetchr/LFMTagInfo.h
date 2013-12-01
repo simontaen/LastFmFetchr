@@ -12,7 +12,7 @@
 @protocol LFMTagInfo <NSObject, LFMTag>
 
 // TODO: Images S to Mega
-- (NSNumber *)listeners;
-- (NSDate *)releaseDate;
+@property (nonatomic, strong, readonly) NSNumber *listeners;
+@property (nonatomic, strong, readonly) NSDate *releaseDate;
 
 @end

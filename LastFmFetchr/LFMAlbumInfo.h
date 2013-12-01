@@ -12,16 +12,16 @@
 @protocol LFMAlbumInfo <NSObject, LFMAlbum>
 
 // TODO: Images S to Mega
-- (NSString *)artistName;
-- (NSNumber *)lfmId;
-- (NSNumber *)listeners;
-- (NSDate *)releaseDate;
+@property (nonatomic, strong, readonly) NSString *artistName;
+@property (nonatomic, strong, readonly) NSNumber *lfmId;
+@property (nonatomic, strong, readonly) NSNumber *listeners;
+@property (nonatomic, strong, readonly) NSDate *releaseDate;
 /// (ordered) Array of LFMTag
-- (NSArray *)topTags;
+@property (nonatomic, strong, readonly) NSArray *topTags;
 /// (ordered) Array of LFMTracks
-- (NSArray *)tracks;
-- (NSString *)wikiContent;
-- (NSDate *)wikiPublishedDate;
-- (NSString *)wikiSummary;
+@property (nonatomic, strong, readonly) NSArray *tracks;
+@property (nonatomic, strong, readonly) NSString *wikiContent;
+@property (nonatomic, strong, readonly) NSDate *wikiPublishedDate;
+@property (nonatomic, strong, readonly) NSString *wikiSummary;
 
 @end

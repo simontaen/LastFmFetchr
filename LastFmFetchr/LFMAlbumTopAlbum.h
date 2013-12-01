@@ -12,7 +12,7 @@
 
 @protocol LFMAlbumTopAlbum <NSObject, LFMAlbum>
 
-- (NSNumber *)rank;
-- (id<LFMArtist>)artist;
+@property (nonatomic, strong, readonly) NSNumber *rankInAllArtistAlbums;
+@property (nonatomic, strong, readonly) LFMArtist *artist;
 
 @end

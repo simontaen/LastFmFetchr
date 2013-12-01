@@ -10,8 +10,8 @@
 
 @protocol LFMArtistsTopAlbums <NSObject>
 
-- (NSString *)artistName;
+@property (nonatomic, strong, readonly) NSString *artistName;
 ///	of LFMAlbumTopAlbum's
-- (NSArray *)albums;
+@property (nonatomic, strong, readonly) NSArray *albums;
 
 @end

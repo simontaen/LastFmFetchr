@@ -13,25 +13,25 @@
 
 // TODO: Images S to Mega
 /// NSArray of NSDictionaries @{ name : NSString, yearfrom : NSDate, yearto : yearto }
-- (NSArray *)members;
-- (NSString *)bioContent;
+@property (nonatomic, strong, readonly) NSArray *members;
+@property (nonatomic, strong, readonly) NSString *bioContent;
 /**
  *  NSArray of NSDates, [1] = year from, [2] = year to (if available).
  *  Returns an empty array if neither are defined.
  */
-- (NSArray *)bioFormationYears;
-- (NSURL *)lfmWikiPage;
-- (NSString *)bioPlaceFormed;
-- (NSDate *)bioPublishedDate;
-- (NSString *)bioSummary;
-- (NSDate *)bioYearFormedDate;
-- (BOOL)isOnTour;
+@property (nonatomic, strong, readonly) NSArray *bioFormationYears;
+@property (nonatomic, strong, readonly) NSURL *lfmWikiPage;
+@property (nonatomic, strong, readonly) NSString *bioPlaceFormed;
+@property (nonatomic, strong, readonly) NSDate *bioPublishedDate;
+@property (nonatomic, strong, readonly) NSString *bioSummary;
+@property (nonatomic, strong, readonly) NSDate *bioYearFormedDate;
+@property (nonatomic, readonly) BOOL isOnTour;
 /// NSArray of NSDictionaries of similar artists
-- (NSArray *)similarArtists;
-- (NSNumber *)listeners;
-- (NSNumber *)playcount;
-- (BOOL)isStreamable;
+@property (nonatomic, strong, readonly) NSArray *similarArtists;
+@property (nonatomic, strong, readonly) NSNumber *listeners;
+@property (nonatomic, strong, readonly) NSNumber *playcount;
+@property (nonatomic, readonly) BOOL isStreamable;
 /// (ordered) Array of LFMTag
-- (NSArray *)tags;
+@property (nonatomic, strong, readonly) NSArray *tags;
 
 @end

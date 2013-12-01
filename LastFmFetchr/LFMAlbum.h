@@ -11,9 +11,9 @@
 @protocol LFMAlbum <NSObject>
 
 // TODO: Images S to XL
-- (NSString *)musicBrianzId;
-- (NSString *)name;
-- (NSNumber *)playcount;
-- (NSURL *)lfmPage;
+@property (nonatomic, strong, readonly) NSString *musicBrianzId;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSNumber *playcount;
+@property (nonatomic, strong, readonly) NSURL *lfmPage;
 
 @end
