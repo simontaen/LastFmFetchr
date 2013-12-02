@@ -161,10 +161,20 @@
 				F4F494611838360D00DF8031 /* LFMData */,
 				F4F49460183835FF00DF8031 /* Artist */,
 				F4F494621838361800DF8031 /* Album */,
+				F4BF1D30184D3CA300849329 /* TopAlbums */,
 				F4F49467183839F200DF8031 /* Track */,
 				F4F494631838361E00DF8031 /* Tag */,
 			);
 			name = "Dictionarys ";
+			sourceTree = "<group>";
+		};
+		F4BF1D30184D3CA300849329 /* TopAlbums */ = {
+			isa = PBXGroup;
+			children = (
+				F4DE2A2418398C710052A363 /* LFMArtistsTopAlbums.h */,
+				F41A5477184BC3C600408036 /* LFMArtistsTopAlbums.m */,
+			);
+			name = TopAlbums;
 			sourceTree = "<group>";
 		};
 		F4ED9CE2179D7B9A007C038B /* Example App */ = {
@@ -186,8 +196,6 @@
 				F41A5464184BB24D00408036 /* LFMArtist.m */,
 				F4DE2A2518398CFA0052A363 /* LFMArtistInfo.h */,
 				F41A5476184BC3C600408036 /* LFMArtistInfo.m */,
-				F4DE2A2418398C710052A363 /* LFMArtistsTopAlbums.h */,
-				F41A5477184BC3C600408036 /* LFMArtistsTopAlbums.m */,
 			);
 			name = Artist;
 			sourceTree = "<group>";

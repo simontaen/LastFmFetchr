@@ -10,4 +10,19 @@
 
 @implementation LFMTagInfo
 
+#pragma mark - MTLJSONSerializing
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+	NSString *contentKey = [self contentKey];
+	
+	NSDictionary *mapping =
+	@{
+	  @"listeners" : [contentKey stringByAppendingFormat:@"listeners"],
+	  @"releaseDate" : [contentKey stringByAppendingString:@"releasedate"]
+	  };
+	
+    return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
+}
+
 @end

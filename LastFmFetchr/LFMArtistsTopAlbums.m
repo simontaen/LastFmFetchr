@@ -10,6 +10,8 @@
 
 @implementation LFMArtistsTopAlbums
 
+#pragma mark - MTLJSONSerializing
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
 	NSString *contentKey = [self contentKey];

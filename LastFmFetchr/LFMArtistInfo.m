@@ -21,18 +21,19 @@
 	  //TODO
 	  //@"members" : [contentKey stringByAppendingFormat:@"bandmembers"],
 	  @"bioContent" : [contentKey stringByAppendingFormat:@"bio.content"],
-	  //@"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
+	  @"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
 	  @"lfmWikiPage" : [contentKey stringByAppendingFormat:@"bio.links.link.href"],
 	  @"bioPlaceFormed" : [contentKey stringByAppendingFormat:@"bio.placeformed"],
 	  @"bioPublishedDate" : [contentKey stringByAppendingFormat:@"bio.published"],
 	  @"bioSummary" : [contentKey stringByAppendingFormat:@"bio.summary"],
 	  @"bioYearFormedDate" : [contentKey stringByAppendingFormat:@"bio.yearformed"],
 	  @"isOnTour" : [contentKey stringByAppendingFormat:@"ontour"],
+	  // TODO
 	  //@"similarArtists" : [contentKey stringByAppendingFormat:@"similar"],
 	  @"listeners" : [contentKey stringByAppendingFormat:@"stats.listeners"],
 	  @"playcount" : [contentKey stringByAppendingFormat:@"stats.playcount"],
 	  @"isStreamable" : [contentKey stringByAppendingFormat:@"streamable"],
-	  //@"tags" : [contentKey stringByAppendingFormat:@"tags"]
+	  @"tags" : [contentKey stringByAppendingFormat:@"tags.tag"]
 	  };
 	
     return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];

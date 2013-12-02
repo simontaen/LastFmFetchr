@@ -346,14 +346,16 @@ static NSString *contentKey = nil;
 + (NSValueTransformer *)albumsJSONTransformer
 {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
-		if (![array isKindOfClass:[NSArray class]]) {
+		if (![array isKindOfClass:[NSArray class]] || ![array count]) {
 			return [NSArray array];
 		} else {
 			NSMutableArray *mutableAlbums = [NSMutableArray arrayWithCapacity:[array count]];
 			for (id aAlbum in array) {
 				if ([aAlbum isKindOfClass:[NSDictionary class]]) {
 					// TOOD: handle error
-					LFMAlbumTopAlbum *topAlbum = [MTLJSONAdapter modelOfClass:LFMAlbum.class fromJSONDictionary:aAlbum error:nil];
+					LFMAlbumTopAlbum *topAlbum = [MTLJSONAdapter modelOfClass:LFMAlbum.class
+														   fromJSONDictionary:aAlbum
+																		error:nil];
 					[mutableAlbums addObject:topAlbum];
 				}
 			}
@@ -365,9 +367,43 @@ static NSString *contentKey = nil;
     }];
 }
 
++ (NSValueTransformer *)tagsJSONTransformer
+{
+	return [LFMData tagsTransformer];
+}
+
++ (NSValueTransformer *)topTagsJSONTransformer
+{
+	return [LFMData tagsTransformer];
+}
+
 #pragma mark - JSON helpers
 
 #pragma mark - Custom ValueTransformers
+
++ (NSValueTransformer *)tagsTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+		if (![array isKindOfClass:[NSArray class]] || ![array count]) {
+			return [NSArray array];
+		} else {
+			NSMutableArray *mutableTags = [NSMutableArray arrayWithCapacity:[array count]];
+			for (id aTag in array) {
+				if ([aTag isKindOfClass:[NSDictionary class]]) {
+					// TOOD: handle error
+					LFMTag *lfmTag = [MTLJSONAdapter modelOfClass:LFMTag.class
+											   fromJSONDictionary:aTag
+															error:nil];
+					[mutableTags addObject:lfmTag];
+				}
+			}
+			return [NSArray arrayWithArray:mutableTags];
+		}
+    } reverseBlock:^(NSArray *array) {
+		// TODO really?
+		return [array description];
+    }];
+}
 
 + (NSValueTransformer *)boolTransformer
 {

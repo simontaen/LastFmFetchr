@@ -10,6 +10,8 @@
 
 @implementation LFMAlbumInfo
 
+#pragma mark - MTLJSONSerializing
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
 	NSString *contentKey = [self contentKey];
@@ -20,8 +22,8 @@
 	  @"lfmId" : [contentKey stringByAppendingFormat:@"id"],
 	  @"listeners" : [contentKey stringByAppendingFormat:@"listeners"],
 	  @"releaseDate" : [contentKey stringByAppendingFormat:@"releasedate"],
+	  @"topTags" : [contentKey stringByAppendingFormat:@"toptags.tag"],
 	  // TODO
-	  //@"topTags" : [contentKey stringByAppendingFormat:@"toptags"],
 	  //@"tracks" : [contentKey stringByAppendingFormat:@"tracks"],
 	  @"wikiContent" : [contentKey stringByAppendingFormat:@"wiki.content"],
 	  @"wikiPublishedDate" : [contentKey stringByAppendingFormat:@"wiki.published"],
