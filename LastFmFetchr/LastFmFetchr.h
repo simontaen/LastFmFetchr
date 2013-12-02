@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPSessionManager.h"
 
+#import "LFMArtist.h"
 #import "LFMArtistInfo.h"
 #import "LFMArtistsTopAlbums.h"
 #import "LFMAlbum.h"
 #import "LFMAlbumInfo.h"
 #import "LFMAlbumTopAlbum.h"
+#import "LFMTrack.h"
 #import "LFMTag.h"
 #import "LFMTagInfo.h"
 

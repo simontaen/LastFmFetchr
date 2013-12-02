@@ -23,8 +23,7 @@
 	  @"listeners" : [contentKey stringByAppendingFormat:@"listeners"],
 	  @"releaseDate" : [contentKey stringByAppendingFormat:@"releasedate"],
 	  @"topTags" : [contentKey stringByAppendingFormat:@"toptags.tag"],
-	  // TODO
-	  //@"tracks" : [contentKey stringByAppendingFormat:@"tracks"],
+	  @"tracks" : [contentKey stringByAppendingFormat:@"tracks.track"],
 	  @"wikiContent" : [contentKey stringByAppendingFormat:@"wiki.content"],
 	  @"wikiPublishedDate" : [contentKey stringByAppendingFormat:@"wiki.published"],
 	  @"wikiSummary" : [contentKey stringByAppendingFormat:@"wiki.summary"]

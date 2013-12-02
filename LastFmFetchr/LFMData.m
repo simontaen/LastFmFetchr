@@ -37,17 +37,6 @@
 	return artistName;
 }
 
-- (NSArray *)tracks
-{
-	static NSArray *tracks = nil;
-	if (!tracks) {
-		tracks = [self tracksFromArray:[self.JSON valueForKeyPath:@"tracks"]];
-	}
-	return tracks;
-}
-
-#pragma mark - LFMTrack
-
 - (NSNumber *)rank
 {
 	static NSNumber *rank = nil;
@@ -57,32 +46,6 @@
 	return rank;
 }
 
-#pragma mark - Mapping Helpers
-
-- (NSArray *)tracksFromArray:(id)obj
-{
-	if (![obj isKindOfClass:[NSDictionary class]]) {
-		return [NSArray array];
-	}
-
-	id jsonArray = ((NSDictionary *)obj)[@"track"];
-	
-	if (![jsonArray isKindOfClass:[NSArray class]]) {
-		return [NSArray array];
-	}
-	NSArray *array = (NSArray *)jsonArray;
-	
-	NSMutableArray *trackArray = [NSMutableArray arrayWithCapacity:[array count]];
-	
-	for (id JSON in array) {
-		if (![JSON isKindOfClass:[NSDictionary class]]) {
-			return [NSArray array];
-		}
-		[trackArray addObject:(id<LFMTrack>)[[LFMData alloc] initWithJson:((NSDictionary *)JSON)]];
-	}
-	
-	return trackArray;
-}
 */
 
 #pragma mark - MTLJSONSerializing
@@ -294,6 +257,30 @@ static NSString *contentKey = nil;
 + (NSValueTransformer *)topTagsJSONTransformer
 {
 	return [LFMData tagsTransformer];
+}
+
++ (NSValueTransformer *)tracksJSONTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+		if (![array isKindOfClass:[NSArray class]] || ![array count]) {
+			return [NSArray array];
+		} else {
+			NSMutableArray *mutableTracks = [NSMutableArray arrayWithCapacity:[array count]];
+			for (id aTrack in array) {
+				if ([aTrack isKindOfClass:[NSDictionary class]]) {
+					// TOOD: handle error
+					LFMTrack *lfmTrack = [MTLJSONAdapter modelOfClass:LFMTrack.class
+														   fromJSONDictionary:aTrack
+																		error:nil];
+					[mutableTracks addObject:lfmTrack];
+				}
+			}
+			return [NSArray arrayWithArray:mutableTracks];
+		}
+    } reverseBlock:^(NSArray *array) {
+		// TODO: what to do here?
+		return array;
+    }];
 }
 
 #pragma mark - JSON helpers

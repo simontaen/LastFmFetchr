@@ -105,7 +105,13 @@ static NSString *const kDashes = @"-------------------------------";
 						 NSParameterAssert(data.releaseDate);
 						 NSParameterAssert(data.topTags);
 						 NSAssert([data.topTags count], @"topTags should not be empty");
-						 NSLog(@"tracks %@", data.tracks);
+						 NSParameterAssert(data.tracks);
+						 NSAssert([data.tracks count], @"tracks should not be empty");
+						 for (LFMTrack *track in data.tracks) {
+							 LFMArtist *artist = track.artist;
+							 NSParameterAssert(artist);
+						 }
+						 NSParameterAssert([data.tracks[0] artist]);
 						 NSParameterAssert(data.wikiContent);
 						 NSParameterAssert(data.wikiPublishedDate);
 						 NSParameterAssert(data.wikiSummary);
