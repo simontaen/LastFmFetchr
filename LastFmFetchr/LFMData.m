@@ -397,7 +397,7 @@ static NSString *contentKey = nil;
 	static dispatch_once_t onceToken;
     static NSDateFormatter *publishedDateFormatter;
     dispatch_once(&onceToken, ^{
-		NSDateFormatter *publishedDateFormatter = [[NSDateFormatter alloc] init];
+		publishedDateFormatter = [[NSDateFormatter alloc] init];
 		[publishedDateFormatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
 	});
     return publishedDateFormatter;
@@ -408,7 +408,7 @@ static NSString *contentKey = nil;
 	static dispatch_once_t onceToken;
     static NSDateFormatter *yearformedDateFormatter;
     dispatch_once(&onceToken, ^{
-		NSDateFormatter *yearformedDateFormatter = [[NSDateFormatter alloc] init];
+		yearformedDateFormatter = [[NSDateFormatter alloc] init];
 		[yearformedDateFormatter setDateFormat:@"yyyy"];
 	});
     return yearformedDateFormatter;
