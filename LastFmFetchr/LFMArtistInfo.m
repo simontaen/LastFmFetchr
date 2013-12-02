@@ -16,22 +16,24 @@
 {
 	NSString *contentKey = [self contentKeyWithDelimiter];
 	
-	NSDictionary *mapping =  @{
-							   @"members" : [contentKey stringByAppendingFormat:@"bandmembers"],
-							   @"bioContent" : [contentKey stringByAppendingFormat:@"bio.content"],
-							   //@"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
-							   @"lfmWikiPage" : [contentKey stringByAppendingFormat:@"bio.links.link.href"],
-							   @"bioPlaceFormed" : [contentKey stringByAppendingFormat:@"bio.placeformed"],
-							   @"bioPublishedDate" : [contentKey stringByAppendingFormat:@"bio.published"],
-							   @"bioSummary" : [contentKey stringByAppendingFormat:@"bio.summary"],
-							   @"bioYearFormedDate" : [contentKey stringByAppendingFormat:@"bio.yearformed"],
-							   @"isOnTour" : [contentKey stringByAppendingFormat:@"ontour"],
-							   @"similarArtists" : [contentKey stringByAppendingFormat:@"similar"],
-							   @"listeners" : [contentKey stringByAppendingFormat:@"stats.listeners"],
-							   @"playcount" : [contentKey stringByAppendingFormat:@"stats.playcount"],
-							   @"isStreamable" : [contentKey stringByAppendingFormat:@"streamable"],
-							   @"tags" : [contentKey stringByAppendingFormat:@"tags"]
-							   };
+	NSDictionary *mapping =
+	@{
+	  //TODO
+	  //@"members" : [contentKey stringByAppendingFormat:@"bandmembers"],
+	  @"bioContent" : [contentKey stringByAppendingFormat:@"bio.content"],
+	  //@"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
+	  @"lfmWikiPage" : [contentKey stringByAppendingFormat:@"bio.links.link.href"],
+	  @"bioPlaceFormed" : [contentKey stringByAppendingFormat:@"bio.placeformed"],
+	  @"bioPublishedDate" : [contentKey stringByAppendingFormat:@"bio.published"],
+	  @"bioSummary" : [contentKey stringByAppendingFormat:@"bio.summary"],
+	  @"bioYearFormedDate" : [contentKey stringByAppendingFormat:@"bio.yearformed"],
+	  @"isOnTour" : [contentKey stringByAppendingFormat:@"ontour"],
+	  //@"similarArtists" : [contentKey stringByAppendingFormat:@"similar"],
+	  @"listeners" : [contentKey stringByAppendingFormat:@"stats.listeners"],
+	  @"playcount" : [contentKey stringByAppendingFormat:@"stats.playcount"],
+	  @"isStreamable" : [contentKey stringByAppendingFormat:@"streamable"],
+	  //@"tags" : [contentKey stringByAppendingFormat:@"tags"]
+	  };
 	
     return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
 }

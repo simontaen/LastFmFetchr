@@ -31,18 +31,15 @@
 						  NSLog(@"Error: %@", [error localizedDescription]);
 					  } else {
 						  //NSLog(@"JSON Response was: %@", data.JSON);
-						  NSLog(@"------------------------------ getInfoForArtist -----------------------------------");
-						  //NSLog(@"members %@", data.members);
-						  NSLog(@"TODO omitting members");
-						  //NSLog(@"bioContent %@", data.bioContent);
-						  NSLog(@"TODO omitting bioContent");
+						  NSLog(@"------------------------------ getInfoForArtist (%@) -----------------------------------", [LFMArtistInfo contentKeyWithDelimiter]);
+						  NSLog(@"members %@", data.members);
+						  NSParameterAssert(data.bioContent);
 						  NSLog(@"bioFormationYears %@", data.bioFormationYears);
-						  NSLog(@"lfmWikiPage %@", data.lfmWikiPage);
-						  NSLog(@"bioPlaceFormed %@", data.bioPlaceFormed);
-						  NSLog(@"bioPublishedDate %@", data.bioPublishedDate);
-						  //NSLog(@"bioSummary %@", data.bioSummary);
-						  NSLog(@"TODO omitting bioSummary");
-						  NSLog(@"bioYearFormedDate %@", data.bioYearFormedDate);
+						  NSParameterAssert(data.lfmWikiPage);
+						  NSParameterAssert(data.bioPlaceFormed);
+						  NSParameterAssert(data.bioPublishedDate);
+						  NSParameterAssert(data.bioSummary);
+						  NSParameterAssert(data.bioYearFormedDate);
 						  /*
 						  NSLog(@"imageSmall %@", data.imageSmall);
 						  NSLog(@"imageSmallString %@", data.imageSmallString);
@@ -56,20 +53,17 @@
 						  NSLog(@"imageMega %@", data.imageMega);
 						  NSLog(@"imageMegaString %@", data.imageMegaString);
 						  */
-						  NSLog(@"musicBrianzId %@", data.musicBrianzId);
-						  NSLog(@"name %@", data.name);
+						  NSParameterAssert(data.musicBrianzId);
+						  NSParameterAssert(data.name);
 						  NSLog(@"isOnTour %@", data.isOnTour);
-						  //NSLog(@"similarArtists %@", data.similarArtists);
-						  NSLog(@"TODO omitting similarArtists");
-						  NSLog(@"listeners %@", data.listeners);
-						  NSLog(@"playcount %@", data.playcount);
+						  NSLog(@"similarArtists %@", data.similarArtists);
+						  NSParameterAssert(data.listeners);
+						  NSParameterAssert(data.playcount);
 						  NSLog(@"isStreamable %@", data.isStreamable);
-						  //NSLog(@"tags %@", data.tags);
-						  NSLog(@"TODO omitting tags");
-						  NSLog(@"lfmPage %@", data.lfmPage);
+						  NSLog(@"tags %@", data.tags);
+						  NSParameterAssert(data.lfmPage);
 						  
 						  NSLog(@"Received data for Artist %@", data.name);
-						  
 					  };
 					  NSLog(@"Counter %i", --counter);
 				  }];
@@ -86,10 +80,10 @@
 						 NSLog(@"Error: %@", [error localizedDescription]);
 					 } else {
 						 //NSLog(@"JSON Response was: %@", data.JSON);
-						 NSLog(@"------------------------------- getInfoForAlbum --------------------------------");
+						 NSLog(@"------------------------------- getInfoForAlbum (%@) --------------------------------", [LFMAlbumInfo contentKeyWithDelimiter]);
 						 
-						 NSLog(@"artistName %@", data.artistName);
-						 NSLog(@"lfmId %@", data.lfmId);
+						 NSParameterAssert(data.artistName);
+						 NSParameterAssert(data.lfmId);
 						 /*
 						 NSLog(@"imageSmall %@", data.imageSmall);
 						 NSLog(@"imageSmallString %@", data.imageSmallString);
@@ -103,18 +97,18 @@
 						 NSLog(@"imageMega %@", data.imageMega);
 						 NSLog(@"imageMegaString %@", data.imageMegaString);
 						 */
-						 NSLog(@"listeners %@", data.listeners);
-						 NSLog(@"releaseDate %@", data.releaseDate);
+						 NSParameterAssert(data.listeners);
+						 NSParameterAssert(data.releaseDate);
 						 NSLog(@"toptags %@", data.topTags);
 						 NSLog(@"tracks %@", data.tracks);
-						 NSLog(@"TODO omitting wikiContent");
-						 NSLog(@"wikiPublishedDate %@", data.wikiPublishedDate);
-						 NSLog(@"TODO omitting wikiSummary");
+						 NSParameterAssert(data.wikiContent);
+						 NSParameterAssert(data.wikiPublishedDate);
+						 NSParameterAssert(data.wikiSummary);
 						 
-						 NSLog(@"musicBrianzId %@", data.musicBrianzId);
-						 NSLog(@"name %@", data.name);
-						 NSLog(@"playcount %@", data.playcount);
-						 NSLog(@"lfmPage %@", data.lfmPage);
+						 NSParameterAssert(data.musicBrianzId);
+						 NSParameterAssert(data.name);
+						 NSParameterAssert(data.playcount);
+						 NSParameterAssert(data.lfmPage);
 						 
 						 NSLog(@"Received data for Album %@ by Artist %@", data.name, data.artistName);
 						 
@@ -130,7 +124,7 @@
 							  NSLog(@"Error: %@", [error localizedDescription]);
 						  } else {
 							  //NSLog(@"JSON Response was: %@", data.JSON);
-							  NSLog(@"----------------------------- getAllAlbumsByArtist -------------------------------");
+							  NSLog(@"----------------------------- getAllAlbumsByArtist (%@) -------------------------------", [LFMArtistsTopAlbums contentKeyWithDelimiter]);
 							  
 							  NSLog(@"artistName %@", data.artistName);
 							  // of LFMAlbumTopAlbum

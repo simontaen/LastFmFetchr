@@ -16,11 +16,12 @@
 {
 	NSString *contentKey = [self contentKeyWithDelimiter];
 	
-	NSDictionary *mapping =  @{
-							   @"musicBrianzId" : [contentKey stringByAppendingFormat:@"mbid"],
-							   @"name" : [contentKey stringByAppendingString:@"name"],
-							   @"lfmPage" : [contentKey stringByAppendingString:@"url"]
-							   };
+	NSDictionary *mapping =
+	@{
+	  @"musicBrianzId" : [contentKey stringByAppendingFormat:@"mbid"],
+	  @"name" : [contentKey stringByAppendingString:@"name"],
+	  @"lfmPage" : [contentKey stringByAppendingString:@"url"]
+	  };
 	
     return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
 }

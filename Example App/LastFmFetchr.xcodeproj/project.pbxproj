@@ -210,10 +210,10 @@
 			children = (
 				F4DE2A21183984F30052A363 /* LFMAlbum.h */,
 				F41A547A184BC3DF00408036 /* LFMAlbum.m */,
-				F4DE2A22183986320052A363 /* LFMAlbumTopAlbum.h */,
-				F41A547C184BC3DF00408036 /* LFMAlbumTopAlbum.m */,
 				F4DE2A23183987860052A363 /* LFMAlbumInfo.h */,
 				F41A547B184BC3DF00408036 /* LFMAlbumInfo.m */,
+				F4DE2A22183986320052A363 /* LFMAlbumTopAlbum.h */,
+				F41A547C184BC3DF00408036 /* LFMAlbumTopAlbum.m */,
 			);
 			name = Album;
 			sourceTree = "<group>";
