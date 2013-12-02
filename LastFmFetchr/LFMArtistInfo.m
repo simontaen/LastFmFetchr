@@ -19,7 +19,7 @@
 	NSDictionary *mapping =  @{
 							   @"members" : [contentKey stringByAppendingFormat:@"bandmembers"],
 							   @"bioContent" : [contentKey stringByAppendingFormat:@"bio.content"],
-							   @"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
+							   //@"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
 							   @"lfmWikiPage" : [contentKey stringByAppendingFormat:@"bio.links.link.href"],
 							   @"bioPlaceFormed" : [contentKey stringByAppendingFormat:@"bio.placeformed"],
 							   @"bioPublishedDate" : [contentKey stringByAppendingFormat:@"bio.published"],

@@ -33,15 +33,15 @@
 						  //NSLog(@"JSON Response was: %@", data.JSON);
 						  NSLog(@"------------------------------ getInfoForArtist -----------------------------------");
 						  //NSLog(@"members %@", data.members);
-						  NSLog(@"omitting members");
+						  NSLog(@"TODO omitting members");
 						  //NSLog(@"bioContent %@", data.bioContent);
-						  NSLog(@"omitting bioContent");
+						  NSLog(@"TODO omitting bioContent");
 						  NSLog(@"bioFormationYears %@", data.bioFormationYears);
 						  NSLog(@"lfmWikiPage %@", data.lfmWikiPage);
 						  NSLog(@"bioPlaceFormed %@", data.bioPlaceFormed);
 						  NSLog(@"bioPublishedDate %@", data.bioPublishedDate);
 						  //NSLog(@"bioSummary %@", data.bioSummary);
-						  NSLog(@"omitting bioSummary");
+						  NSLog(@"TODO omitting bioSummary");
 						  NSLog(@"bioYearFormedDate %@", data.bioYearFormedDate);
 						  /*
 						  NSLog(@"imageSmall %@", data.imageSmall);
@@ -58,13 +58,14 @@
 						  */
 						  NSLog(@"musicBrianzId %@", data.musicBrianzId);
 						  NSLog(@"name %@", data.name);
-						  NSLog(@"isOnTour %d", data.isOnTour);
+						  NSLog(@"isOnTour %@", data.isOnTour);
 						  //NSLog(@"similarArtists %@", data.similarArtists);
-						  NSLog(@"omitting similarArtists");
+						  NSLog(@"TODO omitting similarArtists");
 						  NSLog(@"listeners %@", data.listeners);
 						  NSLog(@"playcount %@", data.playcount);
-						  NSLog(@"isStreamable %c", data.isStreamable);
-						  NSLog(@"tags %@", data.tags);
+						  NSLog(@"isStreamable %@", data.isStreamable);
+						  //NSLog(@"tags %@", data.tags);
+						  NSLog(@"TODO omitting tags");
 						  NSLog(@"lfmPage %@", data.lfmPage);
 						  
 						  NSLog(@"Received data for Artist %@", data.name);
@@ -106,9 +107,9 @@
 						 NSLog(@"releaseDate %@", data.releaseDate);
 						 NSLog(@"toptags %@", data.topTags);
 						 NSLog(@"tracks %@", data.tracks);
-						 NSLog(@"omitting wikiContent");
+						 NSLog(@"TODO omitting wikiContent");
 						 NSLog(@"wikiPublishedDate %@", data.wikiPublishedDate);
-						 NSLog(@"omitting wikiSummary");
+						 NSLog(@"TODO omitting wikiSummary");
 						 
 						 NSLog(@"musicBrianzId %@", data.musicBrianzId);
 						 NSLog(@"name %@", data.name);

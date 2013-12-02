@@ -28,24 +28,6 @@
 	return members;
 }
 
-- (NSString *)bioContent
-{
-	static NSString *bioContent = nil;
-	if (!bioContent) {
-		bioContent = [self notNilStringForKeyPath:@"bio.content"];
-	}
-	return bioContent;
-}
-
-- (NSString *)bioSummary
-{
-	static NSString *bioSummary = nil;
-	if (!bioSummary) {
-		bioSummary = [self notNilStringForKeyPath:@"bio.summary"];
-	}
-	return bioSummary;
-}
-
 - (NSArray *)tags
 {
 	static NSArray *tags = nil;
@@ -92,26 +74,6 @@
 	return albums;
 }
 
-#pragma mark - LFMAlbum
-
-- (NSString *)musicBrianzId
-{
-	static NSString *musicBrianzId = nil;
-	if (!musicBrianzId) {
-		musicBrianzId = [self notNilStringForKeyPath:@"mbid"];
-	}
-	return musicBrianzId;
-}
-
-- (NSString *)name
-{
-	static NSString *name = nil;
-	if (!name) {
-		name = [self notNilStringForKeyPath:@"name"];
-	}
-	return name;
-}
-
 #pragma mark - LFMAlbumInfoSub
 //http://www.last.fm/api/show/album.getInfo
 
@@ -140,36 +102,6 @@
 		tracks = [self tracksFromArray:[self.JSON valueForKeyPath:@"tracks"]];
 	}
 	return tracks;
-}
-
-- (NSString *)wikiContent
-{
-	static NSString *wikiContent = nil;
-	if (!wikiContent) {
-		wikiContent = [self notNilStringForKeyPath:@"wiki.content"];
-	}
-	return wikiContent;
-}
-
-- (NSDate *)wikiPublishedDate
-{
-	static NSDate *wikiPublishedDate = nil;
-	if (!wikiPublishedDate) {
-		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-		[formatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
-		
-		wikiPublishedDate = [formatter dateFromString:[self notNilStringForKeyPath:@"wiki.published"]];
-	}
-	return wikiPublishedDate;
-}
-
-- (NSString *)wikiSummary
-{
-	static NSString *wikiSummary = nil;
-	if (!wikiSummary) {
-		wikiSummary = [self notNilStringForKeyPath:@"wiki.summary"];
-	}
-	return wikiSummary;
 }
 
 #pragma mark - LFMTrack
@@ -268,37 +200,6 @@
 	return trackArray;
 }
 
-#pragma mark - Access to JSON
-
-- (NSString *)notNilStringForKeyPath:(NSString *)keyPath
-{
-	id obj = self.JSON;
-	// this is nil value save
-	for (NSString *key in [keyPath componentsSeparatedByString:@"."]) {
-		if ([obj isKindOfClass:[NSDictionary class]]) {
-			// go "down" the keyPath
-			obj = obj[key];
-		} else {
-			return kEmpty;
-		}
-	}
-	
-	if (obj) {
-		return [obj description];
-	}
-	return kEmpty;
-}
-
-#pragma mark - Lifecycle
-
-- (instancetype)initWithJson:(NSDictionary *)JSON;
-{
-	self = [super init];
-	if (self) {
-		_JSON = JSON;
-	}
-	return self;
-}
 */
 
 #pragma mark - MTLJSONSerializing
@@ -454,6 +355,15 @@ static NSString *contentKey = nil;
 + (NSValueTransformer *)isStreamableJSONTransformer
 {
 	return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
+}
+
++ (NSValueTransformer *)wikiPublishedDateJSONTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return [self.publishedDateFormatter dateFromString:str];
+    } reverseBlock:^(NSDate *date) {
+		return [self.publishedDateFormatter stringFromDate:date];
+    }];
 }
 
 + (NSValueTransformer *)releaseDateJSONTransformer
