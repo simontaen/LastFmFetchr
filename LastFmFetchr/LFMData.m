@@ -11,9 +11,6 @@
 
 @implementation LFMData
 /**
-#pragma mark - LFMArtistInfo
-//http://www.last.fm/api/show/artist.getInfo
-
 - (NSArray *)members
 {
 	static NSArray *members = nil;
@@ -28,18 +25,6 @@
 	return members;
 }
 
-- (NSArray *)tags
-{
-	static NSArray *tags = nil;
-	if (!tags) {
-		tags = [self tagsFromDictionary:[self.JSON valueForKeyPath:@"tags"]];
-	}
-	return tags;
-}
-
-#pragma mark - LFMArtistsTopAlbums
-//http://www.last.fm/api/show/artist.getTopAlbums
-
 - (NSString *)artistName
 {
 	static NSString *artistName = nil;
@@ -50,27 +35,6 @@
 		}
 	}
 	return artistName;
-}
-
-#pragma mark - LFMAlbumInfoSub
-//http://www.last.fm/api/show/album.getInfo
-
-- (NSNumber *)lfmId
-{
-	static NSNumber *lfmId = nil;
-	if (!lfmId) {
-		lfmId = [self longLongNumberForKeyPath:@"id"];
-	}
-	return lfmId;
-}
-
-- (NSArray *)topTags
-{
-	static NSArray *topTags = nil;
-	if (!topTags) {
-		topTags = [self tagsFromDictionary:[self.JSON valueForKeyPath:@"toptags"]];
-	}
-	return topTags;
 }
 
 - (NSArray *)tracks
@@ -93,60 +57,7 @@
 	return rank;
 }
 
-- (id<LFMArtist>)artist
-{
-	static id<LFMArtist> artist = nil;
-	if (!artist) {
-		id obj = [self.JSON valueForKeyPath:@"artist"];
-		
-		if ([obj isKindOfClass:[NSDictionary class]]) {
-			artist = (id<LFMArtist>)[[LFMData alloc] initWithJson:(NSDictionary *)obj];
-		} else {
-			// TODO: this is a problem now, I changed it here,
-			// but it won't be reflected at the other place where
-			// we do the exact same thing
-			// intentionally returning nil, not sure what to do here.
-			artist = nil;
-		}
-	}
-	return artist;
-}
-
-- (NSNumber *)duration
-{
-	static NSNumber *duration = nil;
-	if (!duration) {
-		duration = [self longLongNumberForKeyPath:@"duration"];
-	}
-	return duration;
-}
-
 #pragma mark - Mapping Helpers
-
-- (NSArray *)tagsFromDictionary:(id)obj
-{
-	if (![obj isKindOfClass:[NSDictionary class]]) {
-		return [NSArray array];
-	}
-	
-	id jsonArray = ((NSDictionary *)obj)[@"tag"];
-	
-	if (![jsonArray isKindOfClass:[NSArray class]]) {
-		return [NSArray array];
-	}
-	NSArray *array = (NSArray *)jsonArray;
-	
-	NSMutableArray *tagArray = [NSMutableArray arrayWithCapacity:[array count]];
-	
-	for (id JSON in array) {
-		if (![JSON isKindOfClass:[NSDictionary class]]) {
-			return [NSArray array];
-		}
-		[tagArray addObject:((id<LFMTag>)[[LFMData alloc] initWithJson:((NSDictionary *)JSON)])];
-	}
-	
-	return tagArray;
-}
 
 - (NSArray *)tracksFromArray:(id)obj
 {
@@ -172,7 +83,6 @@
 	
 	return trackArray;
 }
-
 */
 
 #pragma mark - MTLJSONSerializing
@@ -231,7 +141,7 @@ static NSString *contentKey = nil;
 + (NSValueTransformer *)bioFormationYearsJSONTransformer
 {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSDictionary *dict) {
-		if (![dict isKindOfClass:[NSDictionary class]]) {
+		if (![dict isKindOfClass:[NSDictionary class]] || ![dict count]) {
 			return [NSArray array];
 		} else {
 			NSString *fromStr = [dict valueForKeyPath:@"formation.yearfrom"];
@@ -335,7 +245,16 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)rankInAllArtistAlbumsJSONTransformer
 {
-	return [LFMData numberTransformer];
+	return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSDictionary *dict) {
+		if (![dict isKindOfClass:[NSDictionary class]] || ![dict count]) {
+			return @(0);
+		} else {
+			NSString *rank = dict[@"rank"];
+			return [NSNumber numberWithLongLong:[rank longLongValue]];
+		}
+	} reverseBlock:^(NSNumber *num) {
+		return [num description];
+	}];
 }
 
 + (NSValueTransformer *)artistJSONTransformer
