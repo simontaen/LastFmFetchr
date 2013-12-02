@@ -11,6 +11,7 @@
 
 @interface LFMAlbumTopAlbum : LFMAlbum
 
+// TODO: Images S to XL
 @property (nonatomic, strong, readonly) NSNumber *rankInAllArtistAlbums;
 @property (nonatomic, strong, readonly) LFMArtist *artist;
 

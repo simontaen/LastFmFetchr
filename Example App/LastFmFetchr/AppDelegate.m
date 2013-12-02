@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "LastFmFetchr.h"
 
+static NSString *const kDashes = @"-------------------------------";
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -31,7 +33,7 @@
 						  NSLog(@"Error: %@", [error localizedDescription]);
 					  } else {
 						  //NSLog(@"JSON Response was: %@", data.JSON);
-						  NSLog(@"------------------------------ getInfoForArtist (%@) -----------------------------------", [LFMArtistInfo contentKeyWithDelimiter]);
+						  NSLog(@"%@ getInfoForArtist (%@) %@", kDashes, [LFMArtistInfo contentKey], kDashes);
 						  NSLog(@"members %@", data.members);
 						  NSParameterAssert(data.bioContent);
 						  NSLog(@"bioFormationYears %@", data.bioFormationYears);
@@ -80,7 +82,7 @@
 						 NSLog(@"Error: %@", [error localizedDescription]);
 					 } else {
 						 //NSLog(@"JSON Response was: %@", data.JSON);
-						 NSLog(@"------------------------------- getInfoForAlbum (%@) --------------------------------", [LFMAlbumInfo contentKeyWithDelimiter]);
+						 NSLog(@"%@ getInfoForAlbum (%@) %@", kDashes, [LFMAlbumInfo contentKey], kDashes);
 						 
 						 NSParameterAssert(data.artistName);
 						 NSParameterAssert(data.lfmId);
@@ -124,26 +126,27 @@
 							  NSLog(@"Error: %@", [error localizedDescription]);
 						  } else {
 							  //NSLog(@"JSON Response was: %@", data.JSON);
-							  NSLog(@"----------------------------- getAllAlbumsByArtist (%@) -------------------------------", [LFMArtistsTopAlbums contentKeyWithDelimiter]);
+							  NSLog(@"%@ getAllAlbumsByArtist (%@) %@", kDashes, [LFMArtistsTopAlbums contentKey], kDashes);
 							  
 							  NSLog(@"artistName %@", data.artistName);
-							  // of LFMAlbumTopAlbum
+							  NSParameterAssert(data.albums);
+							  
 							  NSArray *albums = data.albums;
 							  for (int i = 0; i < 3; i++) {
 								  LFMAlbumTopAlbum *album = albums[i];
-								  NSLog(@"---------------------- %@ ----------------------", [album name]);
-								  
-								  NSLog(@"rankInAllArtistAlbums %@", [album rankInAllArtistAlbums]);
-								  NSLog(@"rankInAllArtistAlbumsNumber %@", [album rankInAllArtistAlbums]);
+								  NSLog(@"rankInAllArtistAlbums %@", album.rankInAllArtistAlbums);
 								  /*
 								  NSLog(@"imageSmall %@", [album imageSmall]);
 								  NSLog(@"imageMedium %@", [album imageMedium]);
 								  NSLog(@"imageLarge %@", [album imageLarge]);
 								  NSLog(@"imageExtraLarge %@", [album imageExtraLarge]);
 								   */
-								  NSLog(@"musicBrianzId %@", [album musicBrianzId]);
-								  NSLog(@"playcount %@", [album playcount]);
-								  NSLog(@"lfmPage %@", [album lfmPage]);
+								  NSParameterAssert(album.musicBrianzId);
+								  NSParameterAssert(album.name);
+								  NSParameterAssert(album.playcount);
+								  NSParameterAssert(album.lfmPage);
+								  
+								  NSLog(@"-- Received LFMAlbumTopAlbum %@", album.name);
 							  }
 							  NSLog(@"Received %lu TopAlbums by Artist %@", (unsigned long)[albums count], data.artistName);
 							  

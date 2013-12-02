@@ -12,6 +12,7 @@ static NSString *const kDelim = @".";
 
 @interface LFMData : MTLModel <MTLJSONSerializing>
 
-+ (NSString *)contentKeyWithDelimiter;
++ (void)setContentKey:(NSString *)key;
++ (NSString *)contentKey;
 
 @end

@@ -12,7 +12,7 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
-	NSString *contentKey = [self contentKeyWithDelimiter];
+	NSString *contentKey = [self contentKey];
 	
 	NSDictionary *mapping =
 	@{

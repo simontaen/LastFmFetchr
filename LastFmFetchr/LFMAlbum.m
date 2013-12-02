@@ -7,12 +7,15 @@
 //
 
 #import "LFMAlbum.h"
+#import "LFMAlbumTopAlbum.h"
 
 @implementation LFMAlbum
 
+#pragma mark - MTLJSONSerializing
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
-	NSString *contentKey = [self contentKeyWithDelimiter];
+	NSString *contentKey = [self contentKey];
 	
 	NSDictionary *mapping =
 	@{
@@ -23,6 +26,18 @@
 	  };
 	
     return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
+}
+
++ (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionary
+{
+	// NOTE only handle nested objects here
+	
+	if (JSONDictionary[@"@attr"] != nil && JSONDictionary[@"artist"] != nil) {
+		[self setContentKey:@""];
+        return LFMAlbumTopAlbum.class;
+    }
+	
+	return self.class;
 }
 
 @end

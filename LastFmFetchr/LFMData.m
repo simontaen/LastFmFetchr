@@ -52,28 +52,6 @@
 	return artistName;
 }
 
-- (NSArray *)albums
-{
-	static NSArray *albums = nil;
-	if (!albums) {
-		id obj = [self.JSON valueForKeyPath:@"album"];
-		
-		if (![obj isKindOfClass:[NSArray class]]) {
-			albums = [NSArray array];
-		} else {
-			NSArray *array = (NSArray *)obj;
-			NSMutableArray *mutableAlbums = [NSMutableArray arrayWithCapacity:[array count]];
-			for (id aAlbum in array) {
-				if ([aAlbum isKindOfClass:[NSDictionary class]]) {
-					[mutableAlbums addObject:((id<LFMAlbumTopAlbum>)[[LFMData alloc] initWithJson:(NSDictionary *)aAlbum])];
-				}
-			}
-			albums = [NSArray arrayWithArray:mutableAlbums];
-		}
-	}
-	return albums;
-}
-
 #pragma mark - LFMAlbumInfoSub
 //http://www.last.fm/api/show/album.getInfo
 
@@ -206,20 +184,21 @@
 
 + (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionary
 {
+	// NOTE only handle top level keys here where the JSONDictionary comes directly from the API.
+	// Drop to subclasses if you have nested objects
+	
 	if (JSONDictionary[@"artist"] != nil) {
-		// TODO: more logic needed to differentiate between sublcasses
-		// not sure if subclass could implement themselfes though
-		[LFMData setContentKey:@"artist"];
+		[self setContentKey:[@"artist" stringByAppendingString:kDelim] ];
         return LFMArtistInfo.class;
     }
 	
 	if (JSONDictionary[@"album"] != nil) {
-		[LFMData setContentKey:@"album"];
+		[self setContentKey:[@"album" stringByAppendingString:kDelim]];
         return LFMAlbumInfo.class;
     }
 	
 	if (JSONDictionary[@"topalbums"] != nil) {
-		[LFMData setContentKey:@"topalbums"];
+		[self setContentKey:[@"topalbums" stringByAppendingString:kDelim]];
         return LFMArtistsTopAlbums.class;
     }
 	
@@ -235,10 +214,10 @@ static NSString *contentKey = nil;
 	}
 }
 
-+ (NSString *)contentKeyWithDelimiter
++ (NSString *)contentKey
 {
 	@synchronized(self) {
-		return [contentKey stringByAppendingString:kDelim];
+		return contentKey;
 	}
 }
 
@@ -360,6 +339,38 @@ static NSString *contentKey = nil;
     } reverseBlock:^(NSDate *date) {
         NSString *string = [self.releaseDateFormatter stringFromDate:date];
 		return [string stringByReplacingOccurrencesOfString:@"-00:00" withString:@"00:00"];
+    }];
+}
+
++ (NSValueTransformer *)rankInAllArtistAlbumsJSONTransformer
+{
+	return [LFMData numberTransformer];
+}
+
++ (NSValueTransformer *)artistJSONTransformer
+{
+	return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:LFMArtist.class];
+}
+
++ (NSValueTransformer *)albumsJSONTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+		if (![array isKindOfClass:[NSArray class]]) {
+			return [NSArray array];
+		} else {
+			NSMutableArray *mutableAlbums = [NSMutableArray arrayWithCapacity:[array count]];
+			for (id aAlbum in array) {
+				if ([aAlbum isKindOfClass:[NSDictionary class]]) {
+					// TOOD: handle error
+					LFMAlbumTopAlbum *topAlbum = [MTLJSONAdapter modelOfClass:LFMAlbum.class fromJSONDictionary:aAlbum error:nil];
+					[mutableAlbums addObject:topAlbum];
+				}
+			}
+			return [NSArray arrayWithArray:mutableAlbums];
+		}
+    } reverseBlock:^(NSArray *array) {
+		// TODO: what to do here?
+		return array;
     }];
 }
 

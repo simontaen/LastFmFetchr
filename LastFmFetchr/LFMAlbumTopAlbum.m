@@ -10,4 +10,19 @@
 
 @implementation LFMAlbumTopAlbum
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+	NSString *contentKey = [self contentKey];
+	
+	NSDictionary *mapping =
+	@{
+	  // TODO: check stackoverflow about @
+	  //@"rankInAllArtistAlbums" : [contentKey stringByAppendingFormat:@"@attr.rank"],
+	  @"artist" : [contentKey stringByAppendingString:@"artist"]
+	  };
+	
+    return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
+}
+
+
 @end
