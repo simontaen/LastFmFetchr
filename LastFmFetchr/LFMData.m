@@ -143,11 +143,6 @@
 	return duration;
 }
 
-- (BOOL)isTrackStreamable
-{
-	return [self boolFromString:[self notNilStringForKeyPath:@"streamable.fulltrack"]];
-}
-
 #pragma mark - Mapping Helpers
 
 - (NSArray *)tagsFromDictionary:(id)obj
@@ -312,7 +307,7 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)isOnTourJSONTransformer
 {
-	return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
+	return [LFMData boolTransformer];
 }
 
 + (NSValueTransformer *)similarArtistsJSONTransformer
@@ -335,26 +330,17 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)listenersJSONTransformer
 {
-	// TODO: generalize this value transformer, like for bool
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
-        return [NSNumber numberWithLongLong:[str longLongValue]];
-    } reverseBlock:^(NSNumber *num) {
-		return [num description];
-    }];
+	return [LFMData numberTransformer];
 }
 
 + (NSValueTransformer *)playcountJSONTransformer
 {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
-        return [NSNumber numberWithLongLong:[str longLongValue]];
-    } reverseBlock:^(NSNumber *num) {
-		return [num description];
-    }];
+	return [LFMData numberTransformer];
 }
 
 + (NSValueTransformer *)isStreamableJSONTransformer
 {
-	return [NSValueTransformer valueTransformerForName:MTLBooleanValueTransformerName];
+	return [LFMData boolTransformer];
 }
 
 + (NSValueTransformer *)wikiPublishedDateJSONTransformer
@@ -378,6 +364,36 @@ static NSString *contentKey = nil;
 }
 
 #pragma mark - JSON helpers
+
+#pragma mark - Custom ValueTransformers
+
++ (NSValueTransformer *)boolTransformer
+{
+	static dispatch_once_t onceToken;
+    static MTLValueTransformer *boolTransformer;
+    dispatch_once(&onceToken, ^{
+		boolTransformer = [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+			return [NSNumber numberWithBool:[@"1" isEqual:str]];
+		} reverseBlock:^(NSNumber *num) {
+			return [num description];
+		}];
+	});
+    return boolTransformer;
+}
+
++ (NSValueTransformer *)numberTransformer
+{
+	static dispatch_once_t onceToken;
+    static MTLValueTransformer *numberTransformer;
+    dispatch_once(&onceToken, ^{
+		numberTransformer = [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+			return [NSNumber numberWithLongLong:[str longLongValue]];
+		} reverseBlock:^(NSNumber *num) {
+			return [num description];
+		}];
+	});
+    return numberTransformer;
+}
 
 #pragma mark - DateFormatter
 

@@ -55,11 +55,11 @@
 						  */
 						  NSParameterAssert(data.musicBrianzId);
 						  NSParameterAssert(data.name);
-						  NSLog(@"isOnTour %@", data.isOnTour);
+						  NSParameterAssert(data.isOnTour);
 						  NSLog(@"similarArtists %@", data.similarArtists);
 						  NSParameterAssert(data.listeners);
 						  NSParameterAssert(data.playcount);
-						  NSLog(@"isStreamable %@", data.isStreamable);
+						  NSParameterAssert(data.isStreamable);
 						  NSLog(@"tags %@", data.tags);
 						  NSParameterAssert(data.lfmPage);
 						  
