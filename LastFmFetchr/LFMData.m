@@ -230,35 +230,26 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)bioFormationYearsJSONTransformer
 {
-	/*
-	static NSArray *bioFormationYears = nil;
-	if (!bioFormationYears) {
-		id obj = [self.JSON valueForKeyPath:@"bio.formationlist"];
-		
-		if (![obj isKindOfClass:[NSDictionary class]]) {
-			bioFormationYears = [NSArray array];
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSDictionary *dict) {
+		if (![dict isKindOfClass:[NSDictionary class]]) {
+			return [NSArray array];
 		} else {
-			NSDictionary *dict = (NSDictionary *)obj;
-			
-			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-			[formatter setDateFormat:@"yyyy"];
-			
-			NSDate *yearfrom = [formatter dateFromString:[dict valueForKeyPath:@"formation.yearfrom"]];
-			NSDate *yearto = [formatter dateFromString:[dict valueForKeyPath:@"formation.yearto"]];
+			NSString *fromStr = [dict valueForKeyPath:@"formation.yearfrom"];
+			NSDate *yearfrom = [self.yearformedDateFormatter dateFromString:fromStr];
+			NSString *toStr = [dict valueForKeyPath:@"formation.yearto"];
+			NSDate *yearto = [self.yearformedDateFormatter dateFromString:toStr];
 			
 			if (yearfrom && yearto) {
-				bioFormationYears = @[yearfrom, yearto];
+				return @[yearfrom, yearto];
 			} else if (yearfrom) {
-				bioFormationYears = @[yearfrom];
-			} else {
-				bioFormationYears = [NSArray array];
+				return @[yearfrom];
 			}
+			return [NSArray array];
 		}
-	}
-	return bioFormationYears;
-	 */
-	// TODO
-	return nil;
+    } reverseBlock:^(NSArray *array) {
+		// TODO really?
+		return [array description];
+    }];
 }
 
 + (NSValueTransformer *)lfmWikiPageJSONTransformer
