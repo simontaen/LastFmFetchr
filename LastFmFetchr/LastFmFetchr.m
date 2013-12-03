@@ -9,6 +9,7 @@
 #import "LastFmFetchr.h"
 #import "LFMData.h"
 #import "AFNetworking.h"
+#import "LFMJSONResponseSerializerWithCleanup.h"
 #import "SDURLCache.h"
 
 // ----------------------------------------------------------------------
@@ -351,8 +352,8 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 														};
 		_fetchr.requestSerializer = requestSerializer;
 		
-		// Response Serializer, use JSON API
-		AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
+		// Response Serializer, use JSON API, cleanup Last.fm mess with @attr
+		LFMJSONResponseSerializerWithCleanup *responseSerializer = [LFMJSONResponseSerializerWithCleanup serializer];
 		responseSerializer.stringEncoding = NSUTF8StringEncoding;
         _fetchr.responseSerializer = responseSerializer;
 		

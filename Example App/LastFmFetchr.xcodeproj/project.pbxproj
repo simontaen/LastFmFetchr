@@ -32,6 +32,7 @@
 		F4A7C12B179D7B1F00FB7CC3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A7C12A179D7B1F00FB7CC3 /* Default-568h@2x.png */; };
 		F4A7C12E179D7B1F00FB7CC3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4A7C12C179D7B1F00FB7CC3 /* MainStoryboard.storyboard */; };
 		F4ABF51417A8104000DEF135 /* LFMData.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ABF51317A8104000DEF135 /* LFMData.m */; };
+		F4B4AA10184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AA0F184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.m */; };
 		F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */ = {isa = PBXBuildFile; fileRef = F4ED9CE4179D7BE3007C038B /* LastFmFetchr.m */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,8 @@
 		F4A7C12D179D7B1F00FB7CC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		F4ABF51217A8104000DEF135 /* LFMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMData.h; path = ../../LastFmFetchr/LFMData.h; sourceTree = "<group>"; };
 		F4ABF51317A8104000DEF135 /* LFMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMData.m; path = ../../LastFmFetchr/LFMData.m; sourceTree = "<group>"; };
+		F4B4AA0E184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMJSONResponseSerializerWithCleanup.h; path = ../../LastFmFetchr/LFMJSONResponseSerializerWithCleanup.h; sourceTree = "<group>"; };
+		F4B4AA0F184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMJSONResponseSerializerWithCleanup.m; path = ../../LastFmFetchr/LFMJSONResponseSerializerWithCleanup.m; sourceTree = "<group>"; };
 		F4DE2A21183984F30052A363 /* LFMAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbum.h; path = ../../LastFmFetchr/LFMAlbum.h; sourceTree = "<group>"; };
 		F4DE2A22183986320052A363 /* LFMAlbumTopAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbumTopAlbum.h; path = ../../LastFmFetchr/LFMAlbumTopAlbum.h; sourceTree = "<group>"; };
 		F4DE2A23183987860052A363 /* LFMAlbumInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMAlbumInfo.h; path = ../../LastFmFetchr/LFMAlbumInfo.h; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 				F4ABF51517A8104C00DEF135 /* Dictionarys  */,
 				F4ED9CE3179D7BE3007C038B /* LastFmFetchr.h */,
 				F4ED9CE4179D7BE3007C038B /* LastFmFetchr.m */,
+				F4B4AA11184E34BB00C5FBDE /* Networking */,
 			);
 			path = LastFmFetchr;
 			sourceTree = "<group>";
@@ -166,6 +170,15 @@
 				F4F494631838361E00DF8031 /* Tag */,
 			);
 			name = "Dictionarys ";
+			sourceTree = "<group>";
+		};
+		F4B4AA11184E34BB00C5FBDE /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				F4B4AA0E184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.h */,
+				F4B4AA0F184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.m */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		F4BF1D30184D3CA300849329 /* TopAlbums */ = {
@@ -354,6 +367,7 @@
 				F41A547F184BC3DF00408036 /* LFMAlbumTopAlbum.m in Sources */,
 				F4A7C121179D7B1F00FB7CC3 /* main.m in Sources */,
 				F4A7C125179D7B1F00FB7CC3 /* AppDelegate.m in Sources */,
+				F4B4AA10184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.m in Sources */,
 				F41A5465184BB24D00408036 /* LFMArtist.m in Sources */,
 				F41A547E184BC3DF00408036 /* LFMAlbumInfo.m in Sources */,
 				F4375FAF1823B92800E9672C /* LFMData+ImagesSmallToXL.m in Sources */,

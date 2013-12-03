@@ -9,6 +9,7 @@
 #import "Mantle.h"
 
 static NSString *const kDelim = @".";
+static NSString *const kAtPrefixReplacement = @"LFM";
 
 @interface LFMData : MTLModel <MTLJSONSerializing>
 

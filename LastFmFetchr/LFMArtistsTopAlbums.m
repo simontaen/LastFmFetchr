@@ -18,8 +18,7 @@
 	
 	NSDictionary *mapping =
 	@{
-	  // TODO: check stackoverflow about @
-	  //@"artistName" : [contentKey stringByAppendingFormat:@"@attr.artist"],
+	  @"artistName" : [contentKey stringByAppendingFormat:@"%@attr.artist", kAtPrefixReplacement],
 	  @"albums" : [contentKey stringByAppendingString:@"album"]
 	  };
 	

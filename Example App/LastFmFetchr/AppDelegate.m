@@ -143,7 +143,7 @@ static NSString *const kDashes = @"-------------------------------";
 							  NSArray *albums = data.albums;
 							  for (int i = 0; i < 3; i++) {
 								  LFMAlbumTopAlbum *album = albums[i];
-								  NSLog(@"rankInAllArtistAlbums %@", album.rankInAllArtistAlbums);
+								  NSParameterAssert(album.rankInAllArtistAlbums);
 								  /*
 								  NSLog(@"imageSmall %@", [album imageSmall]);
 								  NSLog(@"imageMedium %@", [album imageMedium]);

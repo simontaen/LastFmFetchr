@@ -18,8 +18,7 @@
 	
 	NSDictionary *mapping =
 	@{
-	  // same @attr.rank problem, maybe you can infere it from the position in the array?
-	  //@"rank" : [contentKey stringByAppendingFormat:@"@attr.rank"],
+	  @"rank" : [contentKey stringByAppendingFormat:@"%@attr.rank", kAtPrefixReplacement],
 	  @"artist" : [contentKey stringByAppendingString:@"artist"],
 	  @"duration" : [contentKey stringByAppendingFormat:@"duration"],
 	  @"musicBrianzId" : [contentKey stringByAppendingString:@"mbid"],

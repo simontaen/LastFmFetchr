@@ -32,7 +32,7 @@
 {
 	// NOTE only handle nested objects here
 	
-	if (JSONDictionary[@"@attr"] != nil && JSONDictionary[@"artist"] != nil) {
+	if (JSONDictionary[[kAtPrefixReplacement stringByAppendingString:@"attr"]] != nil && JSONDictionary[@"artist"] != nil) {
 		[self setContentKey:@""];
         return LFMAlbumTopAlbum.class;
     }

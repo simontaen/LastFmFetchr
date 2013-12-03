@@ -18,8 +18,7 @@
 	
 	NSDictionary *mapping =
 	@{
-	  // see http://stackoverflow.com/questions/1567850/using-valueforkeypath-on-nsdictionary-if-a-key-starts-the-symbol
-	  //@"rankInAllArtistAlbums" : [contentKey stringByAppendingFormat:@"@attr.rank"],
+	  @"rankInAllArtistAlbums" : [contentKey stringByAppendingFormat:@"%@attr.rank", kAtPrefixReplacement],
 	  @"artist" : [contentKey stringByAppendingString:@"artist"]
 	  };
 	

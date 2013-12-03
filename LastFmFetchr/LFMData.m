@@ -208,16 +208,12 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)rankInAllArtistAlbumsJSONTransformer
 {
-	return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSDictionary *dict) {
-		if (![dict isKindOfClass:[NSDictionary class]] || ![dict count]) {
-			return @(0);
-		} else {
-			NSString *rank = dict[@"rank"];
-			return [NSNumber numberWithLongLong:[rank longLongValue]];
-		}
-	} reverseBlock:^(NSNumber *num) {
-		return [num description];
-	}];
+	return [LFMData rankJSONTransformer];
+}
+
++ (NSValueTransformer *)rankJSONTransformer
+{
+	return [LFMData numberTransformer];
 }
 
 + (NSValueTransformer *)artistJSONTransformer
