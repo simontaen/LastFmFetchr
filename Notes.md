@@ -5,7 +5,6 @@ Code.todo
 * How can I call every property on an object?
 	* http://stackoverflow.com/questions/2573805/using-objc-msgsend-to-call-a-objective-c-function-with-named-arguments
 	* http://stackoverflow.com/questions/330030/list-selectors-for-obj-c-object
-* NSAssert for methods in LFMAppdelegate
 * it should be possible to directly return a proper LFMData from responseObjectForResponse:data:error in a AFURLResponseSerialization implementor
 * Implement the OAuth [Authentication](http://www.last.fm/api/authentication)
 
