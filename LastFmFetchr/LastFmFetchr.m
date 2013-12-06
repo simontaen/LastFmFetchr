@@ -77,7 +77,6 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 									   [self handleRequestSuccess:JSON
 															 task:task
 												 methodParamValue:kLFMMethodArtistGetInfo
-												   jsonContentKey:kLFMParameterArtist
 														  success:^(NSDictionary *data) {
 															  // TODO: handle error
 															  LFMArtistInfo *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
@@ -132,7 +131,6 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 									   [self handleRequestSuccess:JSON
 															 task:task
 												 methodParamValue:kLFMMethodArtistGetTopAlbums
-												   jsonContentKey:@"topalbums"
 														  success:^(NSDictionary *data) {
 															  // TODO: handle error
 															  LFMArtistsTopAlbums *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
@@ -192,7 +190,6 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 									   [self handleRequestSuccess:JSON
 															 task:task
 												 methodParamValue:kLFMMethodAlbumGetInfo
-												   jsonContentKey:kLFMParameterAlbum
 														  success:^(NSDictionary *data) {
 															  // TODO: handle error
 															  LFMAlbumInfo *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
@@ -234,7 +231,6 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 - (void)handleRequestSuccess:(id)JSON
 						task:(NSURLSessionDataTask *)task
 			methodParamValue:(NSString *)methodParamValue
-			  jsonContentKey:(NSString *)jsonContentKey
 					 success:(void (^)(NSDictionary *data))success
 					 failure:(void (^)(NSError *error))failure
 {
@@ -254,13 +250,7 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 				// DEBUG: NSLog(@"JSON Response was: %@", JSON);
 				
 				// now we are actually fine
-				if (jsonContentKey) {
-					// TODO: jsonContentKey is no longer needed
-					NSLog(@"jsonContentKey %@", jsonContentKey);
-					success((NSDictionary *)(JSON));
-				} else {
-					success((NSDictionary *)(JSON));
-				}
+				success((NSDictionary *)(JSON));
 			}
 			
 		} else {
