@@ -18,7 +18,7 @@
 	
 	NSDictionary *mapping =
 	@{
-	  //TODO
+	  //TODO: members
 	  //@"members" : [contentKey stringByAppendingFormat:@"bandmembers"],
 	  @"bioContent" : [contentKey stringByAppendingFormat:@"bio.content"],
 	  @"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
@@ -29,7 +29,7 @@
 	  @"bioYearFormedDate" : [contentKey stringByAppendingFormat:@"bio.yearformed"],
 	  @"isOnTour" : [contentKey stringByAppendingFormat:@"ontour"],
 	  // TODO
-	  //@"similarArtists" : [contentKey stringByAppendingFormat:@"similar"],
+	  @"similarArtists" : [contentKey stringByAppendingFormat:@"similar.artist"],
 	  @"listeners" : [contentKey stringByAppendingFormat:@"stats.listeners"],
 	  @"playcount" : [contentKey stringByAppendingFormat:@"stats.playcount"],
 	  @"isStreamable" : [contentKey stringByAppendingFormat:@"streamable"],

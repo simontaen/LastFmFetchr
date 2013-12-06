@@ -7,6 +7,7 @@
 //
 
 #import "LFMArtist.h"
+#import "LFMArtistInfo.h"
 
 @implementation LFMArtist
 
@@ -24,6 +25,19 @@
 	  };
 	
     return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
+}
+
++ (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionary
+{
+	// NOTE only handle nested objects here
+	
+	[self setContentKey:@""];
+	
+	if ([JSONDictionary count] > 3) {
+        return LFMArtistInfo.class;
+    }
+	
+	return self.class;
 }
 
 @end

@@ -59,7 +59,7 @@ static NSString *const kDashes = @"-------------------------------";
 						  NSParameterAssert(data.musicBrianzId);
 						  NSParameterAssert(data.name);
 						  NSParameterAssert(data.isOnTour);
-						  NSLog(@"similarArtists %@", data.similarArtists);
+						  NSParameterAssert(data.similarArtists);
 						  NSParameterAssert(data.listeners);
 						  NSParameterAssert(data.playcount);
 						  NSParameterAssert(data.isStreamable);

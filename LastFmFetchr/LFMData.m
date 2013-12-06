@@ -25,27 +25,6 @@
 	return members;
 }
 
-- (NSString *)artistName
-{
-	static NSString *artistName = nil;
-	if (!artistName) {
-		artistName = [self notNilStringForKeyPath:@"attr.artist"];
-		if (!artistName) {
-			artistName = [self notNilStringForKeyPath:@"artist"];
-		}
-	}
-	return artistName;
-}
-
-- (NSNumber *)rank
-{
-	static NSNumber *rank = nil;
-	if (!rank) {
-		rank = [NSNumber numberWithInt:[[self notNilStringForKeyPath:@"@attr.rank"] intValue]];
-	}
-	return rank;
-}
-
 */
 
 #pragma mark - MTLJSONSerializing
@@ -120,7 +99,7 @@ static NSString *contentKey = nil;
 			return [NSArray array];
 		}
     } reverseBlock:^(NSArray *array) {
-		// TODO really?
+		// TODO: what to do here?
 		return [array description];
     }];
 }
@@ -155,20 +134,26 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)similarArtistsJSONTransformer
 {
-	/*
-	static NSArray *similarArtists = nil;
-	if (!similarArtists) {
-		id obj = [self.JSON valueForKeyPath:@"similar.artist"];
-		if (![obj isKindOfClass:[NSArray class]]) {
-			similarArtists = [NSArray array];
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+		if (![array isKindOfClass:[NSArray class]] || ![array count]) {
+			return [NSArray array];
 		} else {
-			similarArtists = (NSArray *)obj;
+			NSMutableArray *mutableArtists = [NSMutableArray arrayWithCapacity:[array count]];
+			for (id aArtist in array) {
+				if ([aArtist isKindOfClass:[NSDictionary class]]) {
+					// TOOD: handle error
+					LFMArtist *lfmArtist = [MTLJSONAdapter modelOfClass:LFMArtist.class
+													 fromJSONDictionary:aArtist
+																  error:nil];
+					[mutableArtists addObject:lfmArtist];
+				}
+			}
+			return [NSArray arrayWithArray:mutableArtists];
 		}
-	}
-	return similarArtists;
-	 */
-	// TODO
-	return nil;
+    } reverseBlock:^(NSArray *array) {
+		// TODO: what to do here?
+		return array;
+    }];
 }
 
 + (NSValueTransformer *)listenersJSONTransformer
@@ -302,7 +287,7 @@ static NSString *contentKey = nil;
 			return [NSArray arrayWithArray:mutableTags];
 		}
     } reverseBlock:^(NSArray *array) {
-		// TODO really?
+		// TODO: what to do here?
 		return [array description];
     }];
 }
