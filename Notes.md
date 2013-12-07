@@ -1,4 +1,4 @@
-Code.todo
+# Code.todo
 
 * Comment style refactoring using [this xcode plugin](https://github.com/onevcat/VVDocumenter-Xcode)
 * Fix TODO's in fetchr
@@ -6,6 +6,7 @@ Code.todo
 	* http://stackoverflow.com/questions/2573805/using-objc-msgsend-to-call-a-objective-c-function-with-named-arguments
 	* http://stackoverflow.com/questions/330030/list-selectors-for-obj-c-object
 * it should be possible to directly return a proper LFMData from responseObjectForResponse:data:error in a AFURLResponseSerialization implementor
+* add the change to AFNetworking
 * Implement the OAuth [Authentication](http://www.last.fm/api/authentication)
 
 
