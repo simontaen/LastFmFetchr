@@ -18,8 +18,7 @@
 	
 	NSDictionary *mapping =
 	@{
-	  //TODO: members
-	  //@"members" : [contentKey stringByAppendingFormat:@"bandmembers"],
+	  @"members" : [contentKey stringByAppendingFormat:@"bandmembers.member"],
 	  @"bioContent" : [contentKey stringByAppendingFormat:@"bio.content"],
 	  @"bioFormationYears" : [contentKey stringByAppendingFormat:@"bio.formationlist"],
 	  @"lfmWikiPage" : [contentKey stringByAppendingFormat:@"bio.links.link.href"],
@@ -37,6 +36,5 @@
 	
     return [mapping mtl_dictionaryByAddingEntriesFromDictionary:[super JSONKeyPathsByPropertyKey]];
 }
-
 
 @end

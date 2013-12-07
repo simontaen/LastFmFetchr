@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D5316BAD425D4DB0AF1A9361 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 449EFFBCEB0F48E995AF2770 /* libPods.a */; };
+		F40BBA661853653800877D60 /* LFMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = F40BBA651853653800877D60 /* LFMMember.m */; };
 		F41A5465184BB24D00408036 /* LFMArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A5464184BB24D00408036 /* LFMArtist.m */; };
 		F41A5478184BC3C600408036 /* LFMArtistInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A5476184BC3C600408036 /* LFMArtistInfo.m */; };
 		F41A5479184BC3C600408036 /* LFMArtistsTopAlbums.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A5477184BC3C600408036 /* LFMArtistsTopAlbums.m */; };
@@ -36,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		449EFFBCEB0F48E995AF2770 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F40BBA641853653800877D60 /* LFMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMMember.h; path = ../../LastFmFetchr/LFMMember.h; sourceTree = "<group>"; };
+		F40BBA651853653800877D60 /* LFMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMMember.m; path = ../../LastFmFetchr/LFMMember.m; sourceTree = "<group>"; };
 		F41A5464184BB24D00408036 /* LFMArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtist.m; path = ../../LastFmFetchr/LFMArtist.m; sourceTree = "<group>"; };
 		F41A5476184BC3C600408036 /* LFMArtistInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistInfo.m; path = ../../LastFmFetchr/LFMArtistInfo.m; sourceTree = "<group>"; };
 		F41A5477184BC3C600408036 /* LFMArtistsTopAlbums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistsTopAlbums.m; path = ../../LastFmFetchr/LFMArtistsTopAlbums.m; sourceTree = "<group>"; };
@@ -96,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F40BBA671853653D00877D60 /* Member */ = {
+			isa = PBXGroup;
+			children = (
+				F40BBA641853653800877D60 /* LFMMember.h */,
+				F40BBA651853653800877D60 /* LFMMember.m */,
+			);
+			name = Member;
+			sourceTree = "<group>";
+		};
 		F4A7C108179D7B1F00FB7CC3 = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +170,7 @@
 			children = (
 				F4F494611838360D00DF8031 /* LFMData */,
 				F4F49460183835FF00DF8031 /* Artist */,
+				F40BBA671853653D00877D60 /* Member */,
 				F4F494621838361800DF8031 /* Album */,
 				F4BF1D30184D3CA300849329 /* TopAlbums */,
 				F4F49467183839F200DF8031 /* Track */,
@@ -358,6 +371,7 @@
 				F4A7C125179D7B1F00FB7CC3 /* AppDelegate.m in Sources */,
 				F4B4AA10184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.m in Sources */,
 				F41A5465184BB24D00408036 /* LFMArtist.m in Sources */,
+				F40BBA661853653800877D60 /* LFMMember.m in Sources */,
 				F41A547E184BC3DF00408036 /* LFMAlbumInfo.m in Sources */,
 				F41A547D184BC3DF00408036 /* LFMAlbum.m in Sources */,
 				F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */,

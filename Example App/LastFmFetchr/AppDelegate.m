@@ -34,7 +34,7 @@ static NSString *const kDashes = @"-------------------------------";
 					  } else {
 						  //NSLog(@"JSON Response was: %@", data.JSON);
 						  NSLog(@"%@ getInfoForArtist (%@) %@", kDashes, [LFMArtistInfo contentKey], kDashes);
-						  NSLog(@"members %@", data.members);
+						  NSAssert([data.members count], @"members should not be empty");
 						  NSParameterAssert(data.bioContent);
 						  NSParameterAssert(data.bioFormationYears);
 						  NSAssert([data.bioFormationYears count], @"bioFormationYears should not be empty");

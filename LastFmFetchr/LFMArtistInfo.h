@@ -10,10 +10,7 @@
 
 @interface LFMArtistInfo : LFMArtist
 
-/**
-*  NSArray of NSDictionaries
-*  @{ name : NSString, yearfrom : NSDate, yearto : yearto }
-*/
+/// NSArray of LFMMember
 @property (nonatomic, strong, readonly) NSArray *members;
 @property (nonatomic, strong, readonly) NSString *bioContent;
 /**
@@ -27,7 +24,7 @@
 @property (nonatomic, strong, readonly) NSString *bioSummary;
 @property (nonatomic, strong, readonly) NSDate *bioYearFormedDate;
 @property (nonatomic, strong, readonly) NSNumber *isOnTour;
-/// NSArray of NSDictionaries of similar artists
+/// NSArray of LFMArtist
 @property (nonatomic, strong, readonly) NSArray *similarArtists;
 @property (nonatomic, strong, readonly) NSNumber *listeners;
 @property (nonatomic, strong, readonly) NSNumber *playcount;

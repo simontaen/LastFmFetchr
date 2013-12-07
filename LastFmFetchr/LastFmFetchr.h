@@ -12,6 +12,7 @@
 #import "LFMArtist.h"
 #import "LFMArtistInfo.h"
 #import "LFMArtistsTopAlbums.h"
+#import "LFMMember.h"
 #import "LFMAlbum.h"
 #import "LFMAlbumInfo.h"
 #import "LFMAlbumTopAlbum.h"

@@ -10,22 +10,6 @@
 #import "LastFmFetchr.h"
 
 @implementation LFMData
-/**
-- (NSArray *)members
-{
-	static NSArray *members = nil;
-	if (!members) {
-		id obj = [self.JSON valueForKeyPath:@"bandmembers.member"];
-		if (![obj isKindOfClass:[NSArray class]]) {
-			members = [NSArray array];
-		} else {
-			members = (NSArray *)obj;
-		}
-	}
-	return members;
-}
-
-*/
 
 #pragma mark - MTLJSONSerializing
 
@@ -143,11 +127,7 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)bioYearFormedDateJSONTransformer
 {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
-        return [self.yearformedDateFormatter dateFromString:str];
-    } reverseBlock:^(NSDate *date) {
-		return [self.yearformedDateFormatter stringFromDate:date];
-    }];
+	return [LFMMember yearDateTransformer];
 }
 
 + (NSValueTransformer *)isOnTourJSONTransformer
@@ -287,6 +267,21 @@ static NSString *contentKey = nil;
     }];
 }
 
++ (NSValueTransformer *)membersJSONTransformer
+{
+	return [LFMData membersTransformer];
+}
+
++ (NSValueTransformer *)yearfromJSONTransformer
+{
+	return [LFMMember yearDateTransformer];
+}
+
++ (NSValueTransformer *)yeartoJSONTransformer
+{
+	return [LFMMember yearDateTransformer];
+}
+
 #pragma mark - JSON helpers
 
 #pragma mark - Custom ValueTransformers
@@ -308,6 +303,30 @@ static NSString *contentKey = nil;
 				}
 			}
 			return [NSArray arrayWithArray:mutableTags];
+		}
+    } reverseBlock:^(NSArray *array) {
+		// TODO: what to do here?
+		return [array description];
+    }];
+}
+
++ (NSValueTransformer *)membersTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+		if (![array isKindOfClass:[NSArray class]] || ![array count]) {
+			return [NSArray array];
+		} else {
+			NSMutableArray *mutableMembers = [NSMutableArray arrayWithCapacity:[array count]];
+			for (id aMember in array) {
+				if ([aMember isKindOfClass:[NSDictionary class]]) {
+					// TOOD: handle error
+					LFMMember *lfmMember = [MTLJSONAdapter modelOfClass:LFMMember.class
+													 fromJSONDictionary:aMember
+																  error:nil];
+					[mutableMembers addObject:lfmMember];
+				}
+			}
+			return [NSArray arrayWithArray:mutableMembers];
 		}
     } reverseBlock:^(NSArray *array) {
 		// TODO: what to do here?
@@ -367,6 +386,15 @@ static NSString *contentKey = nil;
     } reverseBlock:^(NSArray *array) {
 		// TODO: what to do here?
 		return array;
+    }];
+}
+
++ (NSValueTransformer *)yearDateTransformer
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return [self.yearformedDateFormatter dateFromString:str];
+    } reverseBlock:^(NSDate *date) {
+		return [self.yearformedDateFormatter stringFromDate:date];
     }];
 }
 
