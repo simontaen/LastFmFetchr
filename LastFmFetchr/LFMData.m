@@ -31,7 +31,30 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
-    return [NSDictionary dictionary];
+	NSDictionary *dict = nil;
+	
+	if ([self.class instancesRespondToSelector:@selector(imageSmall)]) {
+		dict = @{
+				 @"imageSmall" : [contentKey stringByAppendingFormat:@"image"],
+				 @"imageMedium" : [contentKey stringByAppendingFormat:@"image"],
+				 @"imageLarge" : [contentKey stringByAppendingFormat:@"image"],
+				 @"imageExtraLarge" : [contentKey stringByAppendingFormat:@"image"],
+				 @"imageSmallString" : [contentKey stringByAppendingFormat:@"image"],
+				 @"imageMediumString" : [contentKey stringByAppendingFormat:@"image"],
+				 @"imageLargeString" : [contentKey stringByAppendingFormat:@"image"],
+				 @"imageExtraLargeString" : [contentKey stringByAppendingFormat:@"image"]
+				 };
+		
+		if ([self.class instancesRespondToSelector:@selector(imageMega)]) {
+			dict = [dict mtl_dictionaryByAddingEntriesFromDictionary:
+					@{
+					  @"imageMega" : [contentKey stringByAppendingFormat:@"image"],
+					  @"imageMegaString" : [contentKey stringByAppendingFormat:@"image"]
+					  }];
+		}
+	}
+	
+    return dict;
 }
 
 + (Class)classForParsingJSONDictionary:(NSDictionary *)JSONDictionary
@@ -294,8 +317,8 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)boolTransformer
 {
-	static dispatch_once_t onceToken;
     static MTLValueTransformer *boolTransformer;
+	static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 		boolTransformer = [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
 			return [NSNumber numberWithBool:[@"1" isEqual:str]];
@@ -308,8 +331,8 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)numberTransformer
 {
-	static dispatch_once_t onceToken;
     static MTLValueTransformer *numberTransformer;
+	static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 		numberTransformer = [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
 			return [NSNumber numberWithLongLong:[str longLongValue]];
@@ -320,12 +343,39 @@ static NSString *contentKey = nil;
     return numberTransformer;
 }
 
++ (NSValueTransformer *)imageStringTransformerWithSize:(NSNumber *)size
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+		if (![array isKindOfClass:[NSArray class]]) {
+			return @"";
+		}
+		return [[array objectAtIndex:[size integerValue]][@"#text"] description];
+    } reverseBlock:^(NSArray *array) {
+		// TODO: what to do here?
+		return array;
+    }];
+}
+
++ (NSValueTransformer *)imageURLTransformerWithSize:(NSNumber *)size
+{
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+		if (![array isKindOfClass:[NSArray class]]) {
+			return [NSURL URLWithString:@""];
+		}
+		NSString *urlStr = [[array objectAtIndex:[size integerValue]][@"#text"] description];
+		return [NSURL URLWithString:urlStr];
+    } reverseBlock:^(NSArray *array) {
+		// TODO: what to do here?
+		return array;
+    }];
+}
+
 #pragma mark - DateFormatter
 
 + (NSDateFormatter *)releaseDateFormatter
 {
-	static dispatch_once_t onceToken;
     static NSDateFormatter *releaseDateFormatter;
+	static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 		releaseDateFormatter = [[NSDateFormatter alloc] init];
 		[releaseDateFormatter setDateFormat:@"d MMMM yyyy, ZZZZZ"];
@@ -335,8 +385,8 @@ static NSString *contentKey = nil;
 
 + (NSDateFormatter *)publishedDateFormatter
 {
-	static dispatch_once_t onceToken;
     static NSDateFormatter *publishedDateFormatter;
+	static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 		publishedDateFormatter = [[NSDateFormatter alloc] init];
 		[publishedDateFormatter setDateFormat:@"EEE, d MMM yyyy hh:mm:ss Z"];
@@ -346,13 +396,65 @@ static NSString *contentKey = nil;
 
 + (NSDateFormatter *)yearformedDateFormatter
 {
-	static dispatch_once_t onceToken;
     static NSDateFormatter *yearformedDateFormatter;
+	static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 		yearformedDateFormatter = [[NSDateFormatter alloc] init];
 		[yearformedDateFormatter setDateFormat:@"yyyy"];
 	});
     return yearformedDateFormatter;
+}
+
+#pragma mark - imageJSONTransformer
+
++ (NSValueTransformer *)imageSmallJSONTransformer
+{
+    return [self imageURLTransformerWithSize:@(0)];
+}
+
++ (NSValueTransformer *)imageMediumJSONTransformer
+{
+    return [self imageURLTransformerWithSize:@(1)];
+}
+
++ (NSValueTransformer *)imageLargeJSONTransformer
+{
+    return [self imageURLTransformerWithSize:@(2)];
+}
+
++ (NSValueTransformer *)imageExtraLargeJSONTransformer
+{
+    return [self imageURLTransformerWithSize:@(3)];
+}
+
++ (NSValueTransformer *)imageMegaJSONTransformer
+{
+    return [self imageURLTransformerWithSize:@(4)];
+}
+
++ (NSValueTransformer *)imageSmallStringJSONTransformer
+{
+    return [self imageStringTransformerWithSize:@(0)];
+}
+
++ (NSValueTransformer *)imageMediumStringJSONTransformer
+{
+    return [self imageStringTransformerWithSize:@(1)];
+}
+
++ (NSValueTransformer *)imageLargeStringJSONTransformer
+{
+    return [self imageStringTransformerWithSize:@(2)];
+}
+
++ (NSValueTransformer *)imageExtraLargeStringJSONTransformer
+{
+    return [self imageStringTransformerWithSize:@(3)];
+}
+
++ (NSValueTransformer *)imageMegaStringJSONTransformer
+{
+    return [self imageStringTransformerWithSize:@(4)];
 }
 
 @end

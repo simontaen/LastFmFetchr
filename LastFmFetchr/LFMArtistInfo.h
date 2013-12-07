@@ -10,7 +10,6 @@
 
 @interface LFMArtistInfo : LFMArtist
 
-// TODO: Images S to Mega
 /**
 *  NSArray of NSDictionaries
 *  @{ name : NSString, yearfrom : NSDate, yearto : yearto }
@@ -35,5 +34,16 @@
 @property (nonatomic, strong, readonly) NSNumber *isStreamable;
 /// (ordered) Array of LFMTag
 @property (nonatomic, strong, readonly) NSArray *tags;
+
+@property (nonatomic, strong, readonly) NSURL *imageSmall;
+@property (nonatomic, strong, readonly) NSURL *imageMedium;
+@property (nonatomic, strong, readonly) NSURL *imageLarge;
+@property (nonatomic, strong, readonly) NSURL *imageExtraLarge;
+@property (nonatomic, strong, readonly) NSURL *imageMega;
+@property (nonatomic, strong, readonly) NSString *imageSmallString;
+@property (nonatomic, strong, readonly) NSString *imageMediumString;
+@property (nonatomic, strong, readonly) NSString *imageLargeString;
+@property (nonatomic, strong, readonly) NSString *imageExtraLargeString;
+@property (nonatomic, strong, readonly) NSString *imageMegaString;
 
 @end

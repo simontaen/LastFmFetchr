@@ -11,8 +11,16 @@
 
 @interface LFMAlbumTopAlbum : LFMAlbum
 
-// TODO: Images S to XL
 @property (nonatomic, strong, readonly) NSNumber *rankInAllArtistAlbums;
 @property (nonatomic, strong, readonly) LFMArtist *artist;
+
+@property (nonatomic, strong, readonly) NSURL *imageSmall;
+@property (nonatomic, strong, readonly) NSURL *imageMedium;
+@property (nonatomic, strong, readonly) NSURL *imageLarge;
+@property (nonatomic, strong, readonly) NSURL *imageExtraLarge;
+@property (nonatomic, strong, readonly) NSString *imageSmallString;
+@property (nonatomic, strong, readonly) NSString *imageMediumString;
+@property (nonatomic, strong, readonly) NSString *imageLargeString;
+@property (nonatomic, strong, readonly) NSString *imageExtraLargeString;
 
 @end

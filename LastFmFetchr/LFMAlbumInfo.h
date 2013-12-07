@@ -10,7 +10,6 @@
 
 @interface LFMAlbumInfo : LFMAlbum
 
-// TODO: Images S to Mega
 @property (nonatomic, strong, readonly) NSString *artistName;
 @property (nonatomic, strong, readonly) NSNumber *lfmId;
 @property (nonatomic, strong, readonly) NSNumber *listeners;
@@ -22,5 +21,16 @@
 @property (nonatomic, strong, readonly) NSString *wikiContent;
 @property (nonatomic, strong, readonly) NSDate *wikiPublishedDate;
 @property (nonatomic, strong, readonly) NSString *wikiSummary;
+
+@property (nonatomic, strong, readonly) NSURL *imageSmall;
+@property (nonatomic, strong, readonly) NSURL *imageMedium;
+@property (nonatomic, strong, readonly) NSURL *imageLarge;
+@property (nonatomic, strong, readonly) NSURL *imageExtraLarge;
+@property (nonatomic, strong, readonly) NSURL *imageMega;
+@property (nonatomic, strong, readonly) NSString *imageSmallString;
+@property (nonatomic, strong, readonly) NSString *imageMediumString;
+@property (nonatomic, strong, readonly) NSString *imageLargeString;
+@property (nonatomic, strong, readonly) NSString *imageExtraLargeString;
+@property (nonatomic, strong, readonly) NSString *imageMegaString;
 
 @end

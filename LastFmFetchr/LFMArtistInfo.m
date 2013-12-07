@@ -28,7 +28,6 @@
 	  @"bioSummary" : [contentKey stringByAppendingFormat:@"bio.summary"],
 	  @"bioYearFormedDate" : [contentKey stringByAppendingFormat:@"bio.yearformed"],
 	  @"isOnTour" : [contentKey stringByAppendingFormat:@"ontour"],
-	  // TODO
 	  @"similarArtists" : [contentKey stringByAppendingFormat:@"similar.artist"],
 	  @"listeners" : [contentKey stringByAppendingFormat:@"stats.listeners"],
 	  @"playcount" : [contentKey stringByAppendingFormat:@"stats.playcount"],

@@ -43,19 +43,19 @@ static NSString *const kDashes = @"-------------------------------";
 						  NSParameterAssert(data.bioPublishedDate);
 						  NSParameterAssert(data.bioSummary);
 						  NSParameterAssert(data.bioYearFormedDate);
-						  /*
-						  NSLog(@"imageSmall %@", data.imageSmall);
-						  NSLog(@"imageSmallString %@", data.imageSmallString);
-						  NSLog(@"imageMedium %@", data.imageMedium);
-						  NSLog(@"imageMediumString %@", data.imageMediumString);
-						  NSLog(@"imageLarge %@", data.imageLarge);
-						  NSLog(@"imageLargeString %@", data.imageLargeString);
-						  NSLog(@"imageExtraLarge %@", data.imageExtraLarge);
-						  NSLog(@"imageExtraLargeString %@", data.imageExtraLargeString);
+
+						  NSParameterAssert(data.imageSmall);
+						  NSParameterAssert(data.imageSmallString);
+						  NSParameterAssert(data.imageMedium);
+						  NSParameterAssert(data.imageMediumString);
+						  NSParameterAssert(data.imageLarge);
+						  NSParameterAssert(data.imageLargeString);
+						  NSParameterAssert(data.imageExtraLarge);
+						  NSParameterAssert(data.imageExtraLargeString);
 						  
-						  NSLog(@"imageMega %@", data.imageMega);
-						  NSLog(@"imageMegaString %@", data.imageMegaString);
-						  */
+						  NSParameterAssert(data.imageMega);
+						  NSParameterAssert(data.imageMegaString);
+
 						  NSParameterAssert(data.musicBrianzId);
 						  NSParameterAssert(data.name);
 						  NSParameterAssert(data.isOnTour);
@@ -88,19 +88,19 @@ static NSString *const kDashes = @"-------------------------------";
 						 
 						 NSParameterAssert(data.artistName);
 						 NSParameterAssert(data.lfmId);
-						 /*
-						 NSLog(@"imageSmall %@", data.imageSmall);
-						 NSLog(@"imageSmallString %@", data.imageSmallString);
-						 NSLog(@"imageMedium %@", data.imageMedium);
-						 NSLog(@"imageMediumString %@", data.imageMediumString);
-						 NSLog(@"imageLarge %@", data.imageLarge);
-						 NSLog(@"imageLargeString %@", data.imageLargeString);
-						 NSLog(@"imageExtraLarge %@", data.imageExtraLarge);
-						 NSLog(@"imageExtraLargeString %@", data.imageExtraLargeString);
+
+						 NSParameterAssert(data.imageSmall);
+						 NSParameterAssert(data.imageSmallString);
+						 NSParameterAssert(data.imageMedium);
+						 NSParameterAssert(data.imageMediumString);
+						 NSParameterAssert(data.imageLarge);
+						 NSParameterAssert(data.imageLargeString);
+						 NSParameterAssert(data.imageExtraLarge);
+						 NSParameterAssert(data.imageExtraLargeString);
 						 
-						 NSLog(@"imageMega %@", data.imageMega);
-						 NSLog(@"imageMegaString %@", data.imageMegaString);
-						 */
+						 NSParameterAssert(data.imageMega);
+						 NSParameterAssert(data.imageMegaString);
+
 						 NSParameterAssert(data.listeners);
 						 NSParameterAssert(data.releaseDate);
 						 NSParameterAssert(data.topTags);
@@ -144,12 +144,16 @@ static NSString *const kDashes = @"-------------------------------";
 							  for (int i = 0; i < 3; i++) {
 								  LFMAlbumTopAlbum *album = albums[i];
 								  NSParameterAssert(album.rankInAllArtistAlbums);
-								  /*
-								  NSLog(@"imageSmall %@", [album imageSmall]);
-								  NSLog(@"imageMedium %@", [album imageMedium]);
-								  NSLog(@"imageLarge %@", [album imageLarge]);
-								  NSLog(@"imageExtraLarge %@", [album imageExtraLarge]);
-								   */
+
+								  NSParameterAssert(album.imageSmall);
+								  NSParameterAssert(album.imageSmallString);
+								  NSParameterAssert(album.imageMedium);
+								  NSParameterAssert(album.imageMediumString);
+								  NSParameterAssert(album.imageLarge);
+								  NSParameterAssert(album.imageLargeString);
+								  NSParameterAssert(album.imageExtraLarge);
+								  NSParameterAssert(album.imageExtraLargeString);
+
 								  NSParameterAssert(album.musicBrianzId);
 								  NSParameterAssert(album.name);
 								  NSParameterAssert(album.playcount);
