@@ -19,8 +19,6 @@
 		F41A5485184BC3FD00408036 /* LFMTagInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A5483184BC3FD00408036 /* LFMTagInfo.m */; };
 		F428593317A55DB60047297B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593217A55DB60047297B /* SystemConfiguration.framework */; };
 		F428593517A55DBD0047297B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593417A55DBD0047297B /* MobileCoreServices.framework */; };
-		F4375FAF1823B92800E9672C /* LFMData+ImagesSmallToXL.m in Sources */ = {isa = PBXBuildFile; fileRef = F4375FAE1823B92800E9672C /* LFMData+ImagesSmallToXL.m */; };
-		F4904D3A1824A84B0077F9E8 /* LFMData+ImagesSmallToMega.m in Sources */ = {isa = PBXBuildFile; fileRef = F4904D391824A84B0077F9E8 /* LFMData+ImagesSmallToMega.m */; };
 		F4A7C115179D7B1F00FB7CC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */; };
 		F4A7C117179D7B1F00FB7CC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C116179D7B1F00FB7CC3 /* Foundation.framework */; };
 		F4A7C119179D7B1F00FB7CC3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C118179D7B1F00FB7CC3 /* CoreGraphics.framework */; };
@@ -49,11 +47,7 @@
 		F41A5483184BC3FD00408036 /* LFMTagInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMTagInfo.m; path = ../../LastFmFetchr/LFMTagInfo.m; sourceTree = "<group>"; };
 		F428593217A55DB60047297B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F428593417A55DBD0047297B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		F4375FAD1823B92800E9672C /* LFMData+ImagesSmallToXL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LFMData+ImagesSmallToXL.h"; path = "../../LastFmFetchr/LFMData+ImagesSmallToXL.h"; sourceTree = "<group>"; };
-		F4375FAE1823B92800E9672C /* LFMData+ImagesSmallToXL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LFMData+ImagesSmallToXL.m"; path = "../../LastFmFetchr/LFMData+ImagesSmallToXL.m"; sourceTree = "<group>"; };
 		F48C316B18397DA8004F6DA3 /* LFMTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMTrack.h; path = ../../LastFmFetchr/LFMTrack.h; sourceTree = "<group>"; };
-		F4904D381824A84B0077F9E8 /* LFMData+ImagesSmallToMega.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LFMData+ImagesSmallToMega.h"; path = "../../LastFmFetchr/LFMData+ImagesSmallToMega.h"; sourceTree = "<group>"; };
-		F4904D391824A84B0077F9E8 /* LFMData+ImagesSmallToMega.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LFMData+ImagesSmallToMega.m"; path = "../../LastFmFetchr/LFMData+ImagesSmallToMega.m"; sourceTree = "<group>"; };
 		F4A7C111179D7B1F00FB7CC3 /* LastFmFetchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LastFmFetchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F4A7C116179D7B1F00FB7CC3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -218,10 +212,6 @@
 			children = (
 				F4ABF51217A8104000DEF135 /* LFMData.h */,
 				F4ABF51317A8104000DEF135 /* LFMData.m */,
-				F4375FAD1823B92800E9672C /* LFMData+ImagesSmallToXL.h */,
-				F4375FAE1823B92800E9672C /* LFMData+ImagesSmallToXL.m */,
-				F4904D381824A84B0077F9E8 /* LFMData+ImagesSmallToMega.h */,
-				F4904D391824A84B0077F9E8 /* LFMData+ImagesSmallToMega.m */,
 			);
 			name = LFMData;
 			sourceTree = "<group>";
@@ -361,7 +351,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F41A5479184BC3C600408036 /* LFMArtistsTopAlbums.m in Sources */,
-				F4904D3A1824A84B0077F9E8 /* LFMData+ImagesSmallToMega.m in Sources */,
 				F41A5484184BC3FD00408036 /* LFMTag.m in Sources */,
 				F41A5485184BC3FD00408036 /* LFMTagInfo.m in Sources */,
 				F41A547F184BC3DF00408036 /* LFMAlbumTopAlbum.m in Sources */,
@@ -370,7 +359,6 @@
 				F4B4AA10184E34B700C5FBDE /* LFMJSONResponseSerializerWithCleanup.m in Sources */,
 				F41A5465184BB24D00408036 /* LFMArtist.m in Sources */,
 				F41A547E184BC3DF00408036 /* LFMAlbumInfo.m in Sources */,
-				F4375FAF1823B92800E9672C /* LFMData+ImagesSmallToXL.m in Sources */,
 				F41A547D184BC3DF00408036 /* LFMAlbum.m in Sources */,
 				F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */,
 				F4ABF51417A8104000DEF135 /* LFMData.m in Sources */,
