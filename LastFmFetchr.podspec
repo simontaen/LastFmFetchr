@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = 'Simon Tännler'
   s.source       = { :git => "https://github.com/simontea/LastFmFetchr.git", :tag => "v0.0.1" }
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '7.0'
   s.source_files = 'LastFmFetchr/*'
   s.requires_arc = true
   s.dependency 'AFNetworking', '~> 2.0'
