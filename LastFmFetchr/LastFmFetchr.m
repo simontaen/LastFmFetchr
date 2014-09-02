@@ -10,6 +10,7 @@
 #import "LFMData.h"
 #import "AFNetworking.h"
 #import "LFMJSONResponseSerializerWithCleanup.h"
+#import "LFMJSONRequestSerializer.h"
 #import "SDURLCache.h"
 
 // ----------------------------------------------------------------------
@@ -43,8 +44,10 @@ NSString *const kLFMMethodArtistGetTopAlbums = @"artist.getTopAlbums";
 NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 
-
 @implementation LastFmFetchr
+
+// The static fetchr object
+static LastFmFetchr *_fetchr = nil;
 
 #pragma mark - API calls
 
@@ -296,25 +299,8 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 
 # pragma mark - Static Methods
 
-+(instancetype)setApiKey:(NSString *)key //apiSecret:(NSString *)secret
++(instancetype)fetchrWithApiKey:(NSString *)key //apiSecret:(NSString *)secret
 {
-	LastFmFetchr *fetchr = [LastFmFetchr fetchr];
-	NSMutableDictionary *params = [fetchr.requestSerializer.HTTPAdditionalParameters mutableCopy];
-	
-	if (key && key.length) {
-		[params addEntriesFromDictionary:@{ @"api_key" : key}];
-	} else {
-		[params removeObjectForKey:@"api_key"];
-	}
-	
-	fetchr.requestSerializer.HTTPAdditionalParameters = params;
-	
-	return fetchr;
-}
-
-+ (instancetype)fetchr
-{
-	static LastFmFetchr *_fetchr = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		
@@ -336,9 +322,10 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
 								   sessionConfiguration:config];
 		
 		// Request Serializer
-		AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+		LFMJSONRequestSerializer *requestSerializer = [LFMJSONRequestSerializer serializer];
 		requestSerializer.stringEncoding = NSUTF8StringEncoding; // http://www.last.fm/api/intro
-		requestSerializer.HTTPAdditionalParameters = @{ @"format" : @"json" // http://www.last.fm/api/rest
+		requestSerializer.HTTPAdditionalParameters = @{ @"format" : @"json", // http://www.last.fm/api/rest
+														@"api_key" : key
 														};
 		_fetchr.requestSerializer = requestSerializer;
 		
@@ -348,6 +335,11 @@ NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
         _fetchr.responseSerializer = responseSerializer;
 		
 	});
+	return _fetchr;
+}
+
++ (instancetype)fetchr
+{
 	return _fetchr;
 }
 

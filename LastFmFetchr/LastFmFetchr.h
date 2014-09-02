@@ -91,16 +91,15 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 #pragma mark - Static Methods
 
 /**
- *  If nessecary will initialize the LastFmFetchr calling fetchr.
+ *  Initializes the LastFmFetchr called fetchr and sets the api_key.
  *  If api_key is set, it will be sent with each request.
  *
  *  @param key The api_key for the LastFm API
  *
  *  @return The LastFmFetchr
  */
-+(instancetype)setApiKey:(NSString *)key; //apiSecret:(NSString *)secret
++(instancetype)fetchrWithApiKey:(NSString *)key; //apiSecret:(NSString *)secret
 
-/// Initializes and returns the LastFmFetchr
 /// @return The LastFmFetchr
 + (instancetype)fetchr;
 

@@ -15,7 +15,7 @@ static NSString *const kDashes = @"-------------------------------";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	LastFmFetchr *fetchr = [LastFmFetchr setApiKey:@"aed3367b0133ab707cb4e5b6b04da3e7"];
+	LastFmFetchr *fetchr = [LastFmFetchr fetchrWithApiKey:@"aed3367b0133ab707cb4e5b6b04da3e7"];
 	//fetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
 	
 	//[[LFMTesting alloc] initForTesting];
