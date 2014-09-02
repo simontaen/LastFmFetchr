@@ -37,10 +37,10 @@ static NSString *const kDashes = @"-------------------------------";
 						  NSAssert([data.members count], @"members should not be empty");
 						  NSParameterAssert(data.bioContent);
 						  NSParameterAssert(data.bioFormationYears);
-						  NSAssert([data.bioFormationYears count], @"bioFormationYears should not be empty");
+						  //NSAssert([data.bioFormationYears count], @"bioFormationYears should not be empty");
 						  NSParameterAssert(data.lfmWikiPage);
 						  NSParameterAssert(data.bioPlaceFormed);
-						  NSParameterAssert(data.bioPublishedDate);
+						  //NSParameterAssert(data.bioPublishedDate);
 						  NSParameterAssert(data.bioSummary);
 						  NSParameterAssert(data.bioYearFormedDate);
 

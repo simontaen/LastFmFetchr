@@ -93,16 +93,17 @@ static NSString *contentKey = nil;
 		if (![dict isKindOfClass:[NSDictionary class]] || ![dict count]) {
 			return [NSArray array];
 		} else {
-			NSString *fromStr = [dict valueForKeyPath:@"formation.yearfrom"];
-			NSDate *yearfrom = [self.yearformedDateFormatter dateFromString:fromStr];
-			NSString *toStr = [dict valueForKeyPath:@"formation.yearto"];
-			NSDate *yearto = [self.yearformedDateFormatter dateFromString:toStr];
-			
-			if (yearfrom && yearto) {
-				return @[yearfrom, yearto];
-			} else if (yearfrom) {
-				return @[yearfrom];
-			}
+			// Check format for formation, could be an array
+			//			NSString *fromStr = [dict valueForKeyPath:@"formation.yearfrom"];
+			//			NSDate *yearfrom = [self.yearformedDateFormatter dateFromString:fromStr];
+			//			NSString *toStr = [dict valueForKeyPath:@"formation.yearto"];
+			//			NSDate *yearto = [self.yearformedDateFormatter dateFromString:toStr];
+			//
+			//			if (yearfrom && yearto) {
+			//				return @[yearfrom, yearto];
+			//			} else if (yearfrom) {
+			//				return @[yearfrom];
+			//			}
 			return [NSArray array];
 		}
     } reverseBlock:^(NSArray *array) {
