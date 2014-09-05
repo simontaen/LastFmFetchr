@@ -74,34 +74,7 @@ static LastFmFetchr *_fetchr = nil;
 	NSLog(@"LastFmFetchr: Request %@ (%@)", kLFMMethodArtistGetInfo, artist);
 #endif
 	
-	NSURLSessionDataTask *task = [self GET:@""
-								parameters:params
-								   success:^(NSURLSessionDataTask *task, id JSON) {
-									   [self handleRequestSuccess:JSON
-															 task:task
-												 methodParamValue:kLFMMethodArtistGetInfo
-														  success:^(NSDictionary *data) {
-															  // TODO: handle error
-															  LFMArtistInfo *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
-															  dispatch_async(dispatch_get_main_queue(), ^{
-																  completion(lfmData, nil);
-															  });
-														  }
-														  failure:^(NSError *error) {
-															  dispatch_async(dispatch_get_main_queue(), ^{
-																  completion(nil, error);
-															  });
-														  }];
-								   }
-								   failure:^(NSURLSessionDataTask *task, NSError *error) {
-									   [self handleRequestFailure:error
-															 task:task
-														  failure:^(NSError *error) {
-															  dispatch_async(dispatch_get_main_queue(), ^{
-																  completion(nil, error);
-															  });
-														  }];
-								   }];
+	NSURLSessionDataTask *task = [self taskWithParams:params method:kLFMMethodArtistGetInfo completion:completion];
 	[task resume];
 	return task;
 }
@@ -128,34 +101,7 @@ static LastFmFetchr *_fetchr = nil;
 	NSLog(@"LastFmFetchr: Request %@ (%@)", kLFMMethodArtistGetTopAlbums, artist);
 #endif
 	
-	NSURLSessionDataTask *task = [self GET:@""
-								parameters:params
-								   success:^(NSURLSessionDataTask *task, id JSON) {
-									   [self handleRequestSuccess:JSON
-															 task:task
-												 methodParamValue:kLFMMethodArtistGetTopAlbums
-														  success:^(NSDictionary *data) {
-															  // TODO: handle error
-															  LFMArtistsTopAlbums *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
-															  dispatch_async(dispatch_get_main_queue(), ^{
-																  completion(lfmData, nil);
-															  });
-														  }
-														  failure:^(NSError *error) {
-															  dispatch_async(dispatch_get_main_queue(), ^{
-																  completion(nil, error);
-															  });
-														  }];
-								   }
-								   failure:^(NSURLSessionDataTask *task, NSError *error) {
-									   [self handleRequestFailure:error
-															 task:task
-														  failure:^(NSError *error) {
-															  dispatch_async(dispatch_get_main_queue(), ^{
-																  completion(nil, error);
-															  });
-														  }];
-								   }];
+	NSURLSessionDataTask *task = [self taskWithParams:params method:kLFMMethodArtistGetTopAlbums completion:completion];
 	[task resume];
 	return task;
 }
@@ -187,15 +133,26 @@ static LastFmFetchr *_fetchr = nil;
 	NSLog(@"LastFmFetchr: Request %@ (%@:%@)", kLFMMethodAlbumGetInfo, artist, album);
 #endif
 	
+	NSURLSessionDataTask *task = [self taskWithParams:params method:kLFMMethodAlbumGetInfo completion:completion];
+	[task resume];
+	return task;
+}
+
+# pragma mark - AFNetworking handlers
+
+- (NSURLSessionDataTask *)taskWithParams:(NSDictionary *)params
+								  method:(NSString *)method
+							  completion:(void (^)(id data, NSError *error))completion
+{
 	NSURLSessionDataTask *task = [self GET:@""
 								parameters:params
 								   success:^(NSURLSessionDataTask *task, id JSON) {
 									   [self handleRequestSuccess:JSON
 															 task:task
-												 methodParamValue:kLFMMethodAlbumGetInfo
+												 methodParamValue:method
 														  success:^(NSDictionary *data) {
 															  // TODO: handle error
-															  LFMAlbumInfo *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
+															  LFMData *lfmData = [MTLJSONAdapter modelOfClass:LFMData.class fromJSONDictionary:data error:nil];
 															  dispatch_async(dispatch_get_main_queue(), ^{
 																  completion(lfmData, nil);
 															  });
@@ -215,11 +172,8 @@ static LastFmFetchr *_fetchr = nil;
 															  });
 														  }];
 								   }];
-	[task resume];
 	return task;
 }
-
-# pragma mark - AFNetworking handlers
 
 /**
  *  Called when the session task calls its success callback (request comes back successfully). Does very
