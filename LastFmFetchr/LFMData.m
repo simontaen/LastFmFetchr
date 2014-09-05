@@ -46,6 +46,11 @@
 	// NOTE only handle top level keys here where the JSONDictionary comes directly from the API.
 	// Drop to subclasses if you have nested objects
 	
+	if (JSONDictionary[@"corrections"] != nil) {
+		[self setContentKey:[@[@"corrections", @"correction", @"artist", @""] componentsJoinedByString:kDelim]];
+        return LFMArtist.class;
+    }
+	
 	if (JSONDictionary[@"artist"] != nil) {
 		[self setContentKey:[@"artist" stringByAppendingString:kDelim] ];
         return LFMArtistInfo.class;

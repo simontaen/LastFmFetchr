@@ -69,6 +69,9 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 									  mbid:(NSString *)mbid
 								completion:(void (^)(LFMArtistInfo *data, NSError *error))completion;
 
+- (NSURLSessionDataTask *)getCorrectionForArtist:(NSString *)artist
+									  completion:(void (^)(LFMArtist *data, NSError *error))completion;
+
 // This will just get the first 50 currently
 // You COULD accept explicit success handlers that return NSDictionary subclasses
 // that only allow valid methods on the returned object.

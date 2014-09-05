@@ -39,6 +39,7 @@ NSString *const kLFMParameterAlbum = @"album";
 
 // Last.fm API method parameter values
 // Each of these have a separate Method and a NSDictionary Subclass
+NSString *const kLFMMethodArtistGetCorrection = @"artist.getCorrection";
 NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 NSString *const kLFMMethodArtistGetTopAlbums = @"artist.getTopAlbums";
 NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
@@ -52,6 +53,29 @@ static LastFmFetchr *_fetchr = nil;
 #pragma mark - API calls
 
 #pragma mark - Artist methods
+- (NSURLSessionDataTask *)getCorrectionForArtist:(NSString *)artist
+									  completion:(void (^)(LFMArtist *data, NSError *error))completion;
+{
+	NSParameterAssert([artist length]);
+	
+	// perpare the params
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	// add the Last.fm method
+	params[kLFMParameterMethod] = kLFMMethodArtistGetCorrection;
+	// add user params
+	if ([artist length]) {
+		params[kLFMParameterArtist] = artist;
+	}
+	
+#ifndef NDEBUG
+	NSLog(@"LastFmFetchr: Request %@ (%@)", kLFMMethodArtistGetCorrection, artist);
+#endif
+	
+	NSURLSessionDataTask *task = [self taskWithParams:params method:kLFMMethodArtistGetCorrection completion:completion];
+	[task resume];
+	return task;
+}
+
 - (NSURLSessionDataTask *)getInfoForArtist:(NSString *)artist
 									  mbid:(NSString *)mbid
 								completion:(void (^)(LFMArtistInfo *data, NSError *error))completion
