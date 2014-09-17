@@ -1,4 +1,4 @@
 pod 'AFNetworking', '~> 2.0'
 pod 'FCYAsserts', '~> 1.2'
-pod 'SDURLCache'
+#pod 'SDURLCache'
 pod 'Mantle', '~> 1.3'
