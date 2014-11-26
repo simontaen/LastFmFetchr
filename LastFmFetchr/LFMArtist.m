@@ -8,6 +8,7 @@
 
 #import "LFMArtist.h"
 #import "LFMArtistInfo.h"
+#import "LFMArtistChart.h"
 
 @implementation LFMArtist
 
@@ -33,9 +34,13 @@
 	
 	[self setContentKey:@""];
 	
+	if (JSONDictionary[@"playcount"] != nil) {
+		return LFMArtistChart.class;
+	}
+	
 	if ([JSONDictionary count] > 3) {
-        return LFMArtistInfo.class;
-    }
+		return LFMArtistInfo.class;
+	}
 	
 	return self.class;
 }

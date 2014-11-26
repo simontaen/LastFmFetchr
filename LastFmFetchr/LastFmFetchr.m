@@ -36,6 +36,8 @@ NSString *const kLFMParameterMethod = @"method";
 NSString *const kLFMParameterMbid = @"mbid";
 NSString *const kLFMParameterArtist = @"artist";
 NSString *const kLFMParameterAlbum = @"album";
+NSString *const kLFMParameterPage = @"page";
+NSString *const kLFMParameterLimit = @"limit";
 
 // Last.fm API method parameter values
 // Each of these have a separate Method and a NSDictionary Subclass
@@ -43,6 +45,7 @@ NSString *const kLFMMethodArtistGetCorrection = @"artist.getCorrection";
 NSString *const kLFMMethodArtistGetInfo = @"artist.getInfo";
 NSString *const kLFMMethodArtistGetTopAlbums = @"artist.getTopAlbums";
 NSString *const kLFMMethodAlbumGetInfo = @"album.getInfo";
+NSString *const kLFMMethodChartGetTopArtists = @"chart.getTopArtists";
 
 
 @implementation LastFmFetchr
@@ -158,6 +161,33 @@ static LastFmFetchr *_fetchr = nil;
 #endif
 	
 	NSURLSessionDataTask *task = [self taskWithParams:params method:kLFMMethodAlbumGetInfo completion:completion];
+	[task resume];
+	return task;
+}
+
+#pragma mark - Chart methods
+- (NSURLSessionDataTask *)getChartsTopArtists:(NSString *)page
+									withLimit:(NSUInteger)limit
+								   completion:(void (^)(LFMChartTopArtists *data, NSError *error))completion
+{
+	
+	// perpare the params
+	NSMutableDictionary *params = [NSMutableDictionary dictionary];
+	// add the Last.fm method
+	params[kLFMParameterMethod] = kLFMMethodChartGetTopArtists;
+	// add user params
+	if ([page length]) {
+		params[kLFMParameterPage] = page;
+	}
+	if (limit) {
+		params[kLFMParameterLimit] = [NSString stringWithFormat:@"%lu", (unsigned long)limit];
+	}
+	
+#ifndef NDEBUG
+	NSLog(@"LastFmFetchr: Request %@", kLFMMethodChartGetTopArtists);
+#endif
+	
+	NSURLSessionDataTask *task = [self taskWithParams:params method:kLFMMethodChartGetTopArtists completion:completion];
 	[task resume];
 	return task;
 }

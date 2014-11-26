@@ -63,8 +63,13 @@
 	
 	if (JSONDictionary[@"topalbums"] != nil) {
 		[self setContentKey:[@"topalbums" stringByAppendingString:kDelim]];
-        return LFMArtistsTopAlbums.class;
-    }
+		return LFMArtistsTopAlbums.class;
+	}
+	
+	if (JSONDictionary[@"artists"] != nil) {
+		[self setContentKey:[@"artists" stringByAppendingString:kDelim]];
+		return LFMChartTopArtists.class;
+	}
 	
 	return self.class;
 }
@@ -217,7 +222,7 @@ static NSString *contentKey = nil;
 
 + (NSValueTransformer *)albumsJSONTransformer
 {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+	return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
 		if (![array isKindOfClass:[NSArray class]] || ![array count]) {
 			return [NSArray array];
 		} else {
@@ -233,10 +238,34 @@ static NSString *contentKey = nil;
 			}
 			return [NSArray arrayWithArray:mutableAlbums];
 		}
-    } reverseBlock:^(NSArray *array) {
+	} reverseBlock:^(NSArray *array) {
 		// TODO: what to do here?
 		return array;
-    }];
+	}];
+}
+
++ (NSValueTransformer *)artistsJSONTransformer
+{
+	return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *array) {
+		if (![array isKindOfClass:[NSArray class]] || ![array count]) {
+			return [NSArray array];
+		} else {
+			NSMutableArray *mutableArtists = [NSMutableArray arrayWithCapacity:[array count]];
+			for (id aArtist in array) {
+				if ([aArtist isKindOfClass:[NSDictionary class]]) {
+					// TOOD: handle error
+					LFMArtistChart *artist = [MTLJSONAdapter modelOfClass:LFMArtistChart.class
+												  fromJSONDictionary:aArtist
+																		error:nil];
+					[mutableArtists addObject:artist];
+				}
+			}
+			return [NSArray arrayWithArray:mutableArtists];
+		}
+	} reverseBlock:^(NSArray *array) {
+		// TODO: what to do here?
+		return array;
+	}];
 }
 
 + (NSValueTransformer *)tagsJSONTransformer

@@ -26,7 +26,7 @@ static NSString *const kDashes = @"-------------------------------";
 
 - (void)callChartMethods:(LastFmFetchr *)fetchr
 {
-	[fetchr getChartsTopArtists:nil withLimit:2 completion:^(LFMChartTopArtists *data, NSError *error) {
+	[fetchr getChartsTopArtists:nil withLimit:3 completion:^(LFMChartTopArtists *data, NSError *error) {
 		
 		for (LFMArtist *artist in data.artists) {
 			NSLog(@"%@", artist);

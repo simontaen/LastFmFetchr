@@ -21,6 +21,8 @@
 		F428593317A55DB60047297B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593217A55DB60047297B /* SystemConfiguration.framework */; };
 		F428593517A55DBD0047297B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F428593417A55DBD0047297B /* MobileCoreServices.framework */; };
 		F469E90919B625890076F0FF /* LFMJSONRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F469E90819B625890076F0FF /* LFMJSONRequestSerializer.m */; };
+		F4799E351A267DD7002ADDB9 /* LFMArtistChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F4799E341A267DD7002ADDB9 /* LFMArtistChart.m */; };
+		F4799E381A267DE8002ADDB9 /* LFMChartTopArtists.m in Sources */ = {isa = PBXBuildFile; fileRef = F4799E371A267DE8002ADDB9 /* LFMChartTopArtists.m */; };
 		F4A7C115179D7B1F00FB7CC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */; };
 		F4A7C117179D7B1F00FB7CC3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C116179D7B1F00FB7CC3 /* Foundation.framework */; };
 		F4A7C119179D7B1F00FB7CC3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A7C118179D7B1F00FB7CC3 /* CoreGraphics.framework */; };
@@ -53,6 +55,10 @@
 		F428593417A55DBD0047297B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F469E90719B625890076F0FF /* LFMJSONRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMJSONRequestSerializer.h; path = ../../LastFmFetchr/LFMJSONRequestSerializer.h; sourceTree = "<group>"; };
 		F469E90819B625890076F0FF /* LFMJSONRequestSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMJSONRequestSerializer.m; path = ../../LastFmFetchr/LFMJSONRequestSerializer.m; sourceTree = "<group>"; };
+		F4799E331A267DD7002ADDB9 /* LFMArtistChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMArtistChart.h; path = ../../LastFmFetchr/LFMArtistChart.h; sourceTree = "<group>"; };
+		F4799E341A267DD7002ADDB9 /* LFMArtistChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMArtistChart.m; path = ../../LastFmFetchr/LFMArtistChart.m; sourceTree = "<group>"; };
+		F4799E361A267DE8002ADDB9 /* LFMChartTopArtists.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMChartTopArtists.h; path = ../../LastFmFetchr/LFMChartTopArtists.h; sourceTree = "<group>"; };
+		F4799E371A267DE8002ADDB9 /* LFMChartTopArtists.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LFMChartTopArtists.m; path = ../../LastFmFetchr/LFMChartTopArtists.m; sourceTree = "<group>"; };
 		F48C316B18397DA8004F6DA3 /* LFMTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFMTrack.h; path = ../../LastFmFetchr/LFMTrack.h; sourceTree = "<group>"; };
 		F4A7C111179D7B1F00FB7CC3 /* LastFmFetchr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LastFmFetchr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A7C114179D7B1F00FB7CC3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -176,6 +182,7 @@
 				F40BBA671853653D00877D60 /* Member */,
 				F4F494621838361800DF8031 /* Album */,
 				F4BF1D30184D3CA300849329 /* TopAlbums */,
+				F4E396541A26728700E4D375 /* Chart */,
 				F4F49467183839F200DF8031 /* Track */,
 				F4F494631838361E00DF8031 /* Tag */,
 			);
@@ -202,6 +209,15 @@
 			name = TopAlbums;
 			sourceTree = "<group>";
 		};
+		F4E396541A26728700E4D375 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				F4799E361A267DE8002ADDB9 /* LFMChartTopArtists.h */,
+				F4799E371A267DE8002ADDB9 /* LFMChartTopArtists.m */,
+			);
+			name = Chart;
+			sourceTree = "<group>";
+		};
 		F4ED9CE2179D7B9A007C038B /* Example App */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +237,8 @@
 				F41A5464184BB24D00408036 /* LFMArtist.m */,
 				F4DE2A2518398CFA0052A363 /* LFMArtistInfo.h */,
 				F41A5476184BC3C600408036 /* LFMArtistInfo.m */,
+				F4799E331A267DD7002ADDB9 /* LFMArtistChart.h */,
+				F4799E341A267DD7002ADDB9 /* LFMArtistChart.m */,
 			);
 			name = Artist;
 			sourceTree = "<group>";
@@ -370,6 +388,7 @@
 			files = (
 				F41A5479184BC3C600408036 /* LFMArtistsTopAlbums.m in Sources */,
 				F469E90919B625890076F0FF /* LFMJSONRequestSerializer.m in Sources */,
+				F4799E351A267DD7002ADDB9 /* LFMArtistChart.m in Sources */,
 				F41A5484184BC3FD00408036 /* LFMTag.m in Sources */,
 				F41A5485184BC3FD00408036 /* LFMTagInfo.m in Sources */,
 				F41A547F184BC3DF00408036 /* LFMAlbumTopAlbum.m in Sources */,
@@ -379,6 +398,7 @@
 				F41A5465184BB24D00408036 /* LFMArtist.m in Sources */,
 				F40BBA661853653800877D60 /* LFMMember.m in Sources */,
 				F41A547E184BC3DF00408036 /* LFMAlbumInfo.m in Sources */,
+				F4799E381A267DE8002ADDB9 /* LFMChartTopArtists.m in Sources */,
 				F41A547D184BC3DF00408036 /* LFMAlbum.m in Sources */,
 				F4ED9CE5179D7BE3007C038B /* LastFmFetchr.m in Sources */,
 				F4ABF51417A8104000DEF135 /* LFMData.m in Sources */,

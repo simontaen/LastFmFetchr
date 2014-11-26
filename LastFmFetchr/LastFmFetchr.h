@@ -19,6 +19,8 @@
 #import "LFMTrack.h"
 #import "LFMTag.h"
 #import "LFMTagInfo.h"
+#import "LFMChartTopArtists.h"
+#import "LFMArtistChart.h"
 
 // ----------------------------------------------------------------------
 // API Error codes, see http://www.last.fm/api/errorcodes
@@ -85,6 +87,11 @@ typedef NS_ENUM(NSInteger, LFMServiceErrorCodes) {
 								 byArtist:(NSString *)artist
 									 mbid:(NSString *)mbid
 							   completion:(void (^)(LFMAlbumInfo *data, NSError *error))completion;
+
+#pragma mark - Chart methods
+- (NSURLSessionDataTask *)getChartsTopArtists:(NSString *)page
+									withLimit:(NSUInteger)limit
+								   completion:(void (^)(LFMChartTopArtists *data, NSError *error))completion;
 
 #pragma mark - Requests Management
 
