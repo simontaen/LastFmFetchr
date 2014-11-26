@@ -18,14 +18,27 @@ static NSString *const kDashes = @"-------------------------------";
 	LastFmFetchr *fetchr = [LastFmFetchr fetchrWithApiKey:@"aed3367b0133ab707cb4e5b6b04da3e7"];
 	//fetchr.apiSecret = @"d27f4af60d0c89152dedc7cf89ac1e89";
 	
-	//[[LFMTesting alloc] initForTesting];
+	//[self callAlbumMethods:fetchr];
+	[self callChartMethods:fetchr];
 	
-	
-	// ------------ Artist calls ------------------
-	
+    return YES;
+}
+
+- (void)callChartMethods:(LastFmFetchr *)fetchr
+{
+	[fetchr getChartsTopArtists:nil withLimit:2 completion:^(LFMChartTopArtists *data, NSError *error) {
+		
+		for (LFMArtist *artist in data.artists) {
+			NSLog(@"%@", artist);
+		}
+	}];
+}
+
+- (void)callArtistMethods:(LastFmFetchr *)fetchr
+{
 	int __block counter = 0;
 	NSLog(@"Counter %i", counter);
-		
+	
 	[fetchr getInfoForArtist:@"Pink Floyd"
 						mbid:nil
 				  completion:^(LFMArtistInfo *data, NSError *error) {
@@ -43,7 +56,7 @@ static NSString *const kDashes = @"-------------------------------";
 						  //NSParameterAssert(data.bioPublishedDate);
 						  NSParameterAssert(data.bioSummary);
 						  NSParameterAssert(data.bioYearFormedDate);
-
+						  
 						  NSParameterAssert(data.imageSmall);
 						  NSParameterAssert(data.imageSmallString);
 						  NSParameterAssert(data.imageMedium);
@@ -55,7 +68,7 @@ static NSString *const kDashes = @"-------------------------------";
 						  
 						  NSParameterAssert(data.imageMega);
 						  NSParameterAssert(data.imageMegaString);
-
+						  
 						  NSParameterAssert(data.musicBrianzId);
 						  NSParameterAssert(data.name);
 						  NSParameterAssert(data.isOnTour);
@@ -72,9 +85,12 @@ static NSString *const kDashes = @"-------------------------------";
 					  NSLog(@"Counter %i", --counter);
 				  }];
 	NSLog(@"Counter %i", ++counter);
-	
-	
-	// ------------ Album calls ------------------
+}
+
+- (void)callAlbumMethods:(LastFmFetchr *)fetchr
+{
+	int __block counter = 0;
+	NSLog(@"Counter %i", counter);
 	
 	[fetchr getInfoForAlbum:@"Highway to Hell"
 				   byArtist:@"AC/DC"
@@ -88,7 +104,7 @@ static NSString *const kDashes = @"-------------------------------";
 						 
 						 NSParameterAssert(data.artistName);
 						 NSParameterAssert(data.lfmId);
-
+						 
 						 NSParameterAssert(data.imageSmall);
 						 NSParameterAssert(data.imageSmallString);
 						 NSParameterAssert(data.imageMedium);
@@ -100,7 +116,7 @@ static NSString *const kDashes = @"-------------------------------";
 						 
 						 NSParameterAssert(data.imageMega);
 						 NSParameterAssert(data.imageMegaString);
-
+						 
 						 NSParameterAssert(data.listeners);
 						 NSParameterAssert(data.releaseDate);
 						 NSParameterAssert(data.topTags);
@@ -144,7 +160,7 @@ static NSString *const kDashes = @"-------------------------------";
 							  for (int i = 0; i < 3; i++) {
 								  LFMAlbumTopAlbum *album = albums[i];
 								  NSParameterAssert(album.rankInAllArtistAlbums);
-
+								  
 								  NSParameterAssert(album.imageSmall);
 								  NSParameterAssert(album.imageSmallString);
 								  NSParameterAssert(album.imageMedium);
@@ -153,7 +169,7 @@ static NSString *const kDashes = @"-------------------------------";
 								  NSParameterAssert(album.imageLargeString);
 								  NSParameterAssert(album.imageExtraLarge);
 								  NSParameterAssert(album.imageExtraLargeString);
-
+								  
 								  NSParameterAssert(album.musicBrianzId);
 								  NSParameterAssert(album.name);
 								  NSParameterAssert(album.playcount);
@@ -167,10 +183,6 @@ static NSString *const kDashes = @"-------------------------------";
 						  NSLog(@"Counter %i", --counter);
 					  }];
 	NSLog(@"Counter %i", ++counter);
-	
-	
-	
-    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
